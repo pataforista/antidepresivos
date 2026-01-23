@@ -1,0 +1,207 @@
+# ============================================================
+# DATASET_PSICOFARMACOLOGIA
+# Reglas canónicas de validación — Antidepresivos (Fase 2)
+# ============================================================
+# Este archivo define reglas técnicas y clínicas que TODO CSV
+# de antidepresivos debe cumplir para ser considerado válido.
+# ============================================================
+
+version: "2.0"
+scope: "antidepresivos_fase_2_canonic"
+encoding: "utf-8"
+delimiter: ","
+decimal_separator: "."
+
+# ------------------------------------------------------------
+# 1. Reglas Generales de Estructura
+# ------------------------------------------------------------
+structure:
+  require_header: true
+  forbid_extra_columns: true
+  forbid_missing_columns: true
+  forbid_empty_id: true
+
+id:
+  column: "id_farmaco"
+  pattern: "^ADP_[A-Z]+_[0-9]{2}$"
+  unique: true
+  description: >
+    Identificador único canónico.
+    Ejemplo: ADP_SSRI_01, ADP_SNRI_03, ADP_RAPID_04.
+
+# ------------------------------------------------------------
+# 2. Tipos de Datos Numéricos
+# ------------------------------------------------------------
+numeric_fields:
+  integer_only:
+    - biodisponibilidad_oral
+    - union_proteinas_plasmaticas
+    - excrecion_renal
+    - excrecion_fecal
+    - dosis_inicio_adulto
+    - dosis_maxima_autorizada
+    - nivel_sedacion
+
+  allow_ranges_as_text:
+    - t_max
+    - vida_media_parental
+    - vida_media_metabolitos
+    - volumen_distribucion
+    - rango_terapeutico_adulto
+    - tiempo_estado_estacionario
+
+  integer_ranges:
+    biodisponibilidad_oral: [0, 100]
+    union_proteinas_plasmaticas: [0, 100]
+    excrecion_renal: [0, 100]
+    excrecion_fecal: [0, 100]
+    nivel_sedacion: [0, 3]
+
+# ------------------------------------------------------------
+# 3. Campos Categóricos Controlados
+# ------------------------------------------------------------
+categorical_fields:
+
+  nivel_sedacion:
+    allowed: [0, 1, 2, 3]
+    meaning:
+      0: "Nulo o mínimo"
+      1: "Leve"
+      2: "Moderado"
+      3: "Alto"
+
+  perfil_impacto_peso:
+    allowed:
+      - "Aumento"
+      - "Neutro"
+      - "Pérdida"
+
+  perfil_disfuncion_sexual:
+    allowed:
+      - "Alto"
+      - "Moderado"
+      - "Bajo"
+      - "Nulo"
+
+  perfil_activacion:
+    allowed:
+      - "Bajo"
+      - "Moderado"
+      - "Alto"
+
+  linealidad_farmacocinetica:
+    allowed:
+      - "Lineal"
+      - "No lineal"
+      - "Dependiente de dosis"
+
+  riesgo_prolongacion_qt:
+    allowed:
+      - "Nulo"
+      - "Bajo"
+      - "Moderado"
+      - "Alto"
+
+  riesgo_sindrome_abstinencia:
+    allowed:
+      - "Nulo"
+      - "Bajo"
+      - "Moderado"
+      - "Alto"
+
+# ------------------------------------------------------------
+# 4. Reglas Clínicas Específicas
+# ------------------------------------------------------------
+clinical_rules:
+
+  uso_pediatrico:
+    column: "aprobado_uso_pediatrico"
+    allowed: ["Sí", "No"]
+    note: >
+      Uso pediátrico es estrictamente binario.
+      No se permiten rangos de edad ni comentarios aquí.
+
+  embarazo:
+    column: "riesgo_embarazo_multifuente"
+    allow_multiple_sources: true
+    forbid_single_letter_categories: true
+    note: >
+      No se permiten categorías tipo FDA A/B/C/D/X.
+      Debe ser texto multifuente (FDA / EMA / estudios).
+
+  black_box:
+    column: "black_box_warning"
+    allowed: ["Sí", "No"]
+
+  metabolismo:
+    require_enzyme_if_non_linear: true
+    note: >
+      Si la cinética es No lineal o Dependiente de dosis,
+      debe especificarse sustrato o inhibición enzimática.
+
+# ------------------------------------------------------------
+# 5. Reglas de Texto (Campos Narrativos)
+# ------------------------------------------------------------
+text_fields:
+  allow_semicolon_lists: true
+  forbid_commas_unquoted: true
+  preferred_separator: "; "
+
+  required_non_empty:
+    - mecanismo_principal
+    - indicaciones_aprobadas_fda
+    - efectos_raros_graves
+    - interacciones_contraindicadas
+
+# ------------------------------------------------------------
+# 6. Reglas de Consistencia Interna
+# ------------------------------------------------------------
+consistency_checks:
+
+  qt_warning:
+    rule: >
+      Si riesgo_prolongacion_qt == "Alto",
+      efectos_raros_graves debe mencionar arritmia o QT.
+
+  sedating_agents:
+    rule: >
+      Si nivel_sedacion == 3,
+      perfil_activacion no puede ser "Alto".
+
+  imao_rules:
+    applies_to: "IMAO"
+    require:
+      - "lavado 14 días"
+      - "tiramina"
+    fields:
+      - interacciones_contraindicadas
+      - titulacion_paso
+
+  ketamine_group:
+    applies_to: ["Ketamina", "Esketamina"]
+    require:
+      - "disociación"
+      - "monitoreo"
+    fields:
+      - efectos_frecuentes
+      - restricciones_ue
+
+# ------------------------------------------------------------
+# 7. Exclusiones Explícitas
+# ------------------------------------------------------------
+explicit_exclusions:
+  - "Escalas numéricas de riesgo"
+  - "Síntesis automática de guías"
+  - "Ponderaciones implícitas"
+  - "Campos calculados dentro del CSV"
+
+# ------------------------------------------------------------
+# 8. Estado Final
+# ------------------------------------------------------------
+status:
+  canonical: true
+  locked_fields:
+    - nivel_sedacion
+    - perfil_impacto_peso
+    - riesgo_embarazo_multifuente
+  last_review: "2025-01"

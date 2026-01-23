@@ -1,0 +1,137 @@
+# Fuentes bibliográficas y bases de referencia
+## Dataset Canónico de Antidepresivos — Fase 2
+
+Este documento describe las **fuentes primarias, secundarias y regulatorias**
+utilizadas para la construcción, curaduría y validación del dataset canónico
+de antidepresivos.
+
+La bibliografía aquí listada representa el **núcleo trazable** de información
+empleado para definir:
+- mecanismos de acción,
+- farmacocinética y farmacodinámica,
+- perfiles de seguridad,
+- decisiones regulatorias,
+- y perfiles clínicos comparativos.
+
+El dataset no replica textualmente ninguna fuente individual, sino que
+integra información **contrastada y normalizada** a partir de múltiples
+referencias.
+
+---
+
+## CAPA 1 — Fuentes farmacológicas primarias (núcleo estructural)
+
+### Libros de texto de psicofarmacología
+
+1. **Stahl, S. M.** (2021).  
+   *Stahl’s Essential Psychopharmacology: Neuroscientific Basis and Practical Applications* (6th ed.).  
+   Cambridge University Press.
+
+2. **Stahl, S. M., Muntner, N., & Felker, A.** (2017).  
+   *Stahl’s Illustrated Antidepressants*.  
+   Cambridge University Press.
+
+3. **Macaluso, M., & Preskorn, S. H.** (Eds.). (2019).  
+   *Antidepressants: From Biogenic Amines to New Mechanisms of Action*.  
+   Handbook of Experimental Pharmacology. Springer.
+
+4. **Hengartner, M. P.** (2022).  
+   *Evidence-Biased Antidepressant Prescribing*.  
+   Springer International Publishing.
+
+Estas fuentes constituyen la base para:
+- clasificación farmacológica,
+- perfiles receptorales,
+- distinción activación/sedación,
+- y efectos adversos diferenciales.
+
+---
+
+## CAPA 2 — Fuentes regulatorias y farmacocinéticas
+
+Utilizadas para definir:
+- biodisponibilidad,
+- vida media,
+- metabolismo,
+- advertencias regulatorias,
+- uso en embarazo,
+- prolongación de QT,
+- programas de mitigación de riesgo.
+
+5. **U.S. Food and Drug Administration (FDA)**.  
+   Prescribing Information / Drug Labels.  
+   https://www.accessdata.fda.gov
+
+6. **European Medicines Agency (EMA)**.  
+   European Public Assessment Reports (EPARs).  
+   https://www.ema.europa.eu
+
+7. **American College of Obstetricians and Gynecologists (ACOG)**.  
+   Clinical guidance on antidepressant use in pregnancy and postpartum.
+
+8. **WHO Collaborating Centre for Drug Statistics Methodology**.  
+   ATC/DDD Index.  
+   https://www.whocc.no
+
+---
+
+## CAPA 3 — Evidencia específica y fármacos de vanguardia
+
+Referencias clave para antidepresivos de acción rápida,
+neuroesteroides y moduladores glutamatérgicos.
+
+9. **Krystal, J. H., et al.** (2019).  
+   Ketamine and the future of rapid-acting antidepressants.  
+   *American Journal of Psychiatry*, 176(5), 418–426.
+
+10. **Popova, V., et al.** (2019).  
+    Brexanolone for postpartum depression.  
+    *The Lancet*, 394(10203), 169–178.
+
+11. **Deligiannidis, K. M., et al.** (2023).  
+    Zuranolone for the treatment of postpartum depression.  
+    *American Journal of Psychiatry*.
+
+12. **WFSBP Task Force**.  
+    Guidelines for biological treatment of unipolar depressive disorders.
+
+---
+
+## CAPA 4 — Fuentes clínicas transversales (seguridad e interacciones)
+
+13. **Taylor, D., Barnes, T., & Young, A.**  
+    *The Maudsley Prescribing Guidelines in Psychiatry* (14th ed.).  
+    Wiley-Blackwell.
+
+14. **Lexicomp / Micromedex** (consulta cruzada).  
+    Bases de datos clínicas para interacciones y contraindicaciones críticas.
+
+---
+
+## Nota metodológica
+
+La información del dataset fue obtenida mediante:
+
+- contraste multifuente,
+- normalización semántica,
+- eliminación de falsa precisión,
+- y traducción a categorías clínicas comparables.
+
+Cuando existen discrepancias entre agencias regulatorias o fuentes clínicas
+(p. ej., embarazo, QT, uso pediátrico), estas se **preservan explícitamente**
+en el dataset, evitando síntesis artificiales.
+
+Este enfoque prioriza trazabilidad, comparabilidad y utilidad clínica
+sobre simplificación excesiva.
+
+---
+
+## Autoría
+
+Curaduría, normalización y estructura metodológica:
+
+**César Celada**  
+2025
+
+---
+
