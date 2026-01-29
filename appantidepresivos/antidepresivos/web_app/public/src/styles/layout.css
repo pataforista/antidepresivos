@@ -1,0 +1,108 @@
+/* src/styles/layout.css */
+
+/* App Shell */
+#app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.shell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    /* Full width for mobile, maybe constraint on desktop? */
+    margin: 0 auto;
+    background: var(--color-bg);
+}
+
+@media (min-width: 1024px) {
+    .shell {
+        /* Optional: Centered layout on large screens if desired, 
+       but for data apps usually full width is better. 
+       Let's keep it full but with padding control. */
+    }
+}
+
+/* Glass Header */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-surface-translucent);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    gap: var(--space-4);
+    box-shadow: var(--shadow-sm);
+}
+
+.header__title {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.header__nav {
+    margin-left: auto;
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+.header__nav-link {
+    color: var(--color-text-muted);
+    font-weight: 500;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast);
+}
+
+.header__nav-link:hover,
+.header__nav-link.active {
+    color: var(--color-primary);
+    background: rgba(0, 0, 0, 0.03);
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: var(--space-5);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Footer */
+.footer {
+    padding: var(--space-3) var(--space-5);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    text-align: center;
+}
+
+/* Grids */
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--space-4);
+}
+
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    max-width: 900px;
+    margin: 0 auto;
+}

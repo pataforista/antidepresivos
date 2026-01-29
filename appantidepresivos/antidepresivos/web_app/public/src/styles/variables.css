@@ -1,0 +1,73 @@
+/* src/styles/variables.css */
+:root {
+  /* --- Palette: Clinical Premium --- */
+  /* Primary: Trust & Science (Deep Teal/Blue) */
+  --color-primary: #0f766e; /* teal-700 */
+  --color-primary-light: #14b8a6; /* teal-500 */
+  --color-primary-dark: #0f5132;
+  --color-on-primary: #ffffff;
+
+  /* Secondary: Neutrality & Balance */
+  --color-secondary: #64748b; /* slate-500 */
+  --color-secondary-light: #94a3b8;
+  --color-secondary-dark: #334155;
+
+  /* Backgrounds */
+  --color-bg: #f8fafc; /* slate-50 */
+  --color-surface: #ffffff;
+  --color-surface-translucent: rgba(255, 255, 255, 0.85);
+
+  /* Text */
+  --color-text-main: #1e293b; /* slate-800 */
+  --color-text-muted: #64748b;
+
+  /* Status */
+  --color-danger: #ef4444;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+
+  /* --- Typography --- */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif; /* For emphasis if needed */
+
+  /* --- Spacing --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+
+  /* --- Effects --- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --backdrop-blur: blur(12px);
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f172a; /* slate-900 */
+    --color-surface: #1e293b; /* slate-800 */
+    --color-surface-translucent: rgba(30, 41, 59, 0.85);
+
+    --color-text-main: #f1f5f9; /* slate-100 */
+    --color-text-muted: #94a3b8; /* slate-400 */
+
+    --color-primary: #14b8a6; /* teal-500 */
+    --color-primary-light: #2dd4bf;
+    --color-primary-dark: #0d9488;
+
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+}

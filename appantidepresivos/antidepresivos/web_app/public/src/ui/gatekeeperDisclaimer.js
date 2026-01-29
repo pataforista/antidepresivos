@@ -14,21 +14,19 @@ export function mountDisclaimerGate({ rootEl, onAllow }) {
 
   function renderDisclaimer() {
     rootEl.innerHTML = `
-      <div class="gatekeeper" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.75);font-family:system-ui">
-        <div class="gatekeeper__card" style="max-width:720px;width:100%;background:#0b1220;color:#f9fafb;border-radius:12px;padding:16px">
-          <h2 style="margin:0 0 8px">Aviso legal</h2>
-          <p style="margin:0 0 10px;opacity:.9;line-height:1.5">
+      <div class="gatekeeper">
+        <div class="gatekeeper__card">
+          <h2 class="h2">Aviso legal</h2>
+          <p class="text-muted" style="margin-bottom: 24px;">
             Antes de usar la app, confirma que entiendes que esto es un recurso educativo
             y no sustituye el juicio clínico ni fuentes primarias.
           </p>
-          <div class="gatekeeper__actions" style="display:flex;justify-content:flex-end;gap:8px">
-            <button id="btnAcceptDisclaimer"
-                    class="btn btn--primary"
-                    style="padding:10px 12px;border-radius:10px;border:0;background:#2563eb;color:white;cursor:pointer">
+          <div style="display:flex;justify-content:flex-end;gap:8px">
+            <button id="btnAcceptDisclaimer" class="btn btn--primary">
               Entiendo y acepto
             </button>
           </div>
-          <p class="gatekeeper__meta" style="margin:10px 0 0;opacity:.7;font-size:12px">
+          <p class="text-sm text-muted" style="margin-top: 16px;">
             Autor: César Celada
           </p>
         </div>
