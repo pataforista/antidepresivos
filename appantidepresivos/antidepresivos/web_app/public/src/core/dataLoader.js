@@ -2,11 +2,13 @@ import { normalizeDatasetItems } from "./normalize.js";
 
 export async function loadAppData() {
   // 1) manifest
-  const manifest = await fetchJson("/data/manifest.json");
+  const manifest = await fetchJson("./data/manifest.json");
 
   // 2) schemaUI (JS module versionado)
   // manifest.schema.path debe apuntar a /data/schemaUI.<hash>.js
-  const schemaModule = await import(manifest.schema.path);
+  // Resolvemos la ruta relativa a la base del documento (index.html) para que funcione el import
+  const schemaUrl = new URL(manifest.schema.path, document.baseURI).href;
+  const schemaModule = await import(schemaUrl);
   const schema = schemaModule.SCHEMA_UI;
 
   // 3) legal
@@ -15,15 +17,15 @@ export async function loadAppData() {
   // 4) dataset
   const datasetRaw = await fetchJson(manifest.dataset.path);
 
-// Asegura forma canónica { meta, items }
-const dataset = coerceDataset(datasetRaw);
+  // Asegura forma canónica { meta, items }
+  const dataset = coerceDataset(datasetRaw);
 
-// Normaliza items (clona + _search + _norm + *_ord)
-dataset.items = normalizeDatasetItems(dataset.items, schema);
+  // Normaliza items (clona + _search + _norm + *_ord)
+  dataset.items = normalizeDatasetItems(dataset.items, schema);
 
 
   // 5) normalización runtime (NO modifica CSV, solo añade _search/_norm)
-  dataset.items = normalizeDatasetItems(dataset.items, schema);
+  // dataset.items = normalizeDatasetItems(dataset.items, schema);
 
   return { manifest, schema, legal, dataset };
 }

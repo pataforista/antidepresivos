@@ -1,6 +1,56 @@
-// public/src/app.js
+import { initCardSpotlight, updateGooeyNav } from "./ui/visuals.js";
 
-import { store } from "./core/store.js";
+async function main() {
+  // ... (keep existing setup)
+
+  // (In mountShell)
+  // ...
+  mountShell(root);
+  // Init Visuals
+  setTimeout(() => updateGooeyNav(), 50);
+  // ...
+
+  // Re-render nav state on route change
+  store.subscribe("state:path:route", ({ next }) => {
+    renderRoute(next);
+    updateHeaderNav(next);
+  });
+  // ...
+}
+
+function updateHeaderNav(route) {
+  // Simple class toggling
+  document.querySelectorAll(".nav-gooey__link").forEach(el => {
+    el.classList.remove("active");
+    if (el.getAttribute("href") === `#/${route?.name}`) {
+      el.classList.add("active");
+    }
+  });
+  updateGooeyNav();
+}
+
+/* ... mountShell ... */
+function mountShell(root) {
+  // ...
+  root.innerHTML = `
+    <div id="appShell" class="shell">
+      <header class="header">
+        <strong class="header__title">${escapeHtml(title)}</strong>
+
+        <nav class="header__nav nav-gooey">
+          <div class="nav-gooey__blob"></div>
+          <a href="#/list" class="nav-gooey__link active">Lista</a>
+          <a href="#/compare" class="nav-gooey__link" id="btnHeaderCompare">Comparar</a>
+        </nav>
+        
+        <div style="display:flex;align-items:center;gap:8px;margin-left:12px">
+            <button id="btnClearCompare" type="button" class="btn btn--ghost text-sm" style="display:none">
+                Limpiar
+            </button>
+            <span id="compareCount" class="text-sm text-muted"></span>
+        </div>
+      </header>
+  /* ... */
 import { loadAppData } from "./core/dataLoader.js";
 import { mountDisclaimerGate } from "./ui/gatekeeperDisclaimer.js";
 import { createRouter } from "./core/router.js";
@@ -46,7 +96,7 @@ async function main() {
               // alert("Selecciona al menos un fármaco para comparar.");
               return;
             }
-            location.hash = `#/compare?ids=${encodeURIComponent(ids.join(","))}`;
+            location.hash = `# / compare ? ids = ${ encodeURIComponent(ids.join(",")) } `;
           });
         }
         const router = createRouter(store);
@@ -90,9 +140,11 @@ async function main() {
     });
   } catch (e) {
     console.error(e);
-    root.innerHTML = `<pre style="padding:12px;color:#b00">${escapeHtml(
+    root.innerHTML = `< pre style = "padding:12px;color:#b00" > ${
+    escapeHtml(
       String(e?.stack ?? e)
-    )}</pre>`;
+    )
+  }</pre > `;
   }
 }
 
@@ -138,7 +190,7 @@ function mountShell(root) {
   const title = state.data?.schema?.meta?.appTitle ?? "Antidepresivos — Códice";
 
   root.innerHTML = `
-    <div id="appShell" class="shell">
+    < div id = "appShell" class="shell" >
       <header class="header">
         <strong class="header__title">${escapeHtml(title)}</strong>
 
@@ -162,8 +214,8 @@ function mountShell(root) {
            </button>
         </div>
       </footer>
-    </div>
-  `;
+    </div >
+    `;
 
   // Listener para el Modal de Info
   setTimeout(() => {
@@ -176,7 +228,7 @@ function updateCompareCount() {
   const el = document.getElementById("compareCount");
   if (!el) return;
   const ids = store.getState().compare?.ids ?? [];
-  el.textContent = ids.length ? `Seleccionados: ${ids.length}` : "";
+  el.textContent = ids.length ? `Seleccionados: ${ ids.length } ` : "";
 }
 
 /* ============================================================
@@ -213,10 +265,10 @@ function renderList(view) {
   const filterHTML = renderFilters(state.filters);
 
   view.innerHTML = `
-    <h2 class="h2">Listado</h2>
+    < h2 class="h2" > Listado</h2 >
     <p class="text-muted" style="margin-bottom: 12px;">Fármacos encontrados: <b>${items.length}</b></p>
 
-    <!-- Barra de Filtros -->
+    <!--Barra de Filtros-- >
     <div class="card" style="margin-bottom: 24px; padding: 16px;">
       ${filterHTML}
     </div>
@@ -265,7 +317,7 @@ function renderList(view) {
   if (go) {
     go.addEventListener("click", () => {
       const ids = store.getState().compare?.ids ?? [];
-      location.hash = `#/compare?ids=${encodeURIComponent(ids.join(","))}`;
+      location.hash = `# / compare ? ids = ${ encodeURIComponent(ids.join(",")) } `;
     });
   }
 
@@ -294,23 +346,23 @@ function renderFilters(filters) {
     const isActive = activeGroups.has(g);
     // Usamos data-group para el handler
     return `
-      <button type="button" 
-              class="chip ${isActive ? 'chip--active' : ''} filter-group-btn" 
-              data-group="${g}"
-              style="cursor:pointer; ${isActive ? 'background:var(--color-primary);color:white' : ''}">
-        ${g}
-      </button>
+    < button type = "button"
+  class="chip ${isActive ? 'chip--active' : ''} filter-group-btn"
+  data - group="${g}"
+  style = "cursor:pointer; ${isActive ? 'background:var(--color-primary);color:white' : ''}" >
+    ${ g }
+      </button >
     `;
   }).join("");
 
   return `
-    <div style="display:flex; flex-direction:column; gap:16px;">
-      <!-- Buscador -->
+    < div style = "display:flex; flex-direction:column; gap:16px;" >
+      < !--Buscador -->
       <div class="field-box" style="padding:0; border:none;">
         <input type="search" id="inputSearch" class="input" placeholder="Buscar por nombre, mecanismo..." value="${escapeHtml(q)}" style="width:100%; padding: 10px; border-radius: 8px; border: 1px solid var(--color-border);" />
       </div>
 
-      <!-- Grupos -->
+      <!--Grupos -->
       <div>
         <div class="text-sm text-muted" style="margin-bottom:8px">Filtrar por Grupo:</div>
         <div style="display:flex; flex-wrap:wrap; gap:8px;">
@@ -318,16 +370,16 @@ function renderFilters(filters) {
         </div>
       </div>
       
-      <!-- Sedación (Slider simple) -->
-      <div>
-        <div class="text-sm text-muted" style="margin-bottom:8px">Nivel Sedación (0 - 3):</div>
-        <div style="display:flex; align-items:center; gap:12px">
-           <input type="range" id="rangeSedacion" min="0" max="3" step="1" value="${filters.sedacion?.max ?? 3}" style="flex:1" />
-           <span id="lblSedacion">${filters.sedacion?.max ?? 3}</span>
-        </div>
+      <!--Sedación(Slider simple) -->
+    <div>
+      <div class="text-sm text-muted" style="margin-bottom:8px">Nivel Sedación (0 - 3):</div>
+      <div style="display:flex; align-items:center; gap:12px">
+        <input type="range" id="rangeSedacion" min="0" max="3" step="1" value="${filters.sedacion?.max ?? 3}" style="flex:1" />
+        <span id="lblSedacion">${filters.sedacion?.max ?? 3}</span>
       </div>
     </div>
-  `;
+    </div >
+    `;
 }
 
 function attachFilterListeners(view) {
@@ -383,10 +435,10 @@ function renderCompare(view) {
 
   if (!rows.length) {
     view.innerHTML = `
-      <h2 class="h2">Comparador</h2>
+    < h2 class="h2" > Comparador</h2 >
       <p class="text-muted">No hay fármacos seleccionados.</p>
       <p><a href="#/list" class="btn btn--primary">Volver a lista</a></p>
-    `;
+  `;
     return;
   }
 
@@ -395,10 +447,10 @@ function renderCompare(view) {
       const id = d.id_farmaco;
       const label = d?.nombre_generico ?? id;
       return `
-        <button class="chip chip--removable chipRemove" data-id="${escapeHtml(id)}" type="button">
-          ${escapeHtml(label)} ✕
-        </button>
-      `;
+    < button class="chip chip--removable chipRemove" data - id="${escapeHtml(id)}" type = "button" >
+      ${ escapeHtml(label) } ✕
+        </button >
+    `;
     })
     .join("");
 
@@ -420,25 +472,25 @@ function renderCompare(view) {
   ];
 
   view.innerHTML = `
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+    < div style = "display:flex;align-items:center;justify-content:space-between;margin-bottom:16px" >
       <h2 class="h2" style="margin:0">Comparador</h2>
       <a href="#/list" class="btn btn--ghost text-sm">← Volver</a>
-    </div>
+    </div >
 
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
       ${chips}
     </div>
 
-    <!-- Layout: Radar a la izquierda (desktop) o arriba (mobile) -->
+    <!--Layout: Radar a la izquierda(desktop) o arriba(mobile)-- >
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-      
+
       <!-- Radar Card -->
       <div class="card" style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 24px;">
-         <h3 class="h3" style="margin-bottom:16px">Perfil Clínico (Radar)</h3>
-         ${radarSVG}
-         <div class="text-xs text-muted" style="margin-top:12px; text-align:center">
-           Comparación normalizada de efectos (Mayor área = Mayor intensidad/riesgo/impacto)
-         </div>
+        <h3 class="h3" style="margin-bottom:16px">Perfil Clínico (Radar)</h3>
+        ${radarSVG}
+        <div class="text-xs text-muted" style="margin-top:12px; text-align:center">
+          Comparación normalizada de efectos (Mayor área = Mayor intensidad/riesgo/impacto)
+        </div>
       </div>
 
       <!-- Tabla Card -->
@@ -495,9 +547,9 @@ function renderRadarChart(data) {
     const pts = axes.map((_, i) => {
       const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
       const rad = r * l;
-      return `${c + rad * Math.cos(ang)},${c + rad * Math.sin(ang)}`;
+      return `${ c + rad * Math.cos(ang) },${ c + rad * Math.sin(ang) } `;
     }).join(" ");
-    return `<polygon points="${pts}" fill="none" stroke="var(--color-border)" stroke-width="1" />`;
+    return `< polygon points = "${pts}" fill = "none" stroke = "var(--color-border)" stroke - width="1" /> `;
   }).join("");
 
   // Axes lines
@@ -505,7 +557,7 @@ function renderRadarChart(data) {
     const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
     const x = c + r * Math.cos(ang);
     const y = c + r * Math.sin(ang);
-    return `<line x1="${c}" y1="${c}" x2="${x}" y2="${y}" stroke="var(--color-border)" stroke-width="1" />`;
+    return `< line x1 = "${c}" y1 = "${c}" x2 = "${x}" y2 = "${y}" stroke = "var(--color-border)" stroke - width="1" /> `;
   }).join("");
 
   // Labels
@@ -514,7 +566,7 @@ function renderRadarChart(data) {
     const dist = r + 20;
     const x = c + dist * Math.cos(ang);
     const y = c + dist * Math.sin(ang);
-    return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="var(--color-text-muted)">${lbl}</text>`;
+    return `< text x = "${x}" y = "${y}" text - anchor="middle" dominant - baseline="middle" font - size="10" fill = "var(--color-text-muted)" > ${ lbl }</text > `;
   }).join("");
 
   // Polygons
@@ -524,43 +576,45 @@ function renderRadarChart(data) {
       const val = item.scores[key] ?? 0; // 0..1
       const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
       const rad = r * val; // scale 0..1 to radius
-      return `${c + rad * Math.cos(ang)},${c + rad * Math.sin(ang)}`;
+      return `${ c + rad * Math.cos(ang) },${ c + rad * Math.sin(ang) } `;
     }).join(" ");
     return `
-        <polygon points="${pts}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
-        <g>
-         ${axes.map((key, i) => {
-      const val = item.scores[key] ?? 0;
-      const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
-      const rad = r * val;
-      const px = c + rad * Math.cos(ang);
-      const py = c + rad * Math.sin(ang);
-      return `<circle cx="${px}" cy="${py}" r="3" fill="${color}" />`;
-    }).join("")}
-        </g>
-      `;
+    < polygon points = "${pts}" fill = "${color}" fill - opacity="0.2" stroke = "${color}" stroke - width="2" />
+      <g>
+        ${axes.map((key, i) => {
+          const val = item.scores[key] ?? 0;
+          const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
+          const rad = r * val;
+          const px = c + rad * Math.cos(ang);
+          const py = c + rad * Math.sin(ang);
+          return `<circle cx="${px}" cy="${py}" r="3" fill="${color}" />`;
+        }).join("")}
+      </g>
+  `;
   }).join("");
 
   // Leyenda
   const legend = `
-    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:12px;">
-      ${data.map((d, i) => `
+    < div style = "display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:12px;" >
+      ${
+        data.map((d, i) => `
          <div style="display:flex; align-items:center; gap:6px; font-size:12px;">
            <span style="display:inline-block; width:10px; height:10px; background:${colors[i % colors.length]}; border-radius:50%;"></span>
            <span>${escapeHtml(d.name)}</span>
          </div>
-      `).join("")}
-    </div>
-  `;
+      `).join("")
+  }
+    </div >
+    `;
 
   return `
-    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-       ${gridSVG}
-       ${axesSVG}
-       ${polys}
-       ${labelsSVG}
-    </svg>
-    ${legend}
+    < svg width = "${size}" height = "${size}" viewBox = "0 0 ${size} ${size}" >
+      ${ gridSVG }
+       ${ axesSVG }
+       ${ polys }
+       ${ labelsSVG }
+    </svg >
+    ${ legend }
   `;
 }
 
@@ -570,11 +624,11 @@ function renderRadarChart(data) {
 
 function field(label, value) {
   return `
-    <div class="field-box">
+    < div class="field-box" >
       <div class="field-box__label">${escapeHtml(label)}</div>
       <div class="field-box__value">${escapeHtml(value ?? "N/D")}</div>
-    </div>
-  `;
+    </div >
+    `;
 }
 
 function escapeHtml(s) {
@@ -588,4 +642,14 @@ function escapeHtml(s) {
 }
 
 main();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+}
 

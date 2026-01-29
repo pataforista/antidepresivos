@@ -109,9 +109,80 @@
 }
 
 .card--hoverable:hover {
-    box-shadow: var(--shadow-md);
     transform: translateY(-2px);
-    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
+}
+
+/* MagicBento Spotlight & Glow */
+.card {
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    /* Fallback */
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    /* Prepare for spotlight */
+    --mouse-x: -500px;
+    --mouse-y: -500px;
+    --spotlight-color: rgba(var(--color-primary-rgb), 0.08);
+    --glow-color: rgba(var(--color-primary-rgb), 0.3);
+}
+
+.card--spotlight::before {
+    /* Spotlight Content */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y),
+            var(--spotlight-color),
+            transparent 40%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card--spotlight:hover::before {
+    opacity: 1;
+}
+
+/* Border Glow */
+.card--spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    padding: 1px;
+    /* border width */
+    background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y),
+            var(--glow-color),
+            transparent 40%);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card--spotlight:hover::after {
+    opacity: 1;
+}
+
+/* Ensure content is above spotlight */
+.card__header,
+.card__body,
+.card>* {
+    position: relative;
+    z-index: 3;
 }
 
 .card__header {
