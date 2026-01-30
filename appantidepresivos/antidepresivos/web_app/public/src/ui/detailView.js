@@ -1,27 +1,22 @@
-
 import { store } from "../core/store.js";
 
 export function renderDetail(view, id) {
-    const state = store.getState();
-    const items = state.data?.dataset?.items ?? [];
-    const item = items.find((d) => String(d.id_farmaco) === String(id));
+   const state = store.getState();
+   const items = state.data?.dataset?.items ?? [];
+   const item = items.find((d) => String(d.id_farmaco) === String(id));
 
-    if (!item) {
-        view.innerHTML = `
+   if (!item) {
+      view.innerHTML = `
       <div style="padding:24px; text-align:center">
         <h2 class="h2">Datos no encontrados</h2>
         <p class="text-muted">No se encontró el fármaco con ID <b>${escapeHtml(id)}</b>.</p>
         <a href="#/list" class="btn btn--primary" style="margin-top:16px">Volver al listado</a>
       </div>
     `;
-        return;
-    }
+      return;
+   }
 
-    // --- Layout General ---
-    // Header fijo con info clave
-    // Tabs debajo: General | Dosis | Seguridad | Perfil
-
-    const contentHTML = `
+   const contentHTML = `
     <div class="monograph">
       <!-- Nav Back -->
       <a href="#/list" class="btn btn--ghost text-sm" style="margin-bottom:12px">← Volver</a>
@@ -46,6 +41,7 @@ export function renderDetail(view, id) {
         <button class="tab-btn" data-tab="dosis">Dosis</button>
         <button class="tab-btn" data-tab="seguridad">Seguridad</button>
         <button class="tab-btn" data-tab="farmaco">Farmacología</button>
+        <button class="tab-btn" data-tab="switching">Switching</button>
       </div>
 
       <!-- Tab Content Container -->
@@ -56,55 +52,51 @@ export function renderDetail(view, id) {
     </div>
   `;
 
-    view.innerHTML = contentHTML;
+   view.innerHTML = contentHTML;
 
-    // --- Logic ---
+   // --- Logic ---
 
-    // 1. Tab Switching
-    view.querySelectorAll(".tab-btn").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            // UI Toggle
-            view.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("tab-btn--active"));
-            e.target.classList.add("tab-btn--active");
+   // 1. Tab Switching
+   view.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+         view.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("tab-btn--active"));
+         e.target.classList.add("tab-btn--active");
 
-            // Content Render
-            const tabKey = e.target.dataset.tab;
-            const container = view.querySelector("#tabContent");
-            if (container) {
-                if (tabKey === "resumen") container.innerHTML = renderTabResumen(item);
-                if (tabKey === "dosis") container.innerHTML = renderTabDosis(item);
-                if (tabKey === "seguridad") container.innerHTML = renderTabSeguridad(item);
-                if (tabKey === "farmaco") container.innerHTML = renderTabFarmaco(item);
-            }
-        });
-    });
+         const tabKey = e.target.dataset.tab;
+         const container = view.querySelector("#tabContent");
+         if (container) {
+            if (tabKey === "resumen") container.innerHTML = renderTabResumen(item);
+            if (tabKey === "dosis") container.innerHTML = renderTabDosis(item);
+            if (tabKey === "seguridad") container.innerHTML = renderTabSeguridad(item);
+            if (tabKey === "farmaco") container.innerHTML = renderTabFarmaco(item);
+            if (tabKey === "switching") container.innerHTML = renderTabSwitching(item);
+         }
+      });
+   });
 
-    // 2. Compare Button
-    const btnCmp = view.querySelector("#btnMonoCompare");
-    if (btnCmp) {
-        btnCmp.addEventListener("click", () => {
-            const curr = store.getState().compare?.ids ?? [];
-            const set = new Set(curr);
-            set.add(String(item.id_farmaco));
-            store.setCompareIds([...set], { reason: "ui:detailAddCompare" });
-            location.hash = `#/compare?ids=${encodeURIComponent([...set].join(","))}`;
-        });
-    }
+   // 2. Compare Button
+   const btnCmp = view.querySelector("#btnMonoCompare");
+   if (btnCmp) {
+      btnCmp.addEventListener("click", () => {
+         const curr = store.getState().compare?.ids ?? [];
+         const set = new Set(curr);
+         set.add(String(item.id_farmaco));
+         store.setCompareIds([...set], { reason: "ui:detailAddCompare" });
+         location.hash = `#/compare?ids=${encodeURIComponent([...set].join(","))}`;
+      });
+   }
 }
 
 // --- Renderers de Tabs ---
 
 function renderTabResumen(item) {
-    return `
+   return `
     <div class="animate-fade-in" style="display:grid; gap:24px;">
-       
-       <!-- Mecanismo -->
        <section>
          <h3 class="h3 section-title">Mecanismo de Acción</h3>
          <p class="text-body">${escapeHtml(item.mecanismo_principal)}</p>
        </section>
 
-       <!-- Indicaciones -->
        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px;">
          <div class="card bg-soft">
            <h4 class="h4" style="color:var(--color-primary)">Indicaciones FDA</h4>
@@ -120,29 +112,24 @@ function renderTabResumen(item) {
          </div>
        </div>
 
-       <!-- Clinical Pearls (Utilidad Clave) -->
        ${item.utilidad_sintomatica_clave ? `
        <div class="alert alert--info">
           <strong>💡 Perlas Clínicas:</strong> ${escapeHtml(item.utilidad_sintomatica_clave)}
        </div>
        ` : ''}
-
     </div>
   `;
 }
 
 function renderTabDosis(item) {
-    return `
+   return `
     <div class="animate-fade-in" style="display:grid; gap:24px;">
-       
-       <!-- Grid Principal -->
        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
           ${infoBox("Inicio", item.dosis_inicio_adulto)}
           ${infoBox("Rango Terapéutico", item.rango_terapeutico_adulto)}
           ${infoBox("Dosis Máxima", item.dosis_maxima_autorizada)}
        </div>
 
-       <!-- Titulación -->
        <section class="card">
           <h4 class="h4">Titulación / Administración</h4>
           <div style="display:grid; gap:12px; margin-top:12px">
@@ -152,7 +139,6 @@ function renderTabDosis(item) {
           </div>
        </section>
 
-       <!-- Ajustes -->
        <section class="card" style="border-left: 4px solid var(--color-warning);">
           <h4 class="h4">Ajustes en Poblaciones Especiales</h4>
           <div style="display:grid; gap:12px; margin-top:12px">
@@ -161,26 +147,22 @@ function renderTabDosis(item) {
              ${rowDetail("Uso Pediátrico", item.aprobado_uso_pediatrico === "Sí" ? "Aprobado" : `No aprobado (${escapeHtml(item.aprobado_uso_pediatrico)})`)}
           </div>
        </section>
-
     </div>
    `;
 }
 
 function renderTabSeguridad(item) {
-    const hasBBW = (item.black_box_warning || "").toLowerCase() === "sí";
-
-    return `
+   const hasBBW = (item.black_box_warning || "").toLowerCase() === "sí";
+   return `
      <div class="animate-fade-in" style="display:grid; gap:24px;">
- 
         ${hasBBW ? `
         <div class="alert alert--danger">
            <strong style="display:block; margin-bottom:4px">⚠️ BLACK BOX WARNING</strong>
-           Este fármaco tiene advertencias de seguridad importantes de la FDA. Revise la información de prescripción completa.
+           Este fármaco tiene advertencias de seguridad importantes de la FDA.
         </div>
         ` : ''}
 
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px;">
-           <!-- Efectos Adversos -->
            <section class="card">
               <h4 class="h4">Efectos Adversos</h4>
               <div style="margin-top:12px; display:flex; flex-direction:column; gap:8px">
@@ -190,7 +172,6 @@ function renderTabSeguridad(item) {
               </div>
            </section>
            
-           <!-- Perfil de Riesgo (Semáforo Textual) -->
            <section class="card">
               <h4 class="h4">Perfil de Riesgo</h4>
               <div style="margin-top:12px; display:grid; gap:8px">
@@ -212,13 +193,12 @@ function renderTabSeguridad(item) {
            <h4 class="h4">Embarazo y Lactancia</h4>
            <p class="text-sm">${escapeHtml(item.riesgo_embarazo_multifuente)}</p>
         </section>
-
      </div>
     `;
 }
 
 function renderTabFarmaco(item) {
-    return `
+   return `
      <div class="animate-fade-in" style="display:grid; gap:24px;">
         <section class="card">
            <h4 class="h4">Farmacocinética</h4>
@@ -243,16 +223,82 @@ function renderTabFarmaco(item) {
     `;
 }
 
+function renderTabSwitching(item) {
+   return `
+    <div class="animate-fade-in" style="display:grid; gap:24px;">
+        <section class="card">
+            <h3 class="h3">Estrategias de Cambio (Switching)</h3>
+            <p class="text-body" style="margin-top:8px">
+                Información para realizar el cambio desde <strong>${escapeHtml(item.nombre_generico)}</strong> hacia otros antidepresivos.
+            </p>
+            
+            <div class="alert alert--info" style="margin-top:16px">
+                <strong>Nota Clínica:</strong> Las recomendaciones de switching se basan en vidas medias y riesgos farmacodinámicos. Siempre individualice según la clínica del paciente.
+            </div>
+        </section>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px;">
+            <div class="card shadow-sm">
+                <h4 class="h4" style="color:var(--color-primary)">Métodos Generales</h4>
+                <ul class="list-disc" style="padding-left:20px; margin-top:12px; font-size:0.95rem">
+                    <li><strong>Direct Switch:</strong> Detener fármaco A e iniciar B al día siguiente.</li>
+                    <li><strong>Cross-Taper:</strong> Disminuir gradualmente A mientras se introduce B.</li>
+                    <li><strong>Washout:</strong> Periodo sin medicación entre el fin de A y el inicio de B.</li>
+                </ul>
+            </div>
+
+            <div class="card shadow-sm">
+                <h4 class="h4">Riesgos Específicos para ${escapeHtml(item.nombre_generico)}</h4>
+                <div style="margin-top:12px; display:grid; gap:10px">
+                    ${rowRisk("Síndrome de Abstinencia", item.riesgo_sindrome_abstinencia)}
+                    ${rowRisk("Riesgo QT (potenciación)", item.riesgo_prolongacion_qt)}
+                    <div>
+                        <span class="text-sm text-muted">Vida Media:</span>
+                        <div style="font-weight:600">${escapeHtml(item.vida_media_parental)}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="card bg-soft">
+            <h4 class="h4">Guía Rápida de Cambio</h4>
+            <div style="margin-top:12px; overflow-x:auto;">
+                <table class="table-minimal">
+                    <thead>
+                        <tr>
+                            <th>Hacia...</th>
+                            <th>Estrategia Recomendada</th>
+                            <th>Comentarios</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Otro ISRS / Dual</td>
+                            <td>Cross-Taper (2 semanas)</td>
+                            <td>Riesgo bajo de interacción. Monitorizar activación.</td>
+                        </tr>
+                        <tr>
+                            <td>IMAO</td>
+                            <td>Washout (5 vidas medias)</td>
+                            <td style="color:var(--color-danger); font-weight:600">Periodo de seguridad crítico para evitar S. Serotoninérgico.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    `;
+}
+
 // --- Helpers UI ---
 
 function splitList(str) {
-    if (!str) return [];
-    // Separa por punto y coma o saltos de linea
-    return str.split(/[;|\n]/).map(s => s.trim()).filter(Boolean);
+   if (!str) return [];
+   return str.split(/[;|\n]/).map(s => s.trim()).filter(Boolean);
 }
 
 function infoBox(label, val) {
-    return `
+   return `
       <div class="field-box">
         <div class="field-box__label">${escapeHtml(label)}</div>
         <div class="field-box__value" style="font-weight:600">${escapeHtml(val)}</div>
@@ -261,7 +307,7 @@ function infoBox(label, val) {
 }
 
 function infoBoxClean(label, val) {
-    return `
+   return `
       <div>
         <div class="text-sm text-muted">${escapeHtml(label)}</div>
         <div style="font-weight:600; font-size:1.1rem">${escapeHtml(val)}</div>
@@ -270,7 +316,7 @@ function infoBoxClean(label, val) {
 }
 
 function rowDetail(label, val) {
-    return `
+   return `
       <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--color-border); padding-bottom:8px;">
          <span class="text-muted">${escapeHtml(label)}</span>
          <span style="font-weight:500; text-align:right">${escapeHtml(val)}</span>
@@ -279,10 +325,9 @@ function rowDetail(label, val) {
 }
 
 function rowRisk(label, val) {
-    // Logic simple para colorear si es "Alto"
-    const isHigh = (val || "").toLowerCase().includes("alto") || (val === "3") || (val === "2");
-    const style = isHigh ? "color:var(--color-danger); font-weight:700" : "";
-    return `
+   const isHigh = (val || "").toLowerCase().includes("alto") || (val === "3") || (val === "2");
+   const style = isHigh ? "color:var(--color-danger); font-weight:700" : "";
+   return `
       <div style="display:flex; justify-content:space-between;">
          <span>${escapeHtml(label)}</span>
          <span style="${style}">${escapeHtml(val)}</span>
@@ -291,11 +336,11 @@ function rowRisk(label, val) {
 }
 
 function escapeHtml(s) {
-    return (s ?? "N/D")
-        .toString()
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+   return (s ?? "N/D")
+      .toString()
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 }

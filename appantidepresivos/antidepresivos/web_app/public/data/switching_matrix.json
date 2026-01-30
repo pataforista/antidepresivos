@@ -1,0 +1,20 @@
+[
+  {
+    "from": "sertralina",
+    "to": "venlafaxina",
+    "strategy": "cross_taper",
+    "taper_days": 14,
+    "washout_days": 0,
+    "notes": ["vigilar PA", "riesgo activación"],
+    "contraindications": ["IMAO"]
+  },
+  {
+    "from": "fluoxetina",
+    "to": "sertralina",
+    "strategy": "direct_switch",
+    "taper_days": 0,
+    "washout_days": 3,
+    "notes": ["Fluoxetina tiene vida media larga", "Washout recomendado antes de iniciar dosis plenas"],
+    "contraindications": ["IMAO"]
+  }
+]
