@@ -31,6 +31,17 @@
     font-size: 0.875rem;
 }
 
+.text-xs {
+    font-size: 0.75rem;
+}
+
+.text-body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-text-main);
+}
+
+
 /* Buttons */
 .btn {
     display: inline-flex;
@@ -166,6 +177,9 @@
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
     mask-composite: exclude;
     pointer-events: none;
     z-index: 2;
@@ -251,6 +265,63 @@
     border-color: var(--color-danger);
     color: var(--color-danger);
 }
+
+.bg-soft {
+    background: rgba(var(--color-primary-rgb), 0.06);
+    border-color: rgba(var(--color-primary-rgb), 0.15);
+}
+
+.list-disc {
+    list-style: disc;
+}
+
+.tabs-nav {
+    gap: var(--space-3);
+    scrollbar-width: thin;
+}
+
+.tab-btn {
+    border: none;
+    background: transparent;
+    padding: var(--space-2) 0;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.tab-btn:hover {
+    color: var(--color-text-main);
+}
+
+.tab-btn--active {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.alert {
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    border: 1px solid transparent;
+    background: var(--color-bg);
+    color: var(--color-text-main);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.alert--info {
+    border-color: rgba(59, 130, 246, 0.3);
+    background: rgba(59, 130, 246, 0.08);
+    color: #1e3a8a;
+}
+
+.alert--danger {
+    border-color: rgba(239, 68, 68, 0.35);
+    background: rgba(239, 68, 68, 0.08);
+    color: #7f1d1d;
+}
+
 
 /* Comparison Table */
 .compare-container {

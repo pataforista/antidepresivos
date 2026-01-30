@@ -37,7 +37,7 @@ async function main() {
       rootEl: root,
       onAllow: () => {
         mountShell(root);
-        
+
         const router = createRouter(store);
         router.start();
 
@@ -81,34 +81,34 @@ async function main() {
 }
 
 function attachGlobalListeners() {
-    // Listener para el botón de comparar en el header (si existe en mountShell)
-    const btnHeaderCompare = document.getElementById("btnHeaderCompare");
-    if (btnHeaderCompare) {
-        btnHeaderCompare.addEventListener("click", (ev) => {
-            ev.preventDefault();
-            const ids = store.getState().compare?.ids ?? [];
-            if (!ids.length) {
-                location.hash = "#/list";
-                return;
-            }
-            location.hash = `#/compare?ids=${encodeURIComponent(ids.join(","))}`;
-        });
-    }
+  // Listener para el botón de comparar en el header (si existe en mountShell)
+  const btnHeaderCompare = document.getElementById("btnHeaderCompare");
+  if (btnHeaderCompare) {
+    btnHeaderCompare.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const ids = store.getState().compare?.ids ?? [];
+      if (!ids.length) {
+        location.hash = "#/list";
+        return;
+      }
+      location.hash = `#/compare?ids=${encodeURIComponent(ids.join(","))}`;
+    });
+  }
 
-    // Botón limpiar compare
-    const btnClear = document.getElementById("btnClearCompare");
-    if (btnClear) {
-        btnClear.addEventListener("click", () => {
-            store.setCompareIds([], { reason: "ui:clearCompare" });
-            location.hash = "#/list";
-        });
-    }
+  // Botón limpiar compare
+  const btnClear = document.getElementById("btnClearCompare");
+  if (btnClear) {
+    btnClear.addEventListener("click", () => {
+      store.setCompareIds([], { reason: "ui:clearCompare" });
+      location.hash = "#/list";
+    });
+  }
 
-    // Modal de Info
-    const btnInfo = document.getElementById("btnOpenInfo");
-    if (btnInfo) {
-        btnInfo.addEventListener("click", () => mountInfoModal());
-    }
+  // Modal de Info
+  const btnInfo = document.getElementById("btnOpenInfo");
+  if (btnInfo) {
+    btnInfo.addEventListener("click", () => mountInfoModal());
+  }
 }
 
 function updateHeaderNav(route) {
@@ -200,7 +200,7 @@ function updateCompareCount() {
   if (!el) return;
   const ids = store.getState().compare?.ids ?? [];
   el.textContent = ids.length ? `Seleccionados: ${ids.length}` : "";
-  
+
   const btnClear = document.getElementById("btnClearCompare");
   if (btnClear) {
     btnClear.style.display = ids.length ? "inline-block" : "none";
@@ -250,7 +250,7 @@ function renderList(view) {
       <button id="btnGoCompare" type="button" class="btn btn--primary">
         Ir a comparar
       </button>
-      <span class="text-sm text-muted">
+      <span id="compareHint" class="text-sm text-muted">
         Selecciona con checkbox.
       </span>
     </div>
@@ -265,7 +265,7 @@ function renderList(view) {
         const isOn = selected.has(id);
 
         return `
-            <div class="card card--hoverable">
+            <div class="card card--hoverable card--spotlight">
               <div style="display:flex;gap:12px;align-items:flex-start">
                 <input type="checkbox" class="chkCompare input-checkbox" data-id="${escapeHtml(id)}" ${isOn ? "checked" : ""} style="margin-top:4px" />
                 <div style="flex:1">
@@ -286,9 +286,21 @@ function renderList(view) {
   attachFilterListeners(view);
 
   const go = document.getElementById("btnGoCompare");
+  const hint = document.getElementById("compareHint");
+  const compareIds = store.getState().compare?.ids ?? [];
+  if (go) {
+    go.disabled = compareIds.length === 0;
+    go.textContent = compareIds.length ? `Ir a comparar (${compareIds.length})` : "Ir a comparar";
+  }
+  if (hint) {
+    hint.textContent = compareIds.length
+      ? "Puedes revisar los seleccionados en el comparador."
+      : "Selecciona con checkbox.";
+  }
   if (go) {
     go.addEventListener("click", () => {
       const ids = store.getState().compare?.ids ?? [];
+      if (!ids.length) return;
       location.hash = `#/compare?ids=${encodeURIComponent(ids.join(","))}`;
     });
   }
@@ -303,26 +315,40 @@ function renderList(view) {
       else set.delete(id);
 
       store.setCompareIds([...set], { reason: "ui:listToggleCompare" });
+      const nextIds = [...set];
+      const goBtn = document.getElementById("btnGoCompare");
+      const hintEl = document.getElementById("compareHint");
+      if (goBtn) {
+        goBtn.disabled = nextIds.length === 0;
+        goBtn.textContent = nextIds.length ? `Ir a comparar (${nextIds.length})` : "Ir a comparar";
+      }
+      if (hintEl) {
+        hintEl.textContent = nextIds.length
+          ? "Puedes revisar los seleccionados en el comparador."
+          : "Selecciona con checkbox.";
+      }
     });
   });
+
+  initCardSpotlight();
 }
 
 function renderFilters(filters) {
   const q = filters.q || "";
   const schema = store.getState().data?.schema;
-  
+
   // Obtener grupos dinámicamente si es posible
   let groups = [];
   if (schema) {
-      const groupFilter = schema.filters?.find(f => f.id === "grupo");
-      if (groupFilter && groupFilter.valuesFromData) {
-          const allItems = store.getState().data?.dataset?.items ?? [];
-          groups = [...new Set(allItems.map(i => i.clase_terapeutica))].filter(Boolean).sort();
-      }
+    const groupFilter = schema.filters?.find(f => f.id === "grupo");
+    if (groupFilter && groupFilter.valuesFromData) {
+      const allItems = store.getState().data?.dataset?.items ?? [];
+      groups = [...new Set(allItems.map(i => i.clase_terapeutica))].filter(Boolean).sort();
+    }
   }
-  
+
   if (!groups.length) {
-      groups = ["ISRS", "Dual", "Tricíclico", "IMAO", "Atípico", "Modulador"];
+    groups = ["ISRS", "Dual", "Tricíclico", "IMAO", "Atípico", "Modulador"];
   }
 
   const activeGroups = new Set(filters.grupo || []);
@@ -430,22 +456,22 @@ function renderCompare(view) {
   const schema = state.data?.schema;
   let tableFields = [];
   if (schema && schema.compare?.fields) {
-      tableFields = schema.compare.fields.map(f => ({
-          label: f.label,
-          key: f.rawField,
-          highlight: !!f.ordField
-      }));
+    tableFields = schema.compare.fields.map(f => ({
+      label: f.label,
+      key: f.rawField,
+      highlight: !!f.ordField
+    }));
   } else {
-      tableFields = [
-        { label: "Clase", key: "clase_terapeutica" },
-        { label: "Mecanismo", key: "mecanismo_principal" },
-        { label: "Vida Media", key: "vida_media_parental" },
-        { label: "Sedación", key: "nivel_sedacion", highlight: true },
-        { label: "Peso", key: "perfil_impacto_peso", highlight: true },
-        { label: "Sexual", key: "perfil_disfuncion_sexual", highlight: true },
-        { label: "QT", key: "riesgo_prolongacion_qt", highlight: true },
-        { label: "Abstinencia", key: "riesgo_sindrome_abstinencia", highlight: true }
-      ];
+    tableFields = [
+      { label: "Clase", key: "clase_terapeutica" },
+      { label: "Mecanismo", key: "mecanismo_principal" },
+      { label: "Vida Media", key: "vida_media_parental" },
+      { label: "Sedación", key: "nivel_sedacion", highlight: true },
+      { label: "Peso", key: "perfil_impacto_peso", highlight: true },
+      { label: "Sexual", key: "perfil_disfuncion_sexual", highlight: true },
+      { label: "QT", key: "riesgo_prolongacion_qt", highlight: true },
+      { label: "Abstinencia", key: "riesgo_sindrome_abstinencia", highlight: true }
+    ];
   }
 
   view.innerHTML = `
@@ -547,13 +573,13 @@ function renderRadarChart(data) {
       <polygon points="${pts}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
       <g>
         ${axes.map((key, i) => {
-          const val = item.scores[key] ?? 0;
-          const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
-          const rad = r * val;
-          const px = c + rad * Math.cos(ang);
-          const py = c + rad * Math.sin(ang);
-          return `<circle cx="${px}" cy="${py}" r="3" fill="${color}" />`;
-        }).join("")}
+      const val = item.scores[key] ?? 0;
+      const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
+      const rad = r * val;
+      const px = c + rad * Math.cos(ang);
+      const py = c + rad * Math.sin(ang);
+      return `<circle cx="${px}" cy="${py}" r="3" fill="${color}" />`;
+    }).join("")}
       </g>
     `;
   }).join("");

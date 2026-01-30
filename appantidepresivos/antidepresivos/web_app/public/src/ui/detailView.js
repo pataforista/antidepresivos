@@ -224,66 +224,40 @@ function renderTabFarmaco(item) {
 }
 
 function renderTabSwitching(item) {
+   const vidaMedia = item.vida_media_parental || "N/D";
+   const abstinencia = item.riesgo_sindrome_abstinencia || "N/D";
+   const qt = item.riesgo_prolongacion_qt || "N/D";
+   const activacion = item.perfil_activacion || "N/D";
+   const interacciones = item.interacciones_contraindicadas || "N/D";
+
    return `
     <div class="animate-fade-in" style="display:grid; gap:24px;">
-        <section class="card">
-            <h3 class="h3">Estrategias de Cambio (Switching)</h3>
+        <section class="card bg-soft">
+            <h3 class="h3">Switching (en desarrollo)</h3>
             <p class="text-body" style="margin-top:8px">
-                Información para realizar el cambio desde <strong>${escapeHtml(item.nombre_generico)}</strong> hacia otros antidepresivos.
+                Esta sección está diseñada para resumir estrategias de cambio desde
+                <strong>${escapeHtml(item.nombre_generico)}</strong>. Todavía faltan datos
+                estructurados para generar recomendaciones específicas por par de fármacos.
             </p>
-            
             <div class="alert alert--info" style="margin-top:16px">
-                <strong>Nota Clínica:</strong> Las recomendaciones de switching se basan en vidas medias y riesgos farmacodinámicos. Siempre individualice según la clínica del paciente.
+                <strong>Necesitamos:</strong> matriz de equivalencias, reglas por clase, tiempos de washout y
+                alertas de interacciones críticas.
             </div>
         </section>
 
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px;">
-            <div class="card shadow-sm">
-                <h4 class="h4" style="color:var(--color-primary)">Métodos Generales</h4>
-                <ul class="list-disc" style="padding-left:20px; margin-top:12px; font-size:0.95rem">
-                    <li><strong>Direct Switch:</strong> Detener fármaco A e iniciar B al día siguiente.</li>
-                    <li><strong>Cross-Taper:</strong> Disminuir gradualmente A mientras se introduce B.</li>
-                    <li><strong>Washout:</strong> Periodo sin medicación entre el fin de A y el inicio de B.</li>
-                </ul>
-            </div>
-
-            <div class="card shadow-sm">
-                <h4 class="h4">Riesgos Específicos para ${escapeHtml(item.nombre_generico)}</h4>
-                <div style="margin-top:12px; display:grid; gap:10px">
-                    ${rowRisk("Síndrome de Abstinencia", item.riesgo_sindrome_abstinencia)}
-                    ${rowRisk("Riesgo QT (potenciación)", item.riesgo_prolongacion_qt)}
-                    <div>
-                        <span class="text-sm text-muted">Vida Media:</span>
-                        <div style="font-weight:600">${escapeHtml(item.vida_media_parental)}</div>
-                    </div>
-                </div>
-            </div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+            ${infoBox("Vida media (padre)", vidaMedia)}
+            ${infoBox("Riesgo de abstinencia", abstinencia)}
+            ${infoBox("Riesgo QT", qt)}
+            ${infoBox("Perfil de activación", activacion)}
         </div>
 
-        <section class="card bg-soft">
-            <h4 class="h4">Guía Rápida de Cambio</h4>
-            <div style="margin-top:12px; overflow-x:auto;">
-                <table class="table-minimal">
-                    <thead>
-                        <tr>
-                            <th>Hacia...</th>
-                            <th>Estrategia Recomendada</th>
-                            <th>Comentarios</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Otro ISRS / Dual</td>
-                            <td>Cross-Taper (2 semanas)</td>
-                            <td>Riesgo bajo de interacción. Monitorizar activación.</td>
-                        </tr>
-                        <tr>
-                            <td>IMAO</td>
-                            <td>Washout (5 vidas medias)</td>
-                            <td style="color:var(--color-danger); font-weight:600">Periodo de seguridad crítico para evitar S. Serotoninérgico.</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <section class="card">
+            <h4 class="h4">Checklist de seguridad</h4>
+            <div style="margin-top:12px; display:grid; gap:10px">
+                ${rowDetail("Interacciones contraindicadas", interacciones)}
+                ${rowDetail("Black box warning", item.black_box_warning || "N/D")}
+                ${rowDetail("Uso pediátrico", item.aprobado_uso_pediatrico || "N/D")}
             </div>
         </section>
     </div>

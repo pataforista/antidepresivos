@@ -19,11 +19,7 @@
 }
 
 @media (min-width: 1024px) {
-    .shell {
-        /* Optional: Centered layout on large screens if desired, 
-       but for data apps usually full width is better. 
-       Let's keep it full but with padding control. */
-    }
+    /* Optional: Centered layout on large screens if desired */
 }
 
 /* Glass Header */
@@ -65,9 +61,7 @@
     border-radius: var(--radius-full);
 }
 
-.nav-gooey {
-    /* Marker class for JS */
-}
+/* Marker class for JS logic */
 
 .nav-gooey__blob {
     position: absolute;
@@ -130,6 +124,30 @@
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: var(--space-4);
 }
+
+.grid-compare {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-4);
+    align-items: start;
+}
+
+.radar-card {
+    align-items: center;
+    text-align: center;
+}
+
+.radar-card svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.table-card .compare-container {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
 
 .detail-layout {
     display: grid;
