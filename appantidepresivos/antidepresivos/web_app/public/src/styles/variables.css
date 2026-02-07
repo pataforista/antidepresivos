@@ -1,89 +1,92 @@
 /* src/styles/variables.css */
 :root {
-  /* Base HSL/RGB for alphas */
-  --color-primary-rgb: 79, 70, 229;
-  /* Indigo 600 */
-  --color-secondary-rgb: 71, 85, 105;
-  /* Slate 600 */
-  /* --- Palette: Clinical Premium --- */
-  /* Primary: Trust & Science (Deep Teal/Blue) */
-  --color-primary: #0f766e;
-  /* teal-700 */
-  --color-primary-light: #14b8a6;
-  /* teal-500 */
-  --color-primary-dark: #0f5132;
+  /* --- Palette: Clinical Premium (Deep Teal & Pure Accents) --- */
+
+  /* Primary: Trust & Science */
+  --color-primary-h: 174;
+  --color-primary-s: 78%;
+  --color-primary-l: 26%;
+  /* Deep Teal */
+  --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
+  --color-primary-light: hsl(var(--color-primary-h), var(--color-primary-s), 45%);
+  --color-primary-dark: hsl(var(--color-primary-h), var(--color-primary-s), 15%);
   --color-on-primary: #ffffff;
 
-  /* Secondary: Neutrality & Balance */
-  --color-secondary: #64748b;
-  /* slate-500 */
-  --color-secondary-light: #94a3b8;
-  --color-secondary-dark: #334155;
+  /* Secondary: Scientific Neutrality */
+  --color-secondary-h: 215;
+  --color-secondary-s: 25%;
+  --color-secondary-l: 45%;
+  --color-secondary: hsl(var(--color-secondary-h), var(--color-secondary-s), var(--color-secondary-l));
 
-  /* Backgrounds */
-  --color-bg: #f8fafc;
-  /* slate-50 */
+  /* Accent: Precise Action */
+  --color-accent: #f59e0b;
+  /* Amber 500 */
+
+  /* Backgrounds & Surfaces */
+  --color-bg: #fdfdfc;
+  /* Off-white for less eye strain */
   --color-surface: #ffffff;
-  --color-surface-translucent: rgba(255, 255, 255, 0.85);
+  --color-surface-translucent: rgba(255, 255, 255, 0.7);
+  --color-border: rgba(0, 0, 0, 0.08);
 
   /* Text */
-  --color-text-main: #1e293b;
-  /* slate-800 */
+  --color-text-main: #0f172a;
+  /* Slate 900 */
   --color-text-muted: #64748b;
+  /* Slate 500 */
 
   /* Status */
-  --color-danger: #ef4444;
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
+  --color-danger: #e11d48;
+  /* Rose 600 */
+  --color-success: #059669;
+  /* Emerald 600 */
+  --color-warning: #d97706;
+  /* Amber 600 */
 
   /* --- Typography --- */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  /* For emphasis if needed */
+  --font-headers: 'Outfit', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
 
   /* --- Spacing --- */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-8: 48px;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
 
   /* --- Effects --- */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-glass: 0 8px 32px 0 rgba(15, 118, 110, 0.08);
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
   --radius-full: 9999px;
 
-  --backdrop-blur: blur(12px);
-  --transition-fast: 150ms ease;
-  --transition-normal: 250ms ease;
+  --backdrop-blur: blur(16px);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0f172a;
-    /* slate-900 */
-    --color-surface: #1e293b;
-    /* slate-800 */
-    --color-surface-translucent: rgba(30, 41, 59, 0.85);
+    --color-bg: #0b0f1a;
+    --color-surface: #151b2d;
+    --color-surface-translucent: rgba(21, 27, 45, 0.75);
+    --color-border: rgba(255, 255, 255, 0.08);
 
-    --color-text-main: #f1f5f9;
-    /* slate-100 */
+    --color-text-main: #f8fafc;
     --color-text-muted: #94a3b8;
-    /* slate-400 */
 
-    --color-primary: #14b8a6;
-    /* teal-500 */
-    --color-primary-light: #2dd4bf;
-    --color-primary-dark: #0d9488;
+    --color-primary-l: 45%;
+    --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
 
-    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   }
 }

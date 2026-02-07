@@ -1,51 +1,51 @@
 import { store } from "../core/store.js";
+import { selectItemById } from "../core/selectors.js";
 
 export function renderDetail(view, id) {
    const state = store.getState();
-   const items = state.data?.dataset?.items ?? [];
-   const item = items.find((d) => String(d.id_farmaco) === String(id));
+   const item = selectItemById(state, id);
 
    if (!item) {
       view.innerHTML = `
       <div style="padding:24px; text-align:center">
         <h2 class="h2">Datos no encontrados</h2>
         <p class="text-muted">No se encontró el fármaco con ID <b>${escapeHtml(id)}</b>.</p>
-        <a href="#/list" class="btn btn--primary" style="margin-top:16px">Volver al listado</a>
+        <a href="#/list" class="btn btn--primary" style="margin-top:166px">Volver al listado</a>
       </div>
     `;
       return;
    }
 
    const contentHTML = `
-    <div class="monograph">
+    <div class="monograph animate-fade-in">
       <!-- Nav Back -->
-      <a href="#/list" class="btn btn--ghost text-sm" style="margin-bottom:12px">← Volver</a>
+      <a href="#/list" class="btn btn--ghost text-sm" style="margin-bottom:16px; font-weight:700">← VOLVER AL LISTADO</a>
 
       <!-- Header Principal -->
-      <header class="card monograph__header" style="border-left: 5px solid var(--color-primary);">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+      <header class="card monograph__header" style="border-left: 8px solid var(--color-primary); background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:24px;">
           <div>
-            <h1 class="h1" style="margin:0; font-size:1.75rem">${escapeHtml(item.nombre_generico)}</h1>
-            <div class="text-muted" style="font-size:1rem; margin-top:4px;">${escapeHtml(item.clase_terapeutica)}</div>
-             <div class="chip" style="margin-top:8px">${escapeHtml(item.codigo_atc)}</div>
+            <h1 class="h1" style="margin:0; line-height:1.1">${escapeHtml(item.nombre_generico)}</h1>
+            <div class="text-muted" style="font-size:1.1rem; font-weight:600; font-family:var(--font-headers); margin-top:6px;">${escapeHtml(item.clase_terapeutica)}</div>
+             <div class="chip" style="margin-top:12px; background:var(--color-primary); color:white; border:none">${escapeHtml(item.codigo_atc)}</div>
           </div>
-          <button id="btnMonoCompare" class="btn btn--outline text-sm">
-             + Comparar
+          <button id="btnMonoCompare" class="btn btn--primary">
+             + COMPARAR
           </button>
         </div>
       </header>
       
       <!-- Tabs Navigation -->
-      <div class="tabs-nav" style="margin-top:24px; border-bottom:1px solid var(--color-border); display:flex; gap:24px; overflow-x:auto;">
-        <button class="tab-btn tab-btn--active" data-tab="resumen">Resumen</button>
-        <button class="tab-btn" data-tab="dosis">Dosis</button>
-        <button class="tab-btn" data-tab="seguridad">Seguridad</button>
-        <button class="tab-btn" data-tab="farmaco">Farmacología</button>
-        <button class="tab-btn" data-tab="switching">Switching</button>
+      <div class="tabs-nav" style="margin-top:32px;">
+        <button class="tab-btn tab-btn--active" data-tab="resumen">RESUMEN</button>
+        <button class="tab-btn" data-tab="dosis">DOSIS</button>
+        <button class="tab-btn" data-tab="seguridad">SEGURIDAD</button>
+        <button class="tab-btn" data-tab="farmaco">FARMACOLOGÍA</button>
+        <button class="tab-btn" data-tab="switching">SWITCHING</button>
       </div>
 
       <!-- Tab Content Container -->
-      <div id="tabContent" style="padding-top:24px; min-height:400px">
+      <div id="tabContent" style="padding-top:12px; min-height:450px">
         ${renderTabResumen(item)}
       </div>
 
@@ -97,17 +97,29 @@ function renderTabResumen(item) {
          <p class="text-body">${escapeHtml(item.mecanismo_principal)}</p>
        </section>
 
-       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px;">
+       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:24px;">
          <div class="card bg-soft">
            <h4 class="h4" style="color:var(--color-primary)">Indicaciones FDA</h4>
            <ul class="list-disc" style="padding-left:20px; margin-top:8px;">
-             ${splitList(item.indicaciones_aprobadas_fda).map(li => `<li>${escapeHtml(li)}</li>`).join("")}
+             ${(item.rel_indicaciones || [])
+         .filter(ind => ind.fuente === "FDA")
+         .map(ind => `<li>${escapeHtml(ind.nombre)}</li>`).join("") || "<li>N/D</li>"}
+           </ul>
+         </div>
+         <div class="card bg-soft">
+           <h4 class="h4" style="color:var(--color-secondary)">Indicaciones EMA</h4>
+           <ul class="list-disc" style="padding-left:20px; margin-top:8px;">
+             ${(item.rel_indicaciones || [])
+         .filter(ind => ind.fuente === "EMA")
+         .map(ind => `<li>${escapeHtml(ind.nombre)}</li>`).join("") || "<li>N/D</li>"}
            </ul>
          </div>
          <div class="card">
-           <h4 class="h4">Usos Off-Label / Otros</h4>
+           <h4 class="h4">Usos Off-Label</h4>
            <ul class="list-disc" style="padding-left:20px; margin-top:8px;">
-              ${splitList(item.indicaciones_off_label).map(li => `<li>${escapeHtml(li)}</li>`).join("")}
+              ${(item.rel_indicaciones || [])
+         .filter(ind => ind.fuente === "Off-label")
+         .map(ind => `<li>${escapeHtml(ind.nombre)}</li>`).join("") || "<li>N/D</li>"}
            </ul>
          </div>
        </div>
@@ -152,7 +164,7 @@ function renderTabDosis(item) {
 }
 
 function renderTabSeguridad(item) {
-   const hasBBW = (item.black_box_warning || "").toLowerCase() === "sí";
+   const hasBBW = (item.black_box_warning || "").toLowerCase() === "sí" || item.black_box_warning === true;
    return `
      <div class="animate-fade-in" style="display:grid; gap:24px;">
         ${hasBBW ? `
@@ -166,9 +178,24 @@ function renderTabSeguridad(item) {
            <section class="card">
               <h4 class="h4">Efectos Adversos</h4>
               <div style="margin-top:12px; display:flex; flex-direction:column; gap:8px">
-                  <div><span class="badge badge--red">Muy Frecuentes</span> <span class="text-sm">${escapeHtml(item.efectos_muy_frecuentes)}</span></div>
-                  <div><span class="badge badge--yellow">Frecuentes</span> <span class="text-sm">${escapeHtml(item.efectos_frecuentes)}</span></div>
-                  <div><span class="badge badge--gray">Graves/Raros</span> <span class="text-sm">${escapeHtml(item.efectos_raros_graves)}</span></div>
+                  <div>
+                    <span class="badge badge--red">Muy Frecuentes</span>
+                    <span class="text-sm">${(item.rel_efectos_adversos || [])
+         .filter(ea => ea.frecuencia === "muy frecuente")
+         .map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}</span>
+                  </div>
+                  <div>
+                    <span class="badge badge--yellow">Frecuentes</span>
+                    <span class="text-sm">${(item.rel_efectos_adversos || [])
+         .filter(ea => ea.frecuencia === "frecuente")
+         .map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}</span>
+                  </div>
+                  <div>
+                    <span class="badge badge--gray">Graves/Raros</span>
+                    <span class="text-sm">${(item.rel_efectos_adversos || [])
+         .filter(ea => ea.frecuencia === "raro grave")
+         .map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}</span>
+                  </div>
               </div>
            </section>
            
@@ -184,10 +211,12 @@ function renderTabSeguridad(item) {
            </section>
         </div>
 
-        <section class="card">
-           <h4 class="h4">Interacciones Contraindicadas</h4>
-           <p class="text-body" style="color:var(--color-danger)">${escapeHtml(item.interacciones_contraindicadas)}</p>
-        </section>
+         <section class="card">
+            <h4 class="h4">Interacciones Contraindicadas</h4>
+            <p class="text-body" style="color:var(--color-danger)">
+              ${(item.rel_interacciones || []).map(i => escapeHtml(i.nombre)).join("; ") || "Nula / Ninguna"}
+            </p>
+         </section>
 
         <section class="card bg-soft">
            <h4 class="h4">Embarazo y Lactancia</h4>
@@ -205,17 +234,17 @@ function renderTabFarmaco(item) {
            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:12px;">
               ${infoBoxClean("Vida Media", item.vida_media_parental)}
               ${infoBoxClean("Tmax", item.t_max)}
-              ${infoBoxClean("Biodisponibilidad", item.biodisponibilidad_oral + "%")}
-              ${infoBoxClean("Unión a Proteínas", item.union_proteinas_plasmaticas + "%")}
+              ${infoBoxClean("Biodisponibilidad", (item.biodisponibilidad_oral || "N/D") + (item.biodisponibilidad_oral ? "%" : ""))}
+              ${infoBoxClean("Unión a Proteínas", (item.union_proteinas_plasmaticas || "N/D") + (item.union_proteinas_plasmaticas ? "%" : ""))}
            </div>
         </section>
 
         <section class="card">
            <h4 class="h4">Metabolismo (CYP450)</h4>
            <div style="display:grid; gap:12px; margin-top:12px">
-              ${rowDetail("Sustrato Principal", item.sustrato_enzimatico_principal)}
-              ${rowDetail("Inhibición Relevante", item.inhibicion_enzimatica_relevante)}
-              ${rowDetail("Inducción", item.induccion_enzimatica)}
+              ${rowDetail("Sustrato Principal", (item.rel_enzimas || []).filter(e => e.rol === "sustrato").map(e => e.nombre).join(", ") || "N/D")}
+              ${rowDetail("Inhibición Relevante", (item.rel_enzimas || []).filter(e => e.rol === "inhibidor").map(e => e.nombre).join(", ") || "N/D")}
+              ${rowDetail("Inducción", (item.rel_enzimas || []).filter(e => e.rol === "inductor").map(e => e.nombre).join(", ") || "N/D")}
               ${rowDetail("Metabolito Activo", item.metabolito_activo_nombre)}
            </div>
         </section>
@@ -225,39 +254,31 @@ function renderTabFarmaco(item) {
 
 function renderTabSwitching(item) {
    const vidaMedia = item.vida_media_parental || "N/D";
-   const abstinencia = item.riesgo_sindrome_abstinencia || "N/D";
-   const qt = item.riesgo_prolongacion_qt || "N/D";
-   const activacion = item.perfil_activacion || "N/D";
-   const interacciones = item.interacciones_contraindicadas || "N/D";
-
    return `
     <div class="animate-fade-in" style="display:grid; gap:24px;">
         <section class="card bg-soft">
-            <h3 class="h3">Switching (en desarrollo)</h3>
+            <h3 class="h3">Estrategia de Switching</h3>
             <p class="text-body" style="margin-top:8px">
-                Esta sección está diseñada para resumir estrategias de cambio desde
-                <strong>${escapeHtml(item.nombre_generico)}</strong>. Todavía faltan datos
-                estructurados para generar recomendaciones específicas por par de fármacos.
+                Estrategias de cambio desde <strong>${escapeHtml(item.nombre_generico)}</strong> (Vida media: ${escapeHtml(vidaMedia)}).
             </p>
             <div class="alert alert--info" style="margin-top:16px">
-                <strong>Necesitamos:</strong> matriz de equivalencias, reglas por clase, tiempos de washout y
-                alertas de interacciones críticas.
+                <strong>Nota:</strong> El cross-tapering debe individualizarse según la respuesta clínica y la carga de efectos adversos.
             </div>
         </section>
 
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
             ${infoBox("Vida media (padre)", vidaMedia)}
-            ${infoBox("Riesgo de abstinencia", abstinencia)}
-            ${infoBox("Riesgo QT", qt)}
-            ${infoBox("Perfil de activación", activacion)}
+            ${infoBox("Riesgo de abstinencia", item.riesgo_sindrome_abstinencia || "N/D")}
+            ${infoBox("Riesgo QT", item.riesgo_prolongacion_qt || "N/D")}
+            ${infoBox("Perfil de activación", item.perfil_activacion || "N/D")}
         </div>
 
         <section class="card">
-            <h4 class="h4">Checklist de seguridad</h4>
+            <h4 class="h4">Factores Críticos para el Cambio</h4>
             <div style="margin-top:12px; display:grid; gap:10px">
-                ${rowDetail("Interacciones contraindicadas", interacciones)}
-                ${rowDetail("Black box warning", item.black_box_warning || "N/D")}
-                ${rowDetail("Uso pediátrico", item.aprobado_uso_pediatrico || "N/D")}
+                ${rowDetail("Interacciones Críticas", (item.rel_interacciones || []).map(i => i.nombre).join("; ") || "Ninguna reportada")}
+                ${rowDetail("Black box warning", (item.black_box_warning === true || item.black_box_warning === "Sí") ? "Presente" : "No reportada")}
+                ${rowDetail("Uso pediátrico", (item.aprobado_pediatria === true || item.aprobado_uso_pediatrico === "Sí") ? "Aprobado" : "No aprobado / Falta info")}
             </div>
         </section>
     </div>

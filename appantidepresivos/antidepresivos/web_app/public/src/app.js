@@ -220,11 +220,24 @@ function renderRoute(route) {
     return;
   }
 
-  if (route.name === "list") return renderList(view);
-  if (route.name === "detail") return renderDetail(view, route.params?.id);
-  if (route.name === "compare") return renderCompare(view);
+  // Effect: Fade + Slide Transition
+  view.classList.remove("page-transition-enter-active");
+  view.classList.add("page-transition-enter");
 
-  view.innerHTML = "<p>Ruta no reconocida.</p>";
+  // Clean scroll
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  setTimeout(() => {
+    if (route.name === "list") renderList(view);
+    else if (route.name === "detail") renderDetail(view, route.params?.id);
+    else if (route.name === "compare") renderCompare(view);
+    else view.innerHTML = "<p>Ruta no reconocida.</p>";
+
+    requestAnimationFrame(() => {
+      view.classList.remove("page-transition-enter");
+      view.classList.add("page-transition-enter-active");
+    });
+  }, 50);
 }
 
 /* ============================================================
@@ -342,7 +355,7 @@ function renderFilters(filters) {
   if (schema) {
     const groupFilter = schema.filters?.find(f => f.id === "grupo");
     if (groupFilter && groupFilter.valuesFromData) {
-      const allItems = store.getState().data?.dataset?.items ?? [];
+      const allItems = store.getState().data?.dataset?.farmacos ?? [];
       groups = [...new Set(allItems.map(i => i.clase_terapeutica))].filter(Boolean).sort();
     }
   }
@@ -366,23 +379,24 @@ function renderFilters(filters) {
   }).join("");
 
   return `
-    <div style="display:flex; flex-direction:column; gap:16px;">
-      <div class="field-box" style="padding:0; border:none;">
-        <input type="search" id="inputSearch" class="input" placeholder="Buscar por nombre, mecanismo..." value="${escapeHtml(q)}" style="width:100%; padding: 10px; border-radius: 8px; border: 1px solid var(--color-border);" />
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <div class="field-box" style="padding:0; border:none; box-shadow: var(--shadow-sm);">
+        <input type="search" id="inputSearch" class="input" placeholder="Buscar por nombre, mecanismo..." value="${escapeHtml(q)}" 
+          style="width:100%; padding: 14px 18px; border-radius: var(--radius-md); border: 1px solid var(--color-border); font-size: 1rem; outline: none; transition: border-color 0.2s;" />
       </div>
 
-      <div>
-        <div class="text-sm text-muted" style="margin-bottom:8px">Filtrar por Grupo:</div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+      <div class="card" style="padding: 20px;">
+        <div class="text-sm font-bold" style="margin-bottom:12px; font-family:var(--font-headers); color:var(--color-primary)">Filtrar por Grupo:</div>
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
           ${groupChips}
         </div>
-      </div>
-      
-      <div>
-        <div class="text-sm text-muted" style="margin-bottom:8px">Nivel Sedación (0 - 3):</div>
-        <div style="display:flex; align-items:center; gap:12px">
-          <input type="range" id="rangeSedacion" min="0" max="3" step="1" value="${filters.sedacion?.max ?? 3}" style="flex:1" />
-          <span id="lblSedacion">${filters.sedacion?.max ?? 3}</span>
+        
+        <div style="margin-top:24px;">
+          <div class="text-sm font-bold" style="margin-bottom:12px; font-family:var(--font-headers); color:var(--color-primary)">Nivel Sedación (0 - 3):</div>
+          <div style="display:flex; align-items:center; gap:16px">
+            <input type="range" id="rangeSedacion" min="0" max="3" step="1" value="${filters.sedacion?.max ?? 3}" style="flex:1; accent-color:var(--color-primary)" />
+            <span id="lblSedacion" style="font-weight:700; font-size:1.2rem; color:var(--color-primary); min-width:1ch">${filters.sedacion?.max ?? 3}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -534,7 +548,14 @@ function renderRadarChart(data) {
   const axes = ["sedacion", "peso", "sexual", "qt", "activacion", "abstinencia"];
   const labels = ["Sedación", "Peso", "Sexual", "QT", "Activación", "Abstinencia"];
 
-  const colors = ["#0f766e", "#e11d48", "#2563eb", "#d97706", "#7c3aed"];
+  // Premium Palette (consistent with variables.css)
+  const colors = [
+    "hsla(174, 78%, 26%, 0.8)", // Deep Teal
+    "hsla(12, 92%, 45%, 0.8)",  // Soft Red/Coral
+    "hsla(215, 80%, 30%, 0.8)", // Royal Blue
+    "hsla(35, 92%, 40%, 0.8)",  // Amber
+    "hsla(280, 70%, 40%, 0.8)"  // Purple
+  ];
 
   const levels = [0.25, 0.5, 0.75, 1];
   const gridSVG = levels.map(l => {
@@ -543,22 +564,22 @@ function renderRadarChart(data) {
       const rad = r * l;
       return `${c + rad * Math.cos(ang)},${c + rad * Math.sin(ang)}`;
     }).join(" ");
-    return `<polygon points="${pts}" fill="none" stroke="var(--color-border)" stroke-width="1" />`;
+    return `<polygon points="${pts}" fill="none" stroke="var(--color-border)" stroke-width="0.75" stroke-dasharray="${l === 1 ? '' : '3,3'}" />`;
   }).join("");
 
   const axesSVG = axes.map((_, i) => {
     const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
     const x = c + r * Math.cos(ang);
     const y = c + r * Math.sin(ang);
-    return `<line x1="${c}" y1="${c}" x2="${x}" y2="${y}" stroke="var(--color-border)" stroke-width="1" />`;
+    return `<line x1="${c}" y1="${c}" x2="${x}" y2="${y}" stroke="var(--color-border)" stroke-width="0.75" />`;
   }).join("");
 
   const labelsSVG = labels.map((lbl, i) => {
     const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
-    const dist = r + 20;
+    const dist = r + 25;
     const x = c + dist * Math.cos(ang);
     const y = c + dist * Math.sin(ang);
-    return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="var(--color-text-muted)">${lbl}</text>`;
+    return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="700" font-family="var(--font-headers)" fill="var(--color-text-muted)">${lbl.toUpperCase()}</text>`;
   }).join("");
 
   const polys = data.map((item, idx) => {
@@ -569,26 +590,27 @@ function renderRadarChart(data) {
       const rad = r * val;
       return `${c + rad * Math.cos(ang)},${c + rad * Math.sin(ang)}`;
     }).join(" ");
+
     return `
-      <polygon points="${pts}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
-      <g>
+      <g class="radar-poly" style="transition: all 0.5s ease">
+        <polygon points="${pts}" fill="${color}" fill-opacity="0.15" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" />
         ${axes.map((key, i) => {
       const val = item.scores[key] ?? 0;
       const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
       const rad = r * val;
       const px = c + rad * Math.cos(ang);
       const py = c + rad * Math.sin(ang);
-      return `<circle cx="${px}" cy="${py}" r="3" fill="${color}" />`;
+      return `<circle cx="${px}" cy="${py}" r="3.5" fill="white" stroke="${color}" stroke-width="2" />`;
     }).join("")}
       </g>
     `;
   }).join("");
 
   const legend = `
-    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:12px;">
+    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:20px;">
       ${data.map((d, i) => `
-         <div style="display:flex; align-items:center; gap:6px; font-size:12px;">
-           <span style="display:inline-block; width:10px; height:10px; background:${colors[i % colors.length]}; border-radius:50%;"></span>
+         <div class="card--hoverable" style="display:flex; align-items:center; gap:8px; padding: 6px 12px; border-radius:var(--radius-full); font-size:12px; font-weight:600; border:1px solid var(--color-border); background:var(--color-surface)">
+           <span style="display:inline-block; width:12px; height:12px; background:${colors[i % colors.length]}; border-radius:3px;"></span>
            <span>${escapeHtml(d.name)}</span>
          </div>
       `).join("")}
@@ -596,12 +618,20 @@ function renderRadarChart(data) {
   `;
 
   return `
-    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-      ${gridSVG}
-      ${axesSVG}
-      ${polys}
-      ${labelsSVG}
-    </svg>
+    <div style="position:relative; display:inline-block;">
+      <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="overflow:visible">
+        <defs>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+        ${gridSVG}
+        ${axesSVG}
+        ${polys}
+        ${labelsSVG}
+      </svg>
+    </div>
     ${legend}
   `;
 }

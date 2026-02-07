@@ -1,0 +1,248 @@
+[
+  {
+    "id": "ADP_RAPID_03",
+    "name": "Brexanolona",
+    "missing_count": 7,
+    "missing_fields": [
+      "biodisponibilidad_oral",
+      "t_max",
+      "vida_media_metabolitos",
+      "inhibicion_enzimatica_relevante",
+      "metabolito_activo_nombre",
+      "riesgo_embarazo_multifuente",
+      "interacciones_contraindicadas"
+    ]
+  },
+  {
+    "id": "ADP_MAOI_03",
+    "name": "Isocarboxazida",
+    "missing_count": 6,
+    "missing_fields": [
+      "biodisponibilidad_oral",
+      "vida_media_parental",
+      "vida_media_metabolitos",
+      "union_proteinas_plasmaticas",
+      "inhibicion_enzimatica_relevante",
+      "metabolito_activo_nombre"
+    ]
+  },
+  {
+    "id": "ADP_MAOI_04",
+    "name": "Selegilina (parche transdérmico)",
+    "missing_count": 6,
+    "missing_fields": [
+      "biodisponibilidad_oral",
+      "t_max",
+      "vida_media_metabolitos",
+      "inhibicion_enzimatica_relevante",
+      "metabolito_activo_nombre",
+      "indicaciones_aprobadas_ema"
+    ]
+  },
+  {
+    "id": "ADP_RAPID_02",
+    "name": "Esketamina (intranasal)",
+    "missing_count": 5,
+    "missing_fields": [
+      "biodisponibilidad_oral",
+      "vida_media_metabolitos",
+      "inhibicion_enzimatica_relevante",
+      "metabolito_activo_nombre",
+      "indicaciones_aprobadas_ema"
+    ]
+  },
+  {
+    "id": "ADP_RAPID_04",
+    "name": "Zuranolona",
+    "missing_count": 5,
+    "missing_fields": [
+      "vida_media_metabolitos",
+      "inhibicion_enzimatica_relevante",
+      "metabolito_activo_nombre",
+      "indicaciones_aprobadas_ema",
+      "indicaciones_off_label"
+    ]
+  },
+  {
+    "id": "ADP_MAOI_01",
+    "name": "Fenelzina",
+    "missing_count": 4,
+    "missing_fields": [
+      "biodisponibilidad_oral",
+      "vida_media_metabolitos",
+      "inhibicion_enzimatica_relevante",
+      "metabolito_activo_nombre"
+    ]
+  },
+  {
+    "id": "ADP_MAOI_02",
+    "name": "Tranilcipromina",
+    "missing_count": 4,
+    "missing_fields": [
+      "biodisponibilidad_oral",
+      "vida_media_metabolitos",
+      "inhibicion_enzimatica_relevante",
+      "metabolito_activo_nombre"
+    ]
+  },
+  {
+    "id": "ADP_RAPID_01",
+    "name": "Ketamina",
+    "missing_count": 3,
+    "missing_fields": [
+      "biodisponibilidad_oral",
+      "inhibicion_enzimatica_relevante",
+      "indicaciones_aprobadas_ema"
+    ]
+  },
+  {
+    "id": "ADP_ATYP_02",
+    "name": "Mirtazapina",
+    "missing_count": 3,
+    "missing_fields": [
+      "vida_media_metabolitos",
+      "inhibicion_enzimatica_relevante",
+      "metabolito_activo_nombre"
+    ]
+  },
+  {
+    "id": "ADP_ATYP_04",
+    "name": "Vortioxetina",
+    "missing_count": 1,
+    "missing_fields": [
+      "metabolito_activo_nombre"
+    ]
+  },
+  {
+    "id": "ADP_ATYP_05",
+    "name": "Vilazodona",
+    "missing_count": 1,
+    "missing_fields": [
+      "metabolito_activo_nombre"
+    ]
+  },
+  {
+    "id": "ADP_ATYP_06",
+    "name": "Agomelatina",
+    "missing_count": 1,
+    "missing_fields": [
+      "metabolito_activo_nombre"
+    ]
+  },
+  {
+    "id": "ADP_ATYP_07",
+    "name": "Mianserina",
+    "missing_count": 1,
+    "missing_fields": [
+      "metabolito_activo_nombre"
+    ]
+  },
+  {
+    "id": "ADP_ATYP_01",
+    "name": "Bupropión",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_ATYP_03",
+    "name": "Trazodona",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SSRI_01",
+    "name": "Sertralina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SSRI_02",
+    "name": "Fluoxetina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SSRI_03",
+    "name": "Paroxetina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SSRI_04",
+    "name": "Citalopram",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SSRI_05",
+    "name": "Escitalopram",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SSRI_06",
+    "name": "Fluvoxamina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SNRI_01",
+    "name": "Venlafaxina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SNRI_02",
+    "name": "Desvenlafaxina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SNRI_03",
+    "name": "Duloxetina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_SNRI_04",
+    "name": "Levomilnacipran",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_TCA_01",
+    "name": "Imipramina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_TCA_02",
+    "name": "Amitriptilina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_TCA_03",
+    "name": "Nortriptilina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_TCA_04",
+    "name": "Desipramina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_TCA_05",
+    "name": "Doxepina",
+    "missing_count": 0,
+    "missing_fields": []
+  },
+  {
+    "id": "ADP_TCA_06",
+    "name": "Clomipramina",
+    "missing_count": 0,
+    "missing_fields": []
+  }
+]

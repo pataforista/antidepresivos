@@ -1,0 +1,56 @@
+{
+    "dataset_version": "1.1.0",
+    "description": "Relational dataset of antidepressants with clinical validation rules.",
+    "entities": {
+        "farmacos": "Main table for drug details. Each drug must have a unique id_farmaco.",
+        "indicaciones": "Catalog of clinical indications.",
+        "efectos_adversos": "Catalog of side effects.",
+        "interacciones": "Catalog of contraindicated substances.",
+        "enzimas": "Catalog of CYP enzymes involved in metabolism.",
+        "bridge_tables": "Link main entities via their IDs (M:N relationships)."
+    },
+    "constraints": {
+        "mandatory_fields": [
+            "id_farmaco",
+            "nombre_generico",
+            "clase_terapeutica",
+            "mecanismo_principal"
+        ],
+        "categorical_domains": {
+            "nivel_sedacion": [
+                0,
+                1,
+                2,
+                3
+            ],
+            "perfil_impacto_peso": [
+                "Pérdida",
+                "Neutro",
+                "Aumento"
+            ],
+            "riesgo_prolongacion_qt": [
+                "Bajo",
+                "Moderado",
+                "Alto"
+            ],
+            "aprobado_uso_pediatrico": [
+                "Sí",
+                "No",
+                "N/D"
+            ]
+        },
+        "default_missing_token": "N/D"
+    },
+    "clinical_rules": [
+        {
+            "id": "RULE_QT_CONSISTENCY",
+            "description": "Drugs with 'Moderado' or 'Alto' QT risk must list 'QT', 'Arritmia' or 'Torsade' in efectos_raros_graves.",
+            "severity": "WARNING"
+        },
+        {
+            "id": "RULE_EMA_EMA_STANDARD",
+            "description": "Empty EMA indications must be standardized to 'N/D' if not applicable.",
+            "severity": "INFO"
+        }
+    ]
+}
