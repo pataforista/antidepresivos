@@ -6,7 +6,7 @@ import * as policy from "./core/policy.js";
 import { selectFilteredItems, selectComparisonData } from "./core/selectors.js";
 import { renderDetail } from "./ui/detailView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
-import { initCardSpotlight, updateGooeyNav } from "./ui/visuals.js";
+import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
 
 /* ============================================================
    App Initialization
@@ -16,7 +16,7 @@ async function main() {
   const root = document.getElementById("app");
   if (!root) throw new Error("#app no encontrado");
 
-  root.innerHTML = "<p style='padding:12px;font-family:system-ui'>Cargando…</p>";
+  root.innerHTML = "<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>Cargando Códice…</p></div>";
 
   try {
     const ctx = await loadAppData();
@@ -42,7 +42,10 @@ async function main() {
         router.start();
 
         // Init Visuals
-        setTimeout(() => updateGooeyNav(), 50);
+        setTimeout(() => {
+          updateGooeyNav();
+          initEntranceAnimations();
+        }, 50);
 
         // Render inicial
         renderRoute(store.getState().route);
@@ -52,6 +55,7 @@ async function main() {
         store.subscribe("state:path:route", ({ next }) => {
           renderRoute(next);
           updateHeaderNav(next);
+          setTimeout(initEntranceAnimations, 10);
         });
 
         // Compare: contador + re-render si estás en compare (porque route no cambia)
@@ -67,6 +71,7 @@ async function main() {
         store.subscribe("state:path:filters", () => {
           if (store.getState().route?.name === "list") {
             renderRoute(store.getState().route);
+            setTimeout(initEntranceAnimations, 10);
           }
         });
 
@@ -76,7 +81,7 @@ async function main() {
     });
   } catch (e) {
     console.error(e);
-    root.innerHTML = `<pre style="padding:12px;color:#b00">${escapeHtml(String(e?.stack ?? e))}</pre>`;
+    root.innerHTML = `<pre style="padding:40px; color:var(--color-danger); font-family:monospace;">${escapeHtml(String(e?.stack ?? e))}</pre>`;
   }
 }
 
@@ -164,29 +169,29 @@ function mountShell(root) {
 
   root.innerHTML = `
     <div id="appShell" class="shell">
-      <header class="header">
+      <header class="header glass-effect">
         <strong class="header__title">${escapeHtml(title)}</strong>
 
         <nav class="header__nav nav-gooey">
-          <div class="nav-gooey__blob"></div>
+          <div class="nav-gooey__blob" style="background: var(--color-primary-light); opacity: 0.2; border-radius: var(--radius-full);"></div>
           <a href="#/list" class="nav-gooey__link">Lista</a>
           <a href="#/compare" class="nav-gooey__link" id="btnHeaderCompare">Comparar</a>
         </nav>
         
-        <div style="display:flex;align-items:center;gap:8px;margin-left:12px">
-            <button id="btnClearCompare" type="button" class="btn btn--ghost text-sm">
-                Limpiar
+        <div style="display:flex;align-items:center;gap:12px;margin-left:auto">
+            <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" style="font-weight:700">
+                LIMPIAR
             </button>
-            <span id="compareCount" class="text-sm text-muted"></span>
+            <div id="compareCount" class="chip chip--active text-xs" style="padding: 4px 10px; min-width: 24px; text-align: center; display:none"></div>
         </div>
       </header>
 
-      <main id="appView" class="main"></main>
+      <main id="appView" class="main" style="padding: var(--space-6) var(--space-5); max-width: 1400px; margin: 0 auto; width: 100%;"></main>
 
-      <footer class="footer">
-        <div style="display:flex; justify-content:space-between; align-items:center">
-           <span class="text-xs text-muted">© 2024 • Dr. Cesar Celada</span>
-           <button id="btnOpenInfo" class="btn btn--ghost text-xs" style="padding:4px 0;">
+      <footer class="footer" style="padding: var(--space-8) var(--space-5); background: var(--color-surface); border-top: 1px solid var(--color-border); margin-top: auto;">
+        <div style="display:flex; justify-content:space-between; align-items:center; max-width:1400px; margin:0 auto; width:100%;">
+           <span class="text-xs text-muted" style="font-weight:600">© 2024 • DR. CESAR CELADA</span>
+           <button id="btnOpenInfo" class="btn btn--outline text-xs" style="padding:var(--space-2) var(--space-4);">
              Fuentes y Disclaimer
            </button>
         </div>
@@ -199,7 +204,8 @@ function updateCompareCount() {
   const el = document.getElementById("compareCount");
   if (!el) return;
   const ids = store.getState().compare?.ids ?? [];
-  el.textContent = ids.length ? `Seleccionados: ${ids.length}` : "";
+  el.textContent = ids.length;
+  el.style.display = ids.length ? "inline-flex" : "none";
 
   const btnClear = document.getElementById("btnClearCompare");
   if (btnClear) {
@@ -220,10 +226,6 @@ function renderRoute(route) {
     return;
   }
 
-  // Effect: Fade + Slide Transition
-  view.classList.remove("page-transition-enter-active");
-  view.classList.add("page-transition-enter");
-
   // Clean scroll
   window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -232,11 +234,6 @@ function renderRoute(route) {
     else if (route.name === "detail") renderDetail(view, route.params?.id);
     else if (route.name === "compare") renderCompare(view);
     else view.innerHTML = "<p>Ruta no reconocida.</p>";
-
-    requestAnimationFrame(() => {
-      view.classList.remove("page-transition-enter");
-      view.classList.add("page-transition-enter-active");
-    });
   }, 50);
 }
 
@@ -252,24 +249,27 @@ function renderList(view) {
   const filterHTML = renderFilters(state.filters);
 
   view.innerHTML = `
-    <h2 class="h2">Listado</h2>
-    <p class="text-muted" style="margin-bottom: 12px;">Fármacos encontrados: <b>${items.length}</b></p>
+    <div class="animate-fade-in">
+      <h2 class="h2">Listado de Fármacos</h2>
+      <p class="text-muted" style="margin-bottom: var(--space-6); font-weight:600">Mostrando <b>${items.length}</b> resultados según los criterios.</p>
 
-    <div class="card" style="margin-bottom: 24px; padding: 16px;">
-      ${filterHTML}
-    </div>
+      <section style="margin-bottom: var(--space-8);">
+        ${filterHTML}
+      </section>
 
-    <div style="display:flex;gap:10px;align-items:center;margin-bottom: 24px;">
-      <button id="btnGoCompare" type="button" class="btn btn--primary">
-        Ir a comparar
-      </button>
-      <span id="compareHint" class="text-sm text-muted">
-        Selecciona con checkbox.
-      </span>
-    </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
+        <div style="display:flex; gap:var(--space-3); align-items:center;">
+          <button id="btnGoCompare" type="button" class="btn btn--primary">
+            IR A COMPARAR
+          </button>
+          <span id="compareHint" class="text-sm text-muted" style="font-weight:500">
+            Selecciona fármacos para comparar sus perfiles.
+          </span>
+        </div>
+      </div>
 
-    <div class="grid-cards">
-      ${items
+      <div class="grid-cards">
+        ${items
       .map((d) => {
         const id = String(d.id_farmaco);
         const name = d.nombre_generico ?? id;
@@ -278,21 +278,24 @@ function renderList(view) {
         const isOn = selected.has(id);
 
         return `
-            <div class="card card--hoverable card--spotlight">
-              <div style="display:flex;gap:12px;align-items:flex-start">
-                <input type="checkbox" class="chkCompare input-checkbox" data-id="${escapeHtml(id)}" ${isOn ? "checked" : ""} style="margin-top:4px" />
+            <div class="card card--hoverable card--spotlight" style="padding:var(--space-6)">
+              <div style="display:flex;gap:var(--space-4);align-items:flex-start">
+                <div class="input-checkbox-wrapper">
+                  <input type="checkbox" class="chkCompare" data-id="${escapeHtml(id)}" ${isOn ? "checked" : ""} style="width:20px; height:20px; accent-color:var(--color-primary); cursor:pointer;" />
+                </div>
                 <div style="flex:1">
                   <a href="#/detail/${encodeURIComponent(id)}" style="text-decoration:none;display:block">
                     <div class="card__title">${escapeHtml(name)}</div>
                   </a>
-                  <div class="card__subtitle" style="margin-top:4px">${escapeHtml(cls)}</div>
-                  <div class="chip" style="margin-top:12px;font-size:0.75rem">ATC: ${escapeHtml(atc)}</div>
+                  <div class="text-muted text-sm" style="font-weight:600; margin-top:2px">${escapeHtml(cls)}</div>
+                  <div class="chip text-xs" style="margin-top:var(--space-4); font-weight:700">${escapeHtml(atc)}</div>
                 </div>
               </div>
             </div>
           `;
       })
       .join("")}
+      </div>
     </div>
   `;
 
@@ -303,12 +306,12 @@ function renderList(view) {
   const compareIds = store.getState().compare?.ids ?? [];
   if (go) {
     go.disabled = compareIds.length === 0;
-    go.textContent = compareIds.length ? `Ir a comparar (${compareIds.length})` : "Ir a comparar";
+    go.textContent = compareIds.length ? `IR A COMPARAR (${compareIds.length})` : "IR A COMPARAR";
   }
   if (hint) {
     hint.textContent = compareIds.length
-      ? "Puedes revisar los seleccionados en el comparador."
-      : "Selecciona con checkbox.";
+      ? "Has seleccionado fármacos. Revisa el comparador."
+      : "Selecciona fármacos con el checkbox.";
   }
   if (go) {
     go.addEventListener("click", () => {
@@ -333,12 +336,12 @@ function renderList(view) {
       const hintEl = document.getElementById("compareHint");
       if (goBtn) {
         goBtn.disabled = nextIds.length === 0;
-        goBtn.textContent = nextIds.length ? `Ir a comparar (${nextIds.length})` : "Ir a comparar";
+        goBtn.textContent = nextIds.length ? `IR A COMPARAR (${nextIds.length})` : "IR A COMPARAR";
       }
       if (hintEl) {
         hintEl.textContent = nextIds.length
-          ? "Puedes revisar los seleccionados en el comparador."
-          : "Selecciona con checkbox.";
+          ? "Has seleccionado fármacos. Revisa el comparador."
+          : "Selecciona fármacos con el checkbox.";
       }
     });
   });
@@ -372,30 +375,30 @@ function renderFilters(filters) {
       <button type="button"
         class="chip ${isActive ? 'chip--active' : ''} filter-group-btn"
         data-group="${escapeHtml(g)}"
-        style="cursor:pointer; ${isActive ? 'background:var(--color-primary);color:white' : ''}">
+        style="cursor:pointer;">
         ${escapeHtml(g)}
       </button>
     `;
   }).join("");
 
   return `
-    <div style="display:flex; flex-direction:column; gap:20px;">
-      <div class="field-box" style="padding:0; border:none; box-shadow: var(--shadow-sm);">
-        <input type="search" id="inputSearch" class="input" placeholder="Buscar por nombre, mecanismo..." value="${escapeHtml(q)}" 
-          style="width:100%; padding: 14px 18px; border-radius: var(--radius-md); border: 1px solid var(--color-border); font-size: 1rem; outline: none; transition: border-color 0.2s;" />
+    <div style="display:flex; flex-direction:column; gap:var(--space-6);">
+      <div class="glass-effect" style="border-radius: var(--radius-lg); overflow:hidden;">
+        <input type="search" id="inputSearch" class="input" placeholder="Buscar por nombre, mecanismo, clase..." value="${escapeHtml(q)}" 
+          style="width:100%; padding: 18px 24px; border: none; font-size: 1.1rem; outline: none; background: transparent; font-family:var(--font-body); font-weight:500;" />
       </div>
 
-      <div class="card" style="padding: 20px;">
-        <div class="text-sm font-bold" style="margin-bottom:12px; font-family:var(--font-headers); color:var(--color-primary)">Filtrar por Grupo:</div>
+      <div class="card glass-effect" style="padding: var(--space-6);">
+        <div class="text-xs" style="margin-bottom:var(--space-4); font-family:var(--font-headers); font-weight:800; color:var(--color-primary); letter-spacing:0.1em;">FILTRAR POR GRUPO:</div>
         <div style="display:flex; flex-wrap:wrap; gap:10px;">
           ${groupChips}
         </div>
         
-        <div style="margin-top:24px;">
-          <div class="text-sm font-bold" style="margin-bottom:12px; font-family:var(--font-headers); color:var(--color-primary)">Nivel Sedación (0 - 3):</div>
-          <div style="display:flex; align-items:center; gap:16px">
-            <input type="range" id="rangeSedacion" min="0" max="3" step="1" value="${filters.sedacion?.max ?? 3}" style="flex:1; accent-color:var(--color-primary)" />
-            <span id="lblSedacion" style="font-weight:700; font-size:1.2rem; color:var(--color-primary); min-width:1ch">${filters.sedacion?.max ?? 3}</span>
+        <div style="margin-top:var(--space-6);">
+          <div class="text-xs" style="margin-bottom:var(--space-4); font-family:var(--font-headers); font-weight:800; color:var(--color-primary); letter-spacing:0.1em;">SEDACIÓN MÁXIMA:</div>
+          <div style="display:flex; align-items:center; gap:var(--space-5)">
+            <input type="range" id="rangeSedacion" min="0" max="3" step="1" value="${filters.sedacion?.max ?? 3}" style="flex:1; accent-color:var(--color-primary); cursor:pointer;" />
+            <div id="lblSedacion" class="chip chip--active" style="padding: 6px 14px; font-weight:800; font-size:1rem; min-width:32px; justify-content:center;">${filters.sedacion?.max ?? 3}</div>
           </div>
         </div>
       </div>
@@ -445,9 +448,11 @@ function renderCompare(view) {
 
   if (!rows.length) {
     view.innerHTML = `
-      <h2 class="h2">Comparador</h2>
-      <p class="text-muted">No hay fármacos seleccionados.</p>
-      <p><a href="#/list" class="btn btn--primary">Volver a lista</a></p>
+      <div class="animate-fade-in" style="text-align:center; padding:var(--space-8);">
+        <h2 class="h2">Comparador</h2>
+        <p class="text-muted" style="margin-bottom:var(--space-6)">No has seleccionado ningún fármaco para comparar.</p>
+        <a href="#/list" class="btn btn--primary">VOLVER A LA LISTA</a>
+      </div>
     `;
     return;
   }
@@ -457,8 +462,8 @@ function renderCompare(view) {
       const id = d.id_farmaco;
       const label = d?.nombre_generico ?? id;
       return `
-        <button class="chip chip--removable chipRemove" data-id="${escapeHtml(id)}" type="button">
-          ${escapeHtml(label)} ✕
+        <button class="chip chip--active chipRemove" data-id="${escapeHtml(id)}" type="button" style="cursor:pointer; gap:10px">
+          ${escapeHtml(label)} <span style="font-size:1.2rem; opacity:0.7">×</span>
         </button>
       `;
     })
@@ -489,43 +494,55 @@ function renderCompare(view) {
   }
 
   view.innerHTML = `
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-      <h2 class="h2" style="margin:0">Comparador</h2>
-      <a href="#/list" class="btn btn--ghost text-sm">← Volver</a>
-    </div>
-
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
-      ${chips}
-    </div>
-
-    <div class="grid-compare">
-      <div class="card radar-card">
-        <h3 class="h3" style="margin-bottom:16px">Perfil Clínico (Radar)</h3>
-        ${radarSVG}
-        <div class="text-xs text-muted" style="margin-top:12px; text-align:center">
-          Comparación normalizada de efectos (Mayor área = Mayor intensidad/riesgo/impacto)
-        </div>
+    <div class="animate-fade-in">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
+        <h2 class="h2" style="margin:0">Perfil Comparativo</h2>
+        <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← VOLVER AL LISTADO</a>
       </div>
 
-      <div class="card table-card" style="overflow:hidden; padding:0;">
-        <div class="compare-container">
-          <table class="compare-table">
-            <thead>
-              <tr>
-                <th style="min-width:120px">Rasgo</th>
-                ${rows.map(d => `<th>${escapeHtml(d.nombre_generico)}</th>`).join("")}
-              </tr>
-            </thead>
-            <tbody>
-              ${tableFields.map(tr => `
-                <tr>
-                  <td style="font-weight:600; color:var(--color-text-muted)">${escapeHtml(tr.label)}</td>
-                  ${rows.map(d => `<td class="${tr.highlight ? 'text-sm' : ''}">${escapeHtml(d[tr.key] ?? "-")}</td>`).join("")}
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:var(--space-8)">
+        ${chips}
+      </div>
+
+      <div class="grid-compare">
+        <section class="card glass-effect" style="padding:var(--space-6); border-radius:var(--radius-xl);">
+          <h3 class="h3" style="margin-bottom:var(--space-4); font-size:1.25rem;">Impacto Clínico</h3>
+          ${radarSVG}
+          <div class="alert alert--info" style="margin-top:var(--space-8); padding:var(--space-4);">
+            <div class="text-xs" style="line-height:1.5; font-weight:500">
+              <strong>Nota:</strong> Los valores son normalizados (0-1). Un área mayor representa mayor carga de efectos adversos o intensidad clínica según el eje.
+            </div>
+          </div>
+        </section>
+
+        <section class="card glass-effect" style="overflow:hidden; padding:0; border-radius:var(--radius-xl);">
+          <div style="padding:var(--space-6); border-bottom:1px solid var(--color-border); background:var(--color-bg);">
+            <h3 class="h3" style="margin:0; font-size:1.25rem;">Especificaciones</h3>
+          </div>
+          <div class="compare-container" style="overflow-x:auto;">
+            <table class="compare-table" style="width:100%; border-collapse:collapse;">
+              <thead>
+                <tr style="text-align:left;">
+                  <th style="padding:var(--space-4) var(--space-5); color:var(--color-primary); background:var(--color-bg); font-family:var(--font-headers); font-size:0.75rem; letter-spacing:0.1em; border-bottom:2px solid var(--color-border);">RASGO</th>
+                  ${rows.map(d => `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:800; border-bottom:2px solid var(--color-border); min-width:180px;">${escapeHtml(d.nombre_generico)}</th>`).join("")}
                 </tr>
-              `).join("")}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                ${tableFields.map(tr => `
+                  <tr>
+                    <td style="padding:var(--space-4) var(--space-5); font-weight:700; color:var(--color-text-muted); font-size:0.85rem; border-bottom:1px solid var(--color-border); background:rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.02)">${escapeHtml(tr.label)}</td>
+                    ${rows.map(d => {
+    const val = d[tr.key] ?? "-";
+    const isHigh = tr.highlight && (val.toString().toLowerCase().includes("alto") || val === "3" || val === "2");
+    const textStyle = isHigh ? 'color:var(--color-danger); font-weight:800;' : 'font-weight:500;';
+    return `<td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border); font-size:0.95rem; ${textStyle}">${escapeHtml(val)}</td>`;
+  }).join("")}
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
     </div>
   `;
@@ -542,19 +559,19 @@ function renderCompare(view) {
 }
 
 function renderRadarChart(data) {
-  const size = 300;
+  const size = 320;
   const c = size / 2;
-  const r = 100;
+  const r = 110;
   const axes = ["sedacion", "peso", "sexual", "qt", "activacion", "abstinencia"];
   const labels = ["Sedación", "Peso", "Sexual", "QT", "Activación", "Abstinencia"];
 
-  // Premium Palette (consistent with variables.css)
+  // Premium Palette (Indigo, Rose, Violet, Emerald, Amber)
   const colors = [
-    "hsla(174, 78%, 26%, 0.8)", // Deep Teal
-    "hsla(12, 92%, 45%, 0.8)",  // Soft Red/Coral
-    "hsla(215, 80%, 30%, 0.8)", // Royal Blue
-    "hsla(35, 92%, 40%, 0.8)",  // Amber
-    "hsla(280, 70%, 40%, 0.8)"  // Purple
+    "hsl(243, 75%, 59%)", // Indigo
+    "hsl(350, 89%, 60%)", // Rose
+    "hsl(262, 80%, 50%)", // Violet
+    "hsl(161, 75%, 45%)", // Emerald
+    "hsl(38, 92%, 50%)"   // Amber
   ];
 
   const levels = [0.25, 0.5, 0.75, 1];
@@ -564,22 +581,22 @@ function renderRadarChart(data) {
       const rad = r * l;
       return `${c + rad * Math.cos(ang)},${c + rad * Math.sin(ang)}`;
     }).join(" ");
-    return `<polygon points="${pts}" fill="none" stroke="var(--color-border)" stroke-width="0.75" stroke-dasharray="${l === 1 ? '' : '3,3'}" />`;
+    return `<polygon points="${pts}" fill="none" stroke="var(--color-border)" stroke-width="1" stroke-dasharray="${l === 1 ? '' : '4,4'}" />`;
   }).join("");
 
   const axesSVG = axes.map((_, i) => {
     const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
     const x = c + r * Math.cos(ang);
     const y = c + r * Math.sin(ang);
-    return `<line x1="${c}" y1="${c}" x2="${x}" y2="${y}" stroke="var(--color-border)" stroke-width="0.75" />`;
+    return `<line x1="${c}" y1="${c}" x2="${x}" y2="${y}" stroke="var(--color-border)" stroke-width="1" />`;
   }).join("");
 
   const labelsSVG = labels.map((lbl, i) => {
     const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
-    const dist = r + 25;
+    const dist = r + 30;
     const x = c + dist * Math.cos(ang);
     const y = c + dist * Math.sin(ang);
-    return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="700" font-family="var(--font-headers)" fill="var(--color-text-muted)">${lbl.toUpperCase()}</text>`;
+    return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="900" font-family="var(--font-headers)" fill="var(--color-text-muted)" letter-spacing="0.05em">${lbl.toUpperCase()}</text>`;
   }).join("");
 
   const polys = data.map((item, idx) => {
@@ -592,47 +609,41 @@ function renderRadarChart(data) {
     }).join(" ");
 
     return `
-      <g class="radar-poly" style="transition: all 0.5s ease">
-        <polygon points="${pts}" fill="${color}" fill-opacity="0.15" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" />
+      <g class="radar-poly" style="transition: all 0.6s var(--transition-spring)">
+        <polygon points="${pts}" fill="${color}" fill-opacity="0.12" stroke="${color}" stroke-width="3" stroke-linejoin="round" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));" />
         ${axes.map((key, i) => {
       const val = item.scores[key] ?? 0;
       const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
       const rad = r * val;
       const px = c + rad * Math.cos(ang);
       const py = c + rad * Math.sin(ang);
-      return `<circle cx="${px}" cy="${py}" r="3.5" fill="white" stroke="${color}" stroke-width="2" />`;
+      return `<circle cx="${px}" cy="${py}" r="4" fill="white" stroke="${color}" stroke-width="2.5" />`;
     }).join("")}
       </g>
     `;
   }).join("");
 
   const legend = `
-    <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:20px;">
+    <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:var(--space-6);">
       ${data.map((d, i) => `
-         <div class="card--hoverable" style="display:flex; align-items:center; gap:8px; padding: 6px 12px; border-radius:var(--radius-full); font-size:12px; font-weight:600; border:1px solid var(--color-border); background:var(--color-surface)">
-           <span style="display:inline-block; width:12px; height:12px; background:${colors[i % colors.length]}; border-radius:3px;"></span>
-           <span>${escapeHtml(d.name)}</span>
+         <div class="glass-effect" style="display:flex; align-items:center; gap:8px; padding: 6px 14px; border-radius:var(--radius-full); font-size:11px; font-weight:800; color:var(--color-text-main); font-family:var(--font-headers);">
+           <span style="display:inline-block; width:10px; height:10px; background:${colors[i % colors.length]}; border-radius:3px; box-shadow: 0 0 8px ${colors[i % colors.length]}aa;"></span>
+           <span>${escapeHtml(d.name.toUpperCase())}</span>
          </div>
       `).join("")}
     </div>
   `;
 
   return `
-    <div style="position:relative; display:inline-block;">
+    <div style="position:relative; display:flex; flex-direction:column; align-items:center;">
       <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="overflow:visible">
-        <defs>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
         ${gridSVG}
         ${axesSVG}
         ${polys}
         ${labelsSVG}
       </svg>
+      ${legend}
     </div>
-    ${legend}
   `;
 }
 

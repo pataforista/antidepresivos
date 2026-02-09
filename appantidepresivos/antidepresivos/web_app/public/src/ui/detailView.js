@@ -7,10 +7,10 @@ export function renderDetail(view, id) {
 
    if (!item) {
       view.innerHTML = `
-      <div style="padding:24px; text-align:center">
+      <div style="padding:var(--space-8); text-align:center">
         <h2 class="h2">Datos no encontrados</h2>
         <p class="text-muted">No se encontró el fármaco con ID <b>${escapeHtml(id)}</b>.</p>
-        <a href="#/list" class="btn btn--primary" style="margin-top:166px">Volver al listado</a>
+        <a href="#/list" class="btn btn--primary" style="margin-top:var(--space-6)">Volver al listado</a>
       </div>
     `;
       return;
@@ -19,33 +19,33 @@ export function renderDetail(view, id) {
    const contentHTML = `
     <div class="monograph animate-fade-in">
       <!-- Nav Back -->
-      <a href="#/list" class="btn btn--ghost text-sm" style="margin-bottom:16px; font-weight:700">← VOLVER AL LISTADO</a>
+      <a href="#/list" class="btn btn--ghost text-sm" style="margin-bottom:var(--space-4); font-weight:700">← VOLVER AL LISTADO</a>
 
       <!-- Header Principal -->
-      <header class="card monograph__header" style="border-left: 8px solid var(--color-primary); background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);">
-        <div style="display:flex; justify-content:space-between; align-items:center; gap:24px;">
+      <header class="monograph__header glass-effect">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:var(--space-6); flex-wrap:wrap;">
           <div>
-            <h1 class="h1" style="margin:0; line-height:1.1">${escapeHtml(item.nombre_generico)}</h1>
-            <div class="text-muted" style="font-size:1.1rem; font-weight:600; font-family:var(--font-headers); margin-top:6px;">${escapeHtml(item.clase_terapeutica)}</div>
-             <div class="chip" style="margin-top:12px; background:var(--color-primary); color:white; border:none">${escapeHtml(item.codigo_atc)}</div>
+            <h1 class="h1" style="margin:0;">${escapeHtml(item.nombre_generico)}</h1>
+            <div class="text-muted" style="font-size:1.25rem; font-weight:600; font-family:var(--font-headers); margin-top:var(--space-2);">${escapeHtml(item.clase_terapeutica)}</div>
+             <div class="chip chip--active" style="margin-top:var(--space-4)">${escapeHtml(item.codigo_atc)}</div>
           </div>
-          <button id="btnMonoCompare" class="btn btn--primary">
+          <button id="btnMonoCompare" class="btn btn--primary btn--lg">
              + COMPARAR
           </button>
         </div>
       </header>
       
       <!-- Tabs Navigation -->
-      <div class="tabs-nav" style="margin-top:32px;">
+      <nav class="tabs-nav" style="margin-top:var(--space-8);">
         <button class="tab-btn tab-btn--active" data-tab="resumen">RESUMEN</button>
         <button class="tab-btn" data-tab="dosis">DOSIS</button>
         <button class="tab-btn" data-tab="seguridad">SEGURIDAD</button>
         <button class="tab-btn" data-tab="farmaco">FARMACOLOGÍA</button>
         <button class="tab-btn" data-tab="switching">SWITCHING</button>
-      </div>
+      </nav>
 
       <!-- Tab Content Container -->
-      <div id="tabContent" style="padding-top:12px; min-height:450px">
+      <div id="tabContent" style="padding-top:var(--space-4); min-height:500px">
         ${renderTabResumen(item)}
       </div>
 
@@ -91,42 +91,46 @@ export function renderDetail(view, id) {
 
 function renderTabResumen(item) {
    return `
-    <div class="animate-fade-in" style="display:grid; gap:24px;">
+    <div class="animate-fade-in" style="display:grid; gap:var(--space-6);">
        <section>
          <h3 class="h3 section-title">Mecanismo de Acción</h3>
          <p class="text-body">${escapeHtml(item.mecanismo_principal)}</p>
        </section>
 
-       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:24px;">
-         <div class="card bg-soft">
-           <h4 class="h4" style="color:var(--color-primary)">Indicaciones FDA</h4>
-           <ul class="list-disc" style="padding-left:20px; margin-top:8px;">
+       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:var(--space-6);">
+         <div class="card glass-effect">
+           <h4 class="h4" style="color:var(--color-primary); margin-bottom:var(--space-3)">Indicaciones FDA</h4>
+           <ul class="list-disc" style="padding-left:20px;">
              ${(item.rel_indicaciones || [])
          .filter(ind => ind.fuente === "FDA")
-         .map(ind => `<li>${escapeHtml(ind.nombre)}</li>`).join("") || "<li>N/D</li>"}
+         .map(ind => `<li class="text-body">${escapeHtml(ind.nombre)}</li>`).join("") || "<li>N/D</li>"}
            </ul>
          </div>
-         <div class="card bg-soft">
-           <h4 class="h4" style="color:var(--color-secondary)">Indicaciones EMA</h4>
-           <ul class="list-disc" style="padding-left:20px; margin-top:8px;">
+         <div class="card glass-effect">
+           <h4 class="h4" style="color:var(--color-secondary); margin-bottom:var(--space-3)">Indicaciones EMA</h4>
+           <ul class="list-disc" style="padding-left:20px;">
              ${(item.rel_indicaciones || [])
          .filter(ind => ind.fuente === "EMA")
-         .map(ind => `<li>${escapeHtml(ind.nombre)}</li>`).join("") || "<li>N/D</li>"}
+         .map(ind => `<li class="text-body">${escapeHtml(ind.nombre)}</li>`).join("") || "<li>N/D</li>"}
            </ul>
          </div>
          <div class="card">
-           <h4 class="h4">Usos Off-Label</h4>
-           <ul class="list-disc" style="padding-left:20px; margin-top:8px;">
+           <h4 class="h4" style="margin-bottom:var(--space-3)">Usos Off-Label</h4>
+           <ul class="list-disc" style="padding-left:20px;">
               ${(item.rel_indicaciones || [])
          .filter(ind => ind.fuente === "Off-label")
-         .map(ind => `<li>${escapeHtml(ind.nombre)}</li>`).join("") || "<li>N/D</li>"}
+         .map(ind => `<li class="text-body" style="color:var(--color-text-muted)">${escapeHtml(ind.nombre)}</li>`).join("") || "<li>N/D</li>"}
            </ul>
          </div>
        </div>
 
        ${item.utilidad_sintomatica_clave ? `
        <div class="alert alert--info">
-          <strong>💡 Perlas Clínicas:</strong> ${escapeHtml(item.utilidad_sintomatica_clave)}
+          <div style="font-size:1.5rem">💡</div>
+          <div>
+            <strong style="display:block; margin-bottom:var(--space-1)">Perlas Clínicas:</strong> 
+            <span class="text-body">${escapeHtml(item.utilidad_sintomatica_clave)}</span>
+          </div>
        </div>
        ` : ''}
     </div>
@@ -135,25 +139,25 @@ function renderTabResumen(item) {
 
 function renderTabDosis(item) {
    return `
-    <div class="animate-fade-in" style="display:grid; gap:24px;">
-       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
+    <div class="animate-fade-in" style="display:grid; gap:var(--space-6);">
+       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:var(--space-4);">
           ${infoBox("Inicio", item.dosis_inicio_adulto)}
           ${infoBox("Rango Terapéutico", item.rango_terapeutico_adulto)}
           ${infoBox("Dosis Máxima", item.dosis_maxima_autorizada)}
        </div>
 
-       <section class="card">
-          <h4 class="h4">Titulación / Administración</h4>
-          <div style="display:grid; gap:12px; margin-top:12px">
+       <section class="card glass-effect">
+          <h4 class="h4" style="margin-bottom:var(--space-4)">Titulación / Administración</h4>
+          <div style="display:grid; gap:var(--space-3);">
              ${rowDetail("Frecuencia", item.frecuencia_administracion)}
              ${rowDetail("Paso de Titulación", item.titulacion_paso)}
              ${rowDetail("Tiempo al efecto (Steady State)", item.tiempo_estado_estacionario)}
           </div>
        </section>
 
-       <section class="card" style="border-left: 4px solid var(--color-warning);">
-          <h4 class="h4">Ajustes en Poblaciones Especiales</h4>
-          <div style="display:grid; gap:12px; margin-top:12px">
+       <section class="card" style="border-left: 6px solid var(--color-warning);">
+          <h4 class="h4" style="margin-bottom:var(--space-4)">Poblaciones Especiales</h4>
+          <div style="display:grid; gap:var(--space-3);">
              ${rowDetail("Insuficiencia Renal", item.ajuste_insuficiencia_renal)}
              ${rowDetail("Insuficiencia Hepática", item.ajuste_insuficiencia_hepatica)}
              ${rowDetail("Uso Pediátrico", item.aprobado_uso_pediatrico === "Sí" ? "Aprobado" : `No aprobado (${escapeHtml(item.aprobado_uso_pediatrico)})`)}
@@ -166,42 +170,45 @@ function renderTabDosis(item) {
 function renderTabSeguridad(item) {
    const hasBBW = (item.black_box_warning || "").toLowerCase() === "sí" || item.black_box_warning === true;
    return `
-     <div class="animate-fade-in" style="display:grid; gap:24px;">
+     <div class="animate-fade-in" style="display:grid; gap:var(--space-6);">
         ${hasBBW ? `
         <div class="alert alert--danger">
-           <strong style="display:block; margin-bottom:4px">⚠️ BLACK BOX WARNING</strong>
-           Este fármaco tiene advertencias de seguridad importantes de la FDA.
+           <div style="font-size:1.5rem">⚠️</div>
+           <div>
+             <strong style="display:block; margin-bottom:var(--space-1)">BLACK BOX WARNING</strong>
+             <span class="text-body">Este fármaco tiene advertencias de seguridad importantes de la FDA que requieren vigilancia clínica estrecha.</span>
+           </div>
         </div>
         ` : ''}
 
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px;">
-           <section class="card">
-              <h4 class="h4">Efectos Adversos</h4>
-              <div style="margin-top:12px; display:flex; flex-direction:column; gap:8px">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:var(--space-6);">
+           <section class="card glass-effect">
+              <h4 class="h4" style="margin-bottom:var(--space-4)">Efectos Adversos</h4>
+              <div style="display:flex; flex-direction:column; gap:var(--space-4)">
                   <div>
-                    <span class="badge badge--red">Muy Frecuentes</span>
-                    <span class="text-sm">${(item.rel_efectos_adversos || [])
+                    <span class="badge badge--red" style="margin-bottom:var(--space-2)">Muy Frecuentes</span>
+                    <p class="text-sm" style="line-height:1.5">${(item.rel_efectos_adversos || [])
          .filter(ea => ea.frecuencia === "muy frecuente")
-         .map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}</span>
+         .map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}</p>
                   </div>
                   <div>
-                    <span class="badge badge--yellow">Frecuentes</span>
-                    <span class="text-sm">${(item.rel_efectos_adversos || [])
+                    <span class="badge badge--yellow" style="margin-bottom:var(--space-2)">Frecuentes</span>
+                    <p class="text-sm" style="line-height:1.5">${(item.rel_efectos_adversos || [])
          .filter(ea => ea.frecuencia === "frecuente")
-         .map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}</span>
+         .map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}</p>
                   </div>
                   <div>
-                    <span class="badge badge--gray">Graves/Raros</span>
-                    <span class="text-sm">${(item.rel_efectos_adversos || [])
+                    <span class="badge badge--gray" style="margin-bottom:var(--space-2)">Graves/Raros</span>
+                    <p class="text-sm" style="line-height:1.5">${(item.rel_efectos_adversos || [])
          .filter(ea => ea.frecuencia === "raro grave")
-         .map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}</span>
+         .map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}</p>
                   </div>
               </div>
            </section>
            
-           <section class="card">
-              <h4 class="h4">Perfil de Riesgo</h4>
-              <div style="margin-top:12px; display:grid; gap:8px">
+           <section class="card glass-effect">
+              <h4 class="h4" style="margin-bottom:var(--space-4)">Perfil de Riesgo</h4>
+              <div style="display:grid; gap:var(--space-3)">
                  ${rowRisk("Sedación", item.nivel_sedacion)}
                  ${rowRisk("Peso", item.perfil_impacto_peso)}
                  ${rowRisk("Sexual", item.perfil_disfuncion_sexual)}
@@ -211,16 +218,16 @@ function renderTabSeguridad(item) {
            </section>
         </div>
 
-         <section class="card">
-            <h4 class="h4">Interacciones Contraindicadas</h4>
-            <p class="text-body" style="color:var(--color-danger)">
+         <section class="card" style="border-left: 6px solid var(--color-danger);">
+            <h4 class="h4" style="margin-bottom:var(--space-2)">Interacciones Contraindicadas</h4>
+            <p class="text-body" style="color:var(--color-danger); font-weight:600">
               ${(item.rel_interacciones || []).map(i => escapeHtml(i.nombre)).join("; ") || "Nula / Ninguna"}
             </p>
          </section>
 
-        <section class="card bg-soft">
-           <h4 class="h4">Embarazo y Lactancia</h4>
-           <p class="text-sm">${escapeHtml(item.riesgo_embarazo_multifuente)}</p>
+        <section class="card glass-effect">
+           <h4 class="h4" style="margin-bottom:var(--space-2)">Embarazo y Lactancia</h4>
+           <p class="text-body text-muted" style="font-size:0.95rem">${escapeHtml(item.riesgo_embarazo_multifuente)}</p>
         </section>
      </div>
     `;
@@ -228,20 +235,20 @@ function renderTabSeguridad(item) {
 
 function renderTabFarmaco(item) {
    return `
-     <div class="animate-fade-in" style="display:grid; gap:24px;">
-        <section class="card">
-           <h4 class="h4">Farmacocinética</h4>
-           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:12px;">
+     <div class="animate-fade-in" style="display:grid; gap:var(--space-6);">
+        <section class="card glass-effect">
+           <h4 class="h4" style="margin-bottom:var(--space-4)">Farmacocinética</h4>
+           <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:var(--space-4);">
               ${infoBoxClean("Vida Media", item.vida_media_parental)}
               ${infoBoxClean("Tmax", item.t_max)}
-              ${infoBoxClean("Biodisponibilidad", (item.biodisponibilidad_oral || "N/D") + (item.biodisponibilidad_oral ? "%" : ""))}
-              ${infoBoxClean("Unión a Proteínas", (item.union_proteinas_plasmaticas || "N/D") + (item.union_proteinas_plasmaticas ? "%" : ""))}
+              ${infoBoxClean("Biodisp. Oral", (item.biodisponibilidad_oral || "N/D") + (item.biodisponibilidad_oral ? "%" : ""))}
+              ${infoBoxClean("Unión Prot.", (item.union_proteinas_plasmaticas || "N/D") + (item.union_proteinas_plasmaticas ? "%" : ""))}
            </div>
         </section>
 
-        <section class="card">
-           <h4 class="h4">Metabolismo (CYP450)</h4>
-           <div style="display:grid; gap:12px; margin-top:12px">
+        <section class="card glass-effect">
+           <h4 class="h4" style="margin-bottom:var(--space-4)">Metabolismo (CYP450)</h4>
+           <div style="display:grid; gap:var(--space-3)">
               ${rowDetail("Sustrato Principal", (item.rel_enzimas || []).filter(e => e.rol === "sustrato").map(e => e.nombre).join(", ") || "N/D")}
               ${rowDetail("Inhibición Relevante", (item.rel_enzimas || []).filter(e => e.rol === "inhibidor").map(e => e.nombre).join(", ") || "N/D")}
               ${rowDetail("Inducción", (item.rel_enzimas || []).filter(e => e.rol === "inductor").map(e => e.nombre).join(", ") || "N/D")}
@@ -255,30 +262,32 @@ function renderTabFarmaco(item) {
 function renderTabSwitching(item) {
    const vidaMedia = item.vida_media_parental || "N/D";
    return `
-    <div class="animate-fade-in" style="display:grid; gap:24px;">
-        <section class="card bg-soft">
+    <div class="animate-fade-in" style="display:grid; gap:var(--space-6);">
+        <section class="card bg-soft glass-effect">
             <h3 class="h3">Estrategia de Switching</h3>
-            <p class="text-body" style="margin-top:8px">
-                Estrategias de cambio desde <strong>${escapeHtml(item.nombre_generico)}</strong> (Vida media: ${escapeHtml(vidaMedia)}).
+            <p class="text-body" style="margin-top:var(--space-2)">
+                Consideraciones para el cambio desde <strong>${escapeHtml(item.nombre_generico)}</strong>.
             </p>
-            <div class="alert alert--info" style="margin-top:16px">
-                <strong>Nota:</strong> El cross-tapering debe individualizarse según la respuesta clínica y la carga de efectos adversos.
+            <div class="alert alert--info" style="margin-top:var(--space-4)">
+                <div style="font-size:1.2rem">💊</div>
+                <div class="text-sm">
+                  <strong>Protocolo:</strong> El cross-tapering debe ser gradual y monitorizado, especialmente en fármacos con vida media corta para evitar el síndrome de discontinuación.
+                </div>
             </div>
         </section>
 
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
-            ${infoBox("Vida media (padre)", vidaMedia)}
-            ${infoBox("Riesgo de abstinencia", item.riesgo_sindrome_abstinencia || "N/D")}
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:var(--space-4);">
+            ${infoBox("Vida media", vidaMedia)}
+            ${infoBox("Riesgo Abstinencia", item.riesgo_sindrome_abstinencia || "N/D")}
             ${infoBox("Riesgo QT", item.riesgo_prolongacion_qt || "N/D")}
-            ${infoBox("Perfil de activación", item.perfil_activacion || "N/D")}
+            ${infoBox("Perfil Activación", item.perfil_activacion || "N/D")}
         </div>
 
-        <section class="card">
-            <h4 class="h4">Factores Críticos para el Cambio</h4>
-            <div style="margin-top:12px; display:grid; gap:10px">
-                ${rowDetail("Interacciones Críticas", (item.rel_interacciones || []).map(i => i.nombre).join("; ") || "Ninguna reportada")}
-                ${rowDetail("Black box warning", (item.black_box_warning === true || item.black_box_warning === "Sí") ? "Presente" : "No reportada")}
-                ${rowDetail("Uso pediátrico", (item.aprobado_pediatria === true || item.aprobado_uso_pediatrico === "Sí") ? "Aprobado" : "No aprobado / Falta info")}
+        <section class="card glass-effect" style="border-bottom: 4px solid var(--color-primary);">
+            <h4 class="h4" style="margin-bottom:var(--space-3)">Factores Críticos</h4>
+            <div style="display:grid; gap:var(--space-3)">
+                ${rowDetail("Interacciones", (item.rel_interacciones || []).map(i => i.nombre).join("; ") || "Ninguna reportada")}
+                ${rowDetail("Black Box Warning", (item.black_box_warning === true || item.black_box_warning === "Sí") ? "Presente" : "No reportada")}
             </div>
         </section>
     </div>
@@ -287,44 +296,39 @@ function renderTabSwitching(item) {
 
 // --- Helpers UI ---
 
-function splitList(str) {
-   if (!str) return [];
-   return str.split(/[;|\n]/).map(s => s.trim()).filter(Boolean);
-}
-
 function infoBox(label, val) {
    return `
       <div class="field-box">
         <div class="field-box__label">${escapeHtml(label)}</div>
-        <div class="field-box__value" style="font-weight:600">${escapeHtml(val)}</div>
+        <div class="field-box__value">${escapeHtml(val)}</div>
       </div>
     `;
 }
 
 function infoBoxClean(label, val) {
    return `
-      <div>
-        <div class="text-sm text-muted">${escapeHtml(label)}</div>
-        <div style="font-weight:600; font-size:1.1rem">${escapeHtml(val)}</div>
+      <div style="padding:var(--space-2) 0">
+        <div class="text-xs text-muted" style="text-transform:uppercase; font-weight:800; letter-spacing:0.05em; margin-bottom:4px">${escapeHtml(label)}</div>
+        <div style="font-weight:700; font-size:1.15rem; color:var(--color-primary-dark)">${escapeHtml(val)}</div>
       </div>
     `;
 }
 
 function rowDetail(label, val) {
    return `
-      <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--color-border); padding-bottom:8px;">
-         <span class="text-muted">${escapeHtml(label)}</span>
-         <span style="font-weight:500; text-align:right">${escapeHtml(val)}</span>
+      <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--color-border); padding-bottom:var(--space-2); align-items:flex-start; gap:var(--space-4)">
+         <span class="text-muted text-sm" style="font-weight:600">${escapeHtml(label)}</span>
+         <span style="font-weight:600; text-align:right">${escapeHtml(val)}</span>
       </div>
     `;
 }
 
 function rowRisk(label, val) {
    const isHigh = (val || "").toLowerCase().includes("alto") || (val === "3") || (val === "2");
-   const style = isHigh ? "color:var(--color-danger); font-weight:700" : "";
+   const style = isHigh ? "color:var(--color-danger); font-weight:800" : "font-weight:600";
    return `
-      <div style="display:flex; justify-content:space-between;">
-         <span>${escapeHtml(label)}</span>
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--color-border); padding-bottom:var(--space-2);">
+         <span class="text-sm" style="font-weight:600">${escapeHtml(label)}</span>
          <span style="${style}">${escapeHtml(val)}</span>
       </div>
     `;

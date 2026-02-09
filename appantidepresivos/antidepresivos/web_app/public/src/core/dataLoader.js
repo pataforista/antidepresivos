@@ -21,7 +21,11 @@ export async function loadAppData() {
   const dataset = coerceDataset(datasetRaw);
 
   // Normaliza items (clona + _search + _norm + *_ord)
-  dataset.items = normalizeDatasetItems(dataset.items, schema);
+  if (Array.isArray(dataset.farmacos)) {
+    dataset.farmacos = normalizeDatasetItems(dataset.farmacos, schema);
+  } else {
+    dataset.items = normalizeDatasetItems(dataset.items, schema);
+  }
 
 
   // 5) normalización runtime (NO modifica CSV, solo añade _search/_norm)
@@ -42,6 +46,7 @@ function coerceDataset(datasetRaw) {
   if (Array.isArray(datasetRaw?.items)) return { meta, items: datasetRaw.items };
   if (Array.isArray(datasetRaw?.rows)) return { meta, items: datasetRaw.rows };
   if (Array.isArray(datasetRaw?.data)) return { meta, items: datasetRaw.data };
+  if (Array.isArray(datasetRaw?.farmacos)) return { meta, ...datasetRaw };
 
   const keys = datasetRaw && typeof datasetRaw === "object" ? Object.keys(datasetRaw) : [];
   throw new Error(

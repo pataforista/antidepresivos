@@ -20,6 +20,25 @@ export function initCardSpotlight() {
 }
 
 /**
+ * Observes elements with .animate-on-scroll and applies entrance animations.
+ */
+export function initEntranceAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("animate-fade-in");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(".card, .section-title, .monograph__header").forEach(el => {
+        el.style.opacity = "0"; // Initial state
+        observer.observe(el);
+    });
+}
+
+/**
  * Updates the Gooey Nav background position based on the active link.
  */
 export function updateGooeyNav() {
@@ -30,7 +49,6 @@ export function updateGooeyNav() {
     const blob = nav.querySelector(".nav-gooey__blob");
 
     if (activeLink && blob) {
-        // Move blob to active link
         const rectNav = nav.getBoundingClientRect();
         const rectLink = activeLink.getBoundingClientRect();
 
@@ -43,13 +61,4 @@ export function updateGooeyNav() {
     } else if (blob) {
         blob.style.opacity = "0";
     }
-}
-
-/**
- * Attaches hover listeners to nav links for "preview" effect (optional)
- * or just rely on route changes for "active" state.
- */
-export function initGooeyNavInteractions() {
-    // Only if we wanted hover effects to move the blob temporarily
-    // For now, let's stick to "Current Active Route" logic for stability
 }
