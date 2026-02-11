@@ -143,6 +143,12 @@ export function createRouter(store, opts = {}) {
       params = { id: segs[1] ? decodeURIComponent(segs[1]) : "" };
     } else if (head === "compare") {
       name = "compare";
+    } else if (head === "switching") {
+      name = "switching";
+    } else if (head === "ajuste") {
+      name = "ajuste";
+    } else if (head === "interact") {
+      name = "interact";
     } else {
       name = "unknown";
     }
@@ -167,6 +173,12 @@ export function createRouter(store, opts = {}) {
       path = `/#/detail/${id}`;
     } else if (name === "compare") {
       path = "/#/compare";
+    } else if (name === "switching") {
+      path = "/#/switching";
+    } else if (name === "ajuste") {
+      path = "/#/ajuste";
+    } else if (name === "interact") {
+      path = "/#/interact";
     } else {
       path = options.defaultRoute;
     }
@@ -197,8 +209,8 @@ export function createRouter(store, opts = {}) {
       };
     }
 
-    // list
-    if (route.name === "list") {
+    // list, switching, ajuste, interact
+    if (["list", "switching", "ajuste", "interact"].includes(route.name)) {
       return { ...route, params: {}, query: route.query ?? {} };
     }
 

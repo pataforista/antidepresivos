@@ -163,6 +163,17 @@ function renderTabDosis(item) {
              ${rowDetail("Uso Pediátrico", item.aprobado_uso_pediatrico === "Sí" ? "Aprobado" : `No aprobado (${escapeHtml(item.aprobado_uso_pediatrico)})`)}
           </div>
        </section>
+
+       <section class="card glass-effect">
+          <h4 class="h4" style="margin-bottom:var(--space-4)">Equivalencia Terapéutica</h4>
+          <div style="display:flex; align-items:center; gap:var(--space-4);">
+             <div class="field-box" style="flex:1">
+                <div class="field-box__label">Paridad Fluoxetina</div>
+                <div class="field-box__value">${item.equiv_fluoxetina || "N/D"}</div>
+             </div>
+             <p class="text-xs text-muted" style="flex:1">Basado en la dosis mínima efectiva estándar (Maudsley Guidelines). Útil para estimar dosis inicial al rotar fármacos.</p>
+          </div>
+       </section>
     </div>
    `;
 }
@@ -209,13 +220,15 @@ function renderTabSeguridad(item) {
            <section class="card glass-effect">
               <h4 class="h4" style="margin-bottom:var(--space-4)">Perfil de Riesgo</h4>
               <div style="display:grid; gap:var(--space-3)">
-                 ${rowRisk("Sedación", item.nivel_sedacion)}
-                 ${rowRisk("Peso", item.perfil_impacto_peso)}
-                 ${rowRisk("Sexual", item.perfil_disfuncion_sexual)}
-                 ${rowRisk("QT", item.riesgo_prolongacion_qt)}
-                 ${rowRisk("Abstinencia", item.riesgo_sindrome_abstinencia)}
-              </div>
-           </section>
+                  ${rowRisk("Sedación", item.nivel_sedacion)}
+                  ${rowRisk("Peso", item.perfil_impacto_peso)}
+                  ${rowRisk("Sexual", item.perfil_disfuncion_sexual)}
+                  ${rowRisk("QT", item.riesgo_prolongacion_qt)}
+                  ${rowRisk("Abstinencia", item.riesgo_sindrome_abstinencia)}
+                  ${rowRisk("Carga AEC", item.carga_aec)}
+                  ${rowRisk("Riesgo SIADH", item.riesgo_siadh)}
+               </div>
+            </section>
         </div>
 
          <section class="card" style="border-left: 6px solid var(--color-danger);">

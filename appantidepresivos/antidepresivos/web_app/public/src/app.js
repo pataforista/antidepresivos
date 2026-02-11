@@ -5,8 +5,12 @@ import { createRouter } from "./core/router.js";
 import * as policy from "./core/policy.js";
 import { selectFilteredItems, selectComparisonData } from "./core/selectors.js";
 import { renderDetail } from "./ui/detailView.js";
+import { renderSwitching } from "./ui/switchView.js";
+import { renderAjuste } from "./ui/ajusteView.js";
+import { renderInteract } from "./ui/interactView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
+import { initRibbons } from "./ribbons.js";
 
 /* ============================================================
    App Initialization
@@ -45,6 +49,8 @@ async function main() {
         setTimeout(() => {
           updateGooeyNav();
           initEntranceAnimations();
+          initRibbons("ribbons-container");
+          mountDock(document.getElementById("dock-container"));
         }, 50);
 
         // Render inicial
@@ -233,6 +239,9 @@ function renderRoute(route) {
     if (route.name === "list") renderList(view);
     else if (route.name === "detail") renderDetail(view, route.params?.id);
     else if (route.name === "compare") renderCompare(view);
+    else if (route.name === "switching") renderSwitching(view);
+    else if (route.name === "ajuste") renderAjuste(view);
+    else if (route.name === "interact") renderInteract(view);
     else view.innerHTML = "<p>Ruta no reconocida.</p>";
   }, 50);
 }
@@ -599,53 +608,64 @@ function renderRadarChart(data) {
     return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="10" font-weight="900" font-family="var(--font-headers)" fill="var(--color-text-muted)" letter-spacing="0.05em">${lbl.toUpperCase()}</text>`;
   }).join("");
 
-  const polys = data.map((item, idx) => {
+  const polygonsSVG = data.map((d, idx) => {
     const color = colors[idx % colors.length];
-    const pts = axes.map((key, i) => {
-      const val = item.scores[key] ?? 0;
+    const pts = axes.map((ax, i) => {
       const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
+      const val = d[ax] || 0;
       const rad = r * val;
       return `${c + rad * Math.cos(ang)},${c + rad * Math.sin(ang)}`;
     }).join(" ");
 
     return `
-      <g class="radar-poly" style="transition: all 0.6s var(--transition-spring)">
-        <polygon points="${pts}" fill="${color}" fill-opacity="0.12" stroke="${color}" stroke-width="3" stroke-linejoin="round" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));" />
-        ${axes.map((key, i) => {
-      const val = item.scores[key] ?? 0;
+      <g class="radar-poly" style="filter: drop-shadow(0 4px 8px ${color}44)">
+        <polygon points="${pts}" fill="${color}" fill-opacity="0.15" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" />
+        ${axes.map((ax, i) => {
       const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
+      const val = d[ax] || 0;
       const rad = r * val;
-      const px = c + rad * Math.cos(ang);
-      const py = c + rad * Math.sin(ang);
-      return `<circle cx="${px}" cy="${py}" r="4" fill="white" stroke="${color}" stroke-width="2.5" />`;
+      return `<circle cx="${c + rad * Math.cos(ang)}" cy="${c + rad * Math.sin(ang)}" r="3" fill="var(--color-surface)" stroke="${color}" stroke-width="1.5" />`;
     }).join("")}
       </g>
     `;
   }).join("");
 
-  const legend = `
-    <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:var(--space-6);">
-      ${data.map((d, i) => `
-         <div class="glass-effect" style="display:flex; align-items:center; gap:8px; padding: 6px 14px; border-radius:var(--radius-full); font-size:11px; font-weight:800; color:var(--color-text-main); font-family:var(--font-headers);">
-           <span style="display:inline-block; width:10px; height:10px; background:${colors[i % colors.length]}; border-radius:3px; box-shadow: 0 0 8px ${colors[i % colors.length]}aa;"></span>
-           <span>${escapeHtml(d.name.toUpperCase())}</span>
-         </div>
+  return `
+    <svg viewBox="0 0 ${size} ${size}" style="max-width:400px; margin:0 auto; display:block;">
+      <defs>
+        <radialGradient id="radarGrad">
+          <stop offset="0%" stop-color="var(--color-bg)" stop-opacity="0" />
+          <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0.03" />
+        </radialGradient>
+      </defs>
+      <circle cx="${c}" cy="${c}" r="${r}" fill="url(#radarGrad)" />
+      ${gridSVG}${axesSVG}${labelsSVG}${polygonsSVG}
+    </svg>
+  `;
+}
+
+function mountDock(container) {
+  if (!container) return;
+  const items = [
+    { id: "home", label: "Inicio", icon: "🏠", hash: "#/list" },
+    { id: "compare", label: "Comparar", icon: "⚖️", hash: "#/compare" },
+    { id: "switching", label: "Switching", icon: "🔄", hash: "#/switching" },
+    { id: "ajuste", label: "Ajuste", icon: "📏", hash: "#/ajuste" },
+    { id: "interact", label: "Interacción", icon: "⚡", hash: "#/interact" },
+  ];
+
+  container.innerHTML = `
+    <div class="dock-panel animate-fade-in" style="animation-delay: 0.5s">
+      ${items.map(item => `
+        <div class="dock-item" onclick="location.hash='${item.hash}'">
+          <span class="dock-icon">${item.icon}</span>
+          <span class="dock-label">${item.label}</span>
+        </div>
       `).join("")}
     </div>
   `;
-
-  return `
-    <div style="position:relative; display:flex; flex-direction:column; align-items:center;">
-      <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="overflow:visible">
-        ${gridSVG}
-        ${axesSVG}
-        ${polys}
-        ${labelsSVG}
-      </svg>
-      ${legend}
-    </div>
-  `;
 }
+
 
 /* ============================================================
    Helpers
