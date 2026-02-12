@@ -20,7 +20,7 @@ async function main() {
   const root = document.getElementById("app");
   if (!root) throw new Error("#app no encontrado");
 
-  root.innerHTML = "<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>Cargando Códice…</p></div>";
+  root.innerHTML = "<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>Cargando Antidepresivos…</p></div>";
 
   try {
     const ctx = await loadAppData();
@@ -41,21 +41,30 @@ async function main() {
       rootEl: root,
       onAllow: () => {
         mountShell(root);
+        const d = document.getElementById("debug-error");
+        if (d) d.textContent += "[OK] Shell Mounted\n";
 
         const router = createRouter(store);
         router.start();
 
         // Init Visuals
         setTimeout(() => {
-          updateGooeyNav();
-          initEntranceAnimations();
-          initRibbons("ribbons-container");
-          mountDock(document.getElementById("dock-container"));
+          try {
+            updateGooeyNav();
+            initEntranceAnimations();
+            initRibbons("ribbons-container");
+            mountDock(document.getElementById("dock-container"));
+
+            // Render inicial
+            renderRoute(store.getState().route);
+            updateHeaderNav(store.getState().route);
+          } catch (err) {
+            console.error("Init Error:", err);
+          }
         }, 50);
 
-        // Render inicial
-        renderRoute(store.getState().route);
-        updateHeaderNav(store.getState().route);
+
+
 
         // Re-render cuando cambie la ruta (evento correcto del store)
         store.subscribe("state:path:route", ({ next }) => {
@@ -92,6 +101,30 @@ async function main() {
 }
 
 function attachGlobalListeners() {
+  // Theme Toggle Logic
+  const btnTheme = document.getElementById("btnThemeToggle");
+  if (btnTheme) {
+    btnTheme.addEventListener("click", () => {
+      const current = store.getState().ui.theme || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      store.updatePath("ui.theme", next);
+
+      // Apply theme immediately for visual snappiness
+      document.documentElement.setAttribute('data-theme', next);
+      const metaTheme = document.getElementById("meta-theme-color");
+      if (metaTheme) {
+        metaTheme.setAttribute('content', next === 'dark' ? '#020617' : '#f8fafc');
+      }
+    });
+
+    // Sync button icon on state change
+    store.subscribe("state:path:ui", ({ next }) => {
+      if (btnTheme) {
+        btnTheme.innerHTML = next.theme === 'dark' ? '☀️' : '🌙';
+      }
+    });
+  }
+
   // Listener para el botón de comparar en el header (si existe en mountShell)
   const btnHeaderCompare = document.getElementById("btnHeaderCompare");
   if (btnHeaderCompare) {
@@ -182,7 +215,8 @@ function getFieldSpecList(path, fallbackSpecs) {
 
 function mountShell(root) {
   const state = store.getState();
-  const title = state.data?.schema?.meta?.appTitle ?? "Antidepresivos — Códice";
+  const theme = state.ui?.theme || 'light';
+  const title = state.data?.schema?.meta?.appTitle ?? "Antidepresivos — 2026";
 
   root.innerHTML = `
     <div id="appShell" class="shell">
@@ -196,6 +230,9 @@ function mountShell(root) {
         </nav>
         
         <div class="header__actions">
+            <button id="btnThemeToggle" title="Cambiar Tema" class="btn btn--circle btn--ghost" style="font-size: 1.2rem; min-width: 44px; height: 44px; padding:0; border-radius:50%">
+              ${theme === 'dark' ? '☀️' : '🌙'}
+            </button>
             <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" style="font-weight:700">
                 LIMPIAR
             </button>
@@ -207,9 +244,9 @@ function mountShell(root) {
 
       <footer class="footer" style="padding: var(--space-8) var(--space-5); background: var(--color-surface); border-top: 1px solid var(--color-border); margin-top: auto;">
         <div class="footer__inner">
-           <span class="text-xs text-muted" style="font-weight:600">© 2024 • DR. CESAR CELADA</span>
-           <button id="btnOpenInfo" class="btn btn--outline text-xs" style="padding:var(--space-2) var(--space-4);">
-             Fuentes y Disclaimer
+           <span class="text-xs text-muted" style="font-weight:600">EDICIÓN 2026 • SOPORTE CLÍNICO</span>
+           <button id="btnOpenInfo" class="btn btn--outline text-xs" style="padding:var(--space-2) var(--space-4); border-radius:var(--radius-md);">
+             Créditos y Disclaimer
            </button>
         </div>
       </footer>
@@ -236,6 +273,7 @@ function updateCompareCount() {
 
 function renderRoute(route) {
   const view = document.getElementById("appView");
+
   if (!view) return;
 
   if (!route) {
@@ -474,31 +512,69 @@ function attachFilterListeners(view) {
 function renderCompare(view) {
   const state = store.getState();
   const { selectedItems: rows, radarData } = selectComparisonData(state);
+  // Premium Palette (Indigo, Rose, Violet, Emerald, Amber, Cyan, Orange, Teal)
+  const colors = [
+    "hsl(243, 75%, 59%)", // Indigo
+    "hsl(350, 89%, 60%)", // Rose
+    "hsl(262, 80%, 50%)", // Violet
+    "hsl(161, 75%, 45%)", // Emerald
+    "hsl(38, 92%, 50%)",   // Amber
+    "hsl(190, 90%, 50%)",  // Cyan
+    "hsl(20, 90%, 50%)",   // Orange
+    "hsl(170, 70%, 40%)"   // Teal
+  ];
+
+  // Get all drugs for the dropdown, excluding selected ones
+  const allDrugs = state.data?.dataset?.farmacos || [];
+  const selectedIds = new Set(rows.map(r => r.id_farmaco));
+  const availableDrugs = allDrugs
+    .filter(d => !selectedIds.has(d.id_farmaco))
+    .sort((a, b) => a.nombre_generico.localeCompare(b.nombre_generico));
 
   if (!rows.length) {
     view.innerHTML = `
       <div class="animate-fade-in" style="text-align:center; padding:var(--space-8);">
         <h2 class="h2">Comparador</h2>
         <p class="text-muted" style="margin-bottom:var(--space-6)">No has seleccionado ningún fármaco para comparar.</p>
+        
+        <!-- Empty State Dropdown -->
+        <div style="max-width:300px; margin:0 auto var(--space-6);">
+            <select id="selCompareEmpty" class="btn btn--outline" style="width:100%; text-align:left; padding:12px;">
+                <option value="">+ Agregar Fármaco</option>
+                ${availableDrugs.map(d => `<option value="${d.id_farmaco}">${d.nombre_generico}</option>`).join('')}
+            </select>
+        </div>
+
         <a href="#/list" class="btn btn--primary">VOLVER A LA LISTA</a>
       </div>
     `;
+
+    // Event listener for empty state dropdown
+    const selEmpty = view.querySelector("#selCompareEmpty");
+    if (selEmpty) {
+      selEmpty.addEventListener("change", (e) => {
+        if (!e.target.value) return;
+        store.setCompareIds([e.target.value], { reason: "ui:compareAdd" });
+      });
+    }
     return;
   }
 
   const chips = rows
-    .map((d) => {
+    .map((d, i) => {
       const id = d.id_farmaco;
       const label = d?.nombre_generico ?? id;
+      const color = colors[i % colors.length];
       return `
-        <button class="chip chip--active chipRemove" data-id="${escapeHtml(id)}" type="button" style="cursor:pointer; gap:10px">
+        <button class="chip chip--active chipRemove" data-id="${escapeHtml(id)}" type="button" style="cursor:pointer; gap:10px; border-left: 4px solid ${color}; padding-left:8px;">
+          <span style="width:8px; height:8px; border-radius:50%; background:${color}; display:inline-block;"></span>
           ${escapeHtml(label)} <span style="font-size:1.2rem; opacity:0.7">×</span>
         </button>
       `;
     })
     .join("");
 
-  const radarSVG = renderRadarChart(radarData);
+  const radarSVG = renderRadarChart(radarData, colors);
 
   // Dinamizar campos desde schema si existe
   const schema = state.data?.schema;
@@ -529,8 +605,16 @@ function renderCompare(view) {
         <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← VOLVER AL LISTADO</a>
       </div>
 
-      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:var(--space-8)">
+      <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:var(--space-4); align-items:center;">
         ${chips}
+        
+        <!-- Add Drug Dropdown -->
+        <div style="position:relative;">
+            <select id="selCompareAdd" class="chip" style="cursor:pointer; padding-right:24px; appearance:none; -webkit-appearance:none; border:1px dashed var(--color-border); background:var(--color-bg);">
+                <option value="">+ Añadir...</option>
+                ${availableDrugs.map(d => `<option value="${d.id_farmaco}">${d.nombre_generico}</option>`).join('')}
+            </select>
+        </div>
       </div>
 
       <div class="grid-compare">
@@ -539,7 +623,7 @@ function renderCompare(view) {
           ${radarSVG}
           <div class="alert alert--info" style="margin-top:var(--space-8); padding:var(--space-4);">
             <div class="text-xs" style="line-height:1.5; font-weight:500">
-              <strong>Nota:</strong> Los valores son normalizados (0-1). Un área mayor representa mayor carga de efectos adversos o intensidad clínica según el eje.
+              <strong>Nota:</strong> Los valores son normalizados (0-1). Un área mayor representa mayor carga de efectos adversos o intensidad clínica según el eje. Los colores del gráfico coinciden con los botones de arriba.
             </div>
           </div>
         </section>
@@ -553,7 +637,10 @@ function renderCompare(view) {
               <thead>
                 <tr style="text-align:left;">
                   <th style="padding:var(--space-4) var(--space-5); color:var(--color-primary); background:var(--color-bg); font-family:var(--font-headers); font-size:0.75rem; letter-spacing:0.1em; border-bottom:2px solid var(--color-border);">RASGO</th>
-                  ${rows.map(d => `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:800; border-bottom:2px solid var(--color-border); min-width:180px;">${escapeHtml(d.nombre_generico)}</th>`).join("")}
+                  ${rows.map((d, i) => {
+    const color = colors[i % colors.length];
+    return `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:800; border-bottom:2px solid ${color}; min-width:180px; color:${color}">${escapeHtml(d.nombre_generico)}</th>`
+  }).join("")}
                 </tr>
               </thead>
               <tbody>
@@ -576,8 +663,10 @@ function renderCompare(view) {
     </div>
   `;
 
+  // Listener para eliminar chips
   view.querySelectorAll(".chipRemove").forEach((btn) => {
     btn.addEventListener("click", (ev) => {
+      ev.preventDefault(); // prevent default just in case
       const id = ev.currentTarget.dataset.id;
       const next = (store.getState().compare?.ids ?? []).filter(
         (x) => String(x) !== String(id)
@@ -585,23 +674,47 @@ function renderCompare(view) {
       store.setCompareIds(next, { reason: "ui:compareRemove" });
     });
   });
+
+  // Listener para añadir desde el dropdown
+  const selAdd = view.querySelector("#selCompareAdd");
+  if (selAdd) {
+    selAdd.addEventListener("change", (e) => {
+      const val = e.target.value;
+      if (!val) return;
+      const curr = store.getState().compare?.ids ?? [];
+      store.setCompareIds([...curr, val], { reason: "ui:compareAdd" });
+    });
+  }
 }
 
-function renderRadarChart(data) {
+function renderRadarChart(data, colors) {
   const size = 320;
   const c = size / 2;
   const r = 110;
-  const axes = ["sedacion", "peso", "sexual", "qt", "activacion", "abstinencia"];
-  const labels = ["Sedación", "Peso", "Sexual", "QT", "Activación", "Abstinencia"];
 
-  // Premium Palette (Indigo, Rose, Violet, Emerald, Amber)
-  const colors = [
-    "hsl(243, 75%, 59%)", // Indigo
-    "hsl(350, 89%, 60%)", // Rose
-    "hsl(262, 80%, 50%)", // Violet
-    "hsl(161, 75%, 45%)", // Emerald
-    "hsl(38, 92%, 50%)"   // Amber
+  // Define axes configuration with mappings and max values for normalization
+  const axesConfig = [
+    { id: "sedacion", label: "Sedación", key: "nivel_sedacion", max: 3 },
+    { id: "peso", label: "Peso", key: "perfil_impacto_peso_ord", max: 2 },
+    { id: "sexual", label: "Sexual", key: "perfil_disfuncion_sexual_ord", max: 2 },
+    { id: "qt", label: "QT", key: "riesgo_prolongacion_qt_ord", max: 2 },
+    { id: "activacion", label: "Activación", key: "perfil_activacion_ord", max: 2 },
+    { id: "abstinencia", label: "Abstinencia", key: "riesgo_sindrome_abstinencia_ord", max: 2 }
   ];
+
+  const axes = axesConfig.map(a => a.id);
+  const labels = axesConfig.map(a => a.label);
+
+  // Fallback colors if not provided
+  if (!colors) {
+    colors = [
+      "hsl(243, 75%, 59%)",
+      "hsl(350, 89%, 60%)",
+      "hsl(262, 80%, 50%)",
+      "hsl(161, 75%, 45%)",
+      "hsl(38, 92%, 50%)"
+    ];
+  }
 
   const levels = [0.25, 0.5, 0.75, 1];
   const gridSVG = levels.map(l => {
@@ -630,20 +743,33 @@ function renderRadarChart(data) {
 
   const polygonsSVG = data.map((d, idx) => {
     const color = colors[idx % colors.length];
-    const pts = axes.map((ax, i) => {
-      const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
-      const val = d[ax] || 0;
-      const rad = r * val;
+    const pts = axesConfig.map((ax, i) => {
+      const ang = (Math.PI * 2 * i) / axesConfig.length - Math.PI / 2;
+
+      // Get raw value using the mapped key
+      const rawVal = d[ax.key] ?? 0;
+
+      // Normalize to 0-1 range based on max value for that axis
+      // Ensure we don't divide by zero and clamp to 0-1
+      let normVal = typeof rawVal === 'number' ? rawVal / (ax.max || 1) : 0;
+      if (normVal > 1) normVal = 1;
+      if (normVal < 0) normVal = 0;
+
+      const rad = r * normVal;
       return `${c + rad * Math.cos(ang)},${c + rad * Math.sin(ang)}`;
     }).join(" ");
 
     return `
       <g class="radar-poly" style="filter: drop-shadow(0 4px 8px ${color}44)">
         <polygon points="${pts}" fill="${color}" fill-opacity="0.15" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" />
-        ${axes.map((ax, i) => {
-      const ang = (Math.PI * 2 * i) / axes.length - Math.PI / 2;
-      const val = d[ax] || 0;
-      const rad = r * val;
+        ${axesConfig.map((ax, i) => {
+      const ang = (Math.PI * 2 * i) / axesConfig.length - Math.PI / 2;
+      const rawVal = d[ax.key] ?? 0;
+      let normVal = typeof rawVal === 'number' ? rawVal / (ax.max || 1) : 0;
+      if (normVal > 1) normVal = 1;
+      if (normVal < 0) normVal = 0;
+
+      const rad = r * normVal;
       return `<circle cx="${c + rad * Math.cos(ang)}" cy="${c + rad * Math.sin(ang)}" r="3" fill="var(--color-surface)" stroke="${color}" stroke-width="1.5" />`;
     }).join("")}
       </g>

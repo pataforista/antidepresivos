@@ -64,6 +64,9 @@ export function selectComparisonData(state) {
         return {
             id: item.id_farmaco,
             name: item.nombre_generico ?? item.id_farmaco,
+            // Spread raw item properties so app.js can access fields like 'nivel_sedacion' directly
+            ...item,
+            // Keep calculated scores just in case, though app.js now recalculates them
             scores: {
                 sedacion: sedScore,
                 peso: pesoScore,

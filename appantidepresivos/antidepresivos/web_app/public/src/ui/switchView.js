@@ -10,7 +10,11 @@ export function renderSwitching(view) {
 
     view.innerHTML = `
         <div class="animate-fade-in">
-            <h2 class="h2">Plan de Switching</h2>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
+                <h2 class="h2" style="margin:0">Plan de Switching</h2>
+                <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← VOLVER AL LISTADO</a>
+            </div>
+
             <p class="text-muted" style="margin-bottom: var(--space-8);">
                 Herramienta interactiva para la rotación de antidepresivos. Basado en guías clínicas (Maudsley, CANMAT).
             </p>
@@ -60,8 +64,8 @@ export function renderSwitching(view) {
                     El riesgo de Síndrome Serotoninérgico o recurrencia de síntomas debe evaluarse individualmente.
                 </div>
             </div>
-        </div>
-    `;
+        </div >
+        `;
 
     const fromSel = view.querySelector('#switchFrom');
     const toSel = view.querySelector('#switchTo');
@@ -118,17 +122,17 @@ function updatePlan(fromId, toId, view) {
     view.querySelector('#strategyDesc').textContent = desc;
 
     const list = view.querySelector('#notesList');
-    list.innerHTML = notes.map(n => `<li>${n}</li>`).join('');
+    list.innerHTML = notes.map(n => `< li > ${n}</li > `).join('');
 
     // Visual Timeline Sketch
     const timeline = view.querySelector('#visualTimeline');
     timeline.innerHTML = `
-        <div class="switch-visual-card">
+        < div class="switch-visual-card" >
             <h4>Semana 1</h4>
             <div style="height:4px; background:var(--risk-high); width:100%; border-radius:2px;"></div>
             <div style="height:4px; background:var(--color-border); width:20%; border-radius:2px; margin-top:4px;"></div>
             <p>100% ${fromDrug.nombre_generico} / 0% ${toDrug.nombre_generico}</p>
-        </div>
+        </div >
         <div class="switch-visual-card">
             <h4>Semana 2</h4>
             <div style="height:4px; background:var(--risk-mod); width:50%; border-radius:2px;"></div>

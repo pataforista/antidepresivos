@@ -33,7 +33,11 @@ export function renderInteract(view) {
 
     view.innerHTML = `
         <div class="animate-fade-in">
-            <h2 class="h2">Interaccionómetro CYP</h2>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
+                <h2 class="h2" style="margin:0">Interaccionómetro CYP</h2>
+                <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← VOLVER AL LISTADO</a>
+            </div>
+            
             <p class="text-muted" style="margin-bottom: var(--space-8);">
                 Inhibición enzimática por antidepresivos. Crucial para prevenir toxicidad en polifarmacia.
             </p>
@@ -83,6 +87,6 @@ export function renderInteract(view) {
                     <p class="text-sm">Fluvoxamina eleva masivamente niveles de clozapina. <strong>Riesgo de convulsiones y toxicidad.</strong></p>
                 </div>
             </div>
-        </div>
-    `;
+        </div >
+        `;
 }

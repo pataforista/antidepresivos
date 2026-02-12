@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Antidepresivos — Códice</title>
+  <title>Antidepresivos — 2026</title>
   <link rel="icon" type="image/png" href="./assets/icons/icon-192.png">
 
-  <!-- Fonts: Inter -->
+  <!-- Fonts: Inter & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -22,16 +22,33 @@
 
   <!-- IMPORTANTE: rutas relativas (no /...) -->
   <link rel="manifest" href="./manifest.webmanifest" />
-  <meta name="theme-color" content="#F7F4E9" />
+  <meta name="theme-color" content="#f8fafc" id="meta-theme-color" />
+
+  <script>
+    // Theme Bootstrap: Set theme immediately to avoid FOUC
+    try {
+      const persisted = JSON.parse(localStorage.getItem('pwa_antidep_2026::v0'));
+      const theme = persisted?.state?.ui?.theme || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#020617');
+    } catch (e) { }
+  </script>
 </head>
 
 <body>
+  <div id="debug-error"
+    style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:rgba(0,0,0,0.9); color:red; padding:20px; font-family:monospace; display:none; pointer-events:auto; white-space:pre-wrap;">
+  </div>
   <div id="ribbons-container"
     style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:0.6;"></div>
 
   <div id="dock-container"></div>
 
-  <div id="app"></div>
+  <div id="app" style="position:relative; z-index:1;">
+    <div id="appShell" class="shell">
+      <!-- content will be rendered here -->
+    </div>
+  </div>
 
   <!-- App bootstrap -->
   <script type="module" src="./src/app.js"></script>
@@ -41,11 +58,8 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-          .then(registration => {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-          }, err => {
-            console.log('ServiceWorker registration failed: ', err);
-          });
+          .then(reg => console.log('SW Registered'))
+          .catch(err => console.log('SW Failed', err));
       });
     }
   </script>

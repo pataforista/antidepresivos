@@ -37,7 +37,7 @@ export function initRibbons(containerId, options = {}) {
     gl.canvas.style.height = '100%';
     gl.canvas.style.pointerEvents = 'none'; // Passthrough
     gl.canvas.style.zIndex = '0'; // Behind content
-    container.style.position = 'relative'; // Ensure containment
+    // container.style.position = 'relative'; // REMOVED: Breaks fixed positioning layout
     container.insertBefore(gl.canvas, container.firstChild);
 
     const scene = new Transform();

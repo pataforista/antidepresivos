@@ -86,50 +86,50 @@ export function createStore(initialState = {}, opts = {}) {
     return state;
   }
 
- // --- Subscriptions ---
-// Soporta:
-//   subscribe("state:changed", fn)
-//   subscribe(fn)  -> alias de "state:changed"
-function subscribe(eventOrFn, fnOrOpts, maybeOpts) {
-  // subscribe(fn)
-  if (typeof eventOrFn === "function") {
-    const fn = eventOrFn;
-    const opts = fnOrOpts; // aquí puede venir opts
-    return pubsub.on("state:changed", fn, opts);
+  // --- Subscriptions ---
+  // Soporta:
+  //   subscribe("state:changed", fn)
+  //   subscribe(fn)  -> alias de "state:changed"
+  function subscribe(eventOrFn, fnOrOpts, maybeOpts) {
+    // subscribe(fn)
+    if (typeof eventOrFn === "function") {
+      const fn = eventOrFn;
+      const opts = fnOrOpts; // aquí puede venir opts
+      return pubsub.on("state:changed", fn, opts);
+    }
+
+    // subscribe(event, fn, opts)
+    const event = eventOrFn;
+    const fn = fnOrOpts;
+    const opts = maybeOpts;
+    return pubsub.on(event, fn, opts);
   }
 
-  // subscribe(event, fn, opts)
-  const event = eventOrFn;
-  const fn = fnOrOpts;
-  const opts = maybeOpts;
-  return pubsub.on(event, fn, opts);
-}
+  // Soporta:
+  //   once("state:changed", fn)
+  //   once(fn) -> alias de "state:changed"
+  function once(eventOrFn, fnOrOpts, maybeOpts) {
+    if (typeof eventOrFn === "function") {
+      const fn = eventOrFn;
+      const opts = fnOrOpts;
+      return pubsub.once("state:changed", fn, opts);
+    }
 
-// Soporta:
-//   once("state:changed", fn)
-//   once(fn) -> alias de "state:changed"
-function once(eventOrFn, fnOrOpts, maybeOpts) {
-  if (typeof eventOrFn === "function") {
-    const fn = eventOrFn;
-    const opts = fnOrOpts;
-    return pubsub.once("state:changed", fn, opts);
+    const event = eventOrFn;
+    const fn = fnOrOpts;
+    const opts = maybeOpts;
+    return pubsub.once(event, fn, opts);
   }
 
-  const event = eventOrFn;
-  const fn = fnOrOpts;
-  const opts = maybeOpts;
-  return pubsub.once(event, fn, opts);
-}
-
-// Soporta:
-//   unsubscribe("state:changed", fn)
-//   unsubscribe(fn) -> alias de "state:changed"
-function unsubscribe(eventOrFn, fn) {
-  if (typeof eventOrFn === "function") {
-    return pubsub.off("state:changed", eventOrFn);
+  // Soporta:
+  //   unsubscribe("state:changed", fn)
+  //   unsubscribe(fn) -> alias de "state:changed"
+  function unsubscribe(eventOrFn, fn) {
+    if (typeof eventOrFn === "function") {
+      return pubsub.off("state:changed", eventOrFn);
+    }
+    return pubsub.off(eventOrFn, fn);
   }
-  return pubsub.off(eventOrFn, fn);
-}
 
 
   // --- Selectors (memo ultra simple por referencia) ---
@@ -351,7 +351,7 @@ export const store = createStore(
     }
   },
   {
-    storageKey: "antidepresivos_codice",
+    storageKey: "pwa_antidep_2026",
     persistPaths: ["ui", "filters", "compare"],
     debug: false
   }

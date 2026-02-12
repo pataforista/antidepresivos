@@ -1,48 +1,40 @@
 /* src/styles/variables.css */
 :root {
-  /* --- Palette: Modern Premium (Indigo & Vibrant Accents) --- */
+  /* --- Palette: Modern Premium (Deep Indigo & Professional Slate) --- */
 
   /* Primary: Deep Indigo */
-  --color-primary-h: 243;
-  --color-primary-s: 75%;
-  --color-primary-l: 59%;
-  /* Indigo 600-ish */
+  --color-primary-h: 236;
+  --color-primary-s: 72%;
+  --color-primary-l: 55%;
   --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
   --color-primary-light: hsl(var(--color-primary-h), var(--color-primary-s), 75%);
-  --color-primary-dark: hsl(var(--color-primary-h), var(--color-primary-s), 40%);
+  --color-primary-dark: hsl(var(--color-primary-h), var(--color-primary-s), 35%);
   --color-on-primary: #ffffff;
 
-  /* Secondary: Scientific Violet */
-  --color-secondary-h: 262;
-  --color-secondary-s: 80%;
-  --color-secondary-l: 50%;
+  /* Secondary: Scientific Emerald */
+  --color-secondary-h: 161;
+  --color-secondary-s: 75%;
+  --color-secondary-l: 45%;
   --color-secondary: hsl(var(--color-secondary-h), var(--color-secondary-s), var(--color-secondary-l));
 
-  /* Accent: Rose/Pink for micro-actions */
-  --color-accent: #f43f5e;
-  /* Rose 500 */
-
-  /* Backgrounds & Surfaces */
+  /* Backgrounds & Surfaces (Light Theme Default) */
   --color-bg: #f8fafc;
-  /* Slate 50 */
   --color-surface: #ffffff;
-  --color-surface-translucent: rgba(255, 255, 255, 0.75);
-  --color-border: rgba(148, 163, 184, 0.12);
-  /* Slate 400 with low opacity */
+  --color-surface-raised: #f1f5f9;
+  --color-surface-translucent: rgba(255, 255, 255, 0.85);
+  --color-border: rgba(15, 23, 42, 0.08);
 
   /* Text */
   --color-text-main: #0f172a;
-  /* Slate 900 */
-  --color-text-muted: #64748b;
-  /* Slate 500 */
+  /* High Contrast Slate */
+  --color-text-muted: #475569;
+  /* Accessible Slate 600 */
+  --color-text-dim: #94a3b8;
 
   /* Status */
-  --color-danger: #f43f5e;
-  /* Rose 500 */
+  --color-danger: #e11d48;
   --color-success: #10b981;
-  /* Emerald 500 */
   --color-warning: #f59e0b;
-  /* Amber 500 */
 
   /* --- Typography --- */
   --font-headers: 'Outfit', sans-serif;
@@ -58,57 +50,38 @@
   --space-8: 3rem;
 
   /* --- Effects --- */
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --shadow-glass: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
 
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 32px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
   --radius-full: 9999px;
 
-  --backdrop-blur: blur(20px);
+  --backdrop-blur: blur(16px);
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-spring: 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-  /* --- Ritual & Narrative Tokens --- */
-  --font-ritual: "Cormorant Garamond", serif;
-  --font-mono: "JetBrains Mono", monospace;
-
-  --ritual-red: #C4455C;
-  --ritual-red-muted: rgba(196, 69, 92, 0.1);
-  --ritual-red-bright: #E27DA1;
-
-  --risk-low: #10B981;
-  --risk-mod: #F59E0B;
-  --risk-high: #EF4444;
-
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.5);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #020617;
-    /* Slate 950 */
-    --color-surface: #0f172a;
-    /* Slate 900 */
-    --color-surface-translucent: rgba(15, 23, 42, 0.8);
-    --color-border: rgba(255, 255, 255, 0.06);
+/* --- Dark Theme --- */
+[data-theme="dark"] {
+  --color-bg: #020617;
+  --color-surface: #0f172a;
+  --color-surface-raised: #1e293b;
+  --color-surface-translucent: rgba(15, 23, 42, 0.9);
+  --color-border: rgba(255, 255, 255, 0.08);
 
-    --color-text-main: #f8fafc;
-    /* Slate 50 */
-    --color-text-muted: #94a3b8;
-    /* Slate 400 */
+  --color-text-main: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-text-dim: #64748b;
 
-    --color-primary-l: 65%;
-    --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
+  --color-primary-l: 65%;
+  --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
 
-    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-  }
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }

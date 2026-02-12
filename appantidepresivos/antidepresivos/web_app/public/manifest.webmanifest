@@ -1,11 +1,11 @@
 {
-  "name": "Antidepresivos — Códice",
-  "short_name": "Códice ADP",
+  "name": "Antidepresivos 2026",
+  "short_name": "Antidep 2026",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f8fafc",
-  "theme_color": "#0f766e",
+  "theme_color": "#4f46e5",
   "icons": [
     {
       "src": "./assets/icons/icon-192.png",

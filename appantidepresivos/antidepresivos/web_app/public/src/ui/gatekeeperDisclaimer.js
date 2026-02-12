@@ -30,7 +30,7 @@ export function mountDisclaimerGate({ rootEl, onAllow }) {
             </button>
           </div>
           <p class="text-sm text-muted" style="margin-top: 16px;">
-            Edición 2026 • Dr. César Celada
+            Edición 2026 • Soporte Clínico
           </p>
         </div>
       </div>
