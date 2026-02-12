@@ -1,20 +1,20 @@
 
 export function mountInfoModal() {
-    // Check if modal container exists, if not create it
-    let modal = document.getElementById("infoModal");
-    if (!modal) {
-        modal = document.createElement("div");
-        modal.id = "infoModal";
-        modal.className = "modal-backdrop hidden"; // Needs CSS for .modal-backdrop & .hidden
-        // We'll inject styles just in case or assume layout.css has them (we'll ensure basics)
-        // For now, simpler: inline style approach for the backdrop + class toggling
+  // Check if modal container exists, if not create it
+  let modal = document.getElementById("infoModal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "infoModal";
+    modal.className = "modal-backdrop hidden"; // Needs CSS for .modal-backdrop & .hidden
+    // We'll inject styles just in case or assume layout.css has them (we'll ensure basics)
+    // For now, simpler: inline style approach for the backdrop + class toggling
 
-        // Inject styles dynamically if not present to ensure it works immediately
-        const styleId = "modalStyles";
-        if (!document.getElementById(styleId)) {
-            const s = document.createElement("style");
-            s.id = styleId;
-            s.textContent = `
+    // Inject styles dynamically if not present to ensure it works immediately
+    const styleId = "modalStyles";
+    if (!document.getElementById(styleId)) {
+      const s = document.createElement("style");
+      s.id = styleId;
+      s.textContent = `
           .modal-backdrop {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6);
@@ -38,14 +38,14 @@ export function mountInfoModal() {
             transform: translateY(0);
           }
         `;
-            document.head.appendChild(s);
-        }
-
-        document.body.appendChild(modal);
+      document.head.appendChild(s);
     }
 
-    // Render Content
-    modal.innerHTML = `
+    document.body.appendChild(modal);
+  }
+
+  // Render Content
+  modal.innerHTML = `
     <div class="modal-content">
       <div style="padding:24px; border-bottom:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
         <h2 class="h3" style="margin:0">Acerca de esta App</h2>
@@ -92,24 +92,24 @@ export function mountInfoModal() {
         </div>
 
         <div style="text-align:center; margin-top:24px; font-size:0.75rem; color:var(--color-text-lighter);">
-          © ${new Date().getFullYear()} • Dr. Cesar Celada • Todos los derechos reservados.
+          © 2026 • Dr. Cesar Celada • Todos los derechos reservados.
         </div>
 
       </div>
     </div>
   `;
 
-    // Interaction
-    const closeBtn = modal.querySelector("#btnCloseModal");
-    const close = () => modal.classList.remove("active");
+  // Interaction
+  const closeBtn = modal.querySelector("#btnCloseModal");
+  const close = () => modal.classList.remove("active");
 
-    closeBtn.addEventListener("click", close);
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) close();
-    });
+  closeBtn.addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) close();
+  });
 
-    // Open immediately
-    requestAnimationFrame(() => {
-        modal.classList.add("active");
-    });
+  // Open immediately
+  requestAnimationFrame(() => {
+    modal.classList.add("active");
+  });
 }

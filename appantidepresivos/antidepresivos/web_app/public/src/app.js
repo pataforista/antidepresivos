@@ -123,6 +123,7 @@ function attachGlobalListeners() {
 }
 
 function updateHeaderNav(route) {
+  // Desktop Nav
   document.querySelectorAll(".nav-gooey__link").forEach(el => {
     el.classList.remove("active");
     const href = el.getAttribute("href");
@@ -130,6 +131,16 @@ function updateHeaderNav(route) {
       el.classList.add("active");
     }
   });
+
+  // Mobile Dock
+  document.querySelectorAll(".dock-link").forEach(el => {
+    el.classList.remove("active");
+    const href = el.getAttribute("href");
+    if (href === `#/${route?.name}` || (route?.name === "list" && href === "#/list")) {
+      el.classList.add("active");
+    }
+  });
+
   updateGooeyNav();
 }
 
@@ -232,8 +243,8 @@ function renderRoute(route) {
     return;
   }
 
-  // Clean scroll
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  // Clean scroll inside the app viewport to avoid whole-page jumps.
+  view.scrollTo({ top: 0, behavior: "auto" });
 
   setTimeout(() => {
     if (route.name === "list") renderList(view);
@@ -666,10 +677,10 @@ function mountDock(container) {
   container.innerHTML = `
     <div class="dock-panel animate-fade-in" style="animation-delay: 0.5s">
       ${items.map(item => `
-        <div class="dock-item" onclick="location.hash='${item.hash}'">
+        <a href="${item.hash}" class="dock-item dock-link" data-id="${item.id}" style="text-decoration:none; color:inherit;">
           <span class="dock-icon">${item.icon}</span>
           <span class="dock-label">${item.label}</span>
-        </div>
+        </a>
       `).join("")}
     </div>
   `;

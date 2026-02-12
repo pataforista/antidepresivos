@@ -16,18 +16,21 @@ export function mountDisclaimerGate({ rootEl, onAllow }) {
     rootEl.innerHTML = `
       <div class="gatekeeper">
         <div class="gatekeeper__card">
-          <h2 class="h2">Aviso legal</h2>
+          <h2 class="h2">Aviso Legal 2026</h2>
+          <div class="alert alert--warning" style="margin-bottom: 24px; text-align: left; font-size: 0.9rem;">
+             <strong>Uso exclusivo para profesionales.</strong><br>
+             Esta aplicación es una herramienta de soporte educativo y no sustituye el juicio clínico ni la consulta de fuentes oficiales.
+          </div>
           <p class="text-muted" style="margin-bottom: 24px;">
-            Antes de usar la app, confirma que entiendes que esto es un recurso educativo
-            y no sustituye el juicio clínico ni fuentes primarias.
+            Al ingresar, confirma que es profesional de la salud y entiende las limitaciones de esta herramienta.
           </p>
           <div style="display:flex;justify-content:flex-end;gap:8px">
             <button id="btnAcceptDisclaimer" class="btn btn--primary">
-              Entiendo y acepto
+              Comprendo y Acepto
             </button>
           </div>
           <p class="text-sm text-muted" style="margin-top: 16px;">
-            Autor: César Celada
+            Edición 2026 • Dr. César Celada
           </p>
         </div>
       </div>
@@ -73,6 +76,6 @@ export function mountDisclaimerGate({ rootEl, onAllow }) {
   return () => {
     try {
       if (typeof unsub === "function") unsub();
-    } catch {}
+    } catch { }
   };
 }
