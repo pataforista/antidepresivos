@@ -11,6 +11,10 @@ export function normalizeDatasetItems(items, schemaUI = null) {
 
     out._search = buildSearchIndex(out, searchSpec);
 
+    // Normaliza sedación a escala 0-3 (sin perder el valor original)
+    out.nivel_sedacion_raw = out.nivel_sedacion ?? null;
+    out.nivel_sedacion = mapSedationOrdinal(out.nivel_sedacion);
+
     // Ordinales (nombres alineados a tu SCHEMA_UI)
     const ord = {};
     ord.perfil_impacto_peso_ord = mapPesoOrdinal(out.perfil_impacto_peso);
@@ -82,6 +86,13 @@ function normalizeText(s) {
 function mapLowModHigh(v) {
   const t = normalizeToken(v);
   if (!t) return null;
+
+  if (/^[0-2]$/.test(t)) return Number(t);
+
+  if (t.includes("alto")) return 2;
+  if (t.includes("moderado")) return 1;
+  if (t.includes("bajo")) return 0;
+
   if (t === "bajo") return 0;
   if (t === "moderado") return 1;
   if (t === "alto") return 2;
@@ -99,9 +110,21 @@ function mapPesoOrdinal(v) {
   for (const p of parts) {
     if (p === "aumento") best = Math.max(best, 2);
     else if (p === "neutro") best = Math.max(best, 1);
-    else if (p === "perdida" || p === "pérdida") best = Math.max(best, 0);
+    else if (p === "perdida" || p === "pérdida" || p === "bajo") best = Math.max(best, 0);
   }
   return best >= 0 ? best : null;
+}
+
+function mapSedationOrdinal(v) {
+  const t = normalizeToken(v);
+  if (!t) return null;
+
+  if (/^[0-3]$/.test(t)) return Number(t);
+  if (t.includes("nulo")) return 0;
+  if (t.includes("bajo")) return 1;
+  if (t.includes("moderado")) return 2;
+  if (t.includes("alto")) return 3;
+  return null;
 }
 
 function parseSiNoDesconocido(v) {
