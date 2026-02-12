@@ -362,24 +362,7 @@ body {
     color: hsla(350, 100%, 30%, 1);
 }
 
-/* Grid Layouts */
-.grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: var(--space-6);
-}
-
-.grid-compare {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-}
-
-@media (min-width: 1024px) {
-    .grid-compare {
-        grid-template-columns: 380px 1fr;
-    }
-}
+/* Grid Layouts moved to layout.css */
 
 /* Scrollbar refine */
 ::-webkit-scrollbar {

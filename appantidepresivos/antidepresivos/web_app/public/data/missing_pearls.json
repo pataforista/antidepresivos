@@ -1,0 +1,569 @@
+[
+    {
+        "id": "ADP_RAPID_01",
+        "name": "Ketamina",
+        "patch": {
+            "perlas_clinicas": "Antagonista NMDA con efecto antidepresivo rápido (horas) y robusto en depresión resistente y bipolar. Su uso IV es el 'gold standard' off-label. Requiere monitorización cardiovascular (TA/ECG) y vigilancia de disociación post-infusión. Riesgo de cistitis y dependencia en uso crónico/recreativo."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Ketamine",
+                    "quote": "IV ketamine... is the gold standard... produced a significant antidepressant effect within hours... effects on suicidality"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Ketamine",
+                    "quote": "Associated with transient increases in BP, tachycardia and arrhythmias. Pretreatment ECG required... ketamine-induced cystitis is a recognised complication"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_RAPID_02",
+        "name": "Esketamina",
+        "patch": {
+            "perlas_clinicas": "Enantiómero S de la ketamina, aprobado (spray nasal) para depresión resistente y riesgo suicida agudo. Debe administrarse bajo supervisión (REMS) por riesgo de sedación y disociación. Inducción dos veces por semana; puede reducir riesgo de recaída vs placebo. No requiere ajuste por peso."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Depressive disorders: systematic review... (PMC)",
+                    "section": "Esketamine nasal spray",
+                    "quote": "approved by the FDA... for treatment-resistant depression... as well as MDD accompanied by suicidal thoughts or actions"
+                },
+                {
+                    "source": "2025 in Review: FDA Approvals...",
+                    "section": "Esketamine",
+                    "quote": "REMS-restricted distribution with in-clinic administration, 2-hour monitoring... Adverse effects... dissociation, dizziness... transient blood pressure increases"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_RAPID_03",
+        "name": "Brexanolona",
+        "patch": {
+            "perlas_clinicas": "Neuroesteroide modulador GABA-A para depresión posparto. Requiere infusión IV continua de 60 horas bajo monitorización hospitalaria (REMS) por riesgo de sedación excesiva/pérdida de conciencia. Respuesta rápida y sostenida (hasta 30 días)."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Depressive disorders: systematic review... (PMC)",
+                    "section": "Brexanolone",
+                    "quote": "Intravenous infusion (continuous) 60–90 µg per kilogram per hour for 60 h... Schedule IV drug... REMS program... excessive sedation and loss of consciousness"
+                },
+                {
+                    "source": "New and emerging pharmacologic treatments for MDD - Frontiers",
+                    "section": "Brexanolone",
+                    "quote": "rapid and significant improvements... effects lasting for at least 30 days... undetectable in maternal plasma 3 days after infusion"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_RAPID_04",
+        "name": "Zuranolona",
+        "patch": {
+            "perlas_clinicas": "Primer tratamiento oral (curso de 14 días) para depresión posparto; modulador alostérico positivo GABA-A. Acción rápida (mejoría desde el día 3). Debe tomarse por la noche con alimentos grasos. Alternativa ambulatoria a la brexanolona."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Depressive disorders: systematic review... (PMC)",
+                    "section": "Zuranolone",
+                    "quote": "30 mg to 50 mg once daily dose... for 14 days... significant improvement... as early as day 3"
+                },
+                {
+                    "source": "FDA-Approved Depression Medications in 2025",
+                    "section": "Postpartum Depression Advancements",
+                    "quote": "first oral medication specifically designed for this condition... 14-day at-home regimen... symptom relief within three days"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_ATYP_01",
+        "name": "Bupropión",
+        "patch": {
+            "perlas_clinicas": "Inhibidor de recaptación de NA y DA (NDRI); único antidepresivo moderno sin efectos serotoninérgicos significativos (mínima disfunción sexual). Contraindicado en trastornos convulsivos y alimentarios (bulimia/anorexia). Útil para dejar de fumar y en fatiga/falta de concentración."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Psychiatry - Clinical Gate",
+                    "section": "Noradrenaline and Dopamine Reuptake Inhibitors",
+                    "quote": "Bupropion is unique... lack of serotonergic effects... lower propensity for sexual side effects... Contraindications... Seizures... bulimia or anorexia nervosa"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Smoking cessation",
+                    "quote": "bupropion is more effective than placebo... similar efficacy to single-product NRT"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_ATYP_02",
+        "name": "Mirtazapina",
+        "patch": {
+            "perlas_clinicas": "Antagonista alfa-2 y 5-HT2/3 (NaSSA). Efecto sedante paradójico (mayor a dosis bajas <15mg por predominio antihistamínico). Causa aumento de apetito y peso; baja tasa de disfunción sexual. Útil en ancianos con insomnio o pérdida de peso."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Psychiatry - Clinical Gate",
+                    "section": "NaSSAs",
+                    "quote": "Sedation... tends to predominate at lower doses, as increasing NA at higher doses counteracts this effect... Increased appetite... Weight gain... lower incidence of sexual dysfunction"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Antidepressants - general overview",
+                    "quote": "mirtazapine was ranked as the second most efficacious... attributable to its effects on sleep and appetite"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_ATYP_03",
+        "name": "Trazodona",
+        "patch": {
+            "perlas_clinicas": "Antagonista 5-HT2A e inhibidor débil de recaptación (SARI). Uso principal off-label como hipnótico no adictivo a dosis bajas (50-100mg); dosis antidepresivas (>150mg) suelen ser demasiado sedantes. Riesgo raro de priapismo. Reportado anecdóticamente como 'trip killer' en uso de psicodélicos."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Trazodone - Wikipedia",
+                    "section": "Side effects",
+                    "quote": "propensity to cause sedation is a dual-edged sword... relief from agitation, anxiety, and insomnia can be rapid... Trazodone may cause a rare sexual disorder called priapism"
+                },
+                {
+                    "source": "Trazodone - Wikipedia",
+                    "section": "Recreational use",
+                    "quote": "used and discussed extensively online as a trip killer... exceeded only by alprazolam... and quetiapine"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_ATYP_04",
+        "name": "Vortioxetina",
+        "patch": {
+            "perlas_clinicas": "Mecanismo multimodal (inhibidor SERT + modulador de receptores 5-HT). Beneficios pro-cognitivos independientes del efecto anímico. Perfil neutro en peso y baja disfunción sexual. Las náuseas son el efecto adverso más común."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Depressive disorders: systematic review... (PMC)",
+                    "section": "Vortioxetine",
+                    "quote": "Very low frequency of sexual side effects... Common treatment-emergent adverse events... nausea, vomiting"
+                },
+                {
+                    "source": "Farmacología clínica y molecular...",
+                    "section": "Moduladores multimodales",
+                    "quote": "Esta complejidad farmacodinámica se ha traducido en beneficios significativos sobre la función cognitiva"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_ATYP_05",
+        "name": "Vilazodona",
+        "patch": {
+            "perlas_clinicas": "SPARI (Inhibidor de recaptación de serotonina + agonista parcial 5-HT1A). Debe tomarse con alimentos para asegurar biodisponibilidad. Menor riesgo de disfunción sexual y aumento de peso que ISRS clásicos. Inicio de acción posiblemente más rápido."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Depressive disorders: systematic review... (PMC)",
+                    "section": "Vilazodone",
+                    "quote": "should be taken with food... Very low frequency of sexual side effects... diarrhea, nausea"
+                },
+                {
+                    "source": "Farmacología clínica y molecular...",
+                    "section": "Moduladores multimodales",
+                    "quote": "estrategia diseñada para mimetizar el efecto de desensibilización de los ISRS de manera más rápida"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_ATYP_06",
+        "name": "Agomelatina",
+        "patch": {
+            "perlas_clinicas": "Agonista de melatonina (MT1/MT2) y antagonista 5-HT2C. Resincroniza ritmos circadianos mejorando el sueño sin sedación diurna. Riesgo de hepatotoxicidad: requiere monitorización de enzimas hepáticas (transaminasas) al inicio y periódicamente. Sin efectos sexuales ni de peso."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Farmacología clínica y molecular...",
+                    "section": "Agomelatina",
+                    "quote": "ayuda a resincronizar los ritmos circadianos... sin causar sedación diurna. Se requiere un monitoreo regular de las enzimas hepáticas"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Antidepressants - relative adverse effects",
+                    "quote": "Agomelatine... Sexual dysfunction: - (none)... Weight gain: - (none)"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_ATYP_07",
+        "name": "Mianserina",
+        "patch": {
+            "perlas_clinicas": "Tetracíclico precursor de la mirtazapina; sedante y estimulante del apetito. Riesgo de discrasias sanguíneas (agranulocitosis), requiere monitorización del hemograma. Menor riesgo cardíaco que los tricíclicos."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Antidepressant drugs | IUPHAR",
+                    "section": "Tricyclic",
+                    "quote": "mianserin... sedative properties... Agitated and anxious patients tend to respond best"
+                },
+                {
+                    "source": "Table of drug interactions",
+                    "section": "Malignant diseases",
+                    "quote": "Mianserin (A) (possible increased risk of bone marrow suppression)"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_MAOI_01",
+        "name": "Fenelzina",
+        "patch": {
+            "perlas_clinicas": "IMAO irreversible no selectivo. Históricamente eficaz en 'depresión atípica' y ansiedad social. Requiere dieta estricta baja en tiramina para evitar crisis hipertensivas. Puede causar hipotensión, aumento de peso y edema. Metabolismo produce metabolitos activos."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Social phobia",
+                    "quote": "Phenelzine... Avoidance of tyramine- rich food important... Recommended by NICE"
+                },
+                {
+                    "source": "Psychiatry - Clinical Gate",
+                    "section": "Monoamine Oxidase Inhibitors",
+                    "quote": "Rare cases of fatal hepatic necrosis, hepatotoxicity and jaundice with phenelzine"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_MAOI_02",
+        "name": "Tranilcipromina",
+        "patch": {
+            "perlas_clinicas": "IMAO irreversible con estructura similar a la anfetamina; tiende a ser más activador/estimulante que la fenelzina (riesgo de insomnio). Requiere dieta estricta sin tiramina. Riesgo de crisis hipertensiva por interacción con simpaticomiméticos."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Antidepressant withdrawal symptoms",
+                    "quote": "Tranylcypromine may have amfetamine- like properties at higher doses"
+                },
+                {
+                    "source": "Antidepressants: Selecting one that's right for you - Mayo Clinic",
+                    "section": "MAOIs",
+                    "quote": "Using an MAOI requires a strict diet because of dangerous... interactions with foods that contain tyramine"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_MAOI_03",
+        "name": "Isocarboxazida",
+        "patch": {
+            "perlas_clinicas": "IMAO irreversible no selectivo de acción prolongada. Perfil similar a fenelzina/tranilcipromina con riesgo de crisis hipertensiva (efecto queso). Reservado para depresión refractaria debido a restricciones dietéticas y de interacciones."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Antidepressant drugs | IUPHAR",
+                    "section": "Monoamine oxidase inhibitor",
+                    "quote": "Isocarboxazid... non-selective, irreversible MAOIs, used to manage depressive illness... dangers of dietary and drug interactions"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_MAOI_05",
+        "name": "Moclobemida",
+        "patch": {
+            "perlas_clinicas": "Inhibidor reversible de la MAO-A (RIMA). Menor riesgo de interacción con tiramina que los IMAO clásicos (no suele requerir dieta estricta). Vida media corta. Menor disfunción sexual que ISRS. Precaución con cimetidina (aumenta niveles)."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Table of drug interactions",
+                    "section": "Peptic ulcer",
+                    "quote": "Moclobemide (C) (cimetidine inhibits metabolism)"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Antidepressants and sexual dysfunction",
+                    "quote": "Moclobemide... Consistently shown to have a low risk of SD"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_TCA_01",
+        "name": "Imipramina",
+        "patch": {
+            "perlas_clinicas": "El TCA prototipo. Históricamente 'gold standard' en trastorno de pánico y depresión melancólica. También usado en enuresis nocturna. Fuerte carga anticolinérgica y riesgo de hipotensión ortostática. Metabolizado a desipramina."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Antidepressant drugs | IUPHAR",
+                    "section": "Tricyclic",
+                    "quote": "Imipramine hydrochloride – used for depressive illness and nocturnal enuresis"
+                },
+                {
+                    "source": "Psychiatry - Clinical Gate",
+                    "section": "Tricyclic Antidepressants",
+                    "quote": "Imipramine was the first TCA synthesized... Desipramine is a metabolite of imipramine"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_TCA_02",
+        "name": "Amitriptilina",
+        "patch": {
+            "perlas_clinicas": "TCA terciario muy sedante y con alta carga anticolinérgica. Uso común 'off-label' a dosis bajas para dolor neuropático, migraña e insomnio. Muy tóxico en sobredosis (arritmias). Metabolizado a nortriptilina."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Antidepressant drugs | IUPHAR",
+                    "section": "Tricyclic",
+                    "quote": "Amitriptyline – not recommended for depressive illness because of its toxicity in overdosage- used for migraine prophylaxis, neuropathic pain"
+                },
+                {
+                    "source": "Farmacología clínica y molecular...",
+                    "section": "Las aminas terciarias",
+                    "quote": "Amitriptilina... Muy Alta Afinidad H1... Muy Alta Afinidad M1"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_TCA_03",
+        "name": "Nortriptilina",
+        "patch": {
+            "perlas_clinicas": "Amina secundaria (metabolito de amitriptilina) con 'ventana terapéutica' definida (50-150 mcg/L). Menos sedante y ortostática que la amitriptilina; a menudo preferida en ancianos cuando se requiere un TCA."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Farmacología clínica y molecular...",
+                    "section": "Las aminas terciarias",
+                    "quote": "nortriptilina... suelen ser mejor toleradas en pacientes ancianos"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Plasma level monitoring",
+                    "quote": "Nortriptyline 50–150mcg/L... Trough 2–3 days"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_TCA_04",
+        "name": "Desipramina",
+        "patch": {
+            "perlas_clinicas": "Amina secundaria (metabolito de imipramina). Potente inhibidor selectivo de recaptación de norepinefrina (NET). Menor carga anticolinérgica que los TCA terciarios, pero vigilar riesgo cardíaco."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Farmacología clínica y molecular...",
+                    "section": "Las aminas terciarias",
+                    "quote": "Desipramina NE >> 5-HT... Baja Afinidad H1... Baja Afinidad M1"
+                },
+                {
+                    "source": "Psychiatry - Clinical Gate",
+                    "section": "Tricyclic Antidepressants",
+                    "quote": "Desipramine is a metabolite of imipramine"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_TCA_05",
+        "name": "Doxepina",
+        "patch": {
+            "perlas_clinicas": "TCA con afinidad H1 extremadamente alta, usado a dosis bajas para insomnio (Silenor) y dermatológicamente para prurito. Efecto sedante prominente. Riesgo cardíaco en sobredosis."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Antidepressant drugs | IUPHAR",
+                    "section": "Tricyclic",
+                    "quote": "Doxepin – used for depressive illness (especially where sedation is required) and pruritus of eczema (topical application)"
+                },
+                {
+                    "source": "How to prevent serotonin syndrome...",
+                    "section": "Drug Brand Names",
+                    "quote": "Doxepin • Adapin, Silenor"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_TCA_06",
+        "name": "Clomipramina",
+        "patch": {
+            "perlas_clinicas": "TCA con mayor potencia serotoninérgica; 'gold standard' para TOC (incluyendo niños). Alta incidencia de efectos adversos sexuales y anticolinérgicos. Riesgo de convulsiones y cardiotoxicidad en dosis altas."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Psychiatry - Clinical Gate",
+                    "section": "Tricyclic Antidepressants",
+                    "quote": "Clomipramine +++ Serotonin... +++ Noradrenaline... SD more common with clomipramine (particularly anorgasmia)"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Obsessive-compulsive disorder",
+                    "quote": "Clomipramine remains a useful drug... debatably more efficacious than the SSRIs in treating OCD"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_TCA_07",
+        "name": "Maprotilina",
+        "patch": {
+            "perlas_clinicas": "Antidepresivo tetracíclico (TeCA), inhibidor selectivo de norepinefrina. Estructuralmente similar a TCAs pero con mayor riesgo de convulsiones (dosis-dependiente). Vida media larga."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Antidepressant drugs | IUPHAR",
+                    "section": "Tricyclic",
+                    "quote": "Maprotiline (not UK)- used to treat major depressive disorder... can impair thinking or reactions"
+                },
+                {
+                    "source": "Principles of Pharmacology...",
+                    "section": "Table 45-5",
+                    "quote": "Maprotiline... Seizures 3+... NE reuptake"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_TCA_08",
+        "name": "Amoxapina",
+        "patch": {
+            "perlas_clinicas": "Metabolito del antipsicótico loxapina. Tiene propiedades de bloqueo D2, lo que conlleva riesgo de efectos extrapiramidales (EPS), discinesia tardía y hiperprolactinemia. Útil en depresión psicótica."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Principles of Pharmacology...",
+                    "section": "Table 45-5",
+                    "quote": "Amoxapine... NE, DA... Seizures 2+"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Psychotic depression",
+                    "quote": "TCAs (amoxapine and imipramine) were more efficacious than... venlafaxine"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_MAOI_04",
+        "name": "Selegilina (parche)",
+        "patch": {
+            "perlas_clinicas": "Inhibidor MAO-B selectivo a dosis bajas (parche 6mg/24h), lo que permite su uso sin restricciones dietéticas de tiramina. A dosis mayores (9-12mg) pierde selectividad y requiere dieta. Evita efecto de primer paso intestinal."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Antidepressants: Selecting one that's right for you - Mayo Clinic",
+                    "section": "MAOIs",
+                    "quote": "Selegiline (Emsam), an MAOI that you stick on your skin as a patch, may cause fewer side effects"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "MAOIs",
+                    "quote": "Selective inhibitors of MAO-B (i.e. selegiline) have not been reported to produce hypertensive-crisis associated with ingestion of dietary amines"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_ATYP_08",
+        "name": "Tianeptina",
+        "patch": {
+            "perlas_clinicas": "Mecanismo atípico (modulador glutamatérgico/opioide mu atípico); no inhibe recaptación de 5-HT (potenciador según teorías antiguas). Ansiolítico sin sedación. Riesgo de abuso/dependencia por actividad opioide."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "List of antidepressants - Wikipedia",
+                    "section": "Others",
+                    "quote": "Tianeptine (Stablon, Coaxil, Tianeurax) – weak and atypical μ-opioid receptor agonist, other actions"
+                },
+                {
+                    "source": "Pharmacology of antidepressants - Wikipedia",
+                    "section": "Pharmacokinetics",
+                    "quote": "Tianeptine... Urine (65%)... ?"
+                }
+            ]
+        },
+        "quality_flags": []
+    },
+    {
+        "id": "ADP_NRI_01",
+        "name": "Reboxetina",
+        "patch": {
+            "perlas_clinicas": "Inhibidor selectivo de la recaptación de noradrenalina (NRI). Eficacia cuestionada en depresión mayor comparada con SSRIs. Efectos adversos 'anticolinérgicos-like' (boca seca, hesitación urinaria) mediados por noradrenalina. No aprobado en EE.UU."
+        },
+        "evidence": {
+            "perlas_clinicas": [
+                {
+                    "source": "Psychiatry - Clinical Gate",
+                    "section": "NDRIs",
+                    "quote": "Reboxetine... approved in Europe... rejected by the U.S. FDA because of concerns over poor efficacy"
+                },
+                {
+                    "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                    "section": "Sexual dysfunction",
+                    "quote": "Reboxetine... Probably causes less SD than SSRIs/SNRIs though anti- depressant efficacy has been questioned"
+                }
+            ]
+        },
+        "quality_flags": []
+    }
+]

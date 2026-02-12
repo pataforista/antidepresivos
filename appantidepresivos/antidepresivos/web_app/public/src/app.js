@@ -393,24 +393,33 @@ function renderFilters(filters) {
   return `
     <div style="display:flex; flex-direction:column; gap:var(--space-6);">
       <div class="glass-effect" style="border-radius: var(--radius-lg); overflow:hidden;">
-        <input type="search" id="inputSearch" class="input" placeholder="Buscar por nombre, mecanismo, clase..." value="${escapeHtml(q)}" 
-          style="width:100%; padding: 18px 24px; border: none; font-size: 1.1rem; outline: none; background: transparent; font-family:var(--font-body); font-weight:500;" />
+        <input type="search" id="inputSearch" class="input" placeholder="Buscar por nombre..." value="${escapeHtml(q)}" 
+          style="width:100%; padding: 16px 20px; border: none; font-size: 1rem; outline: none; background: transparent; font-family:var(--font-body); font-weight:500;" />
       </div>
 
-      <div class="card glass-effect" style="padding: var(--space-6);">
-        <div class="text-xs" style="margin-bottom:var(--space-4); font-family:var(--font-headers); font-weight:800; color:var(--color-primary); letter-spacing:0.1em;">FILTRAR POR GRUPO:</div>
-        <div style="display:flex; flex-wrap:wrap; gap:10px;">
-          ${groupChips}
-        </div>
+      <details class="card glass-effect" style="padding: 0; overflow:hidden;" ${filters.grupo?.length || filters.sedacion ? "open" : ""}>
+        <summary style="padding:var(--space-4); cursor:pointer; font-weight:700; display:flex; align-items:center; justify-content:space-between; list-style:none;">
+            <span class="text-xs" style="font-family:var(--font-headers); font-weight:800; color:var(--color-primary); letter-spacing:0.1em; text-transform:uppercase">
+                Filtros Avanzados
+            </span>
+            <span style="font-size:0.8rem; opacity:0.5">▼</span>
+        </summary>
         
-        <div style="margin-top:var(--space-6);">
-          <div class="text-xs" style="margin-bottom:var(--space-4); font-family:var(--font-headers); font-weight:800; color:var(--color-primary); letter-spacing:0.1em;">SEDACIÓN MÁXIMA:</div>
-          <div style="display:flex; align-items:center; gap:var(--space-5)">
-            <input type="range" id="rangeSedacion" min="0" max="3" step="1" value="${filters.sedacion?.max ?? 3}" style="flex:1; accent-color:var(--color-primary); cursor:pointer;" />
-            <div id="lblSedacion" class="chip chip--active" style="padding: 6px 14px; font-weight:800; font-size:1rem; min-width:32px; justify-content:center;">${filters.sedacion?.max ?? 3}</div>
-          </div>
+        <div style="padding:var(--space-5); padding-top:0;">
+            <div class="text-xs" style="margin-bottom:var(--space-4); font-family:var(--font-headers); font-weight:800; color:var(--color-text-muted); letter-spacing:0.05em;">GRUPO TERAPÉUTICO:</div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            ${groupChips}
+            </div>
+            
+            <div style="margin-top:var(--space-6); border-top:1px solid var(--color-border); padding-top:var(--space-5)">
+            <div class="text-xs" style="margin-bottom:var(--space-4); font-family:var(--font-headers); font-weight:800; color:var(--color-text-muted); letter-spacing:0.05em;">SEDACIÓN MÁXIMA:</div>
+            <div style="display:flex; align-items:center; gap:var(--space-5)">
+                <input type="range" id="rangeSedacion" min="0" max="3" step="1" value="${filters.sedacion?.max ?? 3}" style="flex:1; accent-color:var(--color-primary); cursor:pointer;" />
+                <div id="lblSedacion" class="chip chip--active" style="padding: 6px 14px; font-weight:800; font-size:0.9rem; min-width:32px; justify-content:center;">${filters.sedacion?.max ?? 3}</div>
+            </div>
+            </div>
         </div>
-      </div>
+      </details>
     </div>
   `;
 }

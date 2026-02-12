@@ -5,6 +5,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
 }
 
 .shell {
@@ -13,9 +15,10 @@
     height: 100%;
     width: 100%;
     max-width: 100%;
-    /* Full width for mobile, maybe constraint on desktop? */
     margin: 0 auto;
     background: var(--color-bg);
+    overflow-x: hidden;
+    /* Double safety */
 }
 
 @media (min-width: 1024px) {
@@ -121,15 +124,21 @@
 /* Grids */
 .grid-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--space-4);
 }
 
 .grid-compare {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-4);
     align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .grid-compare {
+        grid-template-columns: 380px 1fr;
+    }
 }
 
 .radar-card {
@@ -169,6 +178,8 @@
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
+    min-height: 80vh;
+    /* Ensure content area is substantial */
 }
 
 .footer__inner {
@@ -183,21 +194,27 @@
 
 @media (max-width: 1023px) {
     .header {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        /* Keep header concise on mobile */
         gap: var(--space-2);
         padding: var(--space-3);
     }
 
     .header__title {
-        width: 100%;
-        font-size: 1.1rem;
+        font-size: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
+    /* Hide Desktop Nav in favor of Bottom Dock on Mobile/Tablet */
     .header__nav {
-        width: 100%;
-        order: 2;
-        margin-left: 0;
-        justify-content: space-between;
+        display: none;
+    }
+
+    .header__actions {
+        margin-left: auto;
+        width: auto;
     }
 
     .nav-gooey__link {
@@ -207,29 +224,30 @@
         font-size: 0.85rem;
     }
 
-    .header__actions {
-        width: 100%;
-        order: 3;
-        margin-left: 0;
-        justify-content: flex-end;
-    }
-
     .main {
         padding: var(--space-4) var(--space-3);
+        padding-bottom: 120px;
+        /* Extra space for Dock */
     }
 
-    .grid-cards,
+    /* On very small screens, 1fr is safer */
+    .grid-cards {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+
     .grid-compare {
         grid-template-columns: 1fr;
     }
 
     .footer {
         padding: var(--space-5) var(--space-3);
+        padding-bottom: 110px;
+        /* Ensure footer text is visible above dock if scrolled to bottom */
     }
 
     .footer__inner {
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
         text-align: center;
     }
 }
@@ -266,4 +284,32 @@
     .dock-label {
         display: none;
     }
+}
+
+/* Gatekeeper Overlay */
+.gatekeeper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5);
+}
+
+.gatekeeper__card {
+    background: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-xl);
+    max-width: 480px;
+    width: 100%;
+    animation: fadeIn 0.4s ease-out;
 }

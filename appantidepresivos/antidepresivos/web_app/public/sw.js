@@ -1,9 +1,11 @@
-const CACHE_NAME = 'antidepresivos-v2';
+const CACHE_NAME = 'antidepresivos-v3';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './manifest.webmanifest',
-    './assets/icon_dr_mario_8bit.png',
+    './assets/icons/icon-192.png',
+    './assets/icons/icon-512.png',
+    './src/vendor/ogl.mjs',
     './src/app.js',
     './src/styles/reset.css',
     './src/styles/variables.css',

@@ -2,7 +2,7 @@
 // Ported from React/OGL to Vanilla JS/OGL
 // Uses OGL from CDN (ES Module bundled)
 
-import { Renderer, Transform, Vec3, Color, Polyline } from 'https://unpkg.com/ogl@1.0.11/dist/ogl.mjs';
+import { Renderer, Transform, Vec3, Color, Polyline } from './vendor/ogl.mjs';
 
 export function initRibbons(containerId, options = {}) {
     const container = document.getElementById(containerId);
