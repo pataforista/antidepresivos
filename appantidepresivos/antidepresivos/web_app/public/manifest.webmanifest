@@ -6,5 +6,16 @@
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#0f766e",
-  "icons": []
+  "icons": [
+    {
+      "src": "./assets/icon_dr_mario_8bit.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icon_dr_mario_8bit.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
