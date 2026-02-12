@@ -184,7 +184,7 @@ function mountShell(root) {
           <a href="#/compare" class="nav-gooey__link" id="btnHeaderCompare">Comparar</a>
         </nav>
         
-        <div style="display:flex;align-items:center;gap:12px;margin-left:auto">
+        <div class="header__actions">
             <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" style="font-weight:700">
                 LIMPIAR
             </button>
@@ -192,10 +192,10 @@ function mountShell(root) {
         </div>
       </header>
 
-      <main id="appView" class="main" style="padding: var(--space-6) var(--space-5); max-width: 1400px; margin: 0 auto; width: 100%;"></main>
+      <main id="appView" class="main"></main>
 
       <footer class="footer" style="padding: var(--space-8) var(--space-5); background: var(--color-surface); border-top: 1px solid var(--color-border); margin-top: auto;">
-        <div style="display:flex; justify-content:space-between; align-items:center; max-width:1400px; margin:0 auto; width:100%;">
+        <div class="footer__inner">
            <span class="text-xs text-muted" style="font-weight:600">© 2024 • DR. CESAR CELADA</span>
            <button id="btnOpenInfo" class="btn btn--outline text-xs" style="padding:var(--space-2) var(--space-4);">
              Fuentes y Disclaimer
