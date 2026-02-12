@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const INPUT_DIR = "C:/Users/Admin/Desktop/Antidepresivos/DATASET_PSICOFARMACOLOGIA/antidepresivos/fase_2_canonic";
-const OUTPUT_FILE = "C:/Users/Admin/Desktop/Antidepresivos/appantidepresivos/antidepresivos/web_app/public/data/dataset.antidepresivos.v1.0.0.json";
+const INPUT_DIR = path.resolve(__dirname, "../../../../DATASET_PSICOFARMACOLOGIA/antidepresivos/fase_2_canonic");
+const OUTPUT_FILE = path.resolve(__dirname, "../public/data/dataset.antidepresivos.v1.0.0.json");
 
 // --- Normalization Logic (Relational Migration & Clinical Validation) ---
 function buildRelationalDataset(items) {
@@ -374,7 +374,9 @@ function parseCSVLine(line) {
 // --- Main Execution ---
 try {
     console.log(`Scanning CSVs in ${INPUT_DIR}...`);
-    const files = fs.readdirSync(INPUT_DIR).filter(f => f.endsWith('.csv'));
+    const files = fs.readdirSync(INPUT_DIR)
+        .filter(f => f.endsWith('.csv'))
+        .sort((a, b) => a.localeCompare(b));
 
     let allItems = [];
 
