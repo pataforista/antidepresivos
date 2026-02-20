@@ -1,5 +1,6 @@
 // src/ui/switchView.js
 import { store } from "../core/store.js";
+import { escapeHtml } from "../core/utils.js";
 
 export function renderSwitching(view) {
     const state = store.getState();
@@ -38,23 +39,30 @@ export function renderSwitching(view) {
                 </div>
                 
                 <div id="switchPlanContainer" style="margin-top: 30px; display:none;">
-                    <div class="alert alert--info" style="margin-bottom: 20px;">
+                    <div id="strategyHeader" class="alert alert--info" style="margin-bottom: 20px; display:none;">
                         <div>
                             <strong id="strategyTitle" style="display:block; margin-bottom: 4px; font-size: 1.1rem;">Estrategia Sugerida</strong>
                             <p id="strategyDesc" class="text-sm"></p>
                         </div>
                     </div>
                     
-                    <div id="visualTimeline" class="switch-visuals"></div>
+                    <div id="visualTimeline" class="card" style="padding:var(--space-6); background:rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.02); margin-bottom:var(--space-6);">
+                        <h4 class="h4" style="margin-bottom:var(--space-4)">Esquema de Transición</h4>
+                        <div style="height:350px; width:100%;">
+                            <canvas id="switchChart"></canvas>
+                        </div>
+                        <p class="text-xs text-muted" style="margin-top:var(--space-4)">* Representación porcentual de dosis. El ascenso del fármaco nuevo suele ser más lento que el descenso del anterior.</p>
+                    </div>
                     
                     <div id="clinicalNotes" style="margin-top:24px;">
-                        <h4 class="h4" style="margin-bottom: 8px;">Consideraciones Clínicas</h4>
+                        <h4 class="h4" style="margin-bottom: 12px;">Consideraciones Clínicas</h4>
                         <ul id="notesList" class="text-sm" style="padding-left: 20px; line-height:1.7;"></ul>
                     </div>
                 </div>
 
-                <div id="switchEmpty" style="text-align:center; padding: 40px; color: var(--color-text-muted);">
-                    <p>Seleccione ambos fármacos para generar un esquema de transición.</p>
+                <div id="switchEmpty" style="text-align:center; padding: 60px; color: var(--color-text-muted);">
+                    <div style="font-size:3rem; margin-bottom:var(--space-4); opacity:0.3">🔄</div>
+                    <p style="font-weight:600">Seleccione ambos fármacos para generar un esquema de transición detallado.</p>
                 </div>
             </div>
 
@@ -74,76 +82,158 @@ export function renderSwitching(view) {
     toSel.addEventListener('change', () => updatePlan(fromSel.value, toSel.value, view));
 }
 
+let activeSwitchChart = null;
+
 function updatePlan(fromId, toId, view) {
     const container = view.querySelector('#switchPlanContainer');
     const empty = view.querySelector('#switchEmpty');
 
     if (!fromId || !toId) {
-        container.style.display = 'none';
-        empty.style.display = 'block';
+        if (container) container.style.display = 'none';
+        if (empty) empty.style.display = 'block';
         return;
     }
 
-    container.style.display = 'block';
-    empty.style.display = 'none';
+    if (container) container.style.display = 'block';
+    if (empty) empty.style.display = 'none';
 
     const state = store.getState();
     const dataset = state.data?.dataset?.farmacos ?? [];
-    const fromDrug = dataset.find(f => f.id_farmaco === fromId);
-    const toDrug = dataset.find(f => f.id_farmaco === toId);
+    const fromDrug = dataset.find(f => String(f.id_farmaco) === String(fromId));
+    const toDrug = dataset.find(f => String(f.id_farmaco) === String(toId));
 
-    // Logic for AD switching
-    // 1. Cross-taper (Default)
-    // 2. Washout (MAOIs, Fluoxetine)
-    // 3. Direct switch (Same class, low doses)
+    if (!fromDrug || !toDrug) return;
 
-    let strategy = "Cross-taper (Reducción Gradual Cruzada)";
-    let desc = "Disminuir el fármaco actual mientras se introduce el nuevo a dosis bajas.";
-    let notes = [
-        "Vigilar síntomas de discontinuación.",
-        "Riesgo de interacción farmacodinámica persistente.",
-        "Titular el nuevo fármaco según tolerancia."
-    ];
+    const matrix = state.data?.switchingMatrix || [];
+    const entry = matrix.find(m =>
+        m.from.toLowerCase() === fromDrug.nombre_generico.toLowerCase() &&
+        m.to.toLowerCase() === toDrug.nombre_generico.toLowerCase()
+    );
 
-    const isMAOI = (d) => d?.clase_terapeutica?.toLowerCase().includes('imao');
-    const isFluoxetine = (d) => d?.nombre_generico?.toLowerCase().includes('fluoxetina');
+    let strategy, desc, notes, entryData;
 
-    if (isMAOI(fromDrug) || isMAOI(toDrug)) {
-        strategy = "Washout Estricto (LAVADO)";
-        desc = "Requiere un periodo libre de fármaco de 14 días para evitar Síndrome Serotoninérgico o Crisis Hipertensivas.";
-        notes.unshift("REGLA DE ORO: 14 días de espera obligatorios.");
-    } else if (isFluoxetine(fromDrug)) {
-        strategy = "Taper prolongado / Washout parcial";
-        desc = "Fluoxetina tiene una vida media muy larga (semanas).";
-        notes.unshift("La inhibición del CYP2D6 persiste tras suspender Fluoxetina.");
+    if (entry) {
+        strategy = entry.strategy.replace("_", " ").toUpperCase();
+        desc = `Protocolo específico de ${entry.taper_days} días de transición.`;
+        notes = entry.notes;
+        entryData = entry;
+    } else {
+        // Fallback clinical logic
+        strategy = "Cross-taper (Reducción Gradual Cruzada)";
+        desc = "Estrategia estándar: disminuir el fármaco actual mientras se introduce el nuevo a dosis bajas.";
+        notes = [
+            "Vigilar síntomas de discontinuación.",
+            "Titular el nuevo fármaco según tolerancia clínica.",
+            "Riesgo de interacción farmacodinámica persistente."
+        ];
+        entryData = { taper_days: 14, washout_days: 0, strategy: "cross_taper" };
+
+        const isMAOI = (d) => d?.clase_terapeutica?.toLowerCase().includes('imao');
+        const isFluoxetine = (d) => d?.nombre_generico?.toLowerCase().includes('fluoxetina');
+
+        if (isMAOI(fromDrug) || isMAOI(toDrug)) {
+            strategy = "Washout Estricto (LAVADO)";
+            desc = "Requiere un periodo libre de fármaco de 14 días.";
+            notes.unshift("REGLA DE ORO: 14 días de espera obligatorios para evitar crisis hipertenisvas o serotoninérgicas.");
+            entryData = { taper_days: 0, washout_days: 14, strategy: "washout" };
+        } else if (isFluoxetine(fromDrug)) {
+            strategy = "Taper prolongado / Washout parcial";
+            desc = "Fluoxetina tiene una vida media extremadamente larga.";
+            notes.unshift("La inhibición del CYP2D6 persiste semanas tras suspender Fluoxetina.");
+            entryData = { taper_days: 5, washout_days: 3, strategy: "fluoxetine_switch" };
+        }
     }
+
+    const header = view.querySelector('#strategyHeader');
+    if (header) header.style.display = 'block';
 
     view.querySelector('#strategyTitle').textContent = strategy;
     view.querySelector('#strategyDesc').textContent = desc;
 
     const list = view.querySelector('#notesList');
-    list.innerHTML = notes.map(n => `< li > ${n}</li > `).join('');
+    list.innerHTML = notes.map(n => `<li>${escapeHtml(n)}</li>`).join('');
 
-    // Visual Timeline Sketch
-    const timeline = view.querySelector('#visualTimeline');
-    timeline.innerHTML = `
-        < div class="switch-visual-card" >
-            <h4>Semana 1</h4>
-            <div style="height:4px; background:var(--risk-high); width:100%; border-radius:2px;"></div>
-            <div style="height:4px; background:var(--color-border); width:20%; border-radius:2px; margin-top:4px;"></div>
-            <p>100% ${fromDrug.nombre_generico} / 0% ${toDrug.nombre_generico}</p>
-        </div >
-        <div class="switch-visual-card">
-            <h4>Semana 2</h4>
-            <div style="height:4px; background:var(--risk-mod); width:50%; border-radius:2px;"></div>
-            <div style="height:4px; background:var(--risk-low); width:50%; border-radius:2px; margin-top:4px;"></div>
-            <p>50% / 50%</p>
-        </div>
-        <div class="switch-visual-card" style="border-color: var(--color-primary)">
-            <h4>Semana 3</h4>
-            <div style="height:4px; background:var(--color-border); width:0%; border-radius:2px;"></div>
-            <div style="height:4px; background:var(--color-success); width:100%; border-radius:2px; margin-top:4px;"></div>
-            <p>0% / 100% ${toDrug.nombre_generico}</p>
-        </div>
-    `;
+    renderSwitchChart(entryData, fromDrug.nombre_generico, toDrug.nombre_generico);
+}
+
+function renderSwitchChart(entry, fromName, toName) {
+    const canvas = document.getElementById('switchChart');
+    if (!canvas) return;
+
+    if (activeSwitchChart) {
+        activeSwitchChart.destroy();
+    }
+
+    const taperDays = entry.taper_days || 0;
+    const washoutDays = entry.washout_days || 0;
+    const totalDays = Math.max(taperDays + washoutDays + 14, 21);
+
+    const labels = Array.from({ length: totalDays + 1 }, (_, i) => `Día ${i}`);
+
+    const fromData = [];
+    for (let i = 0; i <= totalDays; i++) {
+        if (taperDays === 0) {
+            fromData.push(i === 0 ? 100 : 0);
+        } else if (i <= taperDays) {
+            fromData.push(100 - (i * (100 / taperDays)));
+        } else {
+            fromData.push(0);
+        }
+    }
+
+    const toData = [];
+    for (let i = 0; i <= totalDays; i++) {
+        if (i < taperDays + washoutDays) {
+            toData.push(0);
+        } else if (i <= taperDays + washoutDays + 7) {
+            const step = i - (taperDays + washoutDays);
+            toData.push(step * (100 / 7));
+        } else {
+            toData.push(100);
+        }
+    }
+
+    activeSwitchChart = new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: fromName.toUpperCase(),
+                    data: fromData,
+                    borderColor: 'rgba(239, 68, 68, 1)',
+                    backgroundColor: 'rgba(239, 68, 68, 0.05)',
+                    pointRadius: 2,
+                    fill: true,
+                    tension: 0.2
+                },
+                {
+                    label: toName.toUpperCase(),
+                    data: toData,
+                    borderColor: 'rgba(16, 185, 129, 1)',
+                    backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                    pointRadius: 2,
+                    fill: true,
+                    tension: 0.2
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 110,
+                    ticks: { callback: (v) => v + '%' }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { font: { family: 'Outfit', weight: 'bold' } }
+                }
+            }
+        }
+    });
 }

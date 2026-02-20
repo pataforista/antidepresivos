@@ -1,3 +1,4 @@
+import { escapeHtml } from "../core/utils.js";
 
 export function mountInfoModal() {
   // Check if modal container exists, if not create it

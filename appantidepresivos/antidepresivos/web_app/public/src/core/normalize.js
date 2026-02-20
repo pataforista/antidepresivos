@@ -6,7 +6,7 @@ export function normalizeDatasetItems(items, schemaUI = null) {
   const searchSpec = pickSearchSpec(schemaUI);
 
   return items.map((item) => {
-   const out = (item && typeof item === "object") ? { ...item } : { value: item };
+    const out = (item && typeof item === "object") ? { ...item } : { value: item };
 
 
     out._search = buildSearchIndex(out, searchSpec);
@@ -14,6 +14,10 @@ export function normalizeDatasetItems(items, schemaUI = null) {
     // Normaliza sedación a escala 0-3 (sin perder el valor original)
     out.nivel_sedacion_raw = out.nivel_sedacion ?? null;
     out.nivel_sedacion = mapSedationOrdinal(out.nivel_sedacion);
+
+    // Normalización de equivalencia (Fluoxetina)
+    out.equiv_fluoxetina_raw = out.equiv_fluoxetina ?? null;
+    out.equiv_fluoxetina_norm = mapNumericValue(out.equiv_fluoxetina);
 
     // Ordinales (nombres alineados a tu SCHEMA_UI)
     const ord = {};
@@ -32,11 +36,11 @@ export function normalizeDatasetItems(items, schemaUI = null) {
     out._norm = { ord, flags };
 
     // Materializa ordFields para que SCHEMA_UI y filtros funcionen
-out.perfil_impacto_peso_ord = ord.perfil_impacto_peso_ord;
-out.perfil_disfuncion_sexual_ord = ord.perfil_disfuncion_sexual_ord;
-out.riesgo_prolongacion_qt_ord = ord.riesgo_prolongacion_qt_ord;
-out.riesgo_sindrome_abstinencia_ord = ord.riesgo_sindrome_abstinencia_ord;
-
+    out.perfil_impacto_peso_ord = ord.perfil_impacto_peso_ord;
+    out.perfil_disfuncion_sexual_ord = ord.perfil_disfuncion_sexual_ord;
+    out.perfil_disfuncion_erectil_ord = ord.perfil_disfuncion_sexual_ord; // Fallback común
+    out.riesgo_prolongacion_qt_ord = ord.riesgo_prolongacion_qt_ord;
+    out.riesgo_sindrome_abstinencia_ord = ord.riesgo_sindrome_abstinencia_ord;
 
     return out;
   });
@@ -124,6 +128,16 @@ function mapSedationOrdinal(v) {
   if (t.includes("bajo")) return 1;
   if (t.includes("moderado")) return 2;
   if (t.includes("alto")) return 3;
+  return null;
+}
+
+function mapNumericValue(v) {
+  if (v === null || v === undefined) return null;
+  const s = String(v).replace(",", ".").trim();
+  const match = s.match(/([0-9]+(\.[0-9]+)?)/);
+  if (match) {
+    return parseFloat(match[1]);
+  }
   return null;
 }
 

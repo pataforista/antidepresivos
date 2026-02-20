@@ -1,5 +1,6 @@
 // src/ui/interactView.js
 import { store } from "../core/store.js";
+import { escapeHtml } from "../core/utils.js";
 
 export function renderInteract(view) {
     const cypData = [
@@ -57,18 +58,18 @@ export function renderInteract(view) {
                         <tbody>
                             ${cypData.map(row => `
                                 <tr>
-                                    <td style="padding:var(--space-4) var(--space-5); font-weight:700; border-bottom:1px solid var(--color-border);">${row.name}</td>
+                                    <td style="padding:var(--space-4) var(--space-5); font-weight:700; border-bottom:1px solid var(--color-border);">${escapeHtml(row.name)}</td>
                                     <td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border);">
-                                        <span class="badge ${getInhibClass(row.d26)}" style="font-size:0.6rem;">${getInhibLabel(row.d26)}</span>
+                                        <span class="badge ${getInhibClass(row.d26)}" style="font-size:0.6rem;">${escapeHtml(getInhibLabel(row.d26))}</span>
                                     </td>
                                     <td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border);">
-                                        <span class="badge ${getInhibClass(row.a12)}" style="font-size:0.6rem;">${getInhibLabel(row.a12)}</span>
+                                        <span class="badge ${getInhibClass(row.a12)}" style="font-size:0.6rem;">${escapeHtml(getInhibLabel(row.a12))}</span>
                                     </td>
                                     <td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border);">
-                                        <span class="badge ${getInhibClass(row.a34)}" style="font-size:0.6rem;">${getInhibLabel(row.a34)}</span>
+                                        <span class="badge ${getInhibClass(row.a34)}" style="font-size:0.6rem;">${escapeHtml(getInhibLabel(row.a34))}</span>
                                     </td>
                                     <td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border);">
-                                        <span class="badge ${getInhibClass(row.c19)}" style="font-size:0.6rem;">${getInhibLabel(row.c19)}</span>
+                                        <span class="badge ${getInhibClass(row.c19)}" style="font-size:0.6rem;">${escapeHtml(getInhibLabel(row.c19))}</span>
                                     </td>
                                 </tr>
                             `).join('')}

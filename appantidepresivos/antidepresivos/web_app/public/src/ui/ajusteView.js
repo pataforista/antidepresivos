@@ -1,5 +1,6 @@
 // src/ui/ajusteView.js
 import { store } from "../core/store.js";
+import { escapeHtml } from "../core/utils.js";
 
 export function renderAjuste(view) {
     const state = store.getState();
@@ -33,18 +34,18 @@ export function renderAjuste(view) {
         results.innerHTML = filtered.map(f => `
             <div class="card card--spotlight" style="padding: var(--space-5); border-left: 4px solid var(--color-primary);">
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
-                    <h4 class="h4" style="margin:0; color:var(--color-primary)">${f.nombre_generico}</h4>
-                    <span class="chip text-xs">${f.clase_terapeutica}</span>
+                    <h4 class="h4" style="margin:0; color:var(--color-primary)">${escapeHtml(f.nombre_generico)}</h4>
+                    <span class="chip text-xs">${escapeHtml(f.clase_terapeutica)}</span>
                 </div>
                 
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
                     <div class="field-box">
                         <div class="field-box__label">Hepatotoxicidad / Hepático</div>
-                        <div class="text-sm" style="font-weight:600">${f.ajuste_insuficiencia_hepatica || "Consultar ficha"}</div>
+                        <div class="text-sm" style="font-weight:600">${escapeHtml(f.ajuste_insuficiencia_hepatica || "Consultar ficha")}</div>
                     </div>
                     <div class="field-box">
                         <div class="field-box__label">Renal / Excreción</div>
-                        <div class="text-sm" style="font-weight:600">${f.ajuste_insuficiencia_renal || "No requiere ajuste significativo"}</div>
+                        <div class="text-sm" style="font-weight:600">${escapeHtml(f.ajuste_insuficiencia_renal || "No requiere ajuste significativo")}</div>
                     </div>
                 </div>
             </div>

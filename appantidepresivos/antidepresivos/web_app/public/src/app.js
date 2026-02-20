@@ -11,6 +11,7 @@ import { renderInteract } from "./ui/interactView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
 import { initRibbons } from "./ribbons.js";
+import { escapeHtml } from "./core/utils.js";
 
 /* ============================================================
    App Initialization
@@ -34,6 +35,7 @@ async function main() {
         legal: ctx.legal ?? null,
         glossary: ctx.glossary ?? null,
         criteria: ctx.criteria ?? null,
+        switchingMatrix: ctx.switchingMatrix ?? [],
       },
     });
 
@@ -816,16 +818,6 @@ function mountDock(container) {
 /* ============================================================
    Helpers
    ============================================================ */
-
-function escapeHtml(s) {
-  return (s ?? "")
-    .toString()
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
 
 main();
 

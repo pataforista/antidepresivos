@@ -322,7 +322,8 @@ export const store = createStore(
       dataset: null,
       legal: null,
       glossary: null,
-      criteria: null
+      criteria: null,
+      switchingMatrix: []
     },
     ui: {
       theme: "light",

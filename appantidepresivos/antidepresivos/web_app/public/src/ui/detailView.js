@@ -1,5 +1,6 @@
 import { store } from "../core/store.js";
 import { selectItemById } from "../core/selectors.js";
+import { escapeHtml } from "../core/utils.js";
 
 export function renderDetail(view, id) {
    const state = store.getState();
@@ -55,6 +56,7 @@ export function renderDetail(view, id) {
    view.innerHTML = contentHTML;
 
    // --- Logic ---
+   initTabGestures(view, item);
 
    // 1. Tab Switching
    view.querySelectorAll(".tab-btn").forEach(btn => {
@@ -69,7 +71,10 @@ export function renderDetail(view, id) {
             if (tabKey === "dosis") container.innerHTML = renderTabDosis(item);
             if (tabKey === "seguridad") container.innerHTML = renderTabSeguridad(item);
             if (tabKey === "farmaco") container.innerHTML = renderTabFarmaco(item);
-            if (tabKey === "switching") container.innerHTML = renderTabSwitching(item);
+            if (tabKey === "switching") {
+               container.innerHTML = renderTabSwitching(item);
+               setTimeout(() => initTitrationChart(item), 50);
+            }
          }
       });
    });
@@ -274,6 +279,11 @@ function renderTabFarmaco(item) {
 
 function renderTabSwitching(item) {
    const vidaMedia = item.vida_media_parental || "N/D";
+   const switchingMatrix = store.getState().data?.switchingMatrix || [];
+   const availableTargets = switchingMatrix
+      .filter(m => m.from === item.nombre_generico.toLowerCase())
+      .map(m => m.to);
+
    return `
     <div class="animate-fade-in" style="display:grid; gap:var(--space-6);">
         <section class="card bg-soft glass-effect">
@@ -281,13 +291,32 @@ function renderTabSwitching(item) {
             <p class="text-body" style="margin-top:var(--space-2)">
                 Consideraciones para el cambio desde <strong>${escapeHtml(item.nombre_generico)}</strong>.
             </p>
-            <div class="alert alert--info" style="margin-top:var(--space-4)">
-                <div style="font-size:1.2rem">💊</div>
-                <div class="text-sm">
-                  <strong>Protocolo:</strong> El cross-tapering debe ser gradual y monitorizado, especialmente en fármacos con vida media corta para evitar el síndrome de discontinuación.
-                </div>
+            
+            <div style="margin-top:var(--space-4); display:flex; gap:var(--space-3); align-items:center; flex-wrap:wrap;">
+               <span class="text-sm" style="font-weight:700">CAMBIAR A:</span>
+               <select id="selSwitchTarget" class="btn btn--outline btn--sm" style="min-width:150px">
+                  <option value="">Seleccionar fármaco...</option>
+                  ${availableTargets.map(t => `<option value="${t}">${t.toUpperCase()}</option>`).join("")}
+               </select>
+            </div>
+
+            <div id="switchingDetails" style="margin-top:var(--space-6);">
+               <div class="alert alert--info">
+                  <div style="font-size:1.2rem">💊</div>
+                  <div class="text-sm">
+                    Seleccione un fármaco destino para ver el protocolo de titulación sugerido.
+                  </div>
+               </div>
             </div>
         </section>
+
+        <div id="chartContainer" class="card glass-effect" style="display:none; padding:var(--space-6);">
+            <h4 class="h4" style="margin-bottom:var(--space-4)">Visualización de Titulación Sugerida</h4>
+            <div style="height:300px; width:100%;">
+               <canvas id="titrationChart"></canvas>
+            </div>
+            <p class="text-xs text-muted" style="margin-top:var(--space-4)">* Este gráfico es una representación esquemática del protocolo. Ajuste según respuesta clínica.</p>
+        </div>
 
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:var(--space-4);">
             ${infoBox("Vida media", vidaMedia)}
@@ -295,16 +324,142 @@ function renderTabSwitching(item) {
             ${infoBox("Riesgo QT", item.riesgo_prolongacion_qt || "N/D")}
             ${infoBox("Perfil Activación", item.perfil_activacion || "N/D")}
         </div>
-
-        <section class="card glass-effect" style="border-bottom: 4px solid var(--color-primary);">
-            <h4 class="h4" style="margin-bottom:var(--space-3)">Factores Críticos</h4>
-            <div style="display:grid; gap:var(--space-3)">
-                ${rowDetail("Interacciones", (item.rel_interacciones || []).map(i => i.nombre).join("; ") || "Ninguna reportada")}
-                ${rowDetail("Black Box Warning", (item.black_box_warning === true || item.black_box_warning === "Sí") ? "Presente" : "No reportada")}
-            </div>
-        </section>
     </div>
     `;
+}
+
+function initTitrationChart(item) {
+   const sel = document.getElementById("selSwitchTarget");
+   if (!sel) return;
+
+   sel.addEventListener("change", (e) => {
+      const target = e.target.value;
+      const container = document.getElementById("chartContainer");
+      const details = document.getElementById("switchingDetails");
+
+      if (!target) {
+         if (container) container.style.display = "none";
+         return;
+      }
+
+      const matrix = store.getState().data?.switchingMatrix || [];
+      const entry = matrix.find(m => m.from === item.nombre_generico.toLowerCase() && m.to === target.toLowerCase());
+
+      if (entry) {
+         if (container) container.style.display = "block";
+         renderTitrationChart(entry, item.nombre_generico, target);
+
+         if (details) {
+            details.innerHTML = `
+               <div class="card" style="border-left:4px solid var(--color-primary); background:rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.05)">
+                  <h5 class="h5" style="margin-bottom:var(--space-2)">Protocolo: ${entry.strategy.replace("_", " ").toUpperCase()}</h5>
+                  <ul class="list-disc" style="padding-left:var(--space-5); margin-bottom:var(--space-3)">
+                     <li><b>Periodo de cambio:</b> ${entry.taper_days} días</li>
+                     ${entry.washout_days > 0 ? `<li><b>Washout:</b> ${entry.washout_days} días requeridos</li>` : ""}
+                     ${entry.notes.map(n => `<li>${escapeHtml(n)}</li>`).join("")}
+                  </ul>
+                  ${entry.contraindications.length ? `<p class="text-xs color-danger"><b>Contraindicaciones:</b> ${entry.contraindications.join(", ")}</p>` : ""}
+               </div>
+            `;
+         }
+      }
+   });
+}
+
+let titrationChartInstance = null;
+
+function renderTitrationChart(entry, fromName, toName) {
+   const ctx = document.getElementById('titrationChart');
+   if (!ctx) return;
+
+   if (titrationChartInstance) {
+      titrationChartInstance.destroy();
+   }
+
+   const taperDays = entry.taper_days || 7;
+   const washoutDays = entry.washout_days || 0;
+   const totalDays = taperDays + washoutDays + 7; // Mostrar 7 días adicionales de dosis plena
+
+   const labels = Array.from({ length: totalDays + 1 }, (_, i) => `Día ${i}`);
+
+   // Datos fármaco origen (descenso)
+   const fromData = [];
+   for (let i = 0; i <= totalDays; i++) {
+      if (i <= taperDays) {
+         fromData.push(100 - (i * (100 / taperDays)));
+      } else {
+         fromData.push(0);
+      }
+   }
+
+   // Datos fármaco destino (ascenso)
+   const toData = [];
+   for (let i = 0; i <= totalDays; i++) {
+      if (i < taperDays + washoutDays) {
+         toData.push(0);
+      } else if (i <= taperDays + washoutDays + 7) {
+         const daysSinceStart = i - (taperDays + washoutDays);
+         toData.push(Math.min(daysSinceStart * (100 / 7), 100)); // Ascenso en 7 días
+      } else {
+         toData.push(100);
+      }
+   }
+
+   titrationChartInstance = new Chart(ctx, {
+      type: 'line',
+      data: {
+         labels: labels,
+         datasets: [
+            {
+               label: fromName.toUpperCase(),
+               data: fromData,
+               borderColor: 'rgba(239, 68, 68, 1)',
+               backgroundColor: 'rgba(239, 68, 68, 0.1)',
+               fill: true,
+               tension: 0.3
+            },
+            {
+               label: toName.toUpperCase(),
+               data: toData,
+               borderColor: 'rgba(16, 185, 129, 1)',
+               backgroundColor: 'rgba(16, 185, 129, 0.1)',
+               fill: true,
+               tension: 0.3
+            }
+         ]
+      },
+      options: {
+         responsive: true,
+         maintainAspectRatio: false,
+         scales: {
+            y: {
+               beginAtZero: true,
+               max: 110,
+               title: {
+                  display: true,
+                  text: 'Dosis relativa (%)'
+               }
+            },
+            x: {
+               title: {
+                  display: true,
+                  text: 'Tiempo'
+               }
+            }
+         },
+         plugins: {
+            legend: {
+               position: 'top',
+               labels: {
+                  font: {
+                     family: 'Outfit',
+                     weight: 'bold'
+                  }
+               }
+            }
+         }
+      }
+   });
 }
 
 // --- Helpers UI ---
@@ -347,12 +502,39 @@ function rowRisk(label, val) {
     `;
 }
 
-function escapeHtml(s) {
-   return (s ?? "N/D")
-      .toString()
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+// --- Helpers UI ---
+// (No change to infoBox/rowDetail/etc as they already used escapeHtml)
+
+// --- Gesture Logic ---
+function initTabGestures(view, item) {
+   if (!window.ZingTouch) return;
+
+   const zr = new ZingTouch.Region(view);
+   const tabs = ["resumen", "dosis", "seguridad", "farmaco", "switching"];
+
+   zr.bind(view, 'swipe', (e) => {
+      const angle = e.detail.data[0].currentDirection;
+      // Swipe direction logic: 
+      // 180 is Left, 0/360 is Right
+      const activeBtn = view.querySelector(".tab-btn--active");
+      if (!activeBtn) return;
+
+      const currentTab = activeBtn.dataset.tab;
+      const currentIndex = tabs.indexOf(currentTab);
+
+      let nextIndex = currentIndex;
+
+      // ZingTouch angles: 0 (right), 90 (up), 180 (left), 270 (down)
+      if (angle >= 135 && angle <= 225) { // Swipe Left -> Next Tab
+         nextIndex = Math.min(currentIndex + 1, tabs.length - 1);
+      } else if ((angle >= 0 && angle <= 45) || (angle >= 315 && angle <= 360)) { // Swipe Right -> Prev Tab
+         nextIndex = Math.max(currentIndex - 1, 0);
+      }
+
+      if (nextIndex !== currentIndex) {
+         const nextTab = tabs[nextIndex];
+         const nextBtn = view.querySelector(`.tab-btn[data-tab="${nextTab}"]`);
+         if (nextBtn) nextBtn.click();
+      }
+   });
 }

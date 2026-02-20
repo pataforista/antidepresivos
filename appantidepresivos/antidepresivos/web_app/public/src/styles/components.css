@@ -267,7 +267,8 @@ body {
 }
 
 .tab-btn {
-    padding: var(--space-4) var(--space-2);
+    padding: 14px 16px;
+    /* Larger targets for thumbs */
     font-family: var(--font-headers);
     font-weight: 700;
     color: var(--color-text-muted);
@@ -604,4 +605,93 @@ body {
     .card {
         padding: var(--space-4);
     }
+}
+
+/* ============================================================
+   Bottom Sheet (Mobile UX)
+   ============================================================ */
+.bottom-sheet-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.bottom-sheet-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.bottom-sheet {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    max-height: 85vh;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    z-index: 2001;
+    transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.bottom-sheet.active {
+    bottom: 0;
+}
+
+.bottom-sheet__handle {
+    width: 36px;
+    height: 5px;
+    background: var(--color-border);
+    border-radius: 3px;
+    margin: 12px auto;
+    cursor: grab;
+    flex-shrink: 0;
+}
+
+.bottom-sheet__header {
+    padding: 0 var(--space-6) var(--space-4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom-sheet__title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: var(--font-headers);
+    color: var(--color-primary);
+}
+
+.bottom-sheet__close {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
+}
+
+.bottom-sheet__content {
+    padding: var(--space-6);
+    padding-top: 0;
+    overflow-y: auto;
+    flex: 1;
+    -webkit-overflow-scrolling: touch;
 }

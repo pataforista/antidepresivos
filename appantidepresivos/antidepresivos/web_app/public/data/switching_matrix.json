@@ -5,8 +5,13 @@
     "strategy": "cross_taper",
     "taper_days": 14,
     "washout_days": 0,
-    "notes": ["vigilar PA", "riesgo activación"],
-    "contraindications": ["IMAO"]
+    "notes": [
+      "vigilar PA",
+      "riesgo activación"
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
   },
   {
     "from": "fluoxetina",
@@ -14,7 +19,52 @@
     "strategy": "direct_switch",
     "taper_days": 0,
     "washout_days": 3,
-    "notes": ["Fluoxetina tiene vida media larga", "Washout recomendado antes de iniciar dosis plenas"],
-    "contraindications": ["IMAO"]
+    "notes": [
+      "Fluoxetina tiene vida media larga",
+      "Washout recomendado antes de iniciar dosis plenas"
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "escitalopram",
+    "to": "venlafaxina",
+    "strategy": "cross_taper",
+    "taper_days": 10,
+    "washout_days": 0,
+    "notes": [
+      "Vigilar frecuencia cardíaca",
+      "Incremento gradual de venlafaxina"
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "paroxetina",
+    "to": "sertralina",
+    "strategy": "cross_taper",
+    "taper_days": 14,
+    "washout_days": 0,
+    "notes": [
+      "Paroxetina tiene riesgo alto de abstinencia, requiere descenso muy lento"
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "duloxetina",
+    "to": "escitalopram",
+    "strategy": "cross_taper",
+    "taper_days": 7,
+    "washout_days": 0,
+    "notes": [
+      "Cambio generalmente bien tolerado"
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
   }
 ]

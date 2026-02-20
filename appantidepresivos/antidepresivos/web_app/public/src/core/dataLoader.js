@@ -31,7 +31,15 @@ export async function loadAppData() {
   // 5) normalización runtime (NO modifica CSV, solo añade _search/_norm)
   // dataset.items = normalizeDatasetItems(dataset.items, schema);
 
-  return { manifest, schema, legal, dataset };
+  // 6) switching matrix
+  let switchingMatrix = [];
+  try {
+    switchingMatrix = await fetchJson("./data/switching_matrix.json");
+  } catch (e) {
+    console.warn("Switching matrix not found", e);
+  }
+
+  return { manifest, schema, legal, dataset, switchingMatrix };
 }
 
 async function fetchJson(url) {

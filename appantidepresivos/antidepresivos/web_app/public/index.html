@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
   <title>Antidepresivos — 2026</title>
   <link rel="icon" type="image/png" href="./assets/icons/icon-192.png">
 
@@ -13,6 +15,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/zingtouch@1.0.6/dist/zingtouch.min.js"></script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="./src/styles/reset.css" />
@@ -63,6 +68,7 @@
       });
     }
   </script>
+  <div id="bottom-sheet-container"></div>
 </body>
 
 </html>

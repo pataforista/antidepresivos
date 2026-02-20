@@ -4,6 +4,7 @@
 
 import { store } from "../core/store.js";
 import * as policy from "../core/policy.js";
+import { escapeHtml } from "../core/utils.js";
 
 export function mountDisclaimerGate({ rootEl, onAllow }) {
   if (!rootEl) throw new Error("mountDisclaimerGate: rootEl requerido");
