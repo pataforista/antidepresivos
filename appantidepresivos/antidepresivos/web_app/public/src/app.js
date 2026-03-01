@@ -13,6 +13,7 @@ import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
 import { initRibbons } from "./ribbons.js";
 import { escapeHtml } from "./core/utils.js";
+import { trackInteraction } from "./ui/coffeePopup.js";
 
 /* ============================================================
    App Initialization
@@ -74,6 +75,7 @@ async function main() {
           renderRoute(next);
           updateHeaderNav(next);
           setTimeout(initEntranceAnimations, 10);
+          trackInteraction();
         });
 
         // Compare: contador + re-render si estás en compare (porque route no cambia)
