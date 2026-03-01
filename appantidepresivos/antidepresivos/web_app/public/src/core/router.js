@@ -149,6 +149,8 @@ export function createRouter(store, opts = {}) {
       name = "ajuste";
     } else if (head === "interact") {
       name = "interact";
+    } else if (head === "quiz") {
+      name = "quiz";
     } else {
       name = "unknown";
     }
@@ -179,6 +181,8 @@ export function createRouter(store, opts = {}) {
       path = "/#/ajuste";
     } else if (name === "interact") {
       path = "/#/interact";
+    } else if (name === "quiz") {
+      path = "/#/quiz";
     } else {
       path = options.defaultRoute;
     }
@@ -209,8 +213,8 @@ export function createRouter(store, opts = {}) {
       };
     }
 
-    // list, switching, ajuste, interact
-    if (["list", "switching", "ajuste", "interact"].includes(route.name)) {
+    // list, switching, ajuste, interact, quiz
+    if (["list", "switching", "ajuste", "interact", "quiz"].includes(route.name)) {
       return { ...route, params: {}, query: route.query ?? {} };
     }
 

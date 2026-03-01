@@ -8,6 +8,7 @@ import { renderDetail } from "./ui/detailView.js";
 import { renderSwitching } from "./ui/switchView.js";
 import { renderAjuste } from "./ui/ajusteView.js";
 import { renderInteract } from "./ui/interactView.js";
+import { renderQuiz } from "./ui/quizView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
 import { initRibbons } from "./ribbons.js";
@@ -229,6 +230,7 @@ function mountShell(root) {
           <div class="nav-gooey__blob" style="background: var(--color-primary-light); opacity: 0.2; border-radius: var(--radius-full);"></div>
           <a href="#/list" class="nav-gooey__link">Lista</a>
           <a href="#/compare" class="nav-gooey__link" id="btnHeaderCompare">Comparar</a>
+          <a href="#/quiz" class="nav-gooey__link nav-gooey__link--quiz">✦ Quiz</a>
         </nav>
         
         <div class="header__actions">
@@ -293,6 +295,7 @@ function renderRoute(route) {
     else if (route.name === "switching") renderSwitching(view);
     else if (route.name === "ajuste") renderAjuste(view);
     else if (route.name === "interact") renderInteract(view);
+    else if (route.name === "quiz") renderQuiz(view);
     else view.innerHTML = "<p>Ruta no reconocida.</p>";
   }, 50);
 }
@@ -800,6 +803,7 @@ function mountDock(container) {
     { id: "switching", label: "Switching", icon: "🔄", hash: "#/switching" },
     { id: "ajuste", label: "Ajuste", icon: "📏", hash: "#/ajuste" },
     { id: "interact", label: "Interacción", icon: "⚡", hash: "#/interact" },
+    { id: "quiz", label: "Quiz", icon: "✦", hash: "#/quiz" },
   ];
 
   container.innerHTML = `
