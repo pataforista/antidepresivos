@@ -134,7 +134,7 @@ function updatePlan(fromId, toId, view) {
         if (isMAOI(fromDrug) || isMAOI(toDrug)) {
             strategy = "Washout Estricto (LAVADO)";
             desc = "Requiere un periodo libre de fármaco de 14 días.";
-            notes.unshift("REGLA DE ORO: 14 días de espera obligatorios para evitar crisis hipertenisvas o serotoninérgicas.");
+            notes.unshift("REGLA DE ORO: 14 días de espera obligatorios para evitar crisis hipertensivas o serotoninérgicas.");
             entryData = { taper_days: 0, washout_days: 14, strategy: "washout" };
         } else if (isFluoxetine(fromDrug)) {
             strategy = "Taper prolongado / Washout parcial";

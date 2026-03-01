@@ -257,6 +257,11 @@ body {
     color: #065f46;
 }
 
+.badge--gray {
+    background: #f1f5f9;
+    color: #475569;
+}
+
 /* --- Tabs --- */
 .tabs-nav {
     display: flex;
