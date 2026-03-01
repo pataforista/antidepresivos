@@ -1,4 +1,4 @@
-const CACHE_NAME = 'antidepresivos-v3';
+const CACHE_NAME = 'antidepresivos-v4';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -20,7 +20,8 @@ const ASSETS_TO_CACHE = [
     './src/core/policy.js',
     './src/ui/gatekeeperDisclaimer.js',
     './src/ui/detailView.js',
-    './src/ui/modalInfo.js'
+    './src/ui/modalInfo.js',
+    './src/ui/coffeePopup.js'
 ];
 
 self.addEventListener('install', (event) => {

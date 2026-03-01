@@ -85,7 +85,30 @@ export function mountInfoModal() {
           <strong>Aviso de Responsabilidad:</strong> Esta herramienta está dirigida exclusivamente a profesionales de la salud. En caso de discrepancia, prevalece la información oficial local.
         </div>
 
-        <div style="text-align:center; margin-top:32px; font-size:0.75rem; color:var(--color-text-dim); font-weight:600;">
+        <hr style="border:0; border-top:1px solid var(--color-border); margin:24px 0;">
+
+        <!-- Apoyo / Buy Me a Coffee -->
+        <div style="text-align:center;">
+          <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-text-dim); font-weight:700; margin-bottom:10px;">
+            Apoya el proyecto
+          </div>
+          <p style="font-size:0.82rem; color:var(--color-text-muted); line-height:1.6; margin:0 0 16px; max-width:380px; margin-inline:auto;">
+            Esta guía se desarrolla y actualiza de forma independiente. Si te resulta útil en tu práctica clínica o docente, puedes apoyar su mantenimiento.
+          </p>
+          <a href="https://buymeacoffee.com/herramente"
+             target="_blank"
+             rel="noopener noreferrer"
+             style="display:inline-flex; align-items:center; gap:8px; background:#FFDD00; color:#111; padding:11px 22px; border-radius:12px; font-weight:800; font-size:0.875rem; text-decoration:none; font-family:var(--font-headers); transition:transform 0.15s, box-shadow 0.15s; box-shadow:0 2px 8px rgba(255,221,0,0.25);"
+             onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 18px rgba(255,221,0,0.45)';"
+             onmouseout="this.style.transform=''; this.style.boxShadow='0 2px 8px rgba(255,221,0,0.25)';">
+            ☕ Invitar un café
+          </a>
+          <div style="margin-top:10px; font-size:0.72rem; color:var(--color-text-dim);">
+            buymeacoffee.com/herramente
+          </div>
+        </div>
+
+        <div style="text-align:center; margin-top:28px; font-size:0.75rem; color:var(--color-text-dim); font-weight:600;">
           © 2026 • Soporte Clínico • Todos los derechos reservados.
         </div>
 
