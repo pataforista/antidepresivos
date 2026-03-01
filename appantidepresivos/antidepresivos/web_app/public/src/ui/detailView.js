@@ -259,8 +259,8 @@ function renderTabFarmaco(item) {
            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:var(--space-4);">
               ${infoBoxClean("Vida Media", item.vida_media_parental)}
               ${infoBoxClean("Tmax", item.t_max)}
-              ${infoBoxClean("Biodisp. Oral", (item.biodisponibilidad_oral || "N/D") + (item.biodisponibilidad_oral ? "%" : ""))}
-              ${infoBoxClean("Unión Prot.", (item.union_proteinas_plasmaticas || "N/D") + (item.union_proteinas_plasmaticas ? "%" : ""))}
+              ${infoBoxClean("Biodisp. Oral", item.biodisponibilidad_oral || "N/D")}
+              ${infoBoxClean("Unión Prot.", item.union_proteinas_plasmaticas || "N/D")}
            </div>
         </section>
 
