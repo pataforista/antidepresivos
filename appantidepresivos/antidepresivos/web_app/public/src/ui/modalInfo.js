@@ -69,31 +69,35 @@ export function mountInfoModal() {
 
         <hr style="border:0; border-top:1px solid var(--color-border); margin:24px 0;">
 
-        <!-- Fuentes -->
-        <h4 class="h4" style="margin-bottom:12px">Fuentes Bibliográficas</h4>
-        <p class="text-muted text-sm" style="margin-bottom:16px; line-height:1.6">
-          La información ha sido compilada cruzando datos de fuentes farmacológicas estándar y agencias regulatorias internacionales (FDA, EMA, Cofepris).
-        </p>
-        <ul style="padding-left:0; margin-bottom:24px; display:grid; gap:8px; list-style:none;">
-           <li class="text-xs" style="background:var(--color-surface-raised); padding:10px; border-radius:8px;"><strong>FDA/EMA</strong>: Labels oficiales y black box warnings.</li>
-           <li class="text-xs" style="background:var(--color-surface-raised); padding:10px; border-radius:8px;"><strong>Stahl's Essential Psychopharmacology</strong> (6th Ed).</li>
-           <li class="text-xs" style="background:var(--color-surface-raised); padding:10px; border-radius:8px;"><strong>Maudsley Prescribing Guidelines</strong>.</li>
-        </ul>
-
-        <!-- Disclaimers -->
-        <div class="alert alert--info" style="font-size:0.85rem; border-radius:var(--radius-md); line-height:1.5">
-          <strong>Aviso de Responsabilidad:</strong> Esta herramienta está dirigida exclusivamente a profesionales de la salud. En caso de discrepancia, prevalece la información oficial local.
+        <!-- Aviso y limitaciones de uso -->
+        <div class="alert alert--warning" style="font-size:0.85rem; border-radius:var(--radius-md); line-height:1.5; margin-bottom: 24px; text-align: left;">
+          <strong>⚠️ Aviso y limitaciones de uso</strong><br><br>
+          Esta aplicación está dirigida exclusivamente a profesionales de salud mental como apoyo clínico. No sustituye el juicio clínico, la valoración presencial, las guías oficiales ni la ficha técnica vigente de cada medicamento.<br><br>
+          Las dosis, equivalencias (CPZ), estrategias de switching y contenido farmacológico son aproximaciones educativas para consulta rápida. Deben verificarse y personalizarse en cada paciente según comorbilidades, interacciones, edad, estado clínico y normativas locales.<br><br>
+          Esta herramienta no está diseñada para automedicación ni para decisiones terapéuticas sin supervisión profesional.
         </div>
 
-        <hr style="border:0; border-top:1px solid var(--color-border); margin:24px 0;">
+        <!-- Autor -->
+        <div style="background:var(--color-surface-raised); padding:16px; border-radius:var(--radius-md); margin-bottom:24px; text-align: center;">
+          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--color-primary); font-weight:700; margin-bottom:4px;">
+            Autor
+          </div>
+          <div style="font-weight:600; font-size:1rem; margin-bottom:8px;">
+            César Celada
+          </div>
+          <div style="font-size:0.85rem; color:var(--color-text-muted);">
+            Para aclaraciones, mejoras o sugerencias:<br>
+            <a href="mailto:drceladapsiquiatria@gmail.com" style="color:var(--color-primary); text-decoration:none;">drceladapsiquiatria@gmail.com</a>
+          </div>
+        </div>
 
         <!-- Apoyo / Buy Me a Coffee -->
-        <div style="text-align:center;">
-          <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-text-dim); font-weight:700; margin-bottom:10px;">
-            Apoya el proyecto
+        <div style="text-align:center; padding:16px; background:var(--color-surface-raised); border-radius:var(--radius-md);">
+          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--color-text-dim); font-weight:700; margin-bottom:8px;">
+            Proyecto sin fines de lucro
           </div>
-          <p style="font-size:0.82rem; color:var(--color-text-muted); line-height:1.6; margin:0 0 16px; max-width:380px; margin-inline:auto;">
-            Esta guía se desarrolla y actualiza de forma independiente. Si te resulta útil en tu práctica clínica o docente, puedes apoyar su mantenimiento.
+          <p style="font-size:0.85rem; color:var(--color-text-muted); line-height:1.5; margin:0 0 16px; margin-inline:auto;">
+            Este proyecto es sin fines de lucro. Si deseas apoyar su mantenimiento y mejoras, puedes donar en:
           </p>
           <a href="https://buymeacoffee.com/herramente"
              target="_blank"
@@ -101,15 +105,8 @@ export function mountInfoModal() {
              style="display:inline-flex; align-items:center; gap:8px; background:#FFDD00; color:#111; padding:11px 22px; border-radius:12px; font-weight:800; font-size:0.875rem; text-decoration:none; font-family:var(--font-headers); transition:transform 0.15s, box-shadow 0.15s; box-shadow:0 2px 8px rgba(255,221,0,0.25);"
              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 18px rgba(255,221,0,0.45)';"
              onmouseout="this.style.transform=''; this.style.boxShadow='0 2px 8px rgba(255,221,0,0.25)';">
-            ☕ Invitar un café
+            ☕ Buy Me a Coffee
           </a>
-          <div style="margin-top:10px; font-size:0.72rem; color:var(--color-text-dim);">
-            buymeacoffee.com/herramente
-          </div>
-        </div>
-
-        <div style="text-align:center; margin-top:28px; font-size:0.75rem; color:var(--color-text-dim); font-weight:600;">
-          © 2026 • Soporte Clínico • Todos los derechos reservados.
         </div>
 
       </div>
