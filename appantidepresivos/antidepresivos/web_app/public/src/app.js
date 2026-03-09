@@ -161,22 +161,23 @@ function attachGlobalListeners() {
 }
 
 function updateHeaderNav(route) {
-  // Desktop Nav
+  const routeName = route?.name ?? "";
+
+  // Desktop Gooey Nav
   document.querySelectorAll(".nav-gooey__link").forEach(el => {
     el.classList.remove("active");
     const href = el.getAttribute("href");
-    if (href === `#/${route?.name}` || (route?.name === "list" && href === "#/list")) {
+    if (href === `#/${routeName}` || (routeName === "list" && href === "#/list")) {
       el.classList.add("active");
     }
   });
 
-  // Mobile Dock
-  document.querySelectorAll(".dock-link").forEach(el => {
+  // M3 Bottom Navigation
+  document.querySelectorAll(".m3-nav-link").forEach(el => {
     el.classList.remove("active");
-    const href = el.getAttribute("href");
-    if (href === `#/${route?.name}` || (route?.name === "list" && href === "#/list")) {
-      el.classList.add("active");
-    }
+    const id = el.dataset.id;
+    const matches = id === routeName || (routeName === "list" && id === "list");
+    if (matches) el.classList.add("active");
   });
 
   updateGooeyNav();
@@ -221,7 +222,7 @@ function getFieldSpecList(path, fallbackSpecs) {
 function mountShell(root) {
   const state = store.getState();
   const theme = state.ui?.theme || 'light';
-  const title = state.data?.schema?.meta?.appTitle ?? "Antidepresivos — 2026";
+  const title = state.data?.schema?.meta?.appTitle ?? "Antidepresivos";
 
   root.innerHTML = `
     <div id="appShell" class="shell">
@@ -232,15 +233,17 @@ function mountShell(root) {
           <div class="nav-gooey__blob" style="background: var(--color-primary-light); opacity: 0.2; border-radius: var(--radius-full);"></div>
           <a href="#/list" class="nav-gooey__link">Lista</a>
           <a href="#/compare" class="nav-gooey__link" id="btnHeaderCompare">Comparar</a>
+          <a href="#/switching" class="nav-gooey__link">Switching</a>
+          <a href="#/interact" class="nav-gooey__link">Interacciones</a>
           <a href="#/quiz" class="nav-gooey__link nav-gooey__link--quiz">✦ Quiz</a>
         </nav>
-        
+
         <div class="header__actions">
             <button id="btnThemeToggle" title="Cambiar Tema" class="btn btn--circle btn--ghost" style="font-size: 1.2rem; min-width: 44px; height: 44px; padding:0; border-radius:50%">
               ${theme === 'dark' ? '☀️' : '🌙'}
             </button>
-            <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" style="font-weight:700">
-                LIMPIAR
+            <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" style="font-weight:700; display:none">
+                Limpiar
             </button>
             <div id="compareCount" class="chip chip--active text-xs" style="padding: 4px 10px; min-width: 24px; text-align: center; display:none"></div>
         </div>
@@ -248,11 +251,11 @@ function mountShell(root) {
 
       <main id="appView" class="main"></main>
 
-      <footer class="footer" style="padding: var(--space-8) var(--space-5); background: var(--color-surface); border-top: 1px solid var(--color-border); margin-top: auto;">
+      <footer class="footer" style="background: var(--color-surface); border-top: 1px solid var(--color-border); margin-top: auto;">
         <div class="footer__inner">
            <span class="text-xs text-muted" style="font-weight:600">EDICIÓN 2026 • SOPORTE CLÍNICO</span>
            <button id="btnOpenInfo" class="btn btn--outline text-xs" style="padding:var(--space-2) var(--space-4); border-radius:var(--radius-md);">
-             Créditos y Disclaimer
+             Créditos
            </button>
         </div>
       </footer>
@@ -261,15 +264,26 @@ function mountShell(root) {
 }
 
 function updateCompareCount() {
-  const el = document.getElementById("compareCount");
-  if (!el) return;
   const ids = store.getState().compare?.ids ?? [];
-  el.textContent = ids.length;
-  el.style.display = ids.length ? "inline-flex" : "none";
 
+  // Header chip
+  const el = document.getElementById("compareCount");
+  if (el) {
+    el.textContent = ids.length;
+    el.style.display = ids.length ? "inline-flex" : "none";
+  }
+
+  // Header clear button
   const btnClear = document.getElementById("btnClearCompare");
   if (btnClear) {
     btnClear.style.display = ids.length ? "inline-block" : "none";
+  }
+
+  // M3 Nav badge on "Comparar" item
+  const navBadge = document.getElementById("navCompareBadge");
+  if (navBadge) {
+    navBadge.textContent = ids.length;
+    navBadge.style.display = ids.length ? "flex" : "none";
   }
 }
 
@@ -292,7 +306,16 @@ function renderRoute(route) {
 
   setTimeout(() => {
     if (route.name === "list") renderList(view);
-    else if (route.name === "detail") renderDetail(view, route.params?.id);
+    else if (route.name === "detail") {
+      // Registrar en recientes antes de renderizar
+      const itemId = route.params?.id;
+      if (itemId) {
+        const allFarmacos = store.getState().data?.dataset?.farmacos ?? [];
+        const found = allFarmacos.find(f => String(f.id_farmaco) === String(itemId));
+        if (found) addRecentItem(found.id_farmaco, found.nombre_generico, found.clase_terapeutica);
+      }
+      renderDetail(view, itemId);
+    }
     else if (route.name === "compare") renderCompare(view);
     else if (route.name === "switching") renderSwitching(view);
     else if (route.name === "ajuste") renderAjuste(view);
@@ -303,81 +326,203 @@ function renderRoute(route) {
 }
 
 /* ============================================================
+   Recent Items — localStorage helpers
+   ============================================================ */
+const RECENT_KEY = "antidep_recents_v1";
+const MAX_RECENTS = 6;
+
+function getRecentItems() {
+  try { return JSON.parse(localStorage.getItem(RECENT_KEY) || "[]"); }
+  catch { return []; }
+}
+
+function addRecentItem(id, name, cls) {
+  const recents = getRecentItems().filter(r => String(r.id) !== String(id));
+  recents.unshift({ id: String(id), name, cls, ts: Date.now() });
+  try { localStorage.setItem(RECENT_KEY, JSON.stringify(recents.slice(0, MAX_RECENTS))); }
+  catch {}
+}
+
+/* ============================================================
+   Task Filter definitions (filtros por tarea clínica)
+   ============================================================ */
+const TASK_FILTERS = [
+  { id: "low_sedation",   label: "↓ Sedación",     icon: "😴",
+    test: d => parseInt(d.nivel_sedacion) <= 1 },
+  { id: "low_sexual",     label: "↓ D. sexual",    icon: "❤️",
+    test: d => /bajo|leve|mínima|minima|nula/i.test(d.perfil_disfuncion_sexual || "") },
+  { id: "low_qt",         label: "↓ Riesgo QT",    icon: "💓",
+    test: d => /bajo|leve|mínimo|minimo|nulo/i.test(d.riesgo_prolongacion_qt || "") },
+  { id: "low_weight",     label: "↓ Impacto peso", icon: "⚖️",
+    test: d => /neutro|bajo|pérdida|perdida/i.test(d.perfil_impacto_peso || "") },
+  { id: "low_withdrawal", label: "↓ Abstinencia",  icon: "🔄",
+    test: d => /bajo|leve|mínimo|minimo|nulo/i.test(d.riesgo_sindrome_abstinencia || "") },
+  { id: "isrs",           label: "ISRS",            icon: "💊",
+    test: d => /isrs/i.test(d.clase_terapeutica || "") },
+  { id: "dual",           label: "Dual (IRSN)",     icon: "🔁",
+    test: d => /dual|irsn|snri/i.test(d.clase_terapeutica || d.mecanismo_principal || "") },
+];
+
+function applyTaskFilters(items, activeTasks) {
+  if (!activeTasks || activeTasks.length === 0) return items;
+  const defs = TASK_FILTERS.filter(t => activeTasks.includes(t.id));
+  return items.filter(d => defs.every(t => t.test(d)));
+}
+
+/* ============================================================
+   Clinical Chips helper (lectura rápida)
+   ============================================================ */
+function getClinicalChips(d) {
+  const chips = [];
+
+  // ATC code
+  if (d.codigo_atc) {
+    chips.push({ label: d.codigo_atc, variant: "primary" });
+  }
+
+  // Sedation level
+  const sed = parseInt(d.nivel_sedacion, 10);
+  if (!isNaN(sed)) {
+    const variants = ["success", "success", "warning", "danger"];
+    const labels = ["Sin sedación", "Sedación ↓", "Sedación ↑↑", "Sedación ↑↑↑"];
+    chips.push({ label: labels[Math.min(sed, 3)], variant: variants[Math.min(sed, 3)] });
+  }
+
+  // QT risk — only flag if notable
+  const qt = (d.riesgo_prolongacion_qt || "").toLowerCase();
+  if (/alto|medio|moderado/i.test(qt)) {
+    chips.push({ label: "QT ↑", variant: /alto/i.test(qt) ? "danger" : "warning" });
+  }
+
+  // Sexual dysfunction — only flag if notable
+  const sex = (d.perfil_disfuncion_sexual || "").toLowerCase();
+  if (/alto|medio|moderado|significativo/i.test(sex)) {
+    chips.push({ label: "D.sexual ↑", variant: /alto/i.test(sex) ? "danger" : "warning" });
+  }
+
+  return chips;
+}
+
+function renderClinicalChips(d) {
+  const chips = getClinicalChips(d);
+  if (!chips.length) return "";
+  return `<div class="clinical-chips-row">
+    ${chips.map(c => `<span class="clinical-chip clinical-chip--${c.variant}">${escapeHtml(c.label)}</span>`).join("")}
+  </div>`;
+}
+
+/* ============================================================
+   Skeleton cards (estado de carga)
+   ============================================================ */
+function renderSkeletonGrid(count = 6) {
+  return Array.from({ length: count }, () => `
+    <div class="skeleton-card">
+      <div class="skeleton skeleton-line skeleton-line--title"></div>
+      <div class="skeleton skeleton-line skeleton-line--sub"></div>
+      <div style="display:flex; gap:8px; margin-top:8px">
+        <div class="skeleton skeleton-line skeleton-line--chip"></div>
+        <div class="skeleton skeleton-line skeleton-line--chip"></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* ============================================================
    List
    ============================================================ */
 
 function renderList(view) {
   const state = store.getState();
-  const items = selectFilteredItems(state);
-  const selected = new Set(state.compare?.ids ?? []);
+  const activeTasks = state.filters?.tasks ?? [];
 
-  const filterHTML = renderFilters(state.filters);
+  // Show skeleton while data loads
+  if (!state.data?.dataset) {
+    view.innerHTML = `<div class="animate-fade-in"><div class="grid-cards">${renderSkeletonGrid(6)}</div></div>`;
+    return;
+  }
+
+  let items = selectFilteredItems(state);
+  items = applyTaskFilters(items, activeTasks);
+  const selected = new Set(state.compare?.ids ?? []);
+  const compareIds = [...selected];
+
+  // Recent items
+  const allFarmacos = state.data?.dataset?.farmacos ?? [];
+  const recentRaw = getRecentItems();
+  const recentFarmacos = recentRaw
+    .map(r => allFarmacos.find(f => String(f.id_farmaco) === String(r.id)))
+    .filter(Boolean)
+    .slice(0, 5);
+
+  // Task chips HTML
+  const taskChipsHTML = TASK_FILTERS.map(t => {
+    const isActive = activeTasks.includes(t.id);
+    return `<button type="button" class="task-chip ${isActive ? "active" : ""} task-filter-btn" data-task="${escapeHtml(t.id)}">
+      <span class="task-chip__icon">${t.icon}</span>${escapeHtml(t.label)}
+    </button>`;
+  }).join("");
+
+  // Recents HTML
+  const recentsHTML = recentFarmacos.length ? `
+    <section class="recents-section animate-fade-in">
+      <div class="recents-section__title">Recientes</div>
+      <div class="recents-list">
+        ${recentFarmacos.map(d => `
+          <a href="#/detail/${encodeURIComponent(d.id_farmaco)}" class="recent-item">
+            <span class="recent-item__name">${escapeHtml(d.nombre_generico)}</span>
+            <span class="recent-item__class">${escapeHtml(d.clase_terapeutica || "")}</span>
+          </a>
+        `).join("")}
+      </div>
+    </section>
+  ` : "";
 
   view.innerHTML = `
     <div class="animate-fade-in">
-      <h2 class="h2">Listado de Fármacos</h2>
-      <p class="text-muted" style="margin-bottom: var(--space-6); font-weight:600">Mostrando <b>${items.length}</b> resultados según los criterios.</p>
 
-      <section style="margin-bottom: var(--space-8);">
-        ${filterHTML}
-      </section>
-
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
-        <div style="display:flex; gap:var(--space-3); align-items:center;">
-          <button id="btnGoCompare" type="button" class="btn btn--primary">
-            IR A COMPARAR
-          </button>
-          <span id="compareHint" class="text-sm text-muted" style="font-weight:500">
-            Selecciona fármacos para comparar sus perfiles.
-          </span>
-        </div>
+      <!-- Hero search protagonista -->
+      <div class="search-hero">
+        <span class="search-hero__icon-left">🔍</span>
+        <input type="search" id="inputSearch" class="search-hero__input"
+          placeholder="Buscar antidepresivo…"
+          value="${escapeHtml(state.filters.q || "")}"
+          autocomplete="off" autocorrect="off" spellcheck="false" />
       </div>
 
-      <div class="grid-cards">
-        ${items
-      .map((d) => {
-        const id = String(d.id_farmaco);
-        const name = d.nombre_generico ?? id;
-        const atc = d.codigo_atc ?? "N/D";
-        const cls = d.clase_terapeutica ?? "";
-        const isOn = selected.has(id);
+      <!-- Task chips (filtros por tarea clínica) -->
+      <div class="task-chips-bar">
+        ${taskChipsHTML}
+      </div>
 
-        return `
-            <div class="card card--hoverable card--spotlight" style="padding:var(--space-6)">
-              <div style="display:flex;gap:var(--space-4);align-items:flex-start">
-                <div class="input-checkbox-wrapper">
-                  <input type="checkbox" class="chkCompare" data-id="${escapeHtml(id)}" ${isOn ? "checked" : ""} style="width:20px; height:20px; accent-color:var(--color-primary); cursor:pointer;" />
-                </div>
-                <div style="flex:1">
-                  <a href="#/detail/${encodeURIComponent(id)}" style="text-decoration:none;display:block">
-                    <div class="card__title">${escapeHtml(name)}</div>
-                  </a>
-                  <div class="text-muted text-sm" style="font-weight:600; margin-top:2px">${escapeHtml(cls)}</div>
-                  <div class="chip text-xs" style="margin-top:var(--space-4); font-weight:700">${escapeHtml(atc)}</div>
-                </div>
-              </div>
-            </div>
-          `;
-      })
-      .join("")}
+      <!-- Recientes -->
+      ${recentsHTML}
+
+      <!-- List header -->
+      <div class="list-header">
+        <span class="list-header__count">${items.length} fármaco${items.length !== 1 ? "s" : ""}</span>
+        <button id="btnGoCompare" type="button" class="m3-fab" ${compareIds.length === 0 ? "disabled" : ""}>
+          ⚖️ ${compareIds.length ? `Comparar (${compareIds.length})` : "Comparar"}
+        </button>
+      </div>
+
+      <!-- Drug grid -->
+      <div class="grid-cards">
+        ${items.map(d => renderDrugCard(d, selected)).join("") || `
+          <div style="grid-column:1/-1; text-align:center; padding:var(--space-8); color:var(--color-text-muted)">
+            <div style="font-size:2.5rem; margin-bottom:var(--space-3)">🔍</div>
+            <p style="font-weight:700">Sin resultados para esos criterios.</p>
+            <p class="text-sm" style="margin-top:var(--space-2)">Prueba quitando algún filtro de tarea.</p>
+          </div>
+        `}
       </div>
     </div>
   `;
 
   attachFilterListeners(view);
+  initCardSpotlight();
 
+  // Compare button
   const go = document.getElementById("btnGoCompare");
-  const hint = document.getElementById("compareHint");
-  const compareIds = store.getState().compare?.ids ?? [];
-  if (go) {
-    go.disabled = compareIds.length === 0;
-    go.textContent = compareIds.length ? `IR A COMPARAR (${compareIds.length})` : "IR A COMPARAR";
-  }
-  if (hint) {
-    hint.textContent = compareIds.length
-      ? "Has seleccionado fármacos. Revisa el comparador."
-      : "Selecciona fármacos con el checkbox.";
-  }
   if (go) {
     go.addEventListener("click", () => {
       const ids = store.getState().compare?.ids ?? [];
@@ -385,131 +530,80 @@ function renderList(view) {
       location.hash = `#/compare?ids=${encodeURIComponent(ids.join(","))}`;
     });
   }
-
-  view.querySelectorAll(".chkCompare").forEach((el) => {
-    el.addEventListener("change", (ev) => {
-      const id = ev.target.dataset.id;
-      const curr = store.getState().compare?.ids ?? [];
-      const set = new Set(curr);
-
-      if (ev.target.checked) set.add(id);
-      else set.delete(id);
-
-      store.setCompareIds([...set], { reason: "ui:listToggleCompare" });
-      const nextIds = [...set];
-      const goBtn = document.getElementById("btnGoCompare");
-      const hintEl = document.getElementById("compareHint");
-      if (goBtn) {
-        goBtn.disabled = nextIds.length === 0;
-        goBtn.textContent = nextIds.length ? `IR A COMPARAR (${nextIds.length})` : "IR A COMPARAR";
-      }
-      if (hintEl) {
-        hintEl.textContent = nextIds.length
-          ? "Has seleccionado fármacos. Revisa el comparador."
-          : "Selecciona fármacos con el checkbox.";
-      }
-    });
-  });
-
-  initCardSpotlight();
 }
 
-function renderFilters(filters) {
-  const q = filters.q || "";
-  const schema = store.getState().data?.schema;
-
-  // Obtener grupos dinámicamente si es posible
-  let groups = [];
-  if (schema) {
-    const groupFilter = schema.filters?.find(f => f.id === "grupo");
-    if (groupFilter && groupFilter.valuesFromData) {
-      const allItems = store.getState().data?.dataset?.farmacos ?? [];
-      groups = [...new Set(allItems.map(i => i.clase_terapeutica))].filter(Boolean).sort();
-    }
-  }
-
-  if (!groups.length) {
-    groups = ["ISRS", "Dual", "Tricíclico", "IMAO", "Atípico", "Modulador"];
-  }
-
-  const activeGroups = new Set(filters.grupo || []);
-
-  const groupChips = groups.map(g => {
-    const isActive = activeGroups.has(g);
-    return `
-      <button type="button"
-        class="chip ${isActive ? 'chip--active' : ''} filter-group-btn"
-        data-group="${escapeHtml(g)}"
-        style="cursor:pointer;">
-        ${escapeHtml(g)}
-      </button>
-    `;
-  }).join("");
+function renderDrugCard(d, selected) {
+  const id = String(d.id_farmaco);
+  const name = d.nombre_generico ?? id;
+  const cls = d.clase_terapeutica ?? "";
+  const isOn = selected.has(id);
 
   return `
-    <div style="display:flex; flex-direction:column; gap:var(--space-6);">
-      <div class="glass-effect" style="border-radius: var(--radius-lg); overflow:hidden;">
-        <input type="search" id="inputSearch" class="input" placeholder="Buscar por nombre..." value="${escapeHtml(q)}" 
-          style="width:100%; padding: 16px 20px; border: none; font-size: 1rem; outline: none; background: transparent; font-family:var(--font-body); font-weight:500;" />
+    <div class="card card--hoverable card--spotlight">
+      <div class="card-drug__header">
+        <a href="#/detail/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
+        <button type="button"
+          class="card-drug__compare-btn chkCompareBtn ${isOn ? "active" : ""}"
+          data-id="${escapeHtml(id)}"
+          title="${isOn ? "Quitar del comparador" : "Agregar al comparador"}"
+          aria-pressed="${isOn}">
+          ${isOn ? "✓" : "+"}
+        </button>
       </div>
-
-      <details class="card glass-effect" style="padding: 0; overflow:hidden;" ${filters.grupo?.length || filters.sedacion ? "open" : ""}>
-        <summary style="padding:var(--space-4); cursor:pointer; font-weight:700; display:flex; align-items:center; justify-content:space-between; list-style:none;">
-            <span class="text-xs" style="font-family:var(--font-headers); font-weight:800; color:var(--color-primary); letter-spacing:0.1em; text-transform:uppercase">
-                Filtros Avanzados
-            </span>
-            <span style="font-size:0.8rem; opacity:0.5">▼</span>
-        </summary>
-        
-        <div style="padding:var(--space-5); padding-top:0;">
-            <div class="text-xs" style="margin-bottom:var(--space-4); font-family:var(--font-headers); font-weight:800; color:var(--color-text-muted); letter-spacing:0.05em;">GRUPO TERAPÉUTICO:</div>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;">
-            ${groupChips}
-            </div>
-            
-            <div style="margin-top:var(--space-6); border-top:1px solid var(--color-border); padding-top:var(--space-5)">
-            <div class="text-xs" style="margin-bottom:var(--space-4); font-family:var(--font-headers); font-weight:800; color:var(--color-text-muted); letter-spacing:0.05em;">SEDACIÓN MÁXIMA:</div>
-            <div style="display:flex; align-items:center; gap:var(--space-5)">
-                <input type="range" id="rangeSedacion" min="0" max="3" step="1" value="${filters.sedacion?.max ?? 3}" style="flex:1; accent-color:var(--color-primary); cursor:pointer;" />
-                <div id="lblSedacion" class="chip chip--active" style="padding: 6px 14px; font-weight:800; font-size:0.9rem; min-width:32px; justify-content:center;">${filters.sedacion?.max ?? 3}</div>
-            </div>
-            </div>
-        </div>
-      </details>
+      <div class="card-drug__class">${escapeHtml(cls)}</div>
+      ${renderClinicalChips(d)}
     </div>
   `;
 }
 
 function attachFilterListeners(view) {
+  // Hero search input
   const inputSearch = view.querySelector("#inputSearch");
   if (inputSearch) {
     inputSearch.addEventListener("input", (e) => {
       store.updatePath("filters.q", e.target.value);
     });
+    // Auto-focus search on desktop
+    if (window.innerWidth >= 1024) inputSearch.focus();
   }
 
-  view.querySelectorAll(".filter-group-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      const g = e.target.dataset.group;
-      let current = store.getState().filters.grupo || [];
-      if (current.includes(g)) {
-        current = current.filter(x => x !== g);
-      } else {
-        current = [...current, g];
-      }
-      store.updatePath("filters.grupo", current);
+  // Task chips
+  view.querySelectorAll(".task-filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const taskId = btn.dataset.task;
+      const current = store.getState().filters?.tasks ?? [];
+      const next = current.includes(taskId)
+        ? current.filter(x => x !== taskId)
+        : [...current, taskId];
+      store.updatePath("filters.tasks", next);
     });
   });
 
-  const range = view.querySelector("#rangeSedacion");
-  if (range) {
-    range.addEventListener("input", (e) => {
-      const val = parseInt(e.target.value);
-      const lbl = document.getElementById("lblSedacion");
-      if (lbl) lbl.textContent = val;
-      store.updatePath("filters.sedacion", { min: 0, max: val });
+  // Compare toggle buttons (replacing checkboxes)
+  view.querySelectorAll(".chkCompareBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      const curr = store.getState().compare?.ids ?? [];
+      const set = new Set(curr);
+      if (set.has(id)) set.delete(id);
+      else set.add(id);
+      store.setCompareIds([...set], { reason: "ui:listToggleCompare" });
+
+      // Update button visually immediately
+      const isNowOn = set.has(id);
+      btn.classList.toggle("active", isNowOn);
+      btn.textContent = isNowOn ? "✓" : "+";
+      btn.setAttribute("aria-pressed", String(isNowOn));
+
+      // Update compare FAB
+      const go = document.getElementById("btnGoCompare");
+      if (go) {
+        const newIds = [...set];
+        go.disabled = newIds.length === 0;
+        go.textContent = newIds.length ? `⚖️ Comparar (${newIds.length})` : "⚖️ Comparar";
+      }
     });
-  }
+  });
 }
 
 /* ============================================================
@@ -799,25 +893,35 @@ function renderRadarChart(data, colors) {
 
 function mountDock(container) {
   if (!container) return;
+
+  // M3 Bottom Navigation — 5 destinos principales
   const items = [
-    { id: "home", label: "Inicio", icon: "🏠", hash: "#/list" },
-    { id: "compare", label: "Comparar", icon: "⚖️", hash: "#/compare" },
-    { id: "switching", label: "Switching", icon: "🔄", hash: "#/switching" },
-    { id: "ajuste", label: "Ajuste", icon: "📏", hash: "#/ajuste" },
-    { id: "interact", label: "Interacción", icon: "⚡", hash: "#/interact" },
-    { id: "quiz", label: "Quiz", icon: "✦", hash: "#/quiz" },
+    { id: "list",      label: "Inicio",       icon: "🏠",  hash: "#/list" },
+    { id: "compare",   label: "Comparar",     icon: "⚖️",  hash: "#/compare" },
+    { id: "switching", label: "Switching",    icon: "🔄",  hash: "#/switching" },
+    { id: "interact",  label: "Interacc.",    icon: "⚡",  hash: "#/interact" },
+    { id: "quiz",      label: "Quiz",         icon: "✦",   hash: "#/quiz" },
   ];
 
-  container.innerHTML = `
-    <div class="dock-panel animate-fade-in" style="animation-delay: 0.5s">
-      ${items.map(item => `
-        <a href="${item.hash}" class="dock-item dock-link" data-id="${item.id}" style="text-decoration:none; color:inherit;">
-          <span class="dock-icon">${item.icon}</span>
-          <span class="dock-label">${item.label}</span>
-        </a>
-      `).join("")}
-    </div>
-  `;
+  // Inject M3 nav bar directly into body (not the dock container, which is hidden on desktop)
+  let navBar = document.getElementById("m3-nav-bar");
+  if (!navBar) {
+    navBar = document.createElement("nav");
+    navBar.id = "m3-nav-bar";
+    navBar.className = "m3-nav-bar animate-fade-in";
+    navBar.style.animationDelay = "0.4s";
+    document.body.appendChild(navBar);
+  }
+
+  navBar.innerHTML = items.map(item => `
+    <a href="${item.hash}" class="m3-nav-item m3-nav-link dock-link" data-id="${item.id}">
+      <span class="m3-nav-item__indicator">
+        <span class="m3-nav-item__icon">${item.icon}</span>
+        ${item.id === "compare" ? `<span class="m3-nav-item__badge" id="navCompareBadge" style="display:none"></span>` : ""}
+      </span>
+      <span class="m3-nav-item__label">${item.label}</span>
+    </a>
+  `).join("");
 }
 
 
