@@ -48,26 +48,46 @@ export function mountInfoModal() {
   modal.innerHTML = `
     <div class="modal-content">
       <div style="padding:var(--space-5) var(--space-6); border-bottom:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
-        <h2 class="h3" style="margin:0">Guía Clínica 2026</h2>
+        <h2 class="h3" style="margin:0">Créditos</h2>
         <button id="btnCloseModal" type="button" class="btn btn--ghost btn--circle" style="font-size:1.2rem;">✕</button>
       </div>
-      
+
       <div style="padding:var(--space-6);">
-        
+
         <!-- Branding -->
         <div style="margin-bottom:24px; text-align:center;">
           <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-primary); font-weight:800; margin-bottom:8px;">
-            Soporte CLÍNICO
+            Guía Clínica
           </div>
           <div style="font-size:1.75rem; font-weight:800; color:var(--color-text-main); font-family:var(--font-headers);">
-            Edición Profesional
+            Antidepresivos 2026
           </div>
           <div class="text-muted text-sm" style="margin-top:4px; font-weight:600">
-            Actualización 2026
+            Edición Profesional • Soporte Clínico
           </div>
         </div>
 
         <hr style="border:0; border-top:1px solid var(--color-border); margin:24px 0;">
+
+        <!-- Créditos principales -->
+        <div style="background:linear-gradient(135deg, var(--color-primary-light) 0%, rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.08) 100%); padding:20px; border-radius:var(--radius-lg); margin-bottom:24px; border-left:4px solid var(--color-primary);">
+          <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-primary); font-weight:800; margin-bottom:12px;">
+            ✓ Desarrollado por
+          </div>
+          <div style="font-weight:800; font-size:1.5rem; margin-bottom:8px; color:var(--color-text-main);">
+            Dr. César Celada
+          </div>
+          <div style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:16px; line-height:1.6;">
+            Psiquiatra especializado en psicofarmacología clínica. Edición y compilación de información farmacológica actualizada para profesionales de la salud mental.
+          </div>
+          <div style="font-size:0.8rem; color:var(--color-text-muted);">
+            <strong>Contacto:</strong><br>
+            <a href="mailto:drceladapsiquiatria@gmail.com" style="color:var(--color-primary); text-decoration:none; font-weight:600;">drceladapsiquiatria@gmail.com</a>
+          </div>
+          <div style="font-size:0.8rem; color:var(--color-text-muted); margin-top:8px;">
+            <strong>Comentarios, dudas o errores:</strong> Envía un correo al email anterior con tu consulta.
+          </div>
+        </div>
 
         <!-- Aviso y limitaciones de uso -->
         <div class="alert alert--warning" style="font-size:0.85rem; border-radius:var(--radius-md); line-height:1.5; margin-bottom: 24px; text-align: left;">
@@ -77,35 +97,21 @@ export function mountInfoModal() {
           Esta herramienta no está diseñada para automedicación ni para decisiones terapéuticas sin supervisión profesional.
         </div>
 
-        <!-- Autor -->
-        <div style="background:var(--color-surface-raised); padding:16px; border-radius:var(--radius-md); margin-bottom:24px; text-align: center;">
-          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--color-primary); font-weight:700; margin-bottom:4px;">
-            Autor
-          </div>
-          <div style="font-weight:600; font-size:1rem; margin-bottom:8px;">
-            César Celada
-          </div>
-          <div style="font-size:0.85rem; color:var(--color-text-muted);">
-            Para aclaraciones, mejoras o sugerencias:<br>
-            <a href="mailto:drceladapsiquiatria@gmail.com" style="color:var(--color-primary); text-decoration:none;">drceladapsiquiatria@gmail.com</a>
-          </div>
-        </div>
-
         <!-- Apoyo / Buy Me a Coffee -->
-        <div style="text-align:center; padding:16px; background:var(--color-surface-raised); border-radius:var(--radius-md);">
-          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; color:var(--color-text-dim); font-weight:700; margin-bottom:8px;">
-            Proyecto sin fines de lucro
+        <div style="background:var(--color-surface-raised); padding:20px; border-radius:var(--radius-lg); text-align:center; border:2px dashed var(--color-border);">
+          <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-text-dim); font-weight:800; margin-bottom:12px;">
+            ☕ Apoya el proyecto
           </div>
-          <p style="font-size:0.85rem; color:var(--color-text-muted); line-height:1.5; margin:0 0 16px; margin-inline:auto;">
-            Este proyecto es sin fines de lucro. Si deseas apoyar su mantenimiento y mejoras, puedes donar en:
+          <p style="font-size:0.9rem; color:var(--color-text-muted); line-height:1.6; margin:0 0 16px;">
+            Este es un proyecto <strong>sin fines de lucro</strong> que se mantiene de forma independiente. Si esta herramienta es útil en tu práctica clínica, considera hacer una pequeña donación para apoyar su desarrollo y mejoras continuas.
           </p>
           <a href="https://buymeacoffee.com/herramente"
              target="_blank"
              rel="noopener noreferrer"
-             style="display:inline-flex; align-items:center; gap:8px; background:#FFDD00; color:#111; padding:11px 22px; border-radius:12px; font-weight:800; font-size:0.875rem; text-decoration:none; font-family:var(--font-headers); transition:transform 0.15s, box-shadow 0.15s; box-shadow:0 2px 8px rgba(255,221,0,0.25);"
-             onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 18px rgba(255,221,0,0.45)';"
-             onmouseout="this.style.transform=''; this.style.boxShadow='0 2px 8px rgba(255,221,0,0.25)';">
-            ☕ Buy Me a Coffee
+             style="display:inline-flex; align-items:center; gap:8px; background:#FFDD00; color:#111; padding:12px 24px; border-radius:10px; font-weight:800; font-size:0.9rem; text-decoration:none; font-family:var(--font-headers); transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow:0 4px 12px rgba(255,221,0,0.35); border:none; cursor:pointer;"
+             onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(255,221,0,0.5)';"
+             onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 12px rgba(255,221,0,0.35)';">
+            ☕ Invitar un café
           </a>
         </div>
 
