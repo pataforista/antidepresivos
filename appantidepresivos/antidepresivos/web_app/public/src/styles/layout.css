@@ -196,7 +196,6 @@
 @media (max-width: 1023px) {
     .header {
         flex-wrap: nowrap;
-        /* Keep header concise on mobile */
         gap: var(--space-2);
         padding: var(--space-3);
     }
@@ -208,7 +207,7 @@
         text-overflow: ellipsis;
     }
 
-    /* Hide Desktop Nav in favor of Bottom Dock on Mobile/Tablet */
+    /* Hide Desktop Gooey Nav — use M3 Bottom Nav instead */
     .header__nav {
         display: none;
     }
@@ -218,20 +217,12 @@
         width: auto;
     }
 
-    .nav-gooey__link {
-        flex: 1;
-        text-align: center;
-        padding: var(--space-2) var(--space-2);
-        font-size: 0.85rem;
-    }
-
     .main {
         padding: var(--space-4) var(--space-3);
-        padding-bottom: 120px;
-        /* Extra space for Dock */
+        /* Space for M3 bottom nav */
+        padding-bottom: calc(var(--nav-bar-height) + env(safe-area-inset-bottom) + var(--space-4));
     }
 
-    /* On very small screens, 1fr is safer */
     .grid-cards {
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     }
@@ -242,8 +233,7 @@
 
     .footer {
         padding: var(--space-5) var(--space-3);
-        padding-bottom: 110px;
-        /* Ensure footer text is visible above dock if scrolled to bottom */
+        padding-bottom: calc(var(--nav-bar-height) + env(safe-area-inset-bottom) + var(--space-5));
     }
 
     .footer__inner {
@@ -259,32 +249,118 @@
     }
 
     .footer {
-        padding-bottom: 110px;
+        padding-bottom: calc(var(--nav-bar-height) + env(safe-area-inset-bottom) + var(--space-3));
+    }
+}
+
+/* ============================================================
+   M3 Bottom Navigation Bar (replaces floating dock)
+   ============================================================ */
+#dock-container {
+    display: none; /* Hide on desktop — shown only on mobile via .m3-nav-bar */
+}
+
+.m3-nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-bar-height);
+    background: var(--color-surface-container-low);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: stretch;
+    z-index: 200;
+    padding: 0 var(--space-2);
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+    /* Only show on mobile */
+}
+
+@media (min-width: 1024px) {
+    .m3-nav-bar {
+        display: none;
     }
 
     #dock-container {
-        width: calc(100% - 16px);
-        left: 8px;
-        transform: none;
-        bottom: 12px;
-    }
-
-    .dock-panel {
-        width: 100%;
-        justify-content: space-between;
-        gap: 8px;
-        padding: 8px;
-        border-radius: 16px;
-    }
-
-    .dock-item {
-        width: 44px;
-        height: 44px;
-    }
-
-    .dock-label {
         display: none;
     }
+}
+
+.m3-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    gap: 4px;
+    padding-top: 12px;
+    padding-bottom: 4px;
+    transition: color var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.m3-nav-item__indicator {
+    width: 64px;
+    height: 32px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-normal);
+    position: relative;
+}
+
+.m3-nav-item.active .m3-nav-item__indicator {
+    background: var(--color-primary-container);
+}
+
+.m3-nav-item.active {
+    color: var(--color-on-primary-container);
+}
+
+.m3-nav-item__icon {
+    font-size: 20px;
+    line-height: 1;
+    transition: transform var(--transition-spring);
+}
+
+.m3-nav-item.active .m3-nav-item__icon {
+    transform: scale(1.05);
+}
+
+.m3-nav-item__label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-family: var(--font-body);
+    transition: font-weight var(--transition-fast);
+    white-space: nowrap;
+}
+
+.m3-nav-item.active .m3-nav-item__label {
+    font-weight: 700;
+}
+
+/* Compare badge on nav item */
+.m3-nav-item__badge {
+    position: absolute;
+    top: -2px;
+    right: 6px;
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--radius-full);
+    font-size: 9px;
+    font-weight: 800;
+    min-width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
 }
 
 /* Gatekeeper Overlay */
