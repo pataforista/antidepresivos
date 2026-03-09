@@ -1,0 +1,392 @@
+/* src/styles/layout.css */
+
+/* App Shell */
+#app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+}
+
+.shell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    background: var(--color-bg);
+    overflow-x: hidden;
+    /* Double safety */
+}
+
+@media (min-width: 1024px) {
+    /* Optional: Centered layout on large screens if desired */
+}
+
+/* Glass Header */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-surface-translucent);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    gap: var(--space-4);
+    box-shadow: var(--shadow-sm);
+}
+
+.header__title {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.header__nav {
+    margin-left: auto;
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    position: relative;
+    /* Gooey Context */
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-full);
+}
+
+/* Marker class for JS logic */
+
+.nav-gooey__blob {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: calc(100% - 8px);
+    background: var(--color-surface);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1),
+        width 0.4s cubic-bezier(0.2, 0.9, 0.3, 1),
+        opacity 0.2s;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    /* Hidden initially until JS positions it */
+}
+
+.nav-gooey__link {
+    position: relative;
+    z-index: 2;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    transition: color var(--transition-fast);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.nav-gooey__link:hover {
+    color: var(--color-text-main);
+}
+
+.nav-gooey__link.active {
+    color: var(--color-primary);
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: var(--space-5);
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    overflow-x: hidden;
+}
+
+/* Footer */
+.footer {
+    padding: var(--space-3) var(--space-5);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    text-align: center;
+}
+
+/* Grids */
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+}
+
+.grid-compare {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-4);
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .grid-compare {
+        grid-template-columns: 380px 1fr;
+    }
+}
+
+.radar-card {
+    align-items: center;
+    text-align: center;
+}
+
+.radar-card svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.table-card .compare-container {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+}
+
+
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.main {
+    padding: var(--space-6) var(--space-5);
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    min-height: 80vh;
+    /* Ensure content area is substantial */
+}
+
+.footer__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    gap: var(--space-3);
+}
+
+@media (max-width: 1023px) {
+    .header {
+        flex-wrap: nowrap;
+        gap: var(--space-2);
+        padding: var(--space-3);
+    }
+
+    .header__title {
+        font-size: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Hide Desktop Gooey Nav — use M3 Bottom Nav instead */
+    .header__nav {
+        display: none;
+    }
+
+    .header__actions {
+        margin-left: auto;
+        width: auto;
+    }
+
+    .main {
+        padding: var(--space-4) var(--space-3);
+        /* Space for M3 bottom nav */
+        padding-bottom: calc(var(--nav-bar-height) + env(safe-area-inset-bottom) + var(--space-4));
+    }
+
+    .grid-cards {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+
+    .grid-compare {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        padding: var(--space-5) var(--space-3);
+        padding-bottom: calc(var(--nav-bar-height) + env(safe-area-inset-bottom) + var(--space-5));
+    }
+
+    .footer__inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .detail-layout {
+        gap: var(--space-3);
+    }
+
+    .footer {
+        padding-bottom: calc(var(--nav-bar-height) + env(safe-area-inset-bottom) + var(--space-3));
+    }
+}
+
+/* ============================================================
+   M3 Bottom Navigation Bar (replaces floating dock)
+   ============================================================ */
+#dock-container {
+    display: none; /* Hide on desktop — shown only on mobile via .m3-nav-bar */
+}
+
+.m3-nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-bar-height);
+    background: var(--color-surface-container-low);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: stretch;
+    z-index: 200;
+    padding: 0 var(--space-2);
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+    /* Only show on mobile */
+}
+
+@media (min-width: 1024px) {
+    .m3-nav-bar {
+        display: none;
+    }
+
+    #dock-container {
+        display: none;
+    }
+}
+
+.m3-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    gap: 4px;
+    padding-top: 12px;
+    padding-bottom: 4px;
+    transition: color var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.m3-nav-item__indicator {
+    width: 64px;
+    height: 32px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-normal);
+    position: relative;
+}
+
+.m3-nav-item.active .m3-nav-item__indicator {
+    background: var(--color-primary-container);
+}
+
+.m3-nav-item.active {
+    color: var(--color-on-primary-container);
+}
+
+.m3-nav-item__icon {
+    font-size: 20px;
+    line-height: 1;
+    transition: transform var(--transition-spring);
+}
+
+.m3-nav-item.active .m3-nav-item__icon {
+    transform: scale(1.05);
+}
+
+.m3-nav-item__label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-family: var(--font-body);
+    transition: font-weight var(--transition-fast);
+    white-space: nowrap;
+}
+
+.m3-nav-item.active .m3-nav-item__label {
+    font-weight: 700;
+}
+
+/* Compare badge on nav item */
+.m3-nav-item__badge {
+    position: absolute;
+    top: -2px;
+    right: 6px;
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--radius-full);
+    font-size: 9px;
+    font-weight: 800;
+    min-width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+}
+
+/* Gatekeeper Overlay */
+.gatekeeper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5);
+}
+
+.gatekeeper__card {
+    background: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-xl);
+    max-width: 480px;
+    width: 100%;
+    animation: fadeIn 0.4s ease-out;
+}

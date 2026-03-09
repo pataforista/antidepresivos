@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+  <title>Antidepresivos — 2026</title>
+  <link rel="icon" type="image/png" href="./assets/icons/icon-192.png">
+
+  <!-- Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/zingtouch@1.0.6/dist/zingtouch.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./src/styles/reset.css" />
+  <link rel="stylesheet" href="./src/styles/variables.css" />
+  <link rel="stylesheet" href="./src/styles/layout.css" />
+  <link rel="stylesheet" href="./src/styles/components.css" />
+  <link rel="stylesheet" href="./src/styles/quiz.css" />
+
+  <!-- IMPORTANTE: rutas relativas (no /...) -->
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#f8fafc" id="meta-theme-color" />
+
+  <script>
+    // Theme Bootstrap: Set theme immediately to avoid FOUC
+    try {
+      const persisted = JSON.parse(localStorage.getItem('pwa_antidep_2026::v0'));
+      const theme = persisted?.state?.ui?.theme || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#020617');
+    } catch (e) { }
+  </script>
+</head>
+
+<body>
+  <div id="debug-error"
+    style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:rgba(0,0,0,0.9); color:red; padding:20px; font-family:monospace; display:none; pointer-events:auto; white-space:pre-wrap;">
+  </div>
+  <div id="ribbons-container"
+    style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:0.6;"></div>
+
+  <div id="dock-container"></div>
+
+  <div id="app" style="position:relative; z-index:1;">
+    <div id="appShell" class="shell">
+      <!-- content will be rendered here -->
+    </div>
+  </div>
+
+  <!-- App bootstrap -->
+  <script type="module" src="./src/app.js"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('SW Registered'))
+          .catch(err => console.log('SW Failed', err));
+      });
+    }
+  </script>
+  <div id="bottom-sheet-container"></div>
+</body>
+
+</html>

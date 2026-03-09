@@ -1,0 +1,21 @@
+{
+  "app": {
+    "appId": "antidepresivos_codice",
+    "appVersion": "0.1.0"
+  },
+  "dataset": {
+    "hash": "v1.0.0",
+    "version": "1.0.0",
+    "path": "./data/dataset.antidepresivos.v1.0.0.json"
+  },
+  "schema": {
+    "hash": "schema001",
+    "version": "1.0.0",
+    "path": "./data/schemaUI.schema001.js"
+  },
+  "legal": {
+    "hash": "legal001",
+    "version": "1.0.0",
+    "path": "./data/legal.legal001.json"
+  }
+}
