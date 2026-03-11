@@ -697,6 +697,245 @@
   gap: 0.3rem;
 }
 
+/* ── Mode Selector ────────────────────────────────────────────────── */
+.quiz-mode-title {
+  font-family: var(--font-headers);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--quiz-text-dim);
+  margin: 0;
+}
+
+.quiz-mode-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  width: 100%;
+}
+
+@media (max-width: 560px) {
+  .quiz-mode-selector {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quiz-mode-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--quiz-surface);
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: var(--quiz-radius);
+  padding: 1.1rem 0.75rem;
+  cursor: pointer;
+  transition: border-color 200ms, box-shadow 200ms, transform 150ms;
+  --mode-color: #00e5ff;
+}
+
+.quiz-mode-card:hover {
+  border-color: var(--mode-color);
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.15);
+  transform: translateY(-3px);
+}
+
+.quiz-mode-card--active {
+  border-color: var(--mode-color);
+  background: color-mix(in srgb, var(--mode-color) 10%, var(--quiz-surface));
+  box-shadow: 0 0 18px color-mix(in srgb, var(--mode-color) 35%, transparent);
+}
+
+.quiz-mode-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.quiz-mode-label {
+  font-family: var(--font-headers);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--quiz-text);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.quiz-mode-desc {
+  font-size: 0.72rem;
+  color: var(--quiz-text-dim);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.quiz-mode-count {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--mode-color);
+  background: color-mix(in srgb, var(--mode-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--mode-color) 30%, transparent);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+}
+
+/* ── Clinical Scenario Card ───────────────────────────────────────── */
+.quiz-clinical-scenario {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.quiz-clinical-prompt {
+  font-size: 0.82rem;
+  color: var(--quiz-text-dim);
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+.quiz-clinical-need {
+  font-family: var(--font-headers);
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.25;
+  text-shadow: 0 0 10px rgba(255,110,180,0.25);
+}
+
+/* ── Pearl Card ───────────────────────────────────────────────────── */
+.quiz-pearl-card {
+  width: 100%;
+  background: linear-gradient(135deg,
+    rgba(192, 132, 252, 0.08) 0%,
+    rgba(0, 229, 255, 0.06) 100%
+  );
+  border: 1px solid rgba(192, 132, 252, 0.3);
+  border-radius: var(--quiz-radius);
+  padding: 1rem 1.25rem;
+  animation: quiz-fade-in 300ms ease;
+}
+
+.quiz-pearl-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.quiz-pearl-icon {
+  font-size: 1.1rem;
+}
+
+.quiz-pearl-label {
+  font-family: var(--font-headers);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--quiz-neon-purp);
+}
+
+.quiz-pearl-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--quiz-text-dim);
+  line-height: 1.65;
+}
+
+/* ── Review Section ───────────────────────────────────────────────── */
+.quiz-review-section {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.quiz-review-title {
+  font-family: var(--font-headers);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--quiz-text-dim);
+  margin: 0 0 0.75rem;
+}
+
+.quiz-review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 360px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(192, 132, 252, 0.3) transparent;
+  padding-right: 0.25rem;
+}
+
+.quiz-review-item {
+  background: var(--quiz-surface);
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  border-radius: var(--quiz-radius);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.quiz-review-drug {
+  font-family: var(--font-headers);
+  font-weight: 800;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.quiz-review-category {
+  font-size: 0.72rem;
+  color: var(--quiz-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.quiz-review-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
+
+.quiz-review-wrong-label,
+.quiz-review-correct-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.quiz-review-wrong-label { color: #f87171; }
+.quiz-review-correct-label { color: #34d399; }
+
+.quiz-review-wrong {
+  color: #f87171;
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.quiz-review-correct {
+  color: #34d399;
+  font-weight: 700;
+}
+
+.quiz-review-pearl {
+  font-size: 0.78rem;
+  color: var(--quiz-text-dim);
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
 /* ── Responsive ───────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .quiz-title { font-size: 2.5rem; }

@@ -6,6 +6,24 @@ import { store } from "../core/store.js";
 import * as policy from "../core/policy.js";
 import { escapeHtml } from "../core/utils.js";
 
+export function mountLegalModal() {
+  const modal = document.createElement("div");
+  modal.className = "gatekeeper animate-fade-in";
+  modal.style.zIndex = "3000";
+  modal.innerHTML = `
+    <div class="gatekeeper__card" style="position:relative;">
+      <button class="btn btn--circle btn--ghost" style="position:absolute; top:8px; right:8px;" onclick="this.closest('.gatekeeper').remove()">✕</button>
+      <h2 class="h2">Aviso Legal</h2>
+      <div class="alert alert--warning" style="margin-bottom: 24px; text-align: left; font-size: 0.85rem; line-height: 1.5;">
+          Esta aplicación está dirigida exclusivamente a profesionales de salud mental como apoyo clínico. No sustituye el juicio clínico, la valoración presencial, las guías oficiales ni la ficha técnica vigente de cada medicamento.<br><br>
+          Las dosis, equivalencias (CPZ), estrategias de switching y contenido farmacológico son aproximaciones educativas para consulta rápida. Deben verificarse y personalizarse en cada paciente según comorbilidades, interacciones, edad, estado clínico y normativas locales.<br><br>
+          Esta herramienta no está diseñada para automedicación ni para decisiones terapéuticas sin supervisión profesional.
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
 export function mountDisclaimerGate({ rootEl, onAllow }) {
   if (!rootEl) throw new Error("mountDisclaimerGate: rootEl requerido");
   if (typeof onAllow !== "function") throw new Error("mountDisclaimerGate: onAllow debe ser función");

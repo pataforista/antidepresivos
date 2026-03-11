@@ -1,55 +1,80 @@
 /* src/styles/layout.css */
 
-/* App Shell */
-#app {
+/* ── HTML/Body reset ──────────────────────────────────────── */
+html, body {
     height: 100%;
+    overflow-y: auto;
+}
+
+/* ── App Shell ────────────────────────────────────────────── */
+#app {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    /* Prevent horizontal scroll */
 }
 
 .shell {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
     background: var(--color-bg);
     overflow-x: hidden;
-    /* Double safety */
 }
 
-@media (min-width: 1024px) {
-    /* Optional: Centered layout on large screens if desired */
-}
-
-/* Glass Header */
+/* ── Header ───────────────────────────────────────────────── */
 .header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 200;
     display: flex;
     align-items: center;
-    padding: var(--space-3) var(--space-5);
+    padding: 0 var(--space-6);
+    height: 64px;
     background: var(--color-surface-translucent);
     backdrop-filter: var(--backdrop-blur);
     -webkit-backdrop-filter: var(--backdrop-blur);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 1px 0 var(--color-border), var(--shadow-sm);
+    transition: background var(--transition-normal), box-shadow var(--transition-normal);
     gap: var(--space-4);
-    box-shadow: var(--shadow-sm);
+}
+
+.header__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.header__logo {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: var(--font-headers);
+    font-weight: 900;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.28);
 }
 
 .header__title {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: -0.02em;
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
+    font-family: var(--font-headers);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin: 0;
 }
 
 .header__nav {
@@ -58,13 +83,11 @@
     gap: var(--space-2);
     align-items: center;
     position: relative;
-    /* Gooey Context */
     padding: 4px;
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--color-surface-raised);
     border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
 }
-
-/* Marker class for JS logic */
 
 .nav-gooey__blob {
     position: absolute;
@@ -74,25 +97,25 @@
     background: var(--color-surface);
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-sm);
-    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1),
-        width 0.4s cubic-bezier(0.2, 0.9, 0.3, 1),
+    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1),
+        width 0.35s cubic-bezier(0.2, 0.9, 0.3, 1),
         opacity 0.2s;
     z-index: 1;
     pointer-events: none;
     opacity: 0;
-    /* Hidden initially until JS positions it */
 }
 
 .nav-gooey__link {
     position: relative;
     z-index: 2;
     color: var(--color-text-muted);
-    font-weight: 500;
+    font-weight: 600;
     padding: var(--space-2) var(--space-4);
     border-radius: var(--radius-full);
     transition: color var(--transition-fast);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
 }
 
 .nav-gooey__link:hover {
@@ -101,31 +124,54 @@
 
 .nav-gooey__link.active {
     color: var(--color-primary);
+    font-weight: 700;
 }
 
-/* Main Content */
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* ── Main Content ─────────────────────────────────────────── */
 .main {
     flex: 1;
-    padding: var(--space-5);
-    overflow-y: auto;
-    scrollbar-gutter: stable;
-    overflow-x: hidden;
+    padding: var(--space-6) var(--space-5);
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    /* Add bottom clearance for the floating dock */
+    padding-bottom: calc(var(--dock-height) + var(--space-6));
 }
 
-/* Footer */
+/* ── Footer ───────────────────────────────────────────────── */
 .footer {
     padding: var(--space-3) var(--space-5);
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 1px solid var(--color-border);
     font-size: 0.8rem;
     color: var(--color-text-muted);
     background: var(--color-surface);
     text-align: center;
+    /* Also give footer clearance so dock doesn't overlap it */
+    padding-bottom: calc(var(--dock-height) + var(--space-3));
 }
 
-/* Grids */
+.footer__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    gap: var(--space-3);
+}
+
+/* ── Grid Layouts ─────────────────────────────────────────── */
 .grid-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
     gap: var(--space-4);
 }
 
@@ -142,6 +188,14 @@
     }
 }
 
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
 .radar-card {
     align-items: center;
     text-align: center;
@@ -152,52 +206,11 @@
     height: auto;
 }
 
-.table-card .compare-container {
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-}
-
-
-.detail-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.header__actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-left: auto;
-}
-
-.main {
-    padding: var(--space-6) var(--space-5);
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    min-height: 80vh;
-    /* Ensure content area is substantial */
-}
-
-.footer__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    gap: var(--space-3);
-}
-
+/* ── Tablet + Mobile Responsive ───────────────────────────── */
 @media (max-width: 1023px) {
     .header {
-        flex-wrap: nowrap;
-        gap: var(--space-2);
-        padding: var(--space-3);
+        padding: 0 var(--space-4);
+        height: 58px;
     }
 
     .header__title {
@@ -205,26 +218,20 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        max-width: 160px;
     }
 
-    /* Hide Desktop Gooey Nav — use M3 Bottom Nav instead */
     .header__nav {
         display: none;
     }
 
-    .header__actions {
-        margin-left: auto;
-        width: auto;
-    }
-
     .main {
-        padding: var(--space-4) var(--space-3);
-        /* Space for M3 bottom nav */
-        padding-bottom: calc(var(--nav-bar-height) + env(safe-area-inset-bottom) + var(--space-4));
+        padding: var(--space-4) var(--space-4);
+        padding-bottom: calc(var(--dock-height) + var(--space-4));
     }
 
     .grid-cards {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     }
 
     .grid-compare {
@@ -232,124 +239,160 @@
     }
 
     .footer {
-        padding: var(--space-5) var(--space-3);
-        padding-bottom: calc(var(--nav-bar-height) + env(safe-area-inset-bottom) + var(--space-5));
-    }
-
-    .footer__inner {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        padding: var(--space-4) var(--space-4);
+        padding-bottom: calc(var(--dock-height) + var(--space-4));
     }
 }
 
 @media (max-width: 640px) {
+    .header {
+        padding: 0 var(--space-3);
+        height: 54px;
+    }
+
+    .main {
+        padding: var(--space-3) var(--space-3);
+        padding-bottom: calc(var(--dock-height) + var(--space-3));
+    }
+
     .detail-layout {
         gap: var(--space-3);
     }
-
-    .footer {
-        padding-bottom: calc(var(--nav-bar-height) + env(safe-area-inset-bottom) + var(--space-3));
-    }
 }
 
-/* ============================================================
-   M3 Bottom Navigation Bar (replaces floating dock)
-   ============================================================ */
+/* ── Floating Dock (Universal Navigation) ─────────────────── */
 #dock-container {
-    display: none; /* Hide on desktop — shown only on mobile via .m3-nav-bar */
+    display: none;
 }
 
-.m3-nav-bar {
+.floating-dock {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: var(--nav-bar-height);
-    background: var(--color-surface-container-low);
-    border-top: 1px solid var(--color-border);
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 68px;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    background: var(--color-surface-translucent);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 34px;
     display: flex;
-    align-items: stretch;
-    z-index: 200;
-    padding: 0 var(--space-2);
-    padding-bottom: env(safe-area-inset-bottom);
-    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
-    /* Only show on mobile */
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 0 6px;
+    box-shadow: var(--shadow-dock);
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    /* Entry animation */
+    animation: dockSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-@media (min-width: 1024px) {
-    .m3-nav-bar {
-        display: none;
-    }
+.floating-dock::-webkit-scrollbar {
+    display: none;
+}
 
-    #dock-container {
-        display: none;
+@keyframes dockSlideIn {
+    from { transform: translateX(-50%) translateY(24px); opacity: 0; }
+    to   { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+    .floating-dock {
+        bottom: 12px;
+        width: calc(100vw - 24px);
+        max-width: 100%;
+        justify-content: space-around;
+        border-radius: 28px;
     }
 }
 
-.m3-nav-item {
-    flex: 1;
+/* Dock separator */
+.dock-separator {
+    width: 1px;
+    height: 28px;
+    background: var(--color-border-strong);
+    flex-shrink: 0;
+    margin: 0 2px;
+}
+
+.dock-nav-item {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: var(--color-text-muted);
-    gap: 4px;
-    padding-top: 12px;
-    padding-bottom: 4px;
+    color: var(--color-text-dim);
+    gap: 3px;
+    padding: 8px 10px;
     transition: color var(--transition-fast);
     -webkit-tap-highlight-color: transparent;
     outline: none;
+    min-width: 58px;
+    cursor: pointer;
+    background: none;
+    border: none;
 }
 
-.m3-nav-item__indicator {
-    width: 64px;
-    height: 32px;
-    border-radius: 16px;
+.dock-nav-item__indicator {
+    width: 44px;
+    height: 30px;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background var(--transition-normal);
+    transition: background var(--transition-normal), transform var(--transition-spring);
     position: relative;
+    background: transparent;
 }
 
-.m3-nav-item.active .m3-nav-item__indicator {
+.dock-nav-item:hover .dock-nav-item__indicator {
+    background: var(--color-surface-raised);
+    transform: translateY(-3px);
+}
+
+.dock-nav-item.active .dock-nav-item__indicator {
     background: var(--color-primary-container);
+    transform: translateY(-3px);
 }
 
-.m3-nav-item.active {
-    color: var(--color-on-primary-container);
+.dock-nav-item.active {
+    color: var(--color-primary);
 }
 
-.m3-nav-item__icon {
-    font-size: 20px;
+.dock-nav-item__icon {
+    font-size: 18px;
     line-height: 1;
     transition: transform var(--transition-spring);
 }
 
-.m3-nav-item.active .m3-nav-item__icon {
-    transform: scale(1.05);
+.dock-nav-item.active .dock-nav-item__icon {
+    transform: scale(1.1);
 }
 
-.m3-nav-item__label {
-    font-size: 11px;
+.dock-nav-item__label {
+    font-size: 9.5px;
     font-weight: 600;
     letter-spacing: 0.02em;
     font-family: var(--font-body);
-    transition: font-weight var(--transition-fast);
     white-space: nowrap;
+    transition: color var(--transition-fast), font-weight var(--transition-fast);
 }
 
-.m3-nav-item.active .m3-nav-item__label {
-    font-weight: 700;
+.dock-nav-item.active .dock-nav-item__label {
+    font-weight: 800;
+    color: var(--color-primary);
 }
 
-/* Compare badge on nav item */
-.m3-nav-item__badge {
+.dock-nav-item__badge {
     position: absolute;
-    top: -2px;
-    right: 6px;
+    top: -4px;
+    right: -4px;
     background: var(--color-primary);
     color: var(--color-on-primary);
     border-radius: var(--radius-full);
@@ -361,9 +404,11 @@
     align-items: center;
     justify-content: center;
     padding: 0 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    border: 1.5px solid var(--color-surface);
 }
 
-/* Gatekeeper Overlay */
+/* ── Gatekeeper Overlay ───────────────────────────────────── */
 .gatekeeper {
     position: fixed;
     top: 0;
@@ -371,13 +416,17 @@
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(248,250,252,0.8);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: var(--space-5);
+}
+
+[data-theme="dark"] .gatekeeper {
+    background: rgba(10, 15, 26, 0.85);
 }
 
 .gatekeeper__card {
@@ -388,5 +437,5 @@
     box-shadow: var(--shadow-xl);
     max-width: 480px;
     width: 100%;
-    animation: fadeIn 0.4s ease-out;
+    animation: fadeIn 0.4s cubic-bezier(0.2, 0, 0, 1);
 }

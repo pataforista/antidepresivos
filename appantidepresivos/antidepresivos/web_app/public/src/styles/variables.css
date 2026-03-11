@@ -1,116 +1,122 @@
-/* src/styles/variables.css — Material 3 Design System */
+/* src/styles/variables.css — Design System */
 :root {
-  /* --- M3 Palette: Deep Indigo & Scientific Emerald --- */
-
-  /* Primary: Deep Indigo */
+  /* --- Primary: Deep Indigo --- */
   --color-primary-h: 236;
   --color-primary-s: 72%;
-  --color-primary-l: 55%;
+  --color-primary-l: 52%;
   --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
-  --color-primary-light: hsl(var(--color-primary-h), var(--color-primary-s), 75%);
-  --color-primary-dark: hsl(var(--color-primary-h), var(--color-primary-s), 35%);
+  --color-primary-light: hsl(var(--color-primary-h), 72%, 75%);
+  --color-primary-dark: hsl(var(--color-primary-h), 72%, 32%);
   --color-on-primary: #ffffff;
-  /* M3 Container (tonal, high-lightness) */
-  --color-primary-container: hsl(var(--color-primary-h), 80%, 92%);
-  --color-on-primary-container: hsl(var(--color-primary-h), 72%, 20%);
+  --color-primary-container: hsl(var(--color-primary-h), 90%, 93%);
+  --color-on-primary-container: hsl(var(--color-primary-h), 72%, 18%);
 
-  /* Secondary: Scientific Emerald */
-  --color-secondary-h: 161;
-  --color-secondary-s: 75%;
-  --color-secondary-l: 45%;
+  /* --- Secondary: Scientific Teal-Emerald --- */
+  --color-secondary-h: 168;
+  --color-secondary-s: 70%;
+  --color-secondary-l: 40%;
   --color-secondary: hsl(var(--color-secondary-h), var(--color-secondary-s), var(--color-secondary-l));
   --color-secondary-container: hsl(var(--color-secondary-h), 70%, 90%);
-  --color-on-secondary-container: hsl(var(--color-secondary-h), 75%, 15%);
+  --color-on-secondary-container: hsl(var(--color-secondary-h), 75%, 12%);
 
-  /* Backgrounds & Surfaces (Light Theme — M3 surface roles) */
-  --color-bg: #f8fafc;
+  /* --- Surfaces (Light) --- */
+  --color-bg: #f4f7fb;
   --color-surface: #ffffff;
-  --color-surface-raised: #f1f5f9;
+  --color-surface-raised: #eef2f8;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f6f8fb;
-  --color-surface-container: #f0f3f7;
-  --color-surface-container-high: #eaecf0;
-  --color-surface-translucent: rgba(255, 255, 255, 0.88);
-  --color-border: rgba(15, 23, 42, 0.08);
+  --color-surface-container-low: #f4f7fb;
+  --color-surface-container: #edf1f7;
+  --color-surface-container-high: #e5eaf2;
+  --color-surface-translucent: rgba(255, 255, 255, 0.82);
+  --color-border: rgba(15, 23, 42, 0.07);
+  --color-border-strong: rgba(15, 23, 42, 0.14);
 
-  /* Text */
+  /* --- Text --- */
   --color-text-main: #0f172a;
-  --color-text-muted: #475569;
+  --color-text-muted: #4a5568;
   --color-text-dim: #94a3b8;
 
-  /* Status */
-  --color-danger: #e11d48;
+  /* --- Status --- */
+  --color-danger: #dc2626;
   --color-danger-container: #fee2e2;
-  --color-success: #10b981;
+  --color-success: #059669;
   --color-success-container: #d1fae5;
-  --color-warning: #f59e0b;
+  --color-warning: #d97706;
   --color-warning-container: #fef3c7;
 
   /* --- Typography --- */
   --font-headers: 'Outfit', sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
 
-  /* --- Spacing --- */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-8: 3rem;
+  /* --- Spacing (8pt grid) --- */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.5rem;    /* 24px */
+  --space-6: 2rem;      /* 32px */
+  --space-8: 3rem;      /* 48px */
 
-  /* --- M3 Elevation Shadows --- */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.12), 0 1px 3px 1px rgba(0,0,0,0.07);
-  --shadow-md: 0 1px 2px rgba(0,0,0,0.12), 0 2px 6px 2px rgba(0,0,0,0.07);
-  --shadow-lg: 0 4px 8px 3px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.15);
-  --shadow-xl: 0 6px 10px 4px rgba(0,0,0,0.1), 0 2px 3px rgba(0,0,0,0.15);
-  --shadow-glass: 0 8px 32px 0 rgba(15, 23, 42, 0.06);
+  /* --- Elevation Shadows (layered) --- */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 6px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg:  0 10px 20px rgba(0,0,0,0.07), 0 4px 6px rgba(0,0,0,0.05);
+  --shadow-xl:  0 20px 40px rgba(0,0,0,0.08), 0 8px 16px rgba(0,0,0,0.06);
+  --shadow-glass: 0 8px 32px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-dock: 0 16px 48px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.08);
 
-  /* --- Border Radii (M3 uses rounder shapes) --- */
+  /* --- Border Radii --- */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  --radius-xl: 28px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
   --radius-full: 9999px;
 
-  /* --- M3 Navigation Bar --- */
-  --nav-bar-height: 80px;
+  /* --- Navigation --- */
+  --dock-height: 88px;
+  --nav-bar-height: 88px;
 
-  /* --- Motion & Effects --- */
-  --backdrop-blur: blur(16px);
-  --transition-fast: 150ms cubic-bezier(0.2, 0, 0, 1);
-  --transition-normal: 300ms cubic-bezier(0.2, 0, 0, 1);
-  --transition-spring: 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --transition-emphasized: 500ms cubic-bezier(0.2, 0, 0, 1);
+  /* --- Motion --- */
+  --backdrop-blur: blur(20px);
+  --transition-fast: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-normal: 250ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-spring: 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-emphasized: 400ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* --- Dark Theme (M3 dark roles) --- */
+/* --- Dark Theme --- */
 [data-theme="dark"] {
-  --color-bg: #0d1117;
-  --color-surface: #161b22;
-  --color-surface-raised: #21262d;
-  --color-surface-container-lowest: #090d13;
-  --color-surface-container-low: #161b22;
-  --color-surface-container: #1e2430;
-  --color-surface-container-high: #262d3a;
-  --color-surface-translucent: rgba(13, 17, 23, 0.92);
-  --color-border: rgba(255, 255, 255, 0.08);
+  --color-bg: #0a0f1a;
+  --color-surface: #111827;
+  --color-surface-raised: #1a2236;
+  --color-surface-container-lowest: #07090f;
+  --color-surface-container-low: #111827;
+  --color-surface-container: #18202e;
+  --color-surface-container-high: #1e2840;
+  --color-surface-translucent: rgba(10, 15, 26, 0.88);
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
 
-  --color-text-main: #e6edf3;
-  --color-text-muted: #8b949e;
-  --color-text-dim: #484f58;
+  --color-text-main: #e2e8f4;
+  --color-text-muted: #8896ae;
+  --color-text-dim: #3d4a5c;
 
-  --color-primary-l: 68%;
+  --color-primary-l: 65%;
   --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
-  --color-primary-container: hsl(var(--color-primary-h), 60%, 25%);
+  --color-primary-container: hsl(var(--color-primary-h), 55%, 22%);
   --color-on-primary-container: hsl(var(--color-primary-h), 80%, 88%);
 
-  --color-secondary-container: hsl(var(--color-secondary-h), 50%, 22%);
-  --color-on-secondary-container: hsl(var(--color-secondary-h), 70%, 85%);
+  --color-secondary-l: 55%;
+  --color-secondary: hsl(var(--color-secondary-h), var(--color-secondary-s), var(--color-secondary-l));
+  --color-secondary-container: hsl(var(--color-secondary-h), 45%, 20%);
+  --color-on-secondary-container: hsl(var(--color-secondary-h), 65%, 82%);
 
-  --color-danger-container: rgba(225, 29, 72, 0.2);
-  --color-success-container: rgba(16, 185, 129, 0.15);
-  --color-warning-container: rgba(245, 158, 11, 0.15);
+  --color-danger-container: rgba(220, 38, 38, 0.18);
+  --color-success-container: rgba(5, 150, 105, 0.15);
+  --color-warning-container: rgba(217, 119, 6, 0.15);
 
-  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --shadow-dock: 0 16px 48px rgba(0,0,0,0.6), 0 4px 12px rgba(0,0,0,0.4);
 }

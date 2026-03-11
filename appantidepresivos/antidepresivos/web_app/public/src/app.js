@@ -1,6 +1,6 @@
 import { store } from "./core/store.js";
 import { loadAppData } from "./core/dataLoader.js";
-import { mountDisclaimerGate } from "./ui/gatekeeperDisclaimer.js";
+import { mountDisclaimerGate, mountLegalModal } from "./ui/gatekeeperDisclaimer.js";
 import { createRouter } from "./core/router.js";
 import * as policy from "./core/policy.js";
 import { selectFilteredItems, selectComparisonData } from "./core/selectors.js";
@@ -153,34 +153,19 @@ function attachGlobalListeners() {
     });
   }
 
-  // Modal de Info
-  const btnInfo = document.getElementById("btnOpenInfo");
-  if (btnInfo) {
-    btnInfo.addEventListener("click", () => mountInfoModal());
-  }
+  // Info and Legal modal handled via dock event delegation
 }
 
 function updateHeaderNav(route) {
   const routeName = route?.name ?? "";
 
-  // Desktop Gooey Nav
-  document.querySelectorAll(".nav-gooey__link").forEach(el => {
-    el.classList.remove("active");
-    const href = el.getAttribute("href");
-    if (href === `#/${routeName}` || (routeName === "list" && href === "#/list")) {
-      el.classList.add("active");
-    }
-  });
-
-  // M3 Bottom Navigation
-  document.querySelectorAll(".m3-nav-link").forEach(el => {
+  // Floating Dock Navigation
+  document.querySelectorAll(".dock-link").forEach(el => {
     el.classList.remove("active");
     const id = el.dataset.id;
     const matches = id === routeName || (routeName === "list" && id === "list");
     if (matches) el.classList.add("active");
   });
-
-  updateGooeyNav();
 }
 
 /* ============================================================
@@ -226,37 +211,28 @@ function mountShell(root) {
 
   root.innerHTML = `
     <div id="appShell" class="shell">
-      <header class="header glass-effect">
-        <strong class="header__title">${escapeHtml(title)}</strong>
-
-        <nav class="header__nav nav-gooey">
-          <div class="nav-gooey__blob" style="background: var(--color-primary-light); opacity: 0.2; border-radius: var(--radius-full);"></div>
-          <a href="#/list" class="nav-gooey__link">Lista</a>
-          <a href="#/compare" class="nav-gooey__link" id="btnHeaderCompare">Comparar</a>
-          <a href="#/switching" class="nav-gooey__link">Switching</a>
-          <a href="#/interact" class="nav-gooey__link">Interacciones</a>
-          <a href="#/quiz" class="nav-gooey__link nav-gooey__link--quiz">✦ Quiz</a>
-        </nav>
+      <header class="header">
+        <div class="header__brand">
+          <div class="header__logo">A</div>
+          <strong class="header__title">${escapeHtml(title)}</strong>
+        </div>
 
         <div class="header__actions">
-            <button id="btnThemeToggle" title="Cambiar Tema" class="btn btn--circle btn--ghost" style="font-size: 1.2rem; min-width: 44px; height: 44px; padding:0; border-radius:50%">
-              ${theme === 'dark' ? '☀️' : '🌙'}
-            </button>
-            <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" style="font-weight:700; display:none">
-                Limpiar
-            </button>
-            <div id="compareCount" class="chip chip--active text-xs" style="padding: 4px 10px; min-width: 24px; text-align: center; display:none"></div>
+          <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" style="font-weight:700; display:none">
+            Limpiar
+          </button>
+          <button id="btnThemeToggle" title="Cambiar Tema" class="btn btn--circle btn--ghost" style="font-size: 1.2rem; width: 40px; height: 40px; padding:0; background: var(--color-surface-raised);">
+            ${theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          <div id="compareCount" class="chip chip--active text-xs" style="padding: 4px 10px; min-width: 24px; text-align: center; display:none"></div>
         </div>
       </header>
 
       <main id="appView" class="main"></main>
 
-      <footer class="footer" style="background: var(--color-surface); border-top: 1px solid var(--color-border); margin-top: auto;">
+      <footer class="footer">
         <div class="footer__inner">
-           <span class="text-xs text-muted" style="font-weight:600">EDICIÓN 2026 • SOPORTE CLÍNICO</span>
-           <button id="btnOpenInfo" class="btn btn--outline text-xs" style="padding:var(--space-2) var(--space-4); border-radius:var(--radius-md);">
-             Créditos
-           </button>
+          <span class="text-xs text-muted" style="font-weight:600">EDICIÓN 2026 · SOPORTE CLÍNICO</span>
         </div>
       </footer>
     </div>
@@ -892,36 +868,58 @@ function renderRadarChart(data, colors) {
 }
 
 function mountDock(container) {
-  if (!container) return;
-
-  // M3 Bottom Navigation — 5 destinos principales
-  const items = [
-    { id: "list",      label: "Inicio",       icon: "🏠",  hash: "#/list" },
-    { id: "compare",   label: "Comparar",     icon: "⚖️",  hash: "#/compare" },
-    { id: "switching", label: "Switching",    icon: "🔄",  hash: "#/switching" },
-    { id: "interact",  label: "Interacc.",    icon: "⚡",  hash: "#/interact" },
-    { id: "quiz",      label: "Quiz",         icon: "✦",   hash: "#/quiz" },
+  const navItems = [
+    { id: "list",      label: "Inicio",    icon: "🏠",  hash: "#/list",      isRoute: true },
+    { id: "compare",   label: "Comparar",  icon: "⚖️",  hash: "#/compare",   isRoute: true },
+    { id: "switching", label: "Switching", icon: "🔄",  hash: "#/switching", isRoute: true },
+    { id: "interact",  label: "Interact.", icon: "⚡",  hash: "#/interact",  isRoute: true },
+    { id: "quiz",      label: "Quiz",      icon: "🎮",  hash: "#/quiz",      isRoute: true },
+  ];
+  const actionItems = [
+    { id: "legal", label: "Legal",    icon: "📜", hash: "#", isRoute: false, action: "legal" },
+    { id: "info",  label: "Créditos", icon: "💡", hash: "#", isRoute: false, action: "info"  },
   ];
 
-  // Inject M3 nav bar directly into body (not the dock container, which is hidden on desktop)
-  let navBar = document.getElementById("m3-nav-bar");
+  let navBar = document.getElementById("floating-dock");
   if (!navBar) {
     navBar = document.createElement("nav");
-    navBar.id = "m3-nav-bar";
-    navBar.className = "m3-nav-bar animate-fade-in";
-    navBar.style.animationDelay = "0.4s";
+    navBar.id = "floating-dock";
+    navBar.className = "floating-dock";
+    navBar.setAttribute("aria-label", "Navegación principal");
+
+    // Event delegation for action buttons
+    navBar.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-action]");
+      if (!btn) return;
+      e.preventDefault();
+      const action = btn.dataset.action;
+      if (action === "info") mountInfoModal();
+      else if (action === "legal") mountLegalModal();
+    });
+
     document.body.appendChild(navBar);
   }
 
-  navBar.innerHTML = items.map(item => `
-    <a href="${item.hash}" class="m3-nav-item m3-nav-link dock-link" data-id="${item.id}">
-      <span class="m3-nav-item__indicator">
-        <span class="m3-nav-item__icon">${item.icon}</span>
-        ${item.id === "compare" ? `<span class="m3-nav-item__badge" id="navCompareBadge" style="display:none"></span>` : ""}
-      </span>
-      <span class="m3-nav-item__label">${item.label}</span>
-    </a>
-  `).join("");
+  function renderItem(item) {
+    return `
+      <a href="${item.hash}"
+         class="dock-nav-item ${item.isRoute ? 'dock-link' : ''}"
+         data-id="${item.id}"
+         ${item.action ? `data-action="${item.action}"` : ""}
+         ${!item.isRoute ? 'role="button"' : ""}>
+        <span class="dock-nav-item__indicator">
+          <span class="dock-nav-item__icon">${item.icon}</span>
+          ${item.id === "compare" ? `<span class="dock-nav-item__badge" id="navCompareBadge" style="display:none"></span>` : ""}
+        </span>
+        <span class="dock-nav-item__label">${item.label}</span>
+      </a>
+    `;
+  }
+
+  navBar.innerHTML =
+    navItems.map(renderItem).join("") +
+    `<span class="dock-separator" aria-hidden="true"></span>` +
+    actionItems.map(renderItem).join("");
 }
 
 
@@ -935,8 +933,36 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').then(registration => {
       console.log('SW registered: ', registration);
+
+      // Check for updates periodically
+      setInterval(() => {
+        registration.update();
+      }, 1000 * 60 * 60); // Check every hour
+
+      registration.onupdatefound = () => {
+        const installingWorker = registration.installing;
+        if (installingWorker == null) return;
+        installingWorker.onstatechange = () => {
+          if (installingWorker.state === 'installed') {
+            if (navigator.serviceWorker.controller) {
+              // New update available, force skip waiting
+              console.log('New content is available; please refresh.');
+              if (registration.waiting) {
+                registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+              }
+            }
+          }
+        };
+      };
     }).catch(registrationError => {
       console.log('SW registration failed: ', registrationError);
     });
+  });
+
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing) return;
+    refreshing = true;
+    window.location.reload();
   });
 }
