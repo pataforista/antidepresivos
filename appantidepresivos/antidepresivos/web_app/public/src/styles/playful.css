@@ -398,3 +398,56 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+/* ─── Mascot Animations ────────────────────────────────────────────────── */
+.mascot-container {
+    position: fixed;
+    bottom: -100px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    z-index: 1000;
+    pointer-events: none;
+    transition: transform 0.6s var(--transition-spring);
+}
+
+.mascot-container.visible {
+    transform: translateY(-120px);
+}
+
+.mascot-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+}
+
+.mascot-wave {
+    animation: mascotWave 2s infinite ease-in-out;
+}
+
+@keyframes mascotWave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+/* ─── Motivational Toast ───────────────────────────────────────────────── */
+.toast--motivational {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent-pink));
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-premium), 0 0 20px rgba(124, 58, 237, 0.3);
+    animation: toastMotivate 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes toastMotivate {
+    0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* ─── Premium Gradient Utility ─────────────────────────────────────────── */
+.gradient-premium {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+}

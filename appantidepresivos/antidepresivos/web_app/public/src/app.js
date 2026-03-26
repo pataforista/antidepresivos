@@ -97,6 +97,11 @@ async function main() {
 
         // Listeners globales delegados o post-shell
         attachGlobalListeners();
+
+        // Welcome toast
+        setTimeout(() => {
+          showToast("¡Bienvenido al asistente de Antidepresivos 2026! 🚀", "info");
+        }, 1200);
       },
     });
   } catch (e) {
@@ -150,6 +155,7 @@ function attachGlobalListeners() {
     btnClear.addEventListener("click", () => {
       store.setCompareIds([], { reason: "ui:clearCompare" });
       location.hash = "#/list";
+      showToast("Comparación limpiada", "info");
     });
   }
 
@@ -360,20 +366,20 @@ function getClinicalChips(d) {
   const sed = parseInt(d.nivel_sedacion, 10);
   if (!isNaN(sed)) {
     const variants = ["success", "success", "warning", "danger"];
-    const labels = ["Sin sedación", "Sedación ↓", "Sedación ↑↑", "Sedación ↑↑↑"];
+    const labels = ["Sin sedación 🌿", "Sedación ↓ 😴", "Sedación ↑↑ 😫", "Sedación ↑↑↑ 💤"];
     chips.push({ label: labels[Math.min(sed, 3)], variant: variants[Math.min(sed, 3)] });
   }
 
   // QT risk — only flag if notable
   const qt = (d.riesgo_prolongacion_qt || "").toLowerCase();
   if (/alto|medio|moderado/i.test(qt)) {
-    chips.push({ label: "QT ↑", variant: /alto/i.test(qt) ? "danger" : "warning" });
+    chips.push({ label: "QT ↑ 💓", variant: /alto/i.test(qt) ? "danger" : "warning" });
   }
 
   // Sexual dysfunction — only flag if notable
   const sex = (d.perfil_disfuncion_sexual || "").toLowerCase();
   if (/alto|medio|moderado|significativo/i.test(sex)) {
-    chips.push({ label: "D.sexual ↑", variant: /alto/i.test(sex) ? "danger" : "warning" });
+    chips.push({ label: "D.sexual ↑ ❤️", variant: /alto/i.test(sex) ? "danger" : "warning" });
   }
 
   return chips;
@@ -392,12 +398,15 @@ function renderClinicalChips(d) {
    ============================================================ */
 function renderSkeletonGrid(count = 6) {
   return Array.from({ length: count }, () => `
-    <div class="skeleton-card">
-      <div class="skeleton skeleton-line skeleton-line--title"></div>
-      <div class="skeleton skeleton-line skeleton-line--sub"></div>
-      <div style="display:flex; gap:8px; margin-top:8px">
-        <div class="skeleton skeleton-line skeleton-line--chip"></div>
-        <div class="skeleton skeleton-line skeleton-line--chip"></div>
+    <div class="skeleton-card" style="padding: 20px; border-radius: var(--radius-lg); background: var(--color-surface);">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+        <div class="skeleton" style="height:24px; width:60%; border-radius:6px;"></div>
+        <div class="skeleton" style="height:32px; width:32px; border-radius:50%;"></div>
+      </div>
+      <div class="skeleton" style="height:16px; width:40%; margin-bottom:20px; border-radius:4px;"></div>
+      <div style="display:flex; gap:8px;">
+        <div class="skeleton" style="height:28px; width:80px; border-radius:20px;"></div>
+        <div class="skeleton" style="height:28px; width:100px; border-radius:20px;"></div>
       </div>
     </div>
   `).join("");
@@ -514,9 +523,17 @@ function renderDrugCard(d, selected) {
   const cls = d.clase_terapeutica ?? "";
   const isOn = selected.has(id);
 
+  // Determinar emoji según clase
+  let emoji = "💊";
+  if (/isrs/i.test(cls)) emoji = "🧠";
+  if (/dual|irsn/i.test(cls)) emoji = "🔁";
+  if (/triciclico/i.test(cls)) emoji = "🧬";
+  if (/imao/i.test(cls)) emoji = "🔬";
+
   return `
     <div class="card card--hoverable card--spotlight">
       <div class="card-drug__header">
+        <div class="card-drug__emoji">${emoji}</div>
         <a href="#/detail/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
         <button type="button"
           class="card-drug__compare-btn chkCompareBtn ${isOn ? "active" : ""}"
@@ -570,6 +587,11 @@ function attachFilterListeners(view) {
       btn.classList.toggle("active", isNowOn);
       btn.textContent = isNowOn ? "✓" : "+";
       btn.setAttribute("aria-pressed", String(isNowOn));
+
+      // Playful feedback
+      if (isNowOn) {
+        showToast(`✨ Fármaco agregado`, 'success');
+      }
 
       // Update compare FAB
       const go = document.getElementById("btnGoCompare");
@@ -635,6 +657,13 @@ function renderCompare(view) {
       });
     }
     return;
+  }
+
+  // Si llegamos aquí con 2 o más, celebrar (pero solo una vez por navegación)
+  if (rows.length >= 2) {
+    setTimeout(() => {
+      celebrate("¡Comparación lista para análisis! ✨");
+    }, 400);
   }
 
   const chips = rows
@@ -922,6 +951,55 @@ function mountDock(container) {
     actionItems.map(renderItem).join("");
 }
 
+
+/* ============================================================
+   Feedback & Motivation (Playful)
+   ============================================================ */
+
+function showToast(message, type = 'info', duration = 3500) {
+  const container = document.getElementById("toast-container") || (() => {
+    const c = document.createElement("div");
+    c.id = "toast-container";
+    c.style.cssText = "position:fixed; bottom:110px; right:20px; z-index:10000; display:flex; flex-direction:column; gap:10px; pointer-events:none;";
+    document.body.appendChild(c);
+    return c;
+  })();
+
+  const toast = document.createElement("div");
+  toast.className = `toast toast--${type}`;
+  toast.textContent = message;
+  toast.style.pointerEvents = "auto";
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(100%)";
+    setTimeout(() => toast.remove(), 400);
+  }, duration);
+}
+
+function celebrate(message = "¡Análisis clínico completado! ✨") {
+  if (window.confetti) {
+    window.confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#6366f1', '#ec4899', '#10b981', '#f59e0b']
+    });
+  }
+  showToast(message, 'motivational');
+  addMascotPeek();
+}
+
+function addMascotPeek() {
+  const mascot = document.getElementById("mascot-container");
+  if (mascot) {
+    mascot.classList.add("visible");
+    setTimeout(() => {
+      mascot.classList.remove("visible");
+    }, 4000);
+  }
+}
 
 /* ============================================================
    Helpers
