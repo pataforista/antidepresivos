@@ -418,8 +418,9 @@
 .mascot-img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    display: block;
     filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+    color: currentColor;
 }
 
 .mascot-wave {
