@@ -213,18 +213,18 @@ function mountShell(root) {
     <div id="appShell" class="shell">
       <header class="header">
         <div class="header__brand">
-          <div class="header__logo">A</div>
-          <strong class="header__title">${escapeHtml(title)}</strong>
+          <div class="header__logo" title="${escapeHtml(title)}">A</div>
+          <h1 class="header__title">${escapeHtml(title)}</h1>
         </div>
 
         <div class="header__actions">
-          <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" style="font-weight:700; display:none">
+          <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" aria-label="Limpiar comparación" style="display:none;">
             Limpiar
           </button>
-          <button id="btnThemeToggle" title="Cambiar Tema" class="btn btn--circle btn--ghost" style="font-size: 1.2rem; width: 40px; height: 40px; padding:0; background: var(--color-surface-raised);">
+          <button id="btnThemeToggle" type="button" aria-label="Alternar tema" class="btn btn--circle btn--ghost" style="width: 44px; height: 44px; font-size: 1.25rem;">
             ${theme === 'dark' ? '☀️' : '🌙'}
           </button>
-          <div id="compareCount" class="chip chip--active text-xs" style="padding: 4px 10px; min-width: 24px; text-align: center; display:none"></div>
+          <div id="compareCount" class="chip chip--active text-xs" aria-label="Elementos seleccionados" role="status" style="display:none;"></div>
         </div>
       </header>
 

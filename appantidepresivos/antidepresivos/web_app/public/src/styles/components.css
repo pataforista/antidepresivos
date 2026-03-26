@@ -144,17 +144,31 @@ body {
     background: transparent;
     color: var(--color-text-muted);
     box-shadow: none;
+    border: 1px solid transparent;
 }
 
 .btn--ghost:hover:not(:disabled) {
     background: var(--color-surface-raised);
     color: var(--color-primary);
+    border-color: var(--color-border);
+}
+
+.btn--ghost:active:not(:disabled) {
+    background: var(--color-surface-container);
 }
 
 .btn--circle {
     aspect-ratio: 1/1;
     padding: 0;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-normal);
+}
+
+.btn--circle:hover:not(:disabled) {
+    transform: scale(1.05) !important;
 }
 
 /* --- Cards & Glassmorphism --- */
@@ -212,24 +226,29 @@ body {
 
 /* --- Clinical Elements --- */
 .chip {
-    padding: 6px 16px;
+    padding: 8px 14px;
     border-radius: var(--radius-full);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
     background: var(--color-surface-raised);
     color: var(--color-text-muted);
     border: 1.5px solid var(--color-border);
-    transition: all var(--transition-spring);
+    transition: all var(--transition-normal);
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 6px;
+    min-width: 32px;
+    height: 32px;
+    letter-spacing: 0.5px;
 }
 
 .chip--active {
     background: var(--color-primary);
     color: white;
     border-color: var(--color-primary);
-    box-shadow: 0 4px 12px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.3);
+    box-shadow: 0 2px 8px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.3);
+    font-weight: 800;
 }
 
 .badge {
