@@ -31,7 +31,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-3) var(--space-6);
+    padding: max(var(--space-3), env(safe-area-inset-top)) max(var(--space-6), env(safe-area-inset-right)) var(--space-3) max(var(--space-6), env(safe-area-inset-left));
     min-height: 68px;
     background: var(--color-surface-translucent);
     backdrop-filter: var(--backdrop-blur);
@@ -67,9 +67,11 @@ html, body {
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.header__logo:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.35);
+@media (hover: hover) {
+    .header__logo:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.35);
+    }
 }
 
 .header__title {
@@ -132,8 +134,10 @@ html, body {
     letter-spacing: 0.3px;
 }
 
-.nav-gooey__link:hover {
-    color: var(--color-text-main);
+@media (hover: hover) {
+    .nav-gooey__link:hover {
+        color: var(--color-text-main);
+    }
 }
 
 .nav-gooey__link.active {
@@ -157,8 +161,8 @@ html, body {
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-    /* Add bottom clearance for the floating dock */
-    padding-bottom: calc(var(--dock-height) + var(--space-6));
+    /* Add bottom clearance for the floating dock + safe area (notch phones) */
+    padding-bottom: calc(var(--dock-height) + var(--space-6) + env(safe-area-inset-bottom));
 }
 
 /* ── Footer ───────────────────────────────────────────────── */
@@ -169,8 +173,8 @@ html, body {
     color: var(--color-text-muted);
     background: var(--color-surface);
     text-align: center;
-    /* Also give footer clearance so dock doesn't overlap it */
-    padding-bottom: calc(var(--dock-height) + var(--space-3));
+    /* Also give footer clearance so dock doesn't overlap it + safe area */
+    padding-bottom: calc(var(--dock-height) + var(--space-3) + env(safe-area-inset-bottom));
 }
 
 .footer__inner {
@@ -247,7 +251,7 @@ html, body {
 
     .main {
         padding: var(--space-4) var(--space-4);
-        padding-bottom: calc(var(--dock-height) + var(--space-4));
+        padding-bottom: calc(var(--dock-height) + var(--space-4) + env(safe-area-inset-bottom));
     }
 
     .grid-cards {
@@ -260,7 +264,7 @@ html, body {
 
     .footer {
         padding: var(--space-4) var(--space-4);
-        padding-bottom: calc(var(--dock-height) + var(--space-4));
+        padding-bottom: calc(var(--dock-height) + var(--space-4) + env(safe-area-inset-bottom));
     }
 }
 
@@ -289,7 +293,7 @@ html, body {
 
     .main {
         padding: var(--space-3) var(--space-3);
-        padding-bottom: calc(var(--dock-height) + var(--space-3));
+        padding-bottom: calc(var(--dock-height) + var(--space-3) + env(safe-area-inset-bottom));
     }
 
     .detail-layout {
@@ -304,7 +308,7 @@ html, body {
 
 .floating-dock {
     position: fixed;
-    bottom: 20px;
+    bottom: max(20px, calc(12px + env(safe-area-inset-bottom)));
     left: 50%;
     transform: translateX(-50%);
     height: 68px;
@@ -340,7 +344,7 @@ html, body {
 
 @media (max-width: 600px) {
     .floating-dock {
-        bottom: 12px;
+        bottom: max(12px, calc(8px + env(safe-area-inset-bottom)));
         width: calc(100vw - 24px);
         max-width: 100%;
         justify-content: space-around;
@@ -369,6 +373,7 @@ html, body {
     padding: 8px 10px;
     transition: color var(--transition-fast);
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
     outline: none;
     min-width: 58px;
     cursor: pointer;
@@ -388,9 +393,11 @@ html, body {
     background: transparent;
 }
 
-.dock-nav-item:hover .dock-nav-item__indicator {
-    background: var(--color-surface-raised);
-    transform: translateY(-3px);
+@media (hover: hover) {
+    .dock-nav-item:hover .dock-nav-item__indicator {
+        background: var(--color-surface-raised);
+        transform: translateY(-3px);
+    }
 }
 
 .dock-nav-item.active .dock-nav-item__indicator {

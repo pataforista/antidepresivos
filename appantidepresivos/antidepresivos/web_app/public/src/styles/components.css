@@ -12,19 +12,19 @@
 }
 
 .h1 {
-    font-size: 3rem;
+    font-size: clamp(1.75rem, 5vw, 3rem);
     font-weight: 800;
     margin-bottom: var(--space-5);
 }
 
 .h2 {
-    font-size: 2.25rem;
+    font-size: clamp(1.4rem, 4vw, 2.25rem);
     font-weight: 700;
     margin-bottom: var(--space-4);
 }
 
 .h3 {
-    font-size: 1.75rem;
+    font-size: clamp(1.15rem, 3vw, 1.75rem);
     font-weight: 700;
     margin-bottom: var(--space-3);
 }
@@ -112,6 +112,8 @@ body {
     gap: var(--space-2);
     position: relative;
     box-shadow: var(--shadow-sm);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .btn--primary {
@@ -121,10 +123,12 @@ body {
     box-shadow: 0 4px 12px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.25);
 }
 
-.btn--primary:hover:not(:disabled) {
-    background: var(--color-primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.35);
+@media (hover: hover) {
+    .btn--primary:hover:not(:disabled) {
+        background: var(--color-primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.35);
+    }
 }
 
 .btn--outline {
@@ -133,11 +137,13 @@ body {
     background: var(--color-surface);
 }
 
-.btn--outline:hover:not(:disabled) {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+@media (hover: hover) {
+    .btn--outline:hover:not(:disabled) {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
 }
 
 .btn--ghost {
@@ -167,8 +173,10 @@ body {
     transition: all var(--transition-normal);
 }
 
-.btn--circle:hover:not(:disabled) {
-    transform: scale(1.05) !important;
+@media (hover: hover) {
+    .btn--circle:hover:not(:disabled) {
+        transform: scale(1.05) !important;
+    }
 }
 
 /* --- Cards & Glassmorphism --- */
@@ -191,10 +199,12 @@ body {
     overflow: hidden;
 }
 
-.card--hoverable:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--color-primary-light);
+@media (hover: hover) {
+    .card--hoverable:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--color-primary-light);
+    }
 }
 
 .card__title {
@@ -422,10 +432,12 @@ body {
     color: var(--color-text-muted);
 }
 
-.dock-item:hover {
-    background: var(--color-surface-raised);
-    transform: translateY(-8px) scale(1.1);
-    color: var(--color-primary);
+@media (hover: hover) {
+    .dock-item:hover {
+        background: var(--color-surface-raised);
+        transform: translateY(-8px) scale(1.1);
+        color: var(--color-primary);
+    }
 }
 
 .dock-item.active {
@@ -469,10 +481,12 @@ body {
     aspect-ratio: 1 / 1;
 }
 
-.compact-card:hover {
-    background: var(--color-bg);
-    border-color: var(--color-primary);
-    transform: scale(1.02);
+@media (hover: hover) {
+    .compact-card:hover {
+        background: var(--color-bg);
+        border-color: var(--color-primary);
+        transform: scale(1.02);
+    }
 }
 
 /* --- Risk & Bio-Profiling --- */
@@ -545,9 +559,11 @@ body {
     transition: all var(--transition-normal);
 }
 
-.field-box:hover {
-    border-color: var(--color-primary-light);
-    transform: scale(1.01);
+@media (hover: hover) {
+    .field-box:hover {
+        border-color: var(--color-primary-light);
+        transform: scale(1.01);
+    }
 }
 
 .field-box__label {
@@ -567,14 +583,6 @@ body {
 }
 
 @media (max-width: 768px) {
-    .h1 {
-        font-size: 2.25rem;
-    }
-
-    .h2 {
-        font-size: 1.75rem;
-    }
-
     .compact-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -587,7 +595,12 @@ body {
     .tabs-nav {
         overflow-x: auto;
         gap: var(--space-3);
-        scrollbar-width: thin;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .tabs-nav::-webkit-scrollbar {
+        display: none;
     }
 
     .tab-btn {
@@ -595,7 +608,7 @@ body {
     }
 
     #dock-container {
-        bottom: 20px;
+        bottom: max(20px, calc(12px + env(safe-area-inset-bottom)));
         width: 92%;
     }
 
@@ -618,6 +631,23 @@ body {
     .dock-icon {
         font-size: 22px;
         margin: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    /* Prevent iOS auto-zoom on input focus */
+    input, select, textarea {
+        font-size: max(1rem, 16px);
+    }
+
+    /* Hide desktop keyboard shortcut hint in search */
+    .search-hero__icon-right {
+        display: none;
+    }
+
+    /* Remove right padding offset when shortcut is hidden */
+    .search-hero__input {
+        padding-right: 18px;
     }
 }
 
@@ -741,6 +771,7 @@ body {
     cursor: pointer;
     transition: all var(--transition-fast);
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
     user-select: none;
     flex-shrink: 0;
 }
@@ -930,8 +961,8 @@ body {
 }
 
 .card-drug__compare-btn {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--radius-full);
     border: 1.5px solid var(--color-border);
     background: var(--color-surface-container);
@@ -945,6 +976,7 @@ body {
     flex-shrink: 0;
     font-weight: 700;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 .card-drug__compare-btn:hover {
@@ -1041,11 +1073,13 @@ body {
     white-space: nowrap;
 }
 
-.m3-fab:hover:not(:disabled) {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-    background: var(--color-primary);
-    color: var(--color-on-primary);
+@media (hover: hover) {
+    .m3-fab:hover:not(:disabled) {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+        background: var(--color-primary);
+        color: var(--color-on-primary);
+    }
 }
 
 .m3-fab:disabled {
@@ -1128,6 +1162,7 @@ body {
     color: var(--color-text-main);
     transition: background var(--transition-fast);
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
     user-select: none;
 }
 
@@ -1225,8 +1260,8 @@ body {
 .bottom-sheet__close {
     background: var(--color-bg);
     border: 1px solid var(--color-border);
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1234,11 +1269,14 @@ body {
     font-size: 1.2rem;
     cursor: pointer;
     color: var(--color-text-muted);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .bottom-sheet__content {
     padding: var(--space-6);
     padding-top: 0;
+    padding-bottom: max(var(--space-6), env(safe-area-inset-bottom));
     overflow-y: auto;
     flex: 1;
     -webkit-overflow-scrolling: touch;
