@@ -1,0 +1,29 @@
+{
+  "name": "antidepresivos",
+  "version": "1.0.0",
+  "description": "Aplicación web educativa sobre antidepresivos - Material Design 3 + PWA",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "npm run copy:assets",
+    "copy:assets": "echo 'Assets are already in public directory'",
+    "dev": "npx wrangler pages dev appantidepresivos/antidepresivos/web_app/public",
+    "deploy": "npx wrangler pages deploy appantidepresivos/antidepresivos/web_app/public",
+    "deploy:prod": "npx wrangler pages deploy appantidepresivos/antidepresivos/web_app/public --project-name=antidepresivos-prod",
+    "lint": "echo 'No linter configured'",
+    "test": "echo 'No tests configured'"
+  },
+  "keywords": [
+    "antidepresivos",
+    "farmacología",
+    "educación",
+    "salud mental",
+    "material design 3"
+  ],
+  "author": "Pataforista",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.50.0"
+  },
+  "dependencies": {}
+}

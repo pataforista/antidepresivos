@@ -1,0 +1,45 @@
+name = "antidepresivos"
+type = "javascript"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
+
+# Cloudflare Pages configuration
+pages_build_caching = true
+
+# Build configuration
+[build]
+cwd = "./"
+command = "npm run build"
+watch_paths = ["appantidepresivos/antidepresivos/web_app/public/**/*"]
+
+[build.upload]
+format = "service-worker"
+
+# Environment configuration
+[env.production]
+name = "antidepresivos-prod"
+routes = [
+  { pattern = "antidepresivos.com/*", zone_name = "antidepresivos.com" },
+  { pattern = "www.antidepresivos.com/*", zone_name = "antidepresivos.com" }
+]
+
+[env.staging]
+name = "antidepresivos-staging"
+
+# Redirect rules for SPA
+[[routes]]
+pattern = "/*"
+custom_domain = true
+
+# Cache configuration
+[env.production.routes.0]
+pattern = "antidepresivos.com/assets/*"
+zone_name = "antidepresivos.com"
+cache = { default_ttl = 86400, max_ttl = 604800 }
+
+[env.production.routes.1]
+pattern = "antidepresivos.com/data/*"
+zone_name = "antidepresivos.com"
+cache = { default_ttl = 3600, max_ttl = 86400 }

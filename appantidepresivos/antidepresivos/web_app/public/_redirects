@@ -1,3 +1,4 @@
-# Netlify Redirects for SPA
+# Cloudflare Pages Redirects for SPA
 # Redirect all requests to index.html so the client-side router can handle them
+# This configuration works with both Netlify and Cloudflare Pages
 /*    /index.html   200
