@@ -399,41 +399,7 @@
     }
 }
 
-/* ─── Mascot Animations ────────────────────────────────────────────────── */
-.mascot-container {
-    position: fixed;
-    bottom: -100px;
-    right: 20px;
-    width: 120px;
-    height: 120px;
-    z-index: 1000;
-    pointer-events: none;
-    transition: transform 0.6s var(--transition-spring);
-}
 
-.mascot-container.visible {
-    transform: translateY(-120px);
-}
-
-.mascot-img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
-    color: currentColor;
-}
-
-.mascot-wave {
-    animation: mascotWave 2s infinite ease-in-out;
-}
-
-@keyframes mascotWave {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-10deg); }
-    75% { transform: rotate(10deg); }
-}
-
-/* ─── Motivational Toast ───────────────────────────────────────────────── */
 .toast--motivational {
     background: linear-gradient(135deg, var(--color-primary), var(--color-accent-pink));
     color: white;

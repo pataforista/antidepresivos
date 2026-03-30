@@ -1075,7 +1075,7 @@ function showToast(message, type = 'info', duration = 3500) {
   }, duration);
 }
 
-function celebrate(message = "¡Análisis clínico completado! ✨") {
+function celebrate(message = i18n.t("mascot_celebrate")) {
   if (window.confetti) {
     window.confetti({
       particleCount: 150,
@@ -1085,17 +1085,6 @@ function celebrate(message = "¡Análisis clínico completado! ✨") {
     });
   }
   showToast(message, 'motivational');
-  addMascotPeek();
-}
-
-function addMascotPeek() {
-  const mascot = document.getElementById("mascot-container");
-  if (mascot) {
-    mascot.classList.add("visible");
-    setTimeout(() => {
-      mascot.classList.remove("visible");
-    }, 4000);
-  }
 }
 
 /* ============================================================
