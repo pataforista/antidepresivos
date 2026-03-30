@@ -1,6 +1,7 @@
 import { store } from "../core/store.js";
 import { selectItemById } from "../core/selectors.js";
 import { escapeHtml } from "../core/utils.js";
+import { i18n } from "../core/i18n.js";
 
 export function renderDetail(view, id) {
    const state = store.getState();
@@ -9,9 +10,9 @@ export function renderDetail(view, id) {
    if (!item) {
       view.innerHTML = `
       <div style="padding:var(--space-8); text-align:center">
-        <h2 class="h2">Datos no encontrados</h2>
-        <p class="text-muted">No se encontró el fármaco con ID <b>${escapeHtml(id)}</b>.</p>
-        <a href="#/list" class="btn btn--primary" style="margin-top:var(--space-6)">Volver al listado</a>
+        <h2 class="h2">${i18n.t("data_not_found")}</h2>
+        <p class="text-muted">${i18n.t("drug_not_found")} <b>${escapeHtml(id)}</b>.</p>
+        <a href="#/list" class="btn btn--primary" style="margin-top:var(--space-6)">${i18n.t("back_to_list")}</a>
       </div>
     `;
       return;
@@ -23,7 +24,7 @@ export function renderDetail(view, id) {
    const contentHTML = `
     <div class="monograph animate-fade-in">
       <!-- Nav Back -->
-      <a href="#/list" class="btn btn--ghost text-sm" style="margin-bottom:var(--space-4); font-weight:700; display:inline-flex; align-items:center; gap:6px;">← Listado</a>
+      <a href="#/list" class="btn btn--ghost text-sm" style="margin-bottom:var(--space-4); font-weight:700; display:inline-flex; align-items:center; gap:6px;">← ${i18n.t("btn_list")}</a>
 
       <!-- Header Principal — M3 style -->
       <header class="monograph__header glass-effect" style="border-radius:var(--radius-xl); padding:var(--space-6);">
@@ -37,9 +38,14 @@ export function renderDetail(view, id) {
               ${item.mecanismo_principal ? `<span class="text-xs text-muted" style="font-weight:500; font-style:italic; max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${escapeHtml(item.mecanismo_principal)}">${escapeHtml(item.mecanismo_principal)}</span>` : ""}
             </div>
           </div>
-          <button id="btnMonoCompare" class="m3-fab" style="align-self:flex-start; flex-shrink:0;">
-            ⚖️ Comparar
-          </button>
+          <div style="display:flex; gap:var(--space-2); align-self:flex-start; flex-shrink:0;">
+            <button id="btnMonoPDF" class="btn btn--outline btn--circle" title="Descargar PDF" style="width: 44px; height: 44px;">
+              📄
+            </button>
+            <button id="btnMonoCompare" class="m3-fab">
+              ⚖️ ${i18n.t("btn_compare")}
+            </button>
+          </div>
         </div>
 
         <!-- Clinical Summary Strip — lectura rápida -->
@@ -48,11 +54,11 @@ export function renderDetail(view, id) {
 
       <!-- Tabs Navigation -->
       <nav class="tabs-nav" style="margin-top:var(--space-6);">
-        <button class="tab-btn tab-btn--active" data-tab="resumen">Resumen</button>
-        <button class="tab-btn" data-tab="dosis">Dosis</button>
-        <button class="tab-btn" data-tab="seguridad">Seguridad</button>
-        <button class="tab-btn" data-tab="farmaco">Farmacología</button>
-        <button class="tab-btn" data-tab="switching">Switching</button>
+        <button class="tab-btn tab-btn--active" data-tab="resumen">${i18n.t("tab_summary")}</button>
+        <button class="tab-btn" data-tab="dosis">${i18n.t("tab_dose")}</button>
+        <button class="tab-btn" data-tab="seguridad">${i18n.t("tab_safety")}</button>
+        <button class="tab-btn" data-tab="farmaco">${i18n.t("tab_pharmacology")}</button>
+        <button class="tab-btn" data-tab="switching">${i18n.t("tab_switching")}</button>
       </nav>
 
       <!-- Tab Content Container -->
@@ -100,6 +106,22 @@ export function renderDetail(view, id) {
          location.hash = `#/compare?ids=${encodeURIComponent([...set].join(","))}`;
       });
    }
+
+   // 3. PDF Export
+   const btnPdf = view.querySelector("#btnMonoPDF");
+   if (btnPdf) {
+      btnPdf.addEventListener("click", () => {
+         const element = document.querySelector(".monograph");
+         const opt = {
+            margin: 10,
+            filename: `Monografia_${item.nombre_generico}_2026.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+         };
+         html2pdf().set(opt).from(element).save();
+      });
+   }
 }
 
 // --- Clinical Summary Strip builder ---
@@ -115,16 +137,18 @@ function buildClinicalSummary(item) {
    }
 
    const sed = parseInt(item.nivel_sedacion, 10);
-   const sedLabel = isNaN(sed) ? (item.nivel_sedacion || "N/D") : ["Nula", "Baja", "Moderada", "Alta"][Math.min(sed, 3)];
+   const sedEnLabels = ["None", "Low", "Moderate", "High"];
+   const sedEsLabels = ["Nula", "Baja", "Moderada", "Alta"];
+   const sedLabel = isNaN(sed) ? (item.nivel_sedacion || "N/D") : (i18n.getLocale() === 'en' ? sedEnLabels[Math.min(sed, 3)] : sedEsLabels[Math.min(sed, 3)]);
    const sedVariant = isNaN(sed) ? "neutral" : ["success", "success", "warning", "danger"][Math.min(sed, 3)];
 
    const items = [
-      { label: "Sedación", value: sedLabel, variant: sedVariant },
-      { label: "Impacto peso", value: item.perfil_impacto_peso || "N/D", variant: riskVariant(item.perfil_impacto_peso) },
-      { label: "D. sexual", value: item.perfil_disfuncion_sexual || "N/D", variant: riskVariant(item.perfil_disfuncion_sexual) },
-      { label: "Riesgo QT", value: item.riesgo_prolongacion_qt || "N/D", variant: riskVariant(item.riesgo_prolongacion_qt) },
-      { label: "Abstinencia", value: item.riesgo_sindrome_abstinencia || "N/D", variant: riskVariant(item.riesgo_sindrome_abstinencia) },
-      { label: "Vida media", value: item.vida_media_parental || "N/D", variant: "neutral" },
+      { label: i18n.t("sedation"), value: sedLabel, variant: sedVariant },
+      { label: i18n.t("weight_impact"), value: item.perfil_impacto_peso || "N/D", variant: riskVariant(item.perfil_impacto_peso) },
+      { label: i18n.t("sexual_dys"), value: item.perfil_disfuncion_sexual || "N/D", variant: riskVariant(item.perfil_disfuncion_sexual) },
+      { label: i18n.t("qt_risk"), value: item.riesgo_prolongacion_qt || "N/D", variant: riskVariant(item.riesgo_prolongacion_qt) },
+      { label: i18n.t("withdrawal_risk"), value: item.riesgo_sindrome_abstinencia || "N/D", variant: riskVariant(item.riesgo_sindrome_abstinencia) },
+      { label: i18n.t("half_life"), value: item.vida_media_parental || "N/D", variant: "neutral" },
    ];
 
    const variantClass = { danger: "value--danger", warning: "value--warning", success: "value--success", neutral: "" };
@@ -155,7 +179,7 @@ function renderTabResumen(item) {
       <div class="alert alert--info">
          <div style="font-size:1.4rem">💡</div>
          <div>
-           <strong style="display:block; margin-bottom:var(--space-1)">Perla Clínica</strong>
+           <strong style="display:block; margin-bottom:var(--space-1)">${i18n.t("clinical_pearl")}</strong>
            <span class="text-body">${escapeHtml(item.utilidad_sintomatica_clave)}</span>
          </div>
       </div>
@@ -163,7 +187,7 @@ function renderTabResumen(item) {
 
       <details class="detail-section" open>
         <summary class="detail-section__summary">
-          <span>Mecanismo de Acción</span>
+          <span>${i18n.t("mechanism_action")}</span>
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body">
@@ -173,7 +197,7 @@ function renderTabResumen(item) {
 
       <details class="detail-section" open>
         <summary class="detail-section__summary">
-          <span>Indicaciones Aprobadas</span>
+          <span>${i18n.t("approved_indications")}</span>
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body">
@@ -197,7 +221,7 @@ function renderTabResumen(item) {
       ${offInds.length ? `
       <details class="detail-section">
         <summary class="detail-section__summary">
-          <span>Usos Off-Label</span>
+          <span>${i18n.t("off_label_uses")}</span>
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body">
@@ -207,6 +231,38 @@ function renderTabResumen(item) {
         </div>
       </details>
       ` : ""}
+
+      <!-- Nueva Sección: Evidencia y Guías -->
+      ${item.evidence && item.evidence.perlas_clinicas ? `
+      <div class="evidence-container animate-fade-in">
+        <div style="display:flex; align-items:center; gap:var(--space-2); margin-bottom:var(--space-4);">
+          <span style="font-size:1.2rem;">📚</span>
+          <h3 class="h4" style="margin:0;">${i18n.t("evidence_guides")}</h3>
+        </div>
+        ${item.evidence.perlas_clinicas.map(ev => `
+          <div class="evidence-item" style="margin-bottom:var(--space-4);">
+            <blockquote class="evidence-quote">
+              "${escapeHtml(ev.quote)}"
+            </blockquote>
+            <div class="evidence-source">
+              — ${escapeHtml(ev.source)} ${ev.section ? `<span class="text-xs">(${escapeHtml(ev.section)})</span>` : ""}
+            </div>
+          </div>
+        `).join("")}
+      </div>
+      ` : ""}
+
+      <!-- Monograph Footer -->
+      <footer class="monograph-footer" style="margin-top:var(--space-8); padding-top:var(--space-6); border-top:1px solid var(--color-border); text-align:center;">
+        <p class="text-xs text-muted" style="margin-bottom:var(--space-3)">
+          ${i18n.t("monograph_footer_note")}
+        </p>
+        <div style="display:flex; justify-content:center; gap:var(--space-4);">
+           ${item.fecha_aprobacion_fda ? `<a href="https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=BasicSearch.process" target="_blank" class="text-xs link" style="font-weight:700">FDA Label Reference</a>` : ""}
+           <a href="https://www.ema.europa.eu/en/medicines" target="_blank" class="text-xs link" style="font-weight:700">EMA SMPC</a>
+           <a href="https://academic.oup.com/book/43977" target="_blank" class="text-xs link" style="font-weight:700">Maudsley P.G.</a>
+        </div>
+      </footer>
 
     </div>
   `;
@@ -218,47 +274,47 @@ function renderTabDosis(item) {
 
       <!-- Quick-read dose chips -->
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:var(--space-3);">
-        ${infoBox("Inicio", item.dosis_inicio_adulto)}
-        ${infoBox("Rango Terapéutico", item.rango_terapeutico_adulto)}
-        ${infoBox("Dosis Máxima", item.dosis_maxima_autorizada)}
+        ${infoBox(i18n.t("dose_start"), item.dosis_inicio_adulto)}
+        ${infoBox(i18n.t("therapeutic_range"), item.rango_terapeutico_adulto)}
+        ${infoBox(i18n.t("max_dose"), item.dosis_maxima_autorizada)}
       </div>
 
       <details class="detail-section" open>
         <summary class="detail-section__summary">
-          <span>Titulación y Administración</span>
+          <span>${i18n.t("titration_administration")}</span>
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body">
           <div style="display:grid; gap:var(--space-3);">
-            ${rowDetail("Frecuencia", item.frecuencia_administracion)}
-            ${rowDetail("Paso de Titulación", item.titulacion_paso)}
-            ${rowDetail("Steady State", item.tiempo_estado_estacionario)}
+            ${rowDetail(i18n.t("frequency"), item.frecuencia_administracion)}
+            ${rowDetail(i18n.t("titration_step"), item.titulacion_paso)}
+            ${rowDetail(i18n.t("steady_state"), item.tiempo_estado_estacionario)}
           </div>
         </div>
       </details>
 
       <details class="detail-section">
         <summary class="detail-section__summary">
-          <span>Poblaciones Especiales</span>
+          <span>${i18n.t("special_populations")}</span>
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body">
           <div style="display:grid; gap:var(--space-3);">
-            ${rowDetail("Insuficiencia Renal", item.ajuste_insuficiencia_renal)}
-            ${rowDetail("Insuficiencia Hepática", item.ajuste_insuficiencia_hepatica)}
-            ${rowDetail("Uso Pediátrico", item.aprobado_uso_pediatrico === "Sí" ? "✓ Aprobado" : `✗ No aprobado (${escapeHtml(item.aprobado_uso_pediatrico || "N/D")})`)}
+            ${rowDetail(i18n.t("renal_impairment"), item.ajuste_insuficiencia_renal)}
+            ${rowDetail(i18n.t("hepatic_impairment"), item.ajuste_insuficiencia_hepatica)}
+            ${rowDetail(i18n.t("pediatric_use"), item.aprobado_uso_pediatrico === "Sí" || item.aprobado_uso_pediatrico === true ? "✓" : `✗ (${escapeHtml(item.aprobado_uso_pediatrico || "N/D")})`)}
           </div>
         </div>
       </details>
 
       <details class="detail-section">
         <summary class="detail-section__summary">
-          <span>Equivalencia Terapéutica</span>
+          <span>${i18n.t("therapeutic_equivalence")}</span>
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body" style="display:flex; align-items:center; gap:var(--space-5); flex-wrap:wrap;">
           <div class="field-box" style="flex:0 0 auto">
-            <div class="field-box__label">Paridad Fluoxetina</div>
+            <div class="field-box__label">${i18n.t("fluoxetine_parity")}</div>
             <div class="field-box__value">${escapeHtml(item.equiv_fluoxetina || "N/D")}</div>
           </div>
           <p class="text-xs text-muted" style="flex:1; line-height:1.5;">Basado en dosis mínima efectiva estándar (Maudsley Guidelines). Útil para estimar dosis inicial al rotar.</p>
@@ -289,42 +345,42 @@ function renderTabSeguridad(item) {
 
         <details class="detail-section" open>
           <summary class="detail-section__summary">
-            <span>Perfil de Riesgo</span>
+            <span>${i18n.t("risk_profile")}</span>
             <span class="detail-section__chevron">▼</span>
           </summary>
           <div class="detail-section__body">
             <div style="display:grid; gap:var(--space-3)">
-              ${rowRisk("Sedación", item.nivel_sedacion)}
-              ${rowRisk("Impacto Peso", item.perfil_impacto_peso)}
-              ${rowRisk("Disfunción Sexual", item.perfil_disfuncion_sexual)}
-              ${rowRisk("Riesgo QT", item.riesgo_prolongacion_qt)}
-              ${rowRisk("Abstinencia", item.riesgo_sindrome_abstinencia)}
-              ${rowRisk("Carga Anticolinérgica", item.carga_aec)}
-              ${rowRisk("Riesgo SIADH", item.riesgo_siadh)}
+              ${rowRisk(i18n.t("sedation"), item.nivel_sedacion)}
+              ${rowRisk(i18n.t("weight_impact"), item.perfil_impacto_peso)}
+              ${rowRisk(i18n.t("sexual_dys"), item.perfil_disfuncion_sexual)}
+              ${rowRisk(i18n.t("qt_risk"), item.riesgo_prolongacion_qt)}
+              ${rowRisk(i18n.t("withdrawal_risk"), item.riesgo_sindrome_abstinencia)}
+              ${rowRisk(i18n.t("anticholinergic_load"), item.carga_aec)}
+              ${rowRisk(i18n.t("siadh_risk"), item.riesgo_siadh)}
             </div>
           </div>
         </details>
 
         <details class="detail-section" open>
           <summary class="detail-section__summary">
-            <span>Efectos Adversos</span>
+            <span>${i18n.t("adverse_effects")}</span>
             <span class="detail-section__chevron">▼</span>
           </summary>
           <div class="detail-section__body" style="display:grid; gap:var(--space-5);">
             <div>
-              <div class="clinical-chip clinical-chip--danger" style="display:inline-flex; margin-bottom:var(--space-3);">Muy frecuentes</div>
+              <div class="clinical-chip clinical-chip--danger" style="display:inline-flex; margin-bottom:var(--space-3);">${i18n.t("very_frequent")}</div>
               <p class="text-sm" style="line-height:1.6; color:var(--color-text-muted);">
                 ${eas.filter(ea => ea.frecuencia === "muy frecuente").map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}
               </p>
             </div>
             <div>
-              <div class="clinical-chip clinical-chip--warning" style="display:inline-flex; margin-bottom:var(--space-3);">Frecuentes</div>
+              <div class="clinical-chip clinical-chip--warning" style="display:inline-flex; margin-bottom:var(--space-3);">${i18n.t("frequent")}</div>
               <p class="text-sm" style="line-height:1.6; color:var(--color-text-muted);">
                 ${eas.filter(ea => ea.frecuencia === "frecuente").map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}
               </p>
             </div>
             <div>
-              <div class="clinical-chip clinical-chip--neutral" style="display:inline-flex; margin-bottom:var(--space-3);">Graves / Raros</div>
+              <div class="clinical-chip clinical-chip--neutral" style="display:inline-flex; margin-bottom:var(--space-3);">${i18n.t("serious_rare")}</div>
               <p class="text-sm" style="line-height:1.6; color:var(--color-text-muted);">
                 ${eas.filter(ea => ea.frecuencia === "raro grave").map(ea => escapeHtml(ea.nombre)).join("; ") || "N/D"}
               </p>
@@ -335,7 +391,7 @@ function renderTabSeguridad(item) {
         ${interacciones.length ? `
         <details class="detail-section">
           <summary class="detail-section__summary">
-            <span style="color:var(--color-danger);">⚠️ Interacciones Contraindicadas</span>
+            <span style="color:var(--color-danger);">⚠️ ${i18n.t("contraindicated_interactions")}</span>
             <span class="detail-section__chevron">▼</span>
           </summary>
           <div class="detail-section__body">
@@ -348,7 +404,7 @@ function renderTabSeguridad(item) {
 
         <details class="detail-section">
           <summary class="detail-section__summary">
-            <span>Embarazo y Lactancia</span>
+            <span>${i18n.t("pregnancy_lactation")}</span>
             <span class="detail-section__chevron">▼</span>
           </summary>
           <div class="detail-section__body">
@@ -367,30 +423,30 @@ function renderTabFarmaco(item) {
 
        <details class="detail-section" open>
          <summary class="detail-section__summary">
-           <span>Farmacocinética</span>
+           <span>${i18n.t("pharmacokinetics")}</span>
            <span class="detail-section__chevron">▼</span>
          </summary>
          <div class="detail-section__body">
            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:var(--space-4);">
-             ${infoBoxClean("Vida Media", item.vida_media_parental)}
-             ${infoBoxClean("Tmax", item.t_max)}
-             ${infoBoxClean("Biodisp. Oral", item.biodisponibilidad_oral || "N/D")}
-             ${infoBoxClean("Unión Prot.", item.union_proteinas_plasmaticas || "N/D")}
+             ${infoBoxClean(i18n.t("half_life"), item.vida_media_parental)}
+             ${infoBoxClean(i18n.t("t_max"), item.t_max)}
+             ${infoBoxClean(i18n.t("oral_biodisp"), item.biodisponibilidad_oral || "N/D")}
+             ${infoBoxClean(i18n.t("prot_binding"), item.union_proteinas_plasmaticas || "N/D")}
            </div>
          </div>
        </details>
 
        <details class="detail-section" open>
          <summary class="detail-section__summary">
-           <span>Metabolismo CYP450</span>
+           <span>${i18n.t("metabolism_cyp450")}</span>
            <span class="detail-section__chevron">▼</span>
          </summary>
          <div class="detail-section__body">
            <div style="display:grid; gap:var(--space-3)">
-             ${rowDetail("Sustrato de", enzimas.filter(e => e.rol === "sustrato").map(e => e.nombre).join(", ") || "N/D")}
-             ${rowDetail("Inhibe", enzimas.filter(e => e.rol === "inhibidor").map(e => e.nombre).join(", ") || "N/D")}
-             ${rowDetail("Induce", enzimas.filter(e => e.rol === "inductor").map(e => e.nombre).join(", ") || "N/D")}
-             ${rowDetail("Metabolito activo", item.metabolito_activo_nombre || "N/D")}
+             ${rowDetail(i18n.t("substrate_of"), enzimas.filter(e => e.rol === "sustrato").map(e => e.nombre).join(", ") || "N/D")}
+             ${rowDetail(i18n.t("inhibits"), enzimas.filter(e => e.rol === "inhibidor").map(e => e.nombre).join(", ") || "N/D")}
+             ${rowDetail(i18n.t("induces"), enzimas.filter(e => e.rol === "inductor").map(e => e.nombre).join(", ") || "N/D")}
+             ${rowDetail(i18n.t("active_metabolite"), item.metabolito_activo_nombre || "N/D")}
            </div>
          </div>
        </details>
@@ -409,15 +465,15 @@ function renderTabSwitching(item) {
    return `
     <div class="animate-fade-in" style="display:grid; gap:var(--space-6);">
         <section class="card bg-soft glass-effect">
-            <h3 class="h3">Estrategia de Switching</h3>
+            <h3 class="h3">${i18n.t("switching_strategy")}</h3>
             <p class="text-body" style="margin-top:var(--space-2)">
-                Consideraciones para el cambio desde <strong>${escapeHtml(item.nombre_generico)}</strong>.
+                ${i18n.getLocale() === 'en' ? 'Considerations for switching from' : 'Consideraciones para el cambio desde'} <strong>${escapeHtml(item.nombre_generico)}</strong>.
             </p>
             
             <div style="margin-top:var(--space-4); display:flex; gap:var(--space-3); align-items:center; flex-wrap:wrap;">
-               <span class="text-sm" style="font-weight:700">CAMBIAR A:</span>
+               <span class="text-sm" style="font-weight:700">${i18n.t("change_to")}:</span>
                <select id="selSwitchTarget" class="btn btn--outline btn--sm" style="min-width:150px">
-                  <option value="">Seleccionar fármaco...</option>
+                  <option value="">${i18n.t("select_target")}</option>
                   ${availableTargets.map(t => `<option value="${t}">${t.toUpperCase()}</option>`).join("")}
                </select>
             </div>
@@ -433,18 +489,18 @@ function renderTabSwitching(item) {
         </section>
 
         <div id="chartContainer" class="card glass-effect" style="display:none; padding:var(--space-6);">
-            <h4 class="h4" style="margin-bottom:var(--space-4)">Visualización de Titulación Sugerida</h4>
+            <h4 class="h4" style="margin-bottom:var(--space-4)">${i18n.t("titration_chart_title")}</h4>
             <div style="height:300px; width:100%;">
                <canvas id="titrationChart"></canvas>
             </div>
-            <p class="text-xs text-muted" style="margin-top:var(--space-4)">* Este gráfico es una representación esquemática del protocolo. Ajuste según respuesta clínica.</p>
+            <p class="text-xs text-muted" style="margin-top:var(--space-4)">* ${i18n.getLocale() === 'en' ? 'This chart is a schematic representation. Adjust based on clinical response.' : 'Este gráfico es una representación esquemática del protocolo. Ajuste según respuesta clínica.'}</p>
         </div>
 
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:var(--space-4);">
-            ${infoBox("Vida media", vidaMedia)}
-            ${infoBox("Riesgo Abstinencia", item.riesgo_sindrome_abstinencia || "N/D")}
-            ${infoBox("Riesgo QT", item.riesgo_prolongacion_qt || "N/D")}
-            ${infoBox("Perfil Activación", item.perfil_activacion || "N/D")}
+            ${infoBox(i18n.t("half_life"), vidaMedia)}
+            ${infoBox(i18n.t("withdrawal_risk"), item.riesgo_sindrome_abstinencia || "N/D")}
+            ${infoBox(i18n.t("qt_risk"), item.riesgo_prolongacion_qt || "N/D")}
+            ${infoBox(i18n.t("weight_impact"), item.perfil_impacto_peso || "N/D")}
         </div>
     </div>
     `;

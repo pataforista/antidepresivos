@@ -6,6 +6,7 @@
 
 import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
+import { i18n } from "../core/i18n.js";
 
 /* ── Estado del juego ──────────────────────────────────────── */
 let Q = {
@@ -15,35 +16,35 @@ let Q = {
 };
 
 /* ── Modos de juego ─────────────────────────────────────────── */
-const MODES = {
+const getModes = () => ({
   residente: {
     id: "residente",
-    label: "Residente",
+    label: i18n.t("quiz_mode_residente"),
     icon: "🩺",
-    desc: "Conceptos esenciales: clase, mecanismo, efectos frecuentes.",
+    desc: i18n.t("quiz_mode_residente_desc"),
     color: "#00e5ff",
     templateIds: ["clase", "mecanismo", "sedacion", "peso", "sexual", "utilidad"],
     count: 10,
   },
   especialista: {
     id: "especialista",
-    label: "Especialista",
+    label: i18n.t("quiz_mode_especialista"),
     icon: "🧬",
-    desc: "Farmacología avanzada: enzimas, vida media, interacciones, dosis.",
+    desc: i18n.t("quiz_mode_especialista_desc"),
     color: "#c084fc",
     templateIds: ["clase", "mecanismo", "sedacion", "peso", "sexual", "utilidad", "enzima", "interacciones", "abstinencia", "qt"],
     count: 12,
   },
   clinico: {
     id: "clinico",
-    label: "Ronda Clínica",
+    label: i18n.t("quiz_mode_clinico"),
     icon: "🏥",
-    desc: "¿Qué fármaco elegirías? Escenarios clínicos reales.",
+    desc: i18n.t("quiz_mode_clinico_desc"),
     color: "#ff6eb4",
     templateIds: ["utilidad_inversa", "clase", "mecanismo", "sexual", "peso", "interacciones"],
     count: 10,
   },
-};
+});
 
 /* ── Helpers de normalización ───────────────────────────────── */
 function isValid(v) {
@@ -57,12 +58,12 @@ function shortStr(v, maxLen = 80) {
   return s.length > maxLen ? s.slice(0, maxLen - 1) + "…" : s;
 }
 
-const SEDATION_LABEL = {
-  "0": "Nulo (sin sedación)",
-  "1": "Leve",
-  "2": "Moderado",
-  "3": "Alto / Muy sedante",
-};
+const getSedationLabels = () => ({
+  "0": i18n.getLocale() === 'en' ? "None (no sedation)" : "Nulo (sin sedación)",
+  "1": i18n.t("low") || (i18n.getLocale() === 'en' ? "Low" : "Leve"),
+  "2": i18n.t("moderate") || (i18n.getLocale() === 'en' ? "Moderate" : "Moderado"),
+  "3": i18n.t("high") || (i18n.getLocale() === 'en' ? "High / Very sedating" : "Alto / Muy sedante"),
+});
 
 /* ── Templates de preguntas ─────────────────────────────────── */
 // PRINCIPIO ANTI-AMBIGÜEDAD:
@@ -73,10 +74,10 @@ const SEDATION_LABEL = {
 const TEMPLATES = [
   {
     id: "clase",
-    category: "Clasificación",
+    category: i18n.getLocale() === 'en' ? "Classification" : "Clasificación",
     icon: "🏷️",
     difficulty: ["residente", "especialista", "clinico"],
-    ask: () => `¿A qué <b>clase terapéutica</b> pertenece este fármaco?`,
+    ask: () => i18n.t("quiz_question_class"),
     correct: (d) => d.clase_terapeutica,
     pool: (all) => [...new Set(all.map(d => d.clase_terapeutica).filter(isValid))],
     label: (v) => shortStr(v, 60),
@@ -84,10 +85,10 @@ const TEMPLATES = [
   },
   {
     id: "mecanismo",
-    category: "Mecanismo de Acción",
+    category: i18n.getLocale() === 'en' ? "Mechanism" : "Mecanismo de Acción",
     icon: "⚙️",
     difficulty: ["residente", "especialista", "clinico"],
-    ask: () => `¿Cuál es el <b>mecanismo principal</b> de acción?`,
+    ask: () => i18n.t("quiz_question_mech"),
     correct: (d) => d.mecanismo_principal,
     pool: (all) => [...new Set(all.map(d => d.mecanismo_principal).filter(isValid))],
     label: (v) => shortStr(v, 70),
@@ -95,21 +96,21 @@ const TEMPLATES = [
   },
   {
     id: "sedacion",
-    category: "Perfil de Sedación",
+    category: i18n.getLocale() === 'en' ? "Sedation" : "Perfil de Sedación",
     icon: "😴",
     difficulty: ["residente", "especialista"],
-    ask: () => `¿Cuál es el <b>nivel de sedación</b>?`,
+    ask: () => i18n.t("quiz_question_sedation"),
     correct: (d) => String(d.nivel_sedacion ?? ""),
     pool: () => ["0", "1", "2", "3"],
-    label: (v) => SEDATION_LABEL[v] ?? v,
+    label: (v) => getSedationLabels()[v] ?? v,
     validate: (d) => isValid(d.nivel_sedacion) && ["0","1","2","3"].includes(String(d.nivel_sedacion)),
   },
   {
     id: "peso",
-    category: "Impacto en Peso",
+    category: i18n.getLocale() === 'en' ? "Weight" : "Impacto en Peso",
     icon: "⚖️",
     difficulty: ["residente", "especialista"],
-    ask: () => `¿Cuál es el <b>impacto en el peso corporal</b>?`,
+    ask: () => i18n.t("quiz_question_weight"),
     correct: (d) => d.perfil_impacto_peso,
     pool: (all) => [...new Set(all.map(d => d.perfil_impacto_peso).filter(isValid))],
     label: (v) => v,
@@ -117,10 +118,10 @@ const TEMPLATES = [
   },
   {
     id: "sexual",
-    category: "Disfunción Sexual",
+    category: i18n.getLocale() === 'en' ? "Sexual dysfunction" : "Disfunción Sexual",
     icon: "💊",
     difficulty: ["residente", "especialista", "clinico"],
-    ask: () => `¿Cuál es el riesgo de <b>disfunción sexual</b>?`,
+    ask: () => i18n.t("quiz_question_sexual"),
     correct: (d) => d.perfil_disfuncion_sexual,
     pool: (all) => [...new Set(all.map(d => d.perfil_disfuncion_sexual).filter(isValid))],
     label: (v) => v,
@@ -128,10 +129,10 @@ const TEMPLATES = [
   },
   {
     id: "utilidad",
-    category: "Utilidad Clínica",
+    category: i18n.getLocale() === 'en' ? "Clinical Utility" : "Utilidad Clínica",
     icon: "🎯",
     difficulty: ["residente", "especialista", "clinico"],
-    ask: () => `¿Cuál es la <b>utilidad sintomática clave</b> de este fármaco?`,
+    ask: () => i18n.t("quiz_question_utility"),
     correct: (d) => d.utilidad_sintomatica_clave,
     pool: (all) => [...new Set(all.map(d => d.utilidad_sintomatica_clave).filter(isValid))],
     label: (v) => shortStr(v, 70),
@@ -139,10 +140,10 @@ const TEMPLATES = [
   },
   {
     id: "enzima",
-    category: "Metabolismo Enzimático",
+    category: i18n.getLocale() === 'en' ? "Metabolism" : "Metabolismo Enzimático",
     icon: "🧪",
     difficulty: ["especialista"],
-    ask: () => `¿Cuál es el <b>sustrato enzimático principal</b> (metabolismo)?`,
+    ask: () => i18n.t("quiz_question_enzime"),
     correct: (d) => d.sustrato_enzimatico_principal,
     pool: (all) => [...new Set(all.map(d => d.sustrato_enzimatico_principal).filter(isValid))],
     label: (v) => shortStr(v, 60),
@@ -150,10 +151,10 @@ const TEMPLATES = [
   },
   {
     id: "interacciones",
-    category: "Interacciones Peligrosas",
+    category: i18n.getLocale() === 'en' ? "Interactions" : "Interacciones Peligrosas",
     icon: "⚠️",
     difficulty: ["especialista", "clinico"],
-    ask: () => `¿Con qué <b>medicamentos está contraindicada</b> la combinación?`,
+    ask: () => i18n.t("quiz_question_interact"),
     correct: (d) => d.interacciones_contraindicadas,
     pool: (all) => [...new Set(all.map(d => d.interacciones_contraindicadas).filter(isValid))],
     label: (v) => shortStr(v, 70),
@@ -161,10 +162,10 @@ const TEMPLATES = [
   },
   {
     id: "abstinencia",
-    category: "Síndrome de Abstinencia",
+    category: i18n.getLocale() === 'en' ? "Withdrawal" : "Síndrome de Abstinencia",
     icon: "🔴",
     difficulty: ["especialista"],
-    ask: () => `¿Cuál es el riesgo de <b>síndrome de abstinencia</b> al suspender?`,
+    ask: () => i18n.t("quiz_question_withdrawal"),
     correct: (d) => d.riesgo_sindrome_abstinencia,
     pool: (all) => [...new Set(all.map(d => d.riesgo_sindrome_abstinencia).filter(isValid))],
     label: (v) => v,
@@ -172,10 +173,10 @@ const TEMPLATES = [
   },
   {
     id: "qt",
-    category: "Riesgo QT",
+    category: i18n.getLocale() === 'en' ? "QT Risk" : "Riesgo QT",
     icon: "💓",
     difficulty: ["especialista"],
-    ask: () => `¿Cuál es el riesgo de <b>prolongación del QT</b>?`,
+    ask: () => i18n.t("quiz_question_qt"),
     correct: (d) => d.riesgo_prolongacion_qt,
     pool: (all) => [...new Set(all.map(d => d.riesgo_prolongacion_qt).filter(isValid))],
     label: (v) => v,
@@ -184,11 +185,11 @@ const TEMPLATES = [
   // MODO CLÍNICO: pregunta invertida — se da la utilidad, se elige el fármaco.
   {
     id: "utilidad_inversa",
-    category: "Ronda Clínica",
+    category: i18n.getLocale() === 'en' ? "Clinical Round" : "Ronda Clínica",
     icon: "🏥",
     difficulty: ["clinico"],
     // ask() and correct() are set dynamically in buildClinicalQuestion
-    ask: (d, ctx) => ctx?.question ?? `¿Qué fármaco elegirías para <b>${escapeHtml(d.utilidad_sintomatica_clave)}</b>?`,
+    ask: (d, ctx) => ctx?.question ?? (i18n.getLocale() === 'en' ? `Which drug would you choose for <b>${escapeHtml(d.utilidad_sintomatica_clave)}</b>?` : `¿Qué fármaco elegirías para <b>${escapeHtml(d.utilidad_sintomatica_clave)}</b>?`),
     correct: (d) => d.nombre_generico,
     pool: (all) => [...new Set(all.map(d => d.nombre_generico).filter(isValid))],
     label: (v) => v,
@@ -209,11 +210,11 @@ function shuffle(arr) {
 
 function starsFor(score, max) {
   const pct = score / max;
-  if (pct >= 0.9) return { stars: "★★★★★", label: "Excelente", emoji: "🏆" };
-  if (pct >= 0.7) return { stars: "★★★★☆", label: "Muy bien", emoji: "🎓" };
-  if (pct >= 0.5) return { stars: "★★★☆☆", label: "Bien", emoji: "📚" };
-  if (pct >= 0.3) return { stars: "★★☆☆☆", label: "Repasa más", emoji: "📖" };
-  return { stars: "★☆☆☆☆", label: "¡A estudiar!", emoji: "😅" };
+  if (pct >= 0.9) return { stars: "★★★★★", label: i18n.t("quiz_excellent"), emoji: "🏆" };
+  if (pct >= 0.7) return { stars: "★★★★☆", label: i18n.t("quiz_very_good"), emoji: "🎓" };
+  if (pct >= 0.5) return { stars: "★★★☆☆", label: i18n.t("quiz_good"), emoji: "📚" };
+  if (pct >= 0.3) return { stars: "★★☆☆☆", label: i18n.t("quiz_study_more"), emoji: "📖" };
+  return { stars: "★☆☆☆☆", label: i18n.t("quiz_at_study"), emoji: "😅" };
 }
 
 /* ── Construcción de preguntas anti-ambigüedad ───────────────── */
@@ -290,6 +291,7 @@ function buildClinicalQuestion(drug, allDrugs) {
 }
 
 function generateQuestions(allDrugs, mode) {
+  const MODES = getModes();
   const modeConfig = MODES[mode];
   const count = modeConfig.count;
   const isClinical = mode === "clinico";
@@ -326,7 +328,7 @@ function generateQuestions(allDrugs, mode) {
 export function renderQuiz(view) {
   const allDrugs = store.getState().data?.dataset?.farmacos ?? [];
   if (!allDrugs.length) {
-    view.innerHTML = `<div class="quiz-view"><p class="quiz-loading">Cargando datos… ✦</p></div>`;
+    view.innerHTML = `<div class="quiz-view"><p class="quiz-loading">${i18n.t("quiz_loading")}</p></div>`;
     return;
   }
   renderStart(view, allDrugs);
@@ -334,6 +336,7 @@ export function renderQuiz(view) {
 
 /* ── Pantalla Inicio ─────────────────────────────────────────── */
 function renderStart(view, allDrugs) {
+  const MODES = getModes();
   view.innerHTML = `
     <div class="quiz-view animate-fade-in">
       <div class="quiz-scanlines" aria-hidden="true"></div>
@@ -342,10 +345,10 @@ function renderStart(view, allDrugs) {
           <div class="quiz-mascot">ʕ •ᴥ•ʔ</div>
           <div class="quiz-stars-deco" aria-hidden="true">✦ ✧ ✦</div>
         </div>
-        <h1 class="quiz-title">PHARMA<span class="quiz-title-accent">QUIZ</span></h1>
-        <p class="quiz-subtitle">✦ Repaso de Antidepresivos ✦</p>
-
-        <p class="quiz-mode-title">Selecciona tu nivel</p>
+        <h1 class="quiz-title">${i18n.t("quiz_title").slice(0,6)}<span class="quiz-title-accent">${i18n.t("quiz_title").slice(6)}</span></h1>
+        <p class="quiz-subtitle">${i18n.t("quiz_subtitle")}</p>
+ 
+        <p class="quiz-mode-title">${i18n.t("quiz_select_level")}</p>
         <div class="quiz-mode-selector" id="quizModeSelector">
           ${Object.values(MODES).map(m => `
             <button
@@ -357,15 +360,15 @@ function renderStart(view, allDrugs) {
               <span class="quiz-mode-icon">${m.icon}</span>
               <span class="quiz-mode-label">${m.label}</span>
               <span class="quiz-mode-desc">${m.desc}</span>
-              <span class="quiz-mode-count">${m.count} preguntas</span>
+              <span class="quiz-mode-count">${i18n.t("quiz_questions_count").replace("{count}", m.count)}</span>
             </button>
           `).join("")}
         </div>
-
+ 
         <button class="quiz-btn quiz-btn--primary" id="btnStartQuiz">
-          ▶ INICIAR JUEGO
+          ${i18n.t("quiz_start_btn")}
         </button>
-        <a href="#/list" class="quiz-link-back">← Volver al listado</a>
+        <a href="#/list" class="quiz-link-back">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
       </div>
     </div>
   `;
@@ -391,7 +394,7 @@ function renderStart(view, allDrugs) {
     };
     if (!Q.questions.length) {
       view.querySelector(".quiz-container").innerHTML =
-        `<p class="quiz-loading">Error generando preguntas. Recarga la página.</p>`;
+        `<p class="quiz-loading">${i18n.getLocale() === 'en' ? "Error generating questions. Reload page." : "Error generando preguntas. Recarga la página."}</p>`;
       return;
     }
     Q.total = Q.questions.length; // use actual count
@@ -407,6 +410,7 @@ function renderQuestion(view) {
   const pct = Math.round((Q.idx / Q.total) * 100);
   const streakDisplay = Q.streak > 1 ? `🔥×${Q.streak}` : "✦";
   const streakClass = Q.streak >= 3 ? "quiz-streak--hot" : "";
+  const MODES = getModes();
   const modeConfig = MODES[Q.mode];
 
   // Clinical questions show the prompt differently
@@ -422,12 +426,12 @@ function renderQuestion(view) {
   ` : `
     <div class="quiz-drug-category" style="--mode-color:${modeConfig.color}; background: rgba(255,110,180,0.1); border-color: rgba(255,110,180,0.3); color: var(--quiz-neon-pink);">
       <span>${q.tmpl.icon}</span>
-      <span>Ronda Clínica</span>
+      <span>${i18n.t("quiz_mode_clinico")}</span>
     </div>
     <div class="quiz-clinical-scenario">
-      <p class="quiz-clinical-prompt">Un paciente necesita tratamiento para:</p>
+      <p class="quiz-clinical-prompt">${i18n.t("quiz_clinical_scenario_p")}</p>
       <p class="quiz-clinical-need">${escapeHtml(q.clinicalPrompt)}</p>
-      <p class="quiz-question-text" style="border-top:none;padding-top:0.5rem;">¿Qué antidepresivo sería ideal?</p>
+      <p class="quiz-question-text" style="border-top:none;padding-top:0.5rem;">${i18n.t("quiz_clinical_scenario_q")}</p>
     </div>
   `;
 
@@ -437,7 +441,7 @@ function renderQuestion(view) {
       <div class="quiz-container">
         <div class="quiz-hud">
           <div class="quiz-hud-left">
-            <span class="quiz-score-badge">⭐ ${Q.score} pts</span>
+            <span class="quiz-score-badge">⭐ ${Q.score} ${i18n.t("quiz_score")}</span>
           </div>
           <div class="quiz-hud-center">
             <span class="quiz-progress-text">${Q.idx + 1} / ${Q.total}</span>
@@ -473,7 +477,7 @@ function renderQuestion(view) {
         <div class="quiz-pearl-card quiz-hidden" id="quizPearl"></div>
 
         <button class="quiz-btn quiz-btn--next quiz-hidden" id="btnNextQuestion" type="button">
-          ${Q.idx + 1 >= Q.total ? "Ver resultados →" : "Siguiente →"}
+          ${Q.idx + 1 >= Q.total ? i18n.t("quiz_see_results") : i18n.t("quiz_next")}
         </button>
       </div>
     </div>
@@ -524,8 +528,8 @@ function attachOptionListeners(view, q) {
         const bonus = isCorrect ? 10 + Math.max(0, Q.streak - 1) * 5 : 0;
         feedback.className = `quiz-feedback quiz-feedback--${isCorrect ? "ok" : "ko"}`;
         feedback.innerHTML = isCorrect
-          ? `<span class="quiz-feedback-icon">✓</span> ¡Correcto! <b>+${bonus} pts</b>${Q.streak > 2 ? ` <span class="quiz-combo">🔥 COMBO ×${Q.streak}</span>` : ""}`
-          : `<span class="quiz-feedback-icon">✗</span> Era: <b>${escapeHtml(q.tmpl.label(q.correct))}</b>`;
+          ? `<span class="quiz-feedback-icon">✓</span> ${i18n.t("quiz_correct")} <b>+${bonus} ${i18n.t("quiz_score")}</b>${Q.streak > 2 ? ` <span class="quiz-combo">🔥 ${i18n.t("quiz_combo")} ×${Q.streak}</span>` : ""}`
+          : `<span class="quiz-feedback-icon">✗</span> ${i18n.t("quiz_era")} <b>${escapeHtml(q.tmpl.label(q.correct))}</b>`;
       }
 
       // Pearl card — shown after every answer for learning
@@ -534,7 +538,7 @@ function attachOptionListeners(view, q) {
         pearlCard.innerHTML = `
           <div class="quiz-pearl-header">
             <span class="quiz-pearl-icon">💎</span>
-            <span class="quiz-pearl-label">Perla Clínica</span>
+            <span class="quiz-pearl-label">${i18n.t("clinical_pearl")}</span>
           </div>
           <p class="quiz-pearl-text">${escapeHtml(q.pearl)}</p>
         `;
@@ -563,23 +567,24 @@ function renderResults(view) {
   const { stars, label, emoji } = starsFor(Q.score, maxScore);
   const correctCount = Q.total - Q.wrong.length;
   const allDrugs = store.getState().data?.dataset?.farmacos ?? [];
+  const MODES = getModes();
   const modeConfig = MODES[Q.mode];
 
   // Review section for wrong answers
   const reviewHTML = Q.wrong.length ? `
     <div class="quiz-review-section">
-      <h3 class="quiz-review-title">📋 Repaso — errores (${Q.wrong.length})</h3>
+      <h3 class="quiz-review-title">📋 ${i18n.t("quiz_review_title").replace("{count}", Q.wrong.length)}</h3>
       <div class="quiz-review-list">
         ${Q.wrong.map(w => `
           <div class="quiz-review-item">
             <div class="quiz-review-drug">${escapeHtml(w.drug)}</div>
             <div class="quiz-review-category">${escapeHtml(w.category)}</div>
             <div class="quiz-review-row">
-              <span class="quiz-review-wrong-label">Tu respuesta:</span>
+              <span class="quiz-review-wrong-label">${i18n.t("quiz_your_answer")}</span>
               <span class="quiz-review-wrong">${escapeHtml(w.selected)}</span>
             </div>
             <div class="quiz-review-row">
-              <span class="quiz-review-correct-label">Correcto:</span>
+              <span class="quiz-review-correct-label">${i18n.t("quiz_correct_label")}</span>
               <span class="quiz-review-correct">${escapeHtml(w.correct)}</span>
             </div>
             ${w.pearl ? `<div class="quiz-review-pearl">💎 ${escapeHtml(w.pearl).slice(0, 150)}…</div>` : ""}
@@ -589,7 +594,7 @@ function renderResults(view) {
     </div>
   ` : `
     <div class="quiz-review-section" style="text-align:center; padding:1rem;">
-      <p style="color: #34d399; font-weight:700; font-size:1.1rem;">🎉 ¡Sin errores! Perfecto.</p>
+      <p style="color: #34d399; font-weight:700; font-size:1.1rem;">${i18n.t("quiz_no_errors")}</p>
     </div>
   `;
 
@@ -600,38 +605,65 @@ function renderResults(view) {
         <div class="quiz-mascot-wrap">
           <div class="quiz-mascot quiz-mascot--result">${emoji}</div>
         </div>
-        <h2 class="quiz-results-title">RESULTADOS</h2>
+        <h2 class="quiz-results-title">${i18n.t("quiz_results")}</h2>
         <div class="quiz-results-card">
           <div class="quiz-results-stars">${stars}</div>
           <div class="quiz-results-score">
             <span class="quiz-results-pts">${Q.score}</span>
-            <span class="quiz-results-pts-label">/ ${maxScore}+ pts</span>
+            <span class="quiz-results-pts-label">/ ${maxScore}+ ${i18n.t("quiz_score")}</span>
           </div>
-          <p class="quiz-results-msg">${label} — Modo ${modeConfig.label}</p>
+          <p class="quiz-results-msg">${label} — ${i18n.getLocale() === 'en' ? 'Mode' : 'Modo'} ${modeConfig.label}</p>
           <div class="quiz-results-stats">
             <div class="quiz-results-stat">
               <span class="quiz-results-stat-val" style="color:#34d399">${correctCount}</span>
-              <span class="quiz-results-stat-label">Correctas</span>
+              <span class="quiz-results-stat-label">${i18n.t("quiz_correct_stat")}</span>
             </div>
             <div class="quiz-results-stat">
               <span class="quiz-results-stat-val" style="color:#f87171">${Q.wrong.length}</span>
-              <span class="quiz-results-stat-label">Incorrectas</span>
+              <span class="quiz-results-stat-label">${i18n.t("quiz_incorrect_stat")}</span>
             </div>
             <div class="quiz-results-stat">
               <span class="quiz-results-stat-val" style="color:var(--quiz-neon-purp)">🔥×${Q.maxStreak}</span>
-              <span class="quiz-results-stat-label">Racha máx.</span>
+              <span class="quiz-results-stat-label">${i18n.t("quiz_streak_stat")}</span>
             </div>
           </div>
         </div>
 
         ${reviewHTML}
 
+        ${Q.score >= 1000 ? `
+          <div id="guruCertificate" style="display:none; padding:40px; background:white; color:#111; font-family:'Outfit',sans-serif; border:10px double #4f46e5; text-align:center; position:relative;">
+            <div style="font-size:1.5rem; letter-spacing:4px; color:#4f46e5; font-weight:800; margin-bottom:20px;">${i18n.getLocale() === 'en' ? 'EXPERT CERTIFICATE' : 'CERTIFICADO DE EXPERTO'}</div>
+            <div style="font-size:0.9rem; text-transform:uppercase; margin-bottom:10px;">${i18n.getLocale() === 'en' ? 'Antidepressants 2026 recognizes:' : 'Antidepresivos 2026 reconoce a:'}</div>
+            <div style="font-size:2.5rem; font-weight:900; color:#111; border-bottom:2px solid #ddd; display:inline-block; padding:0 40px 5px; margin-bottom:24px;">${i18n.getLocale() === 'en' ? 'PSYCHOPHARMACOLOGY GURU' : 'GURU DE LA PSICOFARMACOLOGÍA'}</div>
+            <div style="font-size:1rem; line-height:1.6; max-width:500px; margin:0 auto 30px;">
+              ${i18n.getLocale() === 'en' ? `For achieving a score of <b>${Q.score} Points</b> in the professional PharmaQuiz level, demonstrating exceptional knowledge in clinical antidepressants mechanism and safety.` : `Por haber alcanzado un puntaje de <b>${Q.score} Puntos</b> en el modo PhamaQuiz de nivel profesional, demostrando un conocimiento excepcional en clases, mecanismos y seguridad clínica de antidepresivos.`}
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; padding:0 40px;">
+              <div style="text-align:left;">
+                <div style="font-weight:800; font-size:1.1rem;">${i18n.getLocale() === 'en' ? '2026 Edition' : 'Edición 2026'}</div>
+                <div style="font-size:0.8rem; color:#666;">${i18n.getLocale() === 'en' ? 'Smart Clinical Support' : 'Soporte Clínico Inteligente'}</div>
+              </div>
+              <div style="text-align:right; font-family:monospace; font-size:0.7rem; color:#999;">
+                HASH_VAL: ${Math.random().toString(36).substr(2, 9).toUpperCase()}
+              </div>
+            </div>
+          </div>
+          <div class="alert alert--success animate-bounce" style="margin-bottom:24px; text-align:center;">
+            <div style="font-size:1.5rem; margin-bottom:8px;">🏆 ${i18n.getLocale() === 'en' ? 'GURU LEVEL REACHED!' : '¡NIVEL GURU ALCANZADO!'} 🏆</div>
+            <p class="text-sm">${i18n.t("quiz_guru_unlocked")}</p>
+            <button id="btnDownloadCert" class="btn btn--primary" style="margin-top:12px; background:var(--quiz-neon-purp); border:none; box-shadow:var(--quiz-glow-md);">
+              ${i18n.t("quiz_download_cert")}
+            </button>
+          </div>
+        ` : ""}
+
         <div class="quiz-results-actions">
           <button class="quiz-btn quiz-btn--primary" id="btnPlayAgain">
-            ↺ Jugar de nuevo
+            ${i18n.t("quiz_play_again")}
           </button>
           <a href="#/list" class="quiz-btn quiz-btn--ghost">
-            ← Ver listado
+            ← ${i18n.t("btn_back")} ${i18n.t("btn_list")}
           </a>
         </div>
       </div>
@@ -640,5 +672,24 @@ function renderResults(view) {
 
   view.querySelector("#btnPlayAgain")?.addEventListener("click", () => {
     renderStart(view, allDrugs);
+  });
+
+  // Certificate download logic
+  view.querySelector("#btnDownloadCert")?.addEventListener("click", () => {
+    const cert = view.querySelector("#guruCertificate");
+    cert.style.display = "block";
+    
+    const opt = {
+      margin: 10,
+      filename: `Certificado_Guru_Antidepresivos_2026.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 3 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+    };
+
+    html2pdf().set(opt).from(cert).save().then(() => {
+      cert.style.display = "none";
+      window.appAnalytics?.track('certificate_download', { score: Q.score });
+    });
   });
 }

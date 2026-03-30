@@ -6,7 +6,10 @@
   "dataset": {
     "hash": "v1.0.0",
     "version": "1.0.0",
-    "path": "./data/dataset.antidepresivos.v1.0.0.json"
+    "locales": {
+      "es": "./data/dataset.antidepresivos.v1.0.0.json",
+      "en": "./data/dataset.en.json"
+    }
   },
   "schema": {
     "hash": "schema001",

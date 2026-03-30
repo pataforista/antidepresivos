@@ -134,12 +134,11 @@
             "indicaciones_aprobadas_ema": "N/D",
             "restricciones_ue": "Programa REMS; administración supervisada; monitoreo ≥2 h",
             "aprobado_uso_pediatrico": false,
-            "riesgo_embarazo_multifuente": "No",
-            "indicaciones_off_label": "FDA: evitar en embarazo; EMA: individualizar",
-            "utilidad_sintomatica_clave": "Depresión resistente",
-            "riesgo_sindrome_abstinencia": "Reducción rápida de síntomas; crisis suicida",
+            "indicaciones_off_label": "N/D",
+            "utilidad_sintomatica_clave": "Depresión resistente; reducción rápida de síntomas; crisis suicida",
+            "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
-            "interacciones_contraindicadas": "Bajo",
+            "interacciones_contraindicadas": "Alcohol; benzodiacepinas; opioides; depresores SNC",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 1,
@@ -211,23 +210,22 @@
             "efectos_poco_frecuentes": "Sedación profunda; pérdida de conciencia; hipoxia",
             "efectos_raros_graves": "Neutro",
             "perfil_impacto_peso": "Bajo",
-            "perfil_disfuncion_sexual": "3",
-            "nivel_sedacion": "Bajo",
-            "perfil_activacion": "2019-03-19",
-            "fecha_aprobacion_fda": "Depresión posparto",
-            "indicaciones_aprobadas_fda": "Activo",
-            "estado_comercial_fda": "Sí",
-            "black_box_warning": false,
-            "autorizado_ema": null,
-            "indicaciones_aprobadas_ema": "Administración en centro monitorizado; oximetría; evaluación sedación",
-            "restricciones_ue": "No",
-            "aprobado_uso_pediatrico": null,
+            "nivel_sedacion": "3",
+            "perfil_activacion": "Bajo",
+            "fecha_aprobacion_fda": "2019-03-19",
+            "indicaciones_aprobadas_fda": "Depresión posparto",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": false,
+            "indicaciones_aprobadas_ema": "N/D",
+            "restricciones_ue": "Administración en centro monitorizado; oximetría; evaluación sedación",
+            "aprobado_uso_pediatrico": false,
             "riesgo_embarazo_multifuente": "N/D",
-            "indicaciones_off_label": "Respuesta rápida y sostenida en PPD con logística hospitalaria",
-            "utilidad_sintomatica_clave": "Bajo",
+            "indicaciones_off_label": "N/D",
+            "utilidad_sintomatica_clave": "Respuesta rápida y sostenida en PPD con logística hospitalaria",
             "riesgo_sindrome_abstinencia": "Bajo",
-            "riesgo_prolongacion_qt": "Alcohol; opioides; benzodiacepinas; depresores SNC",
-            "interacciones_contraindicadas": "N/D",
+            "riesgo_prolongacion_qt": "Bajo",
+            "interacciones_contraindicadas": "Alcohol; opioides; benzodiacepinas; depresores SNC",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": null,
@@ -883,6 +881,265 @@
         {
             "id_farmaco": "ADP_ATYP_07",
             "nombre_generico": "Mianserina",
+            "nombre_quimico_iupac": "1,2,3,4,10,14b-hexahidro-2-metildibenzo[c,f]pirazino[1,2-a]azepina",
+            "clase_terapeutica": "Antidepresivo tetracíclico",
+            "mecanismo_principal": "Antagonista α2-adrenérgico; H1; 5-HT2A/C",
+            "codigo_atc": "N06AX03",
+            "grupo_quimico": "Piperazinoazepina",
+            "biodisponibilidad_oral": "20–30",
+            "t_max": "2–3 h",
+            "vida_media_parental": "20–40 h",
+            "vida_media_metabolitos": "N/A",
+            "union_proteinas_plasmaticas": "95",
+            "volumen_distribucion": ">10 L/kg",
+            "excrecion_renal": "70",
+            "excrecion_fecal": "30",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP2D6; CYP3A4",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "Desmetilmianserina",
+            "polimorfismos_relevantes": "Variabilidad CYP2D6",
+            "ajuste_insuficiencia_hepatica": "Reducir; precaución fuerte",
+            "ajuste_insuficiencia_renal": "Precaución",
+            "dosis_inicio_adulto": "30 mg/día",
+            "rango_terapeutico_adulto": "30–90 mg/día",
+            "dosis_maxima_autorizada": "200 mg/día (histórica)",
+            "frecuencia_administracion": "1 vez al día (nocturna)",
+            "tiempo_estado_estacionario": "5–7 días",
+            "titulacion_paso": "Incrementos de 30 mg cada 1–2 semanas",
+            "efectos_muy_frecuentes": "Somnolencia; aumento de peso",
+            "efectos_frecuentes": "Boca seca; mareo",
+            "efectos_poco_frecuentes": "Edema",
+            "efectos_raros_graves": "Agranulocitosis; convulsiones",
+            "perfil_impacto_peso": "Aumento",
+            "perfil_disfuncion_sexual": "Bajo",
+            "nivel_sedacion": "3",
+            "perfil_activacion": "Bajo",
+            "fecha_aprobacion_fda": "Nunca_aprobado",
+            "indicaciones_aprobadas_fda": "No aprobado en EE.UU.",
+            "estado_comercial_fda": "N/A",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Depresión",
+            "restricciones_ue": "Monitorización hemograma (riesgo discrasias)",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: N/D; EMA: individualizar; Riesgo bajo reportado",
+            "indicaciones_off_label": "Insomnio; ansiedad",
+            "utilidad_sintomatica_clave": "Depresión con insomnio severo; necesidad de aumento de peso",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Moderado",
+            "interacciones_contraindicadas": "IMAO",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 2,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 1,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 0
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 2,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 1,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 0,
+            "_search": "mianserina adp_atyp_07 antidepresivo tetracíclico antagonista α2-adrenérgico; h1; 5-ht2a/c n06ax03 depresion con insomnio severo; necesidad de aumento de peso insomnio; ansiedad",
+            "perlas_clinicas": "Tetracíclico precursor de la mirtazapina; sedante y estimulante del apetito. Riesgo de discrasias sanguíneas (agranulocitosis), requiere monitorización del hemograma. Menor riesgo cardíaco que los tricíclicos.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Antidepressant drugs | IUPHAR",
+                        "section": "Tricyclic",
+                        "quote": "mianserin... sedative properties... Agitated and anxious patients tend to respond best"
+                    },
+                    {
+                        "source": "Table of drug interactions",
+                        "section": "Malignant diseases",
+                        "quote": "Mianserin (A) (possible increased risk of bone marrow suppression)"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_ATYP_08",
+            "nombre_generico": "Tianeptina",
+            "nombre_quimico_iupac": "(RS)-7-[(3-cloro-6,11-dihidro-6-metildibenzo[c,f][1,2]tiazepin-11-il)amino]heptanoato de S,S-dióxido",
+            "clase_terapeutica": "Antidepresivo atípico",
+            "mecanismo_principal": "Modulador glutamatérgico; agonista μ-opioide atípico; neuroplasticidad",
+            "codigo_atc": "N06AX14",
+            "grupo_quimico": "Dibenzotiazepina",
+            "biodisponibilidad_oral": "70–99",
+            "t_max": "1–2 h",
+            "vida_media_parental": "2.5 h",
+            "vida_media_metabolitos": "N/D",
+            "union_proteinas_plasmaticas": "94",
+            "volumen_distribucion": "0.8 L/kg",
+            "excrecion_renal": "65",
+            "excrecion_fecal": "15",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "β-oxidación hepática (mínimo CYP)",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "Pentanoico derivado",
+            "polimorfismos_relevantes": "No conocidos",
+            "ajuste_insuficiencia_hepatica": "No requiere habitualmente",
+            "ajuste_insuficiencia_renal": "Reducir dosis si TFG <15 mL/min",
+            "dosis_inicio_adulto": "12.5 mg/día",
+            "rango_terapeutico_adulto": "12.5 mg 3 veces al día (TID)",
+            "dosis_maxima_autorizada": "37.5 mg/día",
+            "frecuencia_administracion": "3 veces al día",
+            "tiempo_estado_estacionario": "24 h",
+            "titulacion_paso": "Incremento a dosis plena desde inicio",
+            "efectos_muy_frecuentes": "Dolor abdominal; náusea; boca seca",
+            "efectos_frecuentes": "Insomnio; mareo",
+            "efectos_poco_frecuentes": "Pesadillas",
+            "efectos_raros_graves": "Abuso; hepatotoxicidad (muy rara)",
+            "perfil_impacto_peso": "Neutro",
+            "perfil_disfuncion_sexual": "Bajo",
+            "nivel_sedacion": "1",
+            "perfil_activacion": "Moderado",
+            "fecha_aprobacion_fda": "Nunca_aprobado",
+            "indicaciones_aprobadas_fda": "No aprobado en EE.UU. (sustancia controlada en algunos estados)",
+            "estado_comercial_fda": "N/A",
+            "black_box_warning": false,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Depresión (autorizaciones nacionales en Francia, etc.)",
+            "restricciones_ue": "Vigilancia por potencial de abuso",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "EMA: individualizar; Riesgo bajo sugerido",
+            "indicaciones_off_label": "Colon irritable; ansiedad",
+            "utilidad_sintomatica_clave": "Depresión ansiosa; paciente con intolerancia a efectos secundarios clásicos",
+            "riesgo_sindrome_abstinencia": "Moderado",
+            "riesgo_prolongacion_qt": "Bajo",
+            "interacciones_contraindicadas": "IMAO",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 1,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 1,
+                    "perfil_activacion_ord": 1
+                },
+                "flags": {
+                    "black_box_warning": false,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 1,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 1,
+            "perfil_activacion_ord": 1,
+            "_search": "tianeptina adp_atyp_08 antidepresivo atípico modulador glutamatérgico; agonista μ-opioide atípico; neuroplasticidad n06ax14 depresion ansiosa; colon irritable; ansiedad",
+            "perlas_clinicas": "Mecanismo atípico (modulador glutamatérgico/opioide mu atípico); no inhibe recaptación de 5-HT (potenciador según teorías antiguas). Ansiolítico sin sedación. Riesgo de abuso/dependencia por actividad opioide.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "List of antidepressants - Wikipedia",
+                        "section": "Others",
+                        "quote": "Tianeptine (Stablon, Coaxil, Tianeurax) – weak and atypical μ-opioid receptor agonist, other actions"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_NRI_01",
+            "nombre_generico": "Reboxetina",
+            "nombre_quimico_iupac": "(2RS)-2-[(RS)-(2-etoxifenoxi)(fenil)metil]morfolina",
+            "clase_terapeutica": "Inhibidor selectivo de la recaptación de noradrenalina (NRI)",
+            "mecanismo_principal": "Inhibición selectiva de la recaptura de noradrenalina (NET)",
+            "codigo_atc": "N06AX18",
+            "grupo_quimico": "Morfina derivada (morfofolina)",
+            "biodisponibilidad_oral": "90",
+            "t_max": "2 h",
+            "vida_media_parental": "12–13 h",
+            "vida_media_metabolitos": "N/D",
+            "union_proteinas_plasmaticas": "97",
+            "volumen_distribucion": "0.5 L/kg",
+            "excrecion_renal": "78",
+            "excrecion_fecal": "10",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP3A4",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "N/D",
+            "polimorfismos_relevantes": "No conocidos",
+            "ajuste_insuficiencia_hepatica": "Reducir dosis",
+            "ajuste_insuficiencia_renal": "Reducir dosis si TFG <30 mL/min",
+            "dosis_inicio_adulto": "4 mg 2 veces al día",
+            "rango_terapeutico_adulto": "8–10 mg/día",
+            "dosis_maxima_autorizada": "12 mg/día",
+            "frecuencia_administracion": "2 veces al día",
+            "tiempo_estado_estacionario": "5 días",
+            "titulacion_paso": "Incrementar a 10 mg tras 3 semanas si necesario",
+            "efectos_muy_frecuentes": "Xerostomía; estreñimiento; insomnio; sudoración",
+            "efectos_frecuentes": "Taquicardia; mareo; retención urinaria; impotencia",
+            "efectos_poco_frecuentes": "Hipotensión",
+            "efectos_raros_graves": "Hiponatremia; convulsiones",
+            "perfil_impacto_peso": "Neutro",
+            "perfil_disfuncion_sexual": "Bajo/Moderado (impotencia)",
+            "nivel_sedacion": "0",
+            "perfil_activacion": "Alto",
+            "fecha_aprobacion_fda": "Nunca_aprobado",
+            "indicaciones_aprobadas_fda": "Rechazado por FDA por dudas sobre eficacia",
+            "estado_comercial_fda": "N/A",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Depresión",
+            "restricciones_ue": "Evitar si hay riesgo CV alto",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "EMA: individualizar; Riesgo bajo reportado",
+            "indicaciones_off_label": "TDAH; enuresis",
+            "utilidad_sintomatica_clave": "Depresión con anergia severa y falta de motivación",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Bajo",
+            "interacciones_contraindicadas": "IMAO; antidepresivos tricíclicos duales (precaución)",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 1,
+                    "perfil_disfuncion_sexual_ord": 1,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 2
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 1,
+            "perfil_disfuncion_sexual_ord": 1,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 2,
+            "_search": "reboxetina adp_nri_01 inhibidor selectivo de la recaptación de noradrenalina (nri) inhibición selectiva de la recaptura de noradrenalina (net) n06ax18 depransia con anergia severa tdah; enuresis",
+            "perlas_clinicas": "Inhibidor selectivo de la recaptación de noradrenalina (NRI). Eficacia cuestionada en depresión mayor comparada con SSRIs. Efectos adversos 'anticolinérgicos-like' (boca seca, hesitación urinaria) mediados por noradrenalina. No aprobado en EE.UU.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Psychiatry - Clinical Gate",
+                        "section": "NDRIs",
+                        "quote": "Reboxetine... approved in Europe... rejected by the U.S. FDA because of concerns over poor efficacy"
+                    },
+                    {
+                        "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                        "section": "Sexual dysfunction",
+                        "quote": "Reboxetine... Probably causes less SD than SSRIs/SNRIs though anti- depressant efficacy has been questioned"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_ATYP_07",
+            "nombre_generico": "Mianserina",
             "nombre_quimico_iupac": "1,2,3,4,10,14b-hexahidrodibenzo[c,f]pirazino[1,2-a]azepina-2-ylmethylamine",
             "clase_terapeutica": "Antidepresivo atípico",
             "mecanismo_principal": "NaSSA: antagonista α2; 5-HT2/5-HT3; H1",
@@ -1360,33 +1617,47 @@
             "autorizado_ema": true,
             "indicaciones_aprobadas_ema": "Enfermedad depresiva; Trastorno obsesivo-compulsivo (TOC); Trastorno de pánico; Trastorno de ansiedad social; Trastorno de estrés postraumático (TEPT)",
             "restricciones_ue": "Sí",
-            "aprobado_uso_pediatrico": null,
-            "riesgo_embarazo_multifuente": "Ansiedad generalizada; depresión posparto",
-            "indicaciones_off_label": "Ansiedad; síntomas obsesivo-compulsivos; rumiación",
-            "utilidad_sintomatica_clave": "Moderado",
-            "riesgo_sindrome_abstinencia": "Bajo",
-            "riesgo_prolongacion_qt": "IMAO; pimozida",
+            "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+            "indicaciones_off_label": "Ansiedad generalizada; depresión posparto",
+            "utilidad_sintomatica_clave": "Ansiedad; síntomas obsesivo-compulsivos; rumiación",
+            "riesgo_sindrome_abstinencia": "Moderado",
+            "riesgo_prolongacion_qt": "Bajo",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Pimozida",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 1,
                     "perfil_disfuncion_sexual_ord": 2,
-                    "riesgo_prolongacion_qt_ord": null,
-                    "riesgo_sindrome_abstinencia_ord": 0,
-                    "perfil_activacion_ord": null
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 1,
+                    "perfil_activacion_ord": 1
                 },
                 "flags": {
                     "black_box_warning": true,
-                    "aprobado_uso_pediatrico": null,
+                    "aprobado_uso_pediatrico": false,
                     "autorizado_ema": true
                 }
             },
             "perfil_impacto_peso_ord": 1,
             "perfil_disfuncion_sexual_ord": 2,
-            "riesgo_prolongacion_qt_ord": null,
-            "riesgo_sindrome_abstinencia_ord": 0,
-            "perfil_activacion_ord": null,
-            "_search": "sertralina adp_ssri_01 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab06 moderado ansiedad; sintomas obsesivo-compulsivos; rumiacion"
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 1,
+            "perfil_activacion_ord": 1,
+            "perlas_clinicas": "Inhibidor selectivo de la recaptura de serotonina (ISRS) derivado de la naftilamina. Único ISRS con inhibición leve de la recaptura de dopamina a dosis altas (unión sigma-1), lo que puede aportar un perfil activador leve. Considerado el ISRS de elección en pacientes post-infarto (estudio SADHEART).\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "The Maudsley Prescribing Guidelines (15th Ed)",
+                        "section": "Antidepressants in physical health",
+                        "quote": "Sertraline is the best choice... of antidepressant for patients after myocardial infarction because there is most safety data available (SADHEART study)"
+                    },
+                    {
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "Selective Serotonin Reuptake Inhibitors",
+                        "quote": "Sertraline has the unique property of inhibiting the dopamine reuptake transporter (DAT). High doses... might improve energy, motivation, and concentration"
+                    }
+                ]
+            },
+            "_search": "sertralina adp_ssri_01 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab06 ansiedad; sintomas obsesivo-compulsivos; rumiacion"
         },
         {
             "id_farmaco": "ADP_SSRI_02",
@@ -1433,33 +1704,48 @@
             "autorizado_ema": true,
             "indicaciones_aprobadas_ema": "Depresión mayor; Bulimia nerviosa; Trastorno obsesivo-compulsivo (TOC)",
             "restricciones_ue": "Sí",
-            "aprobado_uso_pediatrico": null,
-            "riesgo_embarazo_multifuente": "Trastornos de ansiedad; depresión posparto",
-            "indicaciones_off_label": "Anhedonia; apatía; síntomas obsesivo-compulsivos",
-            "utilidad_sintomatica_clave": "Bajo",
+            "aprobado_uso_pediatrico": true,
+            "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+            "indicaciones_off_label": "Trastornos de ansiedad; depresión posparto",
+            "utilidad_sintomatica_clave": "Anhedonia; apatía; síntomas obsesivo-compulsivos",
             "riesgo_sindrome_abstinencia": "Bajo",
-            "riesgo_prolongacion_qt": "IMAO",
+            "riesgo_prolongacion_qt": "Bajo",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Pimozida; Tioridazina",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 1,
                     "perfil_disfuncion_sexual_ord": 2,
-                    "riesgo_prolongacion_qt_ord": null,
+                    "riesgo_prolongacion_qt_ord": 0,
                     "riesgo_sindrome_abstinencia_ord": 0,
-                    "perfil_activacion_ord": null
+                    "perfil_activacion_ord": 2
                 },
                 "flags": {
                     "black_box_warning": true,
-                    "aprobado_uso_pediatrico": null,
+                    "aprobado_uso_pediatrico": true,
                     "autorizado_ema": true
                 }
             },
             "perfil_impacto_peso_ord": 1,
             "perfil_disfuncion_sexual_ord": 2,
-            "riesgo_prolongacion_qt_ord": null,
+            "riesgo_prolongacion_qt_ord": 0,
             "riesgo_sindrome_abstinencia_ord": 0,
-            "perfil_activacion_ord": null,
-            "_search": "fluoxetina adp_ssri_02 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab03 bajo anhedonia; apatia; sintomas obsesivo-compulsivos"
+            "perfil_activacion_ord": 2,
+            "perlas_clinicas": "El ISRS con mayor vida media (norfluoxetina hasta 15 días), lo que reduce el riesgo de síndrome por discontinuación brusca. Posee un perfil activador por antagonismo 5-HT2C. Requiere el lavado más prolongado (5 semanas) para el cambio a un IMAO debido a su acumulación.\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "Selective Serotonin Reuptake Inhibitors",
+                        "quote": "Fluoxetine is unique... its 5-HT2C antagonism. This is 'activating' and can improve concentration and fatigue"
+                    },
+                    {
+                        "source": "The Maudsley Prescribing Guidelines (15th Ed)",
+                        "section": "Interaction with MAOIs",
+                        "quote": "Fluoxetine and its active metabolite (norfluoxetine) have a very long combined half-life... washing out for 5 weeks is necessary before starting an MAOI"
+                    }
+                ]
+            },
+            "_search": "fluoxetina adp_ssri_02 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab03 anhedonia; apatia; sintomas obsesivo-compulsivos"
         },
         {
             "id_farmaco": "ADP_SSRI_03",
@@ -1506,33 +1792,48 @@
             "autorizado_ema": true,
             "indicaciones_aprobadas_ema": "Depresión mayor; Trastorno de ansiedad social; Trastorno por estrés postraumático (TEPT); Trastorno de ansiedad generalizada; Trastorno obsesivo-compulsivo; Trastorno de pánico",
             "restricciones_ue": "No",
-            "aprobado_uso_pediatrico": null,
-            "riesgo_embarazo_multifuente": "Ansiedad generalizada",
-            "indicaciones_off_label": "Ansiedad somática; insomnio con ansiedad",
-            "utilidad_sintomatica_clave": "Alto",
-            "riesgo_sindrome_abstinencia": "Bajo",
-            "riesgo_prolongacion_qt": "IMAO; tioridazina",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+            "indicaciones_off_label": "Ansiedad generalizada",
+            "utilidad_sintomatica_clave": "Ansiedad somática; insomnio con ansiedad",
+            "riesgo_sindrome_abstinencia": "Alto",
+            "riesgo_prolongacion_qt": "Bajo",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Tioridazina",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 2,
                     "perfil_disfuncion_sexual_ord": 2,
-                    "riesgo_prolongacion_qt_ord": null,
-                    "riesgo_sindrome_abstinencia_ord": 0,
-                    "perfil_activacion_ord": null
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 2,
+                    "perfil_activacion_ord": 0
                 },
                 "flags": {
                     "black_box_warning": true,
-                    "aprobado_uso_pediatrico": null,
+                    "aprobado_uso_pediatrico": false,
                     "autorizado_ema": true
                 }
             },
             "perfil_impacto_peso_ord": 2,
             "perfil_disfuncion_sexual_ord": 2,
-            "riesgo_prolongacion_qt_ord": null,
-            "riesgo_sindrome_abstinencia_ord": 0,
-            "perfil_activacion_ord": null,
-            "_search": "paroxetina adp_ssri_03 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab05 alto ansiedad somatica; insomnio con ansiedad"
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 2,
+            "perfil_activacion_ord": 0,
+            "perlas_clinicas": "ISRS con mayor afinidad por el transportador de serotonina (SERT) y ligera inhibición de la recaptura de noradrenalina a dosis altas. Destaca por su corta vida media y mayor riesgo de síndrome de abstinencia. Posee efectos anticolinérgicos leves (M1) comparado con otros ISRS.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "SSRIs",
+                        "quote": "Paroxetine is the only SSRI with mild anticholinergic (M1) properties... it also inhibits the norepinephrine transporter (NET), which may contribute to its efficacy"
+                    },
+                    {
+                        "source": "The Maudsley Prescribing Guidelines (15th Ed)",
+                        "section": "Antidepressant withdrawal symptoms",
+                        "quote": "SSRIs with short half-lives (e.g. paroxetine) are associated with a higher risk of withdrawal symptoms than those with long half-lives"
+                    }
+                ]
+            },
+            "_search": "paroxetina adp_ssri_03 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab05 ansiedad somatica; insomnio con ansiedad"
         },
         {
             "id_farmaco": "ADP_SSRI_04",
@@ -1579,33 +1880,48 @@
             "autorizado_ema": true,
             "indicaciones_aprobadas_ema": "Enfermedad depresiva; Trastorno de pánico",
             "restricciones_ue": "No",
-            "aprobado_uso_pediatrico": null,
-            "riesgo_embarazo_multifuente": "Ansiedad generalizada",
-            "indicaciones_off_label": "Ansiedad; rumiación",
-            "utilidad_sintomatica_clave": "Moderado",
-            "riesgo_sindrome_abstinencia": "Alto",
-            "riesgo_prolongacion_qt": "IMAO",
-            "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Pimozida; Linezolid; Azul de metileno; Uroquinasa; Dapoxetina",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; Citalopram dose-dependent QT risk | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+            "indicaciones_off_label": "Ansiedad generalizada",
+            "utilidad_sintomatica_clave": "Ansiedad; rumiación",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Alto",
+            "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Pimozida; Linezolid; Azul de metileno; Dapoxetina",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 1,
                     "perfil_disfuncion_sexual_ord": 2,
-                    "riesgo_prolongacion_qt_ord": null,
-                    "riesgo_sindrome_abstinencia_ord": 2,
-                    "perfil_activacion_ord": null
+                    "riesgo_prolongacion_qt_ord": 2,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 0
                 },
                 "flags": {
                     "black_box_warning": true,
-                    "aprobado_uso_pediatrico": null,
+                    "aprobado_uso_pediatrico": false,
                     "autorizado_ema": true
                 }
             },
             "perfil_impacto_peso_ord": 1,
             "perfil_disfuncion_sexual_ord": 2,
-            "riesgo_prolongacion_qt_ord": null,
-            "riesgo_sindrome_abstinencia_ord": 2,
-            "perfil_activacion_ord": null,
-            "_search": "citalopram adp_ssri_04 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab04 moderado ansiedad; rumiacion"
+            "riesgo_prolongacion_qt_ord": 2,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 0,
+            "perlas_clinicas": "ISRS con alta selectividad. Su uso está condicionado por la dosis-dependencia de la prolongación del intervalo QTc. Se recomienda no exceder los 40mg (20mg en ancianos). Es una mezcla racémica, donde el S-citalopram es el enantiómero activo.\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "SSRIs",
+                        "quote": "Citalopram is composed of two enantiomers, R and S... the S-enantiomer is the active one"
+                    },
+                    {
+                        "source": "The Maudsley Prescribing Guidelines (15th Ed)",
+                        "section": "Antidepressants and the heart",
+                        "quote": "Citalopram and escitalopram are associated with dose-related prolongation of the QT interval... doses above 40mg are no longer recommended"
+                    }
+                ]
+            },
+            "_search": "citalopram adp_ssri_04 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab04 ansiedad; rumiacion"
         },
         {
             "id_farmaco": "ADP_SSRI_05",
@@ -1652,33 +1968,48 @@
             "autorizado_ema": true,
             "indicaciones_aprobadas_ema": "Enfermedad depresiva; Trastorno de ansiedad generalizada; Trastorno obsesivo-compulsivo; Trastorno de pánico; Trastorno de ansiedad social",
             "restricciones_ue": "Sí",
-            "aprobado_uso_pediatrico": null,
-            "riesgo_embarazo_multifuente": "Trastorno de pánico",
-            "indicaciones_off_label": "Ansiedad; rumiación",
-            "utilidad_sintomatica_clave": "Moderado",
+            "aprobado_uso_pediatrico": true,
+            "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+            "indicaciones_off_label": "Trastorno de pánico",
+            "utilidad_sintomatica_clave": "Ansiedad; rumiación",
             "riesgo_sindrome_abstinencia": "Bajo",
-            "riesgo_prolongacion_qt": "IMAO",
+            "riesgo_prolongacion_qt": "Moderado",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO)",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 1,
                     "perfil_disfuncion_sexual_ord": 2,
-                    "riesgo_prolongacion_qt_ord": null,
+                    "riesgo_prolongacion_qt_ord": 1,
                     "riesgo_sindrome_abstinencia_ord": 0,
-                    "perfil_activacion_ord": null
+                    "perfil_activacion_ord": 0
                 },
                 "flags": {
                     "black_box_warning": true,
-                    "aprobado_uso_pediatrico": null,
+                    "aprobado_uso_pediatrico": true,
                     "autorizado_ema": true
                 }
             },
             "perfil_impacto_peso_ord": 1,
             "perfil_disfuncion_sexual_ord": 2,
-            "riesgo_prolongacion_qt_ord": null,
+            "riesgo_prolongacion_qt_ord": 1,
             "riesgo_sindrome_abstinencia_ord": 0,
-            "perfil_activacion_ord": null,
-            "_search": "escitalopram adp_ssri_05 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab10 moderado ansiedad; rumiacion"
+            "perfil_activacion_ord": 0,
+            "perlas_clinicas": "Enantiómero S puro del citalopram. Es el ISRS con mayor selectividad por el transportador de serotonina (SERT), lo que minimiza interacciones y efectos secundarios. En el metaanálisis de Cipriani (2018), se posicionó como uno de los antidepresivos con mejor balance entre eficacia y aceptabilidad.\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Lancet (Cipriani et al., 2018)",
+                        "section": "Comparative efficacy and acceptability",
+                        "quote": "In head-to-head comparisons, escitalopram was more effective than most other ADs and was among the best tolerated treatments"
+                    },
+                    {
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "Selective Serotonin Reuptake Inhibitors",
+                        "quote": "The S-enantiomer is the active form of citalopram... Escitalopram removes the R-enantiomer, which can actually interfere with the SERT inhibition"
+                    }
+                ]
+            },
+            "_search": "escitalopram adp_ssri_05 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab10 ansiedad; rumiacion"
         },
         {
             "id_farmaco": "ADP_SSRI_06",
@@ -1725,33 +2056,34 @@
             "autorizado_ema": true,
             "indicaciones_aprobadas_ema": "Enfermedad depresiva; Trastorno obsesivo-compulsivo",
             "restricciones_ue": "Sí",
-            "aprobado_uso_pediatrico": null,
-            "riesgo_embarazo_multifuente": "Depresión",
-            "indicaciones_off_label": "Síntomas obsesivo-compulsivos; ansiedad",
-            "utilidad_sintomatica_clave": "Moderado",
+            "aprobado_uso_pediatrico": true,
+            "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+            "indicaciones_off_label": "Depresión",
+            "utilidad_sintomatica_clave": "Síntomas obsesivo-compulsivos; ansiedad",
             "riesgo_sindrome_abstinencia": "Bajo",
-            "riesgo_prolongacion_qt": "IMAO; tizanidina",
+            "riesgo_prolongacion_qt": "Bajo",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Tizanidina; Terfenadina; Astemizol",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 1,
                     "perfil_disfuncion_sexual_ord": 1,
-                    "riesgo_prolongacion_qt_ord": null,
+                    "riesgo_prolongacion_qt_ord": 0,
                     "riesgo_sindrome_abstinencia_ord": 0,
-                    "perfil_activacion_ord": null
+                    "perfil_activacion_ord": 0
                 },
                 "flags": {
                     "black_box_warning": true,
-                    "aprobado_uso_pediatrico": null,
+                    "aprobado_uso_pediatrico": true,
                     "autorizado_ema": true
                 }
             },
             "perfil_impacto_peso_ord": 1,
             "perfil_disfuncion_sexual_ord": 1,
-            "riesgo_prolongacion_qt_ord": null,
+            "riesgo_prolongacion_qt_ord": 0,
             "riesgo_sindrome_abstinencia_ord": 0,
-            "perfil_activacion_ord": null,
-            "_search": "fluvoxamina adp_ssri_06 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab08 moderado sintomas obsesivo-compulsivos; ansiedad"
+            "perfil_activacion_ord": 0,
+            "_search": "fluvoxamina adp_ssri_06 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab08 sintomas obsesivo-compulsivos; ansiedad",
+            "perlas_clinicas": "\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia."
         },
         {
             "id_farmaco": "ADP_SNRI_01",
@@ -1798,33 +2130,48 @@
             "autorizado_ema": true,
             "indicaciones_aprobadas_ema": "Trastorno depresivo mayor; trastorno de ansiedad generalizada; trastorno de ansiedad social",
             "restricciones_ue": "No",
-            "aprobado_uso_pediatrico": null,
-            "riesgo_embarazo_multifuente": "Dolor neuropático; bochornos",
-            "indicaciones_off_label": "Depresión con ansiedad y dolor comórbido",
-            "utilidad_sintomatica_clave": "Alto",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+            "indicaciones_off_label": "Dolor neuropático; bochornos",
+            "utilidad_sintomatica_clave": "Depresión con ansiedad y dolor comórbido",
             "riesgo_sindrome_abstinencia": "Moderado",
-            "riesgo_prolongacion_qt": "IMAO; linezolid; azul de metileno IV",
+            "riesgo_prolongacion_qt": "Bajo",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAOs); Riesgo de arritmia cardíaca; Hipertensión no controlada",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 1,
                     "perfil_disfuncion_sexual_ord": 1,
-                    "riesgo_prolongacion_qt_ord": null,
+                    "riesgo_prolongacion_qt_ord": 0,
                     "riesgo_sindrome_abstinencia_ord": 1,
                     "perfil_activacion_ord": 1
                 },
                 "flags": {
                     "black_box_warning": true,
-                    "aprobado_uso_pediatrico": null,
+                    "aprobado_uso_pediatrico": false,
                     "autorizado_ema": true
                 }
             },
             "perfil_impacto_peso_ord": 1,
             "perfil_disfuncion_sexual_ord": 1,
-            "riesgo_prolongacion_qt_ord": null,
+            "riesgo_prolongacion_qt_ord": 0,
             "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 1,
-            "_search": "venlafaxina adp_snri_01 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (isrn/snri) n06ax16 alto depresion con ansiedad y dolor comorbido"
+            "perlas_clinicas": "Inhibidor dual (SNRI). A dosis bajas (<150mg) actúa principalmente como un ISRS; la inhibición de la recaptura de noradrenalina se vuelve clínicamente significativa a dosis más altas. Conocido por un síndrome de discontinuación intenso ('chispazos eléctricos') debido a su vida media corta.\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "SNRIs",
+                        "quote": "Venlafaxine... its potent 5-HT reuptake inhibition at low doses, and its NE reuptake inhibition at higher doses (150-225 mg/day)"
+                    },
+                    {
+                        "source": "The Maudsley Prescribing Guidelines (15th Ed)",
+                        "section": "Antidepressant withdrawal symptoms",
+                        "quote": "Withdrawal symptoms (including 'electric shock' sensations) are more common with venlafaxine than with other SNRIs or SSRIs"
+                    }
+                ]
+            },
+            "_search": "venlafaxina adp_snri_01 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (isrn/snri) n06ax16 depresion con ansiedad y dolor comorbido"
         },
         {
             "id_farmaco": "ADP_SNRI_02",
@@ -1871,33 +2218,34 @@
             "autorizado_ema": true,
             "indicaciones_aprobadas_ema": "No aprobada por EMA/UK para depresión (autorizada fuera de UE)",
             "restricciones_ue": "No",
-            "aprobado_uso_pediatrico": null,
-            "riesgo_embarazo_multifuente": "Ansiedad; bochornos",
-            "indicaciones_off_label": "Depresión con fatiga/anergia",
-            "utilidad_sintomatica_clave": "Alto",
-            "riesgo_sindrome_abstinencia": "Bajo",
-            "riesgo_prolongacion_qt": "IMAO; linezolid; azul de metileno IV",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+            "indicaciones_off_label": "Ansiedad; bochornos",
+            "utilidad_sintomatica_clave": "Depresión con fatiga/anergia",
+            "riesgo_sindrome_abstinencia": "Moderado",
+            "riesgo_prolongacion_qt": "Bajo",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAOs)",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 1,
                     "perfil_disfuncion_sexual_ord": 1,
-                    "riesgo_prolongacion_qt_ord": null,
-                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 1,
                     "perfil_activacion_ord": 1
                 },
                 "flags": {
                     "black_box_warning": true,
-                    "aprobado_uso_pediatrico": null,
+                    "aprobado_uso_pediatrico": false,
                     "autorizado_ema": true
                 }
             },
             "perfil_impacto_peso_ord": 1,
             "perfil_disfuncion_sexual_ord": 1,
-            "riesgo_prolongacion_qt_ord": null,
-            "riesgo_sindrome_abstinencia_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 1,
-            "_search": "desvenlafaxina adp_snri_02 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (isrn/snri) n06ax23 alto depresion con fatiga/anergia"
+            "_search": "desvenlafaxina adp_snri_02 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (isrn/snri) n06ax23 depresion con fatiga/anergia",
+            "perlas_clinicas": "\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia."
         },
         {
             "id_farmaco": "ADP_SNRI_03",
@@ -1944,33 +2292,48 @@
             "autorizado_ema": true,
             "indicaciones_aprobadas_ema": "Trastorno depresivo mayor; Trastorno de ansiedad generalizada; Neuropatía diabética; Incontinencia urinaria de esfuerzo",
             "restricciones_ue": "Sí",
-            "aprobado_uso_pediatrico": null,
-            "riesgo_embarazo_multifuente": "Dolor crónico no diabético",
-            "indicaciones_off_label": "Depresión con dolor somático",
-            "utilidad_sintomatica_clave": "Alto",
-            "riesgo_sindrome_abstinencia": "Bajo",
-            "riesgo_prolongacion_qt": "IMAO; linezolid; azul de metileno IV",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+            "indicaciones_off_label": "Dolor crónico no diabético",
+            "utilidad_sintomatica_clave": "Depresión con dolor somático",
+            "riesgo_sindrome_abstinencia": "Moderado",
+            "riesgo_prolongacion_qt": "Bajo",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Tioridazina; Glaucoma de ángulo estrecho no controlado; Inhibidores potentes de CYP1A2 (fluvoxamina, ciprofloxacino)",
             "_norm": {
                 "ord": {
                     "perfil_impacto_peso_ord": 1,
                     "perfil_disfuncion_sexual_ord": 1,
-                    "riesgo_prolongacion_qt_ord": null,
-                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 1,
                     "perfil_activacion_ord": 1
                 },
                 "flags": {
                     "black_box_warning": true,
-                    "aprobado_uso_pediatrico": null,
+                    "aprobado_uso_pediatrico": false,
                     "autorizado_ema": true
                 }
             },
             "perfil_impacto_peso_ord": 1,
             "perfil_disfuncion_sexual_ord": 1,
-            "riesgo_prolongacion_qt_ord": null,
-            "riesgo_sindrome_abstinencia_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 1,
-            "_search": "duloxetina adp_snri_03 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (isrn/snri) n06ax21 alto depresion con dolor somatico"
+            "perlas_clinicas": "Inhibidor dual (SNRI) con indicación aprobada en dolor neuropático diabético y fibromialgia. A diferencia de venlafaxina, su acción dual es significativa desde las dosis iniciales (60mg). Requiere precaución en hepatopatía y en fumadores (el tabaco induce su metabolismo vía CYP1A2).\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "SNRIs",
+                        "quote": "Duloxetine... may be especially useful in treating the physical symptoms of depression, such as chronic pain and fatigue"
+                    },
+                    {
+                        "source": "The Maudsley Prescribing Guidelines (15th Ed)",
+                        "section": "Antidepressants in liver disease",
+                        "quote": "Duloxetine should be avoided in patients with liver disease because it has been associated with hepatic failure in some cases"
+                    }
+                ]
+            },
+            "_search": "duloxetina adp_snri_03 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (isrn/snri) n06ax21 depresion con dolor somatico"
         },
         {
             "id_farmaco": "ADP_SNRI_04",
@@ -1994,56 +2357,57 @@
             "induccion_enzimatica": "No",
             "metabolito_activo_nombre": "No",
             "polimorfismos_relevantes": "No",
-            "ajuste_insuficiencia_hepatica": "No",
-            "ajuste_insuficiencia_renal": "Precaución",
-            "dosis_inicio_adulto": "Ajustar si ERC",
-            "rango_terapeutico_adulto": "20 mg/día",
-            "dosis_maxima_autorizada": "40–120 mg/día",
-            "frecuencia_administracion": "120 mg/día",
-            "tiempo_estado_estacionario": "Una vez al día",
-            "titulacion_paso": "2–3 días",
-            "efectos_muy_frecuentes": "Incrementos de 40 mg",
-            "efectos_frecuentes": "Náusea; estreñimiento; hiperhidrosis",
-            "efectos_poco_frecuentes": "Insomnio; taquicardia; ansiedad",
-            "efectos_raros_graves": "Retención urinaria; aumento PA",
-            "perfil_impacto_peso": "Síndrome serotoninérgico; convulsiones",
-            "perfil_disfuncion_sexual": "Neutro/Pérdida",
-            "nivel_sedacion": "Moderado",
-            "perfil_activacion": "0",
-            "fecha_aprobacion_fda": "Alto",
-            "indicaciones_aprobadas_fda": "2013-07-25",
-            "estado_comercial_fda": "Trastorno depresivo mayor",
-            "black_box_warning": null,
-            "autorizado_ema": true,
-            "indicaciones_aprobadas_ema": "Sí",
+            "ajuste_insuficiencia_hepatica": "No requiere ajuste",
+            "ajuste_insuficiencia_renal": "Ajustar si TFG <60 mL/min",
+            "dosis_inicio_adulto": "20 mg/día",
+            "rango_terapeutico_adulto": "40–120 mg/día",
+            "dosis_maxima_autorizada": "120 mg/día",
+            "frecuencia_administracion": "Una vez al día",
+            "tiempo_estado_estacionario": "2–3 días",
+            "titulacion_paso": "Incrementos de 40 mg cada ≥2 días",
+            "efectos_muy_frecuentes": "Náusea; estreñimiento; hiperhidrosis",
+            "efectos_frecuentes": "Insomnio; taquicardia; ansiedad",
+            "efectos_poco_frecuentes": "Retención urinaria; aumento PA",
+            "efectos_raros_graves": "Síndrome serotoninérgico; convulsiones",
+            "perfil_impacto_peso": "Neutro/Pérdida",
+            "perfil_disfuncion_sexual": "Moderado",
+            "nivel_sedacion": "0",
+            "perfil_activacion": "Alto",
+            "fecha_aprobacion_fda": "2013-07-25",
+            "indicaciones_aprobadas_fda": "Trastorno depresivo mayor",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": false,
+            "indicaciones_aprobadas_ema": "N/A",
             "restricciones_ue": "Not licensed in the UK/EU for depression",
             "aprobado_uso_pediatrico": false,
-            "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: balance recaída-riesgo",
+            "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: balance recaída-riesgo | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
             "indicaciones_off_label": "TDAH (selecto)",
             "utilidad_sintomatica_clave": "Depresión con apatía y baja energía",
-            "riesgo_sindrome_abstinencia": "Alto",
+            "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Bajo",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
-                    "perfil_impacto_peso_ord": null,
-                    "perfil_disfuncion_sexual_ord": null,
+                    "perfil_impacto_peso_ord": 1,
+                    "perfil_disfuncion_sexual_ord": 1,
                     "riesgo_prolongacion_qt_ord": 0,
-                    "riesgo_sindrome_abstinencia_ord": 2,
-                    "perfil_activacion_ord": null
+                    "riesgo_sindrome_abstinencia_ord": 1,
+                    "perfil_activacion_ord": 2
                 },
                 "flags": {
-                    "black_box_warning": null,
+                    "black_box_warning": true,
                     "aprobado_uso_pediatrico": false,
-                    "autorizado_ema": true
+                    "autorizado_ema": false
                 }
             },
-            "perfil_impacto_peso_ord": null,
-            "perfil_disfuncion_sexual_ord": null,
+            "perfil_impacto_peso_ord": 1,
+            "perfil_disfuncion_sexual_ord": 1,
             "riesgo_prolongacion_qt_ord": 0,
-            "riesgo_sindrome_abstinencia_ord": 2,
-            "perfil_activacion_ord": null,
-            "_search": "levomilnacipran adp_snri_04 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (net>sert) n06ax28 depresion con apatia y baja energia tdah (selecto)"
+            "riesgo_sindrome_abstinencia_ord": 1,
+            "perfil_activacion_ord": 2,
+            "_search": "levomilnacipran adp_snri_04 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (net>sert) n06ax28 depresion con apatia y baja energia",
+            "perlas_clinicas": "\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia."
         },
         {
             "id_farmaco": "ADP_TCA_01",
@@ -2117,7 +2481,7 @@
             "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 0,
             "_search": "imipramina adp_tca_01 antidepresivo triciclico (tca) inhibicion recaptura sert/net; antagonismo m1/h1/α1 n06aa02 depresion con dolor; insomnio (si sedacion deseada) enuresis nocturna (historico); dolor neuropatico (selecto)",
-            "perlas_clinicas": "El TCA prototipo. Históricamente 'gold standard' en trastorno de pánico y depresión melancólica. También usado en enuresis nocturna. Fuerte carga anticolinérgica y riesgo de hipotensión ortostática. Metabolizado a desipramina.",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nEl TCA prototipo. Históricamente 'gold standard' en trastorno de pánico y depresión melancólica. También usado en enuresis nocturna. Fuerte carga anticolinérgica y riesgo de hipotensión ortostática. Metabolizado a desipramina.",
             "evidence": {
                 "perlas_clinicas": [
                     {
@@ -2204,22 +2568,22 @@
             "riesgo_prolongacion_qt_ord": 2,
             "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 0,
-            "_search": "amitriptilina adp_tca_02 antidepresivo triciclico (tca) inhibicion recaptura sert/net; antagonismo m1/h1/α1 n06aa09 dolor neuropatico; insomnio comorbido; depresion ansiosa (si sedacion util) dolor neuropatico; migrana; fibromialgia (selecto)",
-            "perlas_clinicas": "TCA terciario muy sedante y con alta carga anticolinérgica. Uso común 'off-label' a dosis bajas para dolor neuropático, migraña e insomnio. Muy tóxico en sobredosis (arritmias). Metabolizado a nortriptilina.",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA terciario muy sedante y con alta carga anticolinérgica. Uso común 'off-label' a dosis bajas para dolor neuropático, migraña e insomnio. Muy tóxico en sobredosis (arritmias). Metabolizado a nortriptilina. Es el fármaco de referencia histórica en depresión melancólica.",
             "evidence": {
                 "perlas_clinicas": [
                     {
-                        "source": "Antidepressant drugs | IUPHAR",
-                        "section": "Tricyclic",
-                        "quote": "Amitriptyline – not recommended for depressive illness because of its toxicity in overdosage- used for migraine prophylaxis, neuropathic pain"
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "Tricyclic Antidepressants",
+                        "quote": "Amitriptyline is a very potent H1 and M1 antagonist. Use in depression is limited by side effects, but it's a staple in pain management"
                     },
                     {
-                        "source": "Farmacología clínica y molecular...",
-                        "section": "Las aminas terciarias",
-                        "quote": "Amitriptilina... Muy Alta Afinidad H1... Muy Alta Afinidad M1"
+                        "source": "The Maudsley Prescribing Guidelines (14th Ed)",
+                        "section": "Antidepressants in pain",
+                        "quote": "Amitriptyline is commonly used... but carries a high risk of anticholinergic side effects and toxicity in overdose"
                     }
                 ]
-            }
+            },
+            "_search": "amitriptilina adp_tca_02 antidepresivo triciclico (tca) inhibicion recaptura sert/net; antagonismo m1/h1/α1 n06aa09 dolor neuropatico; insomnio comorbido; depransiosa (si sedacion util) dolor neuropatico; migrana; fibromialgia (selecto)"
         },
         {
             "id_farmaco": "ADP_TCA_03",
@@ -2292,22 +2656,22 @@
             "riesgo_prolongacion_qt_ord": 2,
             "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 1,
-            "_search": "nortriptilina adp_tca_03 antidepresivo triciclico (tca) inhibicion recaptura net>sert; antagonismo m1/h1/α1 n06aa10 dolor neuropatico con mejor tolerancia tca; depresion con fatiga dolor neuropatico; migrana",
-            "perlas_clinicas": "Amina secundaria (metabolito de amitriptilina) con 'ventana terapéutica' definida (50-150 mcg/L). Menos sedante y ortostática que la amitriptilina; a menudo preferida en ancianos cuando se requiere un TCA.",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nAmina secundaria (metabolito de amitriptilina) con 'ventana terapéutica' definida (50-150 mcg/L). Menos sedante y ortostática que la amitriptilina; a menudo preferida en ancianos cuando se requiere un TCA. Potente inhibidor de la recaptura de noradrenalina.",
             "evidence": {
                 "perlas_clinicas": [
                     {
-                        "source": "Farmacología clínica y molecular...",
-                        "section": "Las aminas terciarias",
-                        "quote": "nortriptilina... suelen ser mejor toleradas en pacientes ancianos"
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "Tricyclic Antidepressants",
+                        "quote": "Nortriptyline is a secondary amine... more potent at inhibiting norepinephrine reuptake than serotonin reuptake"
                     },
                     {
-                        "source": "The Maudsley Prescribing Guidelines in Psychiatry",
+                        "source": "The Maudsley Prescribing Guidelines (14th Ed)",
                         "section": "Plasma level monitoring",
-                        "quote": "Nortriptyline 50–150mcg/L... Trough 2–3 days"
+                        "quote": "Nortriptyline has a well-defined therapeutic window (50-150 mcg/L); levels above or below this range may be less effective"
                     }
                 ]
-            }
+            },
+            "_search": "nortriptilina adp_tca_03 antidepresivo triciclico (tca) inhibicion recaptura net>sert; antagonismo m1/h1/α1 n06aa10 dolor neuropatico con mejor tolerancia tca; depresion con fatiga dolor neuropatico; migrana"
         },
         {
             "id_farmaco": "ADP_TCA_04",
@@ -2381,7 +2745,7 @@
             "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 2,
             "_search": "desipramina adp_tca_04 antidepresivo triciclico (tca) inhibicion recaptura net>>sert; antagonismo m1/h1/α1 (menor sedacion) n06aa01 depresion con enlentecimiento/fatiga (si tolera activacion) tdah (selecto); dolor neuropatico (selecto)",
-            "perlas_clinicas": "Amina secundaria (metabolito de imipramina). Potente inhibidor selectivo de recaptación de norepinefrina (NET). Menor carga anticolinérgica que los TCA terciarios, pero vigilar riesgo cardíaco.",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nAmina secundaria (metabolito de imipramina). Potente inhibidor selectivo de recaptación de norepinefrina (NET). Menor carga anticolinérgica que los TCA terciarios, pero vigilar riesgo cardíaco.",
             "evidence": {
                 "perlas_clinicas": [
                     {
@@ -2469,7 +2833,7 @@
             "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 0,
             "_search": "doxepina adp_tca_05 antidepresivo triciclico (tca) inhibicion recaptura sert/net; antagonismo h1/m1/α1 (muy sedante) n06aa12 insomnio severo comorbido; depresion ansiosa con insomnio insomnio (dosis bajas); prurito (selecto)",
-            "perlas_clinicas": "TCA con afinidad H1 extremadamente alta, usado a dosis bajas para insomnio (Silenor) y dermatológicamente para prurito. Efecto sedante prominente. Riesgo cardíaco en sobredosis.",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA con afinidad H1 extremadamente alta, usado a dosis bajas para insomnio (Silenor) y dermatológicamente para prurito. Efecto sedante prominente. Riesgo cardíaco en sobredosis.",
             "evidence": {
                 "perlas_clinicas": [
                     {
@@ -2557,7 +2921,7 @@
             "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 0,
             "_search": "clomipramina adp_tca_06 antidepresivo triciclico (tca) inhibicion recaptura sert>>net; antagonismo m1/h1/α1 n06aa04 sintomas obsesivo-compulsivos graves; rumiacion intensa panico; depresion resistente (uso historico)",
-            "perlas_clinicas": "TCA con mayor potencia serotoninérgica; 'gold standard' para TOC (incluyendo niños). Alta incidencia de efectos adversos sexuales y anticolinérgicos. Riesgo de convulsiones y cardiotoxicidad en dosis altas.",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA con mayor potencia serotoninérgica; 'gold standard' para TOC (incluyendo niños). Alta incidencia de efectos adversos sexuales y anticolinérgicos. Riesgo de convulsiones y cardiotoxicidad en dosis altas.",
             "evidence": {
                 "perlas_clinicas": [
                     {
@@ -2569,6 +2933,745 @@
                         "source": "The Maudsley Prescribing Guidelines in Psychiatry",
                         "section": "Obsessive-compulsive disorder",
                         "quote": "Clomipramine remains a useful drug... debatably more efficacious than the SSRIs in treating OCD"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_TCA_07",
+            "nombre_generico": "Maprotilina",
+            "nombre_quimico_iupac": "3-(9,10-etenoantracen-9(10H)-il)-N-metilpropan-1-amina",
+            "clase_terapeutica": "Antidepresivo tetracíclico",
+            "mecanismo_principal": "Inhibidor potente y selectivo de la recaptura de noradrenalina (NET)",
+            "codigo_atc": "N06AA21",
+            "grupo_quimico": "Antraceno",
+            "biodisponibilidad_oral": "70",
+            "t_max": "8–24 h",
+            "vida_media_parental": "27–58 h",
+            "vida_media_metabolitos": "N/A",
+            "union_proteinas_plasmaticas": "88",
+            "volumen_distribucion": "23 L/kg",
+            "excrecion_renal": "60",
+            "excrecion_fecal": "30",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP2D6",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "N/A",
+            "polimorfismos_relevantes": "Variabilidad CYP2D6",
+            "ajuste_insuficiencia_hepatica": "Reducir; precaución",
+            "ajuste_insuficiencia_renal": "Precaución",
+            "dosis_inicio_adulto": "75 mg/día",
+            "rango_terapeutico_adulto": "75–150 mg/día",
+            "dosis_maxima_autorizada": "225 mg/día",
+            "frecuencia_administracion": "1 vez al día o dividida",
+            "tiempo_estado_estacionario": "1–2 semanas",
+            "titulacion_paso": "Incrementos de 25 mg tras 2 semanas",
+            "efectos_muy_frecuentes": "Xerostomía; estreñimiento; somnolencia",
+            "efectos_frecuentes": "Mareo; aumento de peso; visión borrosa",
+            "efectos_poco_frecuentes": "Rash cutáneo",
+            "efectos_raros_graves": "Convulsiones (riesgo elevado); arritmias; agranulocitosis",
+            "perfil_impacto_peso": "Aumento",
+            "perfil_disfuncion_sexual": "Moderado",
+            "nivel_sedacion": "2",
+            "perfil_activacion": "Bajo",
+            "fecha_aprobacion_fda": "1980-01-01",
+            "indicaciones_aprobadas_fda": "Trastorno depresivo mayor; distimia",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Depresión",
+            "restricciones_ue": "Vigilar umbral convulsivo",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: individualizar; Riesgo bajo reportado",
+            "indicaciones_off_label": "Dolor neuropático",
+            "utilidad_sintomatica_clave": "Depresión con anergia severa que requiere sedación nocturna",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Alto",
+            "interacciones_contraindicadas": "IMAO; fármacos que disminuyen umbral convulsivo",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 2,
+                    "perfil_disfuncion_sexual_ord": 1,
+                    "riesgo_prolongacion_qt_ord": 2,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 0
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 2,
+            "perfil_disfuncion_sexual_ord": 1,
+            "riesgo_prolongacion_qt_ord": 2,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 0,
+            "_search": "maprotilina adp_tca_07 antidepresivo tetracíclico inhibidor potente y selectivo de la recaptura de noradrenalina (net) n06aa21 depresion con anergia severa dolor neuropatico",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTetracíclico similar a los TCA en efectos, pero con selectividad NET muy marcada. Riesgo de convulsiones significativamente mayor que otros antidepresivos, especialmente en dosis >200mg o titulación rápida.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Antidepressant drugs | IUPHAR",
+                        "section": "Tricyclic",
+                        "quote": "maprotiline... selective for NE reuptake... increased risk of seizures"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_TCA_08",
+            "nombre_generico": "Amoxapina",
+            "nombre_quimico_iupac": "2-cloro-11-(piperazin-1-il)dibenzo[b,f][1,4]oxazepina",
+            "clase_terapeutica": "Antidepresivo tricíclico con efecto antipsicótico",
+            "mecanismo_principal": "Inhibición recaptura NET/SERT + Antagonismo D2 (vía 7-hidroxiamoxapina)",
+            "codigo_atc": "N06AA17",
+            "grupo_quimico": "Dibenzoxazepina",
+            "biodisponibilidad_oral": "N/D",
+            "t_max": "1–2 h",
+            "vida_media_parental": "8 h",
+            "vida_media_metabolitos": "7-hidroxiamoxapina 30 h; 8-hidroxiamoxapina 30 h",
+            "union_proteinas_plasmaticas": "90",
+            "volumen_distribucion": ">10 L/kg",
+            "excrecion_renal": "60",
+            "excrecion_fecal": "20",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP2D6",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "7-hidroxiamoxapina",
+            "polimorfismos_relevantes": "Variabilidad CYP2D6",
+            "ajuste_insuficiencia_hepatica": "Reducir; precaución",
+            "ajuste_insuficiencia_renal": "Precaución",
+            "dosis_inicio_adulto": "50 mg/día",
+            "rango_terapeutico_adulto": "200–300 mg/día",
+            "dosis_maxima_autorizada": "400 mg/día (pacientes ambulatorios); 600 mg/día (hospitalizados)",
+            "frecuencia_administracion": "1–3 veces al día",
+            "tiempo_estado_estacionario": "2–7 días",
+            "titulacion_paso": "Incrementos progresivos según tolerancia",
+            "efectos_muy_frecuentes": "Xerostomía; estreñimiento; somnolencia",
+            "efectos_frecuentes": "Mareo; hipotensión; visión borrosa",
+            "efectos_poco_frecuentes": "Galactorrea; amenorrea",
+            "efectos_raros_graves": "Sintomas extrapiramidales (SEP); Discinesia tardía; SNM; Convulsiones",
+            "perfil_impacto_peso": "Aumento",
+            "perfil_disfuncion_sexual": "Moderado",
+            "nivel_sedacion": "2",
+            "perfil_activacion": "Bajo",
+            "fecha_aprobacion_fda": "1980-01-01",
+            "indicaciones_aprobadas_fda": "Trastorno depresivo mayor con ansiedad o agitación",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": false,
+            "indicaciones_aprobadas_ema": "N/D",
+            "restricciones_ue": "Vigilar SEP/Discinesia tardía",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: individualizar; Riesgo bajo reportado",
+            "indicaciones_off_label": "Depresión psicótica (uso histórico)",
+            "utilidad_sintomatica_clave": "Depresión mayor con características psicóticas o agitación severa",
+            "riesgo_sindrome_abstinencia": "Moderado",
+            "riesgo_prolongacion_qt": "Alto",
+            "interacciones_contraindicadas": "IMAO",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 2,
+                    "perfil_disfuncion_sexual_ord": 1,
+                    "riesgo_prolongacion_qt_ord": 2,
+                    "riesgo_sindrome_abstinencia_ord": 1,
+                    "perfil_activacion_ord": 0
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": false
+                }
+            },
+            "perfil_impacto_peso_ord": 2,
+            "perfil_disfuncion_sexual_ord": 1,
+            "riesgo_prolongacion_qt_ord": 2,
+            "riesgo_sindrome_abstinencia_ord": 1,
+            "perfil_activacion_ord": 0,
+            "_search": "amoxapina adp_tca_08 antidepresivo triciclico con efecto antipsicótico inhibición recaptura net/sert + antagonismo d2 (vía 7-hidroxiamoxapina) n06aa17 depresion con psicosis o agitacion",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nÚnico antidepresivo clásico con actividad antagonista D2 relevante (vía metabolito 7-OH). Útil en depresión psicótica, pero conlleva riesgo de síntomas extrapiramidales y discinesia tardía. Estructuralmente relacionada con la loxapina.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Psychiatry - Clinical Gate",
+                        "section": "Tricyclic Antidepressants",
+                        "quote": "Amoxapine is a metabolite of loxapine... potent D2 receptor blocking properties... associated with neuroleptic side effects"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_AUG_01",
+            "nombre_generico": "Aripiprazol",
+            "nombre_quimico_iupac": "7-{4-[4-(2,3-diclorofenil)piperazin-1-il]butoxi}-3,4-dihidroquinolin-2(1H)-ona",
+            "clase_terapeutica": "Agonista parcial D2 (Antipsicótico de 3ª Gen)",
+            "mecanismo_principal": "Agonista parcial D2/5-HT1A; antagonista 5-HT2A",
+            "codigo_atc": "N05AX12",
+            "grupo_quimico": "Quinolinona",
+            "biodisponibilidad_oral": "87",
+            "t_max": "3–5 h",
+            "vida_media_parental": "75 h",
+            "vida_media_metabolitos": "Dehidro-aripiprazol 94 h",
+            "union_proteinas_plasmaticas": "99",
+            "volumen_distribucion": "4.9 L/kg",
+            "excrecion_renal": "25",
+            "excrecion_fecal": "55",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP2D6; CYP3A4",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "Dehidro-aripiprazol",
+            "polimorfismos_relevantes": "CYP2D6 PM: ↑vida media y exposición",
+            "ajuste_insuficiencia_hepatica": "No requiere habitualmente",
+            "ajuste_insuficiencia_renal": "No requiere",
+            "dosis_inicio_adulto": "2–5 mg/día (como potenciador)",
+            "rango_terapeutico_adulto": "2–15 mg/día (como potenciador)",
+            "dosis_maxima_autorizada": "15 mg/día (en depresión)",
+            "frecuencia_administracion": "1 vez al día",
+            "tiempo_estado_estacionario": "14 días",
+            "titulacion_paso": "Incrementos cada ≥7 días",
+            "efectos_muy_frecuentes": "Acatisia; náusea",
+            "efectos_frecuentes": "Cefalea; insomnio; mareo",
+            "efectos_poco_frecuentes": "Aumento de peso; somnolencia",
+            "efectos_raros_graves": "Discinesia tardía; SNM; impulsividad",
+            "perfil_impacto_peso": "Bajo/Neutro",
+            "perfil_disfuncion_sexual": "Bajo",
+            "nivel_sedacion": "1",
+            "perfil_activacion": "Alto",
+            "fecha_aprobacion_fda": "2007-11-16 (Potenciación)",
+            "indicaciones_aprobadas_fda": "Trastorno depresivo mayor (Potenciación)",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Bipolar I; Esquizofrenia (No autorizada depresión mayor)",
+            "restricciones_ue": "Vigilar akatisia",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: individualizar; Riesgo bajo reportado",
+            "indicaciones_off_label": "Tics; TLP",
+            "utilidad_sintomatica_clave": "Depresión resistente con anhedonia y síntoma de inhibición",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Bajo",
+            "interacciones_contraindicadas": "Nula absoluta (precaución con inhibidores CYP)",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 1,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 2
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 1,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 2,
+            "_search": "aripiprazol adp_aug_01 agonista parcial d2 (antipsicótico de 3ª gen) agonista parcial d2/5-ht1a; antagonista 5-ht2a n05ax12 depresion resistente con anhedonia tics; tlp",
+            "perlas_clinicas": "Agonista parcial D2. Como potenciador, actúa estabilizando la dopamina. Perfil de efectos secundarios favorable en peso y sedación comparado con otros antipsicóticos. El efecto adverso más problemático a dosis bajas es la acatisia.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Treatment-resistant major depression... Nuñez et al. 2022",
+                        "section": "Antipsychotic augmentation",
+                        "quote": "Aripiprazole... showed the most robust evidence for efficacy in augmentation of antidepressants... well tolerated relative to others"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_AUG_02",
+            "nombre_generico": "Quetiapina",
+            "nombre_quimico_iupac": "2-[2-(4-dibenzo[b,f][1,4]tiazepin-11-ilpiperazin-1-il)etoxi]etanol",
+            "clase_terapeutica": "Antipsicótico Atípico (Potenciador)",
+            "mecanismo_principal": "Antagonista D2/5-HT2A; antagonista H1/alpha1; metabolito NRI (norquetiapina)",
+            "codigo_atc": "N05AH04",
+            "grupo_quimico": "Dibenzotiazepina",
+            "biodisponibilidad_oral": "100",
+            "t_max": "1.5 h (IR); 6 h (XR)",
+            "vida_media_parental": "6 h",
+            "vida_media_metabolitos": "Norquetiapina 12 h",
+            "union_proteinas_plasmaticas": "83",
+            "volumen_distribucion": "10 L/kg",
+            "excrecion_renal": "73",
+            "excrecion_fecal": "20",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP3A4",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "Norquetiapina",
+            "polimorfismos_relevantes": "Variabilidad CYP3A4",
+            "ajuste_insuficiencia_hepatica": "Reducir dosis",
+            "ajuste_insuficiencia_renal": "No requiere",
+            "dosis_inicio_adulto": "50 mg/día (como potenciador)",
+            "rango_terapeutico_adulto": "150–300 mg/día (como potenciador)",
+            "dosis_maxima_autorizada": "300 mg/día (en depresión)",
+            "frecuencia_administracion": "1 vez al día (nocturna)",
+            "tiempo_estado_estacionario": "2 días",
+            "titulacion_paso": "Incremento a 150 mg tras 2 días",
+            "efectos_muy_frecuentes": "Somnolencia; boca seca; mareo",
+            "efectos_frecuentes": "Aumento de peso; estreñimiento; hiperglucemia",
+            "efectos_poco_frecuentes": "Taquicardia; hipotensión ortostática",
+            "efectos_raros_graves": "SNM; QT prolongado; cataratas (raro)",
+            "perfil_impacto_peso": "Aumento",
+            "perfil_disfuncion_sexual": "Bajo",
+            "nivel_sedacion": "3",
+            "perfil_activacion": "Bajo",
+            "fecha_aprobacion_fda": "2009-12-03 (Potenciación)",
+            "indicaciones_aprobadas_fda": "Trastorno depresivo mayor (Potenciación XR)",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Trastorno depresivo mayor (Potenciación XR)",
+            "restricciones_ue": "Vigilar síndrome metabólico",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; Riesgo bajo reportado",
+            "indicaciones_off_label": "Insomnio (dosis bajas, desaconsejado)",
+            "utilidad_sintomatica_clave": "Depresión resistente con insomnio severo y ansiedad prominente",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Moderado",
+            "interacciones_contraindicadas": "Inhibidores potentes CYP3A4",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 2,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 1,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 0
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 2,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 1,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 0,
+            "_search": "quetiapina adp_aug_02 antipsicótico atípico (potenciador) antagonista d2/5-ht2a; antagonista h1/alpha1; metabolito nri (norquetiapina) n05ah04 depresistente insomnio; ansiedad",
+            "perlas_clinicas": "Único antipsicótico aprobado en Europa como potenciador. La norquetiapina (metabolito activo) tiene afinidad por el NET, lo que añade un efecto 'dual'. Muy sedante; alto riesgo de aumento de peso y síndrome metabólico. Se prefiere la formulación XR para depresión.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Treatment-resistant major depression... Nuñez et al. 2022",
+                        "section": "Antipsychotic augmentation",
+                        "quote": "Quetiapine XR... effective augmentation... limited by side effects like weight gain and somnolence"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_AUG_03",
+            "nombre_generico": "Brexpiprazol",
+            "nombre_quimico_iupac": "7-{4-[4-(1-benzotiofen-4-il)piperazin-1-il]butoxi}quinolin-2(1H)-ona",
+            "clase_terapeutica": "Agonista parcial D2 (Antipsicótico de 3ª Gen)",
+            "mecanismo_principal": "Agonista parcial D2/D3 + 5-HT1A; Antagonista 5-HT2A",
+            "codigo_atc": "N05AX16",
+            "grupo_quimico": "Quinolinona",
+            "biodisponibilidad_oral": "95",
+            "t_max": "4 h",
+            "vida_media_parental": "91 h",
+            "vida_media_metabolitos": "N/A",
+            "union_proteinas_plasmaticas": "99",
+            "volumen_distribucion": "1.5 L/kg",
+            "excrecion_renal": "25",
+            "excrecion_fecal": "46",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP2D6; CYP3A4",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "N/A",
+            "polimorfismos_relevantes": "CYP2D6 (ajustar en PM)",
+            "ajuste_insuficiencia_hepatica": "Máximo 2 mg/día",
+            "ajuste_insuficiencia_renal": "Máximo 2 mg/día si TFG <60 mL/min",
+            "dosis_inicio_adulto": "0.5 mg/día (como potenciador)",
+            "rango_terapeutico_adulto": "1–3 mg/día (como potenciador)",
+            "dosis_maxima_autorizada": "3 mg/día (en depresión)",
+            "frecuencia_administracion": "1 vez al día",
+            "tiempo_estado_estacionario": "10–12 días",
+            "titulacion_paso": "Incrementos semanales hasta dosis objetivo",
+            "efectos_muy_frecuentes": "Acatisia (menor que aripiprazol); aumento de peso",
+            "efectos_frecuentes": "Diarrea; somnolencia; cefalea",
+            "efectos_poco_frecuentes": "Rash",
+            "efectos_raros_graves": "SNM; Discinesia tardía",
+            "perfil_impacto_peso": "Moderado",
+            "perfil_disfuncion_sexual": "Bajo",
+            "nivel_sedacion": "1",
+            "perfil_activacion": "Neutro",
+            "fecha_aprobacion_fda": "2015-07-10 (Potenciación)",
+            "indicaciones_aprobadas_fda": "Trastorno depresivo mayor (Potenciación)",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Esquizofrenia (No autorizada para depresión mayor)",
+            "restricciones_ue": "Vigilar aumento de peso",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: individualizar; Riesgo bajo reportado",
+            "indicaciones_off_label": "N/D",
+            "utilidad_sintomatica_clave": "Depresión resistente con necesidad de mejor tolerabilidad que aripiprazol",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Bajo",
+            "interacciones_contraindicadas": "Inhibidores potentes CYP2D6/3A4",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 1,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 0
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 1,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 0,
+            "_search": "brexpiprazol adp_aug_03 agonista parcial d2 (antipsicótico de 3ª gen) agonista parcial d2/d3 + 5-ht1a; antagonista 5-ht2a n05ax16 depresistente tolerabilidad",
+            "perlas_clinicas": "Evolución del aripiprazol. Menor actividad agonista parcial D2, lo que resulta en menor incidencia de acatisia, pero mayor tendencia al aumento de peso. Aprobación específica en EE.UU. como potenciador de antidepresivos.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Treatment-resistant major depression... Nuñez et al. 2022",
+                        "section": "Antipsychotic augmentation",
+                        "quote": "Brexpiprazole... similar efficacy to aripiprazole but potentially lower rates of akathisia... weight gain slightly higher"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_AUG_04",
+            "nombre_generico": "Litio (Carbonato)",
+            "nombre_quimico_iupac": "Carbonato de litio",
+            "clase_terapeutica": "Estatibilizador del ánimo / Potenciador",
+            "mecanismo_principal": "Inhibición de GSK-3; modulación de sistemas de 2dos mensajeros; neuroprotección",
+            "codigo_atc": "N05AN01",
+            "grupo_quimico": "Metal alcalino (sal)",
+            "biodisponibilidad_oral": "100",
+            "t_max": "1–3 h (IR); 4–12 h (ER)",
+            "vida_media_parental": "18–36 h",
+            "vida_media_metabolitos": "N/A",
+            "union_proteinas_plasmaticas": "0",
+            "volumen_distribucion": "0.7–0.9 L/kg",
+            "excrecion_renal": "95",
+            "excrecion_fecal": "1",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "No metabolizado (eliminación renal)",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "N/A",
+            "polimorfismos_relevantes": "No conocidos",
+            "ajuste_insuficiencia_hepatica": "No requiere",
+            "ajuste_insuficiencia_renal": "Reducir y monitorear estrechamente; evitar en IR grave",
+            "dosis_inicio_adulto": "300–400 mg/día (como potenciador)",
+            "rango_terapeutico_adulto": "Litemia 0.4–0.8 mEq/L (como potenciador)",
+            "dosis_maxima_autorizada": "Variable según litemia",
+            "frecuencia_administracion": "1–2 veces al día",
+            "tiempo_estado_estacionario": "5–7 días",
+            "titulacion_paso": "Ajuste tras niveles plasmáticos",
+            "efectos_muy_frecuentes": "Temblor; poliuria; polidipsia; náusea",
+            "efectos_frecuentes": "Aumento de peso; hipotiroidismo; diarrea",
+            "efectos_poco_frecuentes": "Acné; psoriasis exacerbada",
+            "efectos_raros_graves": "Toxicidad renal crónica; neurotoxicidad; toxicidad aguda (emergencia)",
+            "perfil_impacto_peso": "Aumento",
+            "perfil_disfuncion_sexual": "Neutro",
+            "nivel_sedacion": "1",
+            "perfil_activacion": "Bajo",
+            "fecha_aprobacion_fda": "1970-01-01 (Uso general)",
+            "indicaciones_aprobadas_fda": "Trastorno bipolar; Manía aguda",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Bipolar; Depresión recurrente",
+            "restricciones_ue": "Monitoreo obligatorio de niveles, función renal y tiroidea",
+            "aprobado_uso_pediatrico": true,
+            "riesgo_embarazo_multifuente": "FDA: Teratógeno (Ebstein - riesgo bajo pero real); EMA: evitar 1er trimestre",
+            "indicaciones_off_label": "Potenciación en Depresión Mayor Resistente (TRD)",
+            "utilidad_sintomatica_clave": "Depresión con riesgo suicida; depresión resistente 'clásica'",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Bajo (raras arritmias)",
+            "interacciones_contraindicadas": "AINEs; Diuréticos tiazídicos; IECAs (↑niveles litio)",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 2,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 0
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": true,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 2,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 0,
+            "_search": "litio (carbonato) adp_aug_04 estatibilizador del ánimo / potenciador inhibición de gsk-3; modulación de sistemas de 2dos mensajeros; neuroprotección n05an01 riesgo suicida deprresistente",
+            "perlas_clinicas": "Estrategia de potenciación con más evidencia acumulada e indicación específica de reducción de riesgo suicida. Requiere monitorización estrecha ('litemias') y vigilancia de función renal y tiroidea. Niveles de potenciación suelen ser menores que para manía.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Treatment-resistant major depression... Nuñez et al. 2022",
+                        "section": "Lithium augmentation",
+                        "quote": "Lithium is the most established strategy for augmentation... reduces suicidal ideation and acts as a long-term stabilizer"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_AUG_05",
+            "nombre_generico": "Liotironina (T3)",
+            "nombre_quimico_iupac": "L-3,3',5-triiodotironina",
+            "clase_terapeutica": "Hormona tiroidea (Potenciador)",
+            "mecanismo_principal": "Modulación de receptores nucleares tiroideos; ↑ metabolismo basal; ↑ síntesis monoaminas",
+            "codigo_atc": "H03AA02",
+            "biodisponibilidad_oral": "95",
+            "t_max": "24 h",
+            "vida_media_parental": "1–2 días",
+            "vida_media_metabolitos": "N/A",
+            "union_proteinas_plasmaticas": "99",
+            "linealidad_farmacocinetica": "Lineal",
+            "metabolito_activo_nombre": "N/A",
+            "ajuste_insuficiencia_hepatica": "No requiere",
+            "ajuste_insuficiencia_renal": "No requiere",
+            "dosis_inicio_adulto": "25 mcg/día (como potenciador)",
+            "rango_terapeutico_adulto": "25–50 mcg/día (como potenciador)",
+            "dosis_maxima_autorizada": "50 mcg/día (en depresión)",
+            "frecuencia_administracion": "1 vez al día",
+            "tiempo_estado_estacionario": "3–5 días",
+            "titulacion_paso": "Incremento a 50 mcg tras 1 semana si es necesario",
+            "efectos_muy_frecuentes": "Palpitaciones; nerviosismo; sudoración",
+            "efectos_frecuentes": "Insomnio; temblor; cefalea",
+            "efectos_poco_frecuentes": "Diarrea; pérdida de peso",
+            "efectos_raros_graves": "Arritmias; insuficiencia cardíaca (ancianos)",
+            "perfil_impacto_peso": "Pérdida",
+            "perfil_disfuncion_sexual": "Neutro",
+            "nivel_sedacion": "0",
+            "perfil_activacion": "Alto",
+            "fecha_aprobacion_fda": "1956-01-01",
+            "indicaciones_aprobadas_fda": "Hipotiroidismo",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Hipotiroidismo (No autorizada para depresión mayor)",
+            "restricciones_ue": "Vigilar función cardíaca",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA/EMA: individualizar (categoría A habitualmente)",
+            "indicaciones_off_label": "Potenciación en Depresión Mayor Resistente (TRD)",
+            "utilidad_sintomatica_clave": "Depresión resistente con síntomas de hipotiroidismo subclínico o lentitud",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Bajo",
+            "interacciones_contraindicadas": "Anticoagulantes (precaución)",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 0,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 2
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 0,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 2,
+            "_search": "liotironina (t3) adp_aug_05 hormona tiroidea (potenciador) modulación de receptores nucleares tiroideos h03aa02 deprresistente activacion",
+            "perlas_clinicas": "Uso de T3 (triyodotironina) como estrategia de potenciación rápida. A menudo preferida sobre T4 por su paso directo al cerebro y mayor rapidez. Vigilar efectos cardíacos (taquicardia) y pérdida ósea en uso prolongado. Muy útil en anergia.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "Augmentation strategies",
+                        "quote": "T3 has the best evidence among thyroid hormones for antidepressant augmentation, even in euthyroid patients"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_AUG_06",
+            "nombre_generico": "Modafinilo",
+            "nombre_quimico_iupac": "2-[(difenilmetil)sulfinil]acetamida",
+            "clase_terapeutica": "Agente promotor de la vigilia (Potenciador)",
+            "mecanismo_principal": "Inhibidor débil de recaptura DA; modulación de histamina y orexina",
+            "codigo_atc": "N06BA07",
+            "grupo_quimico": "Benzhidril-sulfinilo",
+            "biodisponibilidad_oral": "80",
+            "t_max": "2–4 h",
+            "vida_media_parental": "12–15 h",
+            "vida_media_metabolitos": "N/A",
+            "union_proteinas_plasmaticas": "60",
+            "volumen_distribucion": "0.9 L/kg",
+            "excrecion_renal": "80",
+            "excrecion_fecal": "1",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP3A4",
+            "inhibicion_enzimatica_relevante": "Cyp2C19 (Inhibidor); Cyp3A4 (Inductor débil)",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "N/A",
+            "polimorfismos_relevantes": "No conocidos",
+            "ajuste_insuficiencia_hepatica": "Reducir dosis al 50%",
+            "ajuste_insuficiencia_renal": "No requiere habitualmente",
+            "dosis_inicio_adulto": "100 mg/día (como potenciador)",
+            "rango_terapeutico_adulto": "100–200 mg/día (como potenciador)",
+            "dosis_maxima_autorizada": "200 mg/día (en depresión)",
+            "frecuencia_administracion": "1 vez al día (mañana)",
+            "tiempo_estado_estacionario": "2–4 días",
+            "titulacion_paso": "Incremento a 200 mg si es necesario",
+            "efectos_muy_frecuentes": "Cefalea; náusea; insomnio",
+            "efectos_frecuentes": "Anorexia; xerostomía; taquicardia",
+            "efectos_poco_frecuentes": "Hipertensión; agitación",
+            "efectos_raros_graves": "SJS (reacción cutánea severa - raro); psicosis",
+            "perfil_impacto_peso": "Neutro/Pérdida",
+            "perfil_disfuncion_sexual": "Neutro",
+            "nivel_sedacion": "0",
+            "perfil_activacion": "Alto",
+            "fecha_aprobacion_fda": "1998-12-24",
+            "indicaciones_aprobadas_fda": "Narcolepsia; Apnea del sueño",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": false,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Narcolepsia (No autorizada para depresión mayor)",
+            "restricciones_ue": "Vigilar reacciones cutáneas",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: individualizar (Riesgo bajo); EMA: evitar",
+            "indicaciones_off_label": "Fatiga asociada a depresión mayor resistente",
+            "utilidad_sintomatica_clave": "Depresión con somnolencia residual y fatiga cognitiva severa",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Bajo",
+            "interacciones_contraindicadas": "Anticonceptivos orales (disminuye su eficacia)",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 1,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 2
+                },
+                "flags": {
+                    "black_box_warning": false,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 1,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 2,
+            "_search": "modafinilo adp_aug_06 agente promotor de la vigilia (potenciador) inhibidor débil de recaptura da; modulación de histamina y orexina n06ba07 fatiga residiual activacion",
+            "perlas_clinicas": "Utilizado para combatir la fatiga residual y la somnolencia excesiva en la depresión resistente. Aumenta la alerta sin el perfil de 'estímulo' de las anfetaminas clásicas. Advertencia crítica sobre reacciones cutáneas severas (SJS). Interacciona con anticonceptivos.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Treatment-resistant major depression... Nuñez et al. 2022",
+                        "section": "Stimulant and wakefulness-promoting agent augmentation",
+                        "quote": "Modafinil may be useful for fatigue and sleepiness in TRD... evidence is moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_AUG_07",
+            "nombre_generico": "Lisdexanfetamina",
+            "nombre_quimico_iupac": "(2S)-2,6-diamino-N-[(2S)-1-fenilpropan-2-il]hexanamida",
+            "clase_terapeutica": "Estimulante (Profármaco de D-anfetamina)",
+            "mecanismo_principal": "Inhibición recaptura DA/NE + ↑ liberación monoaminas",
+            "codigo_atc": "N06BA12",
+            "grupo_quimico": "Anfetamina (derivado)",
+            "biodisponibilidad_oral": "100",
+            "t_max": "3.5 h",
+            "vida_media_parental": "<1 h (profármaco); D-anfetamina 12 h",
+            "vida_media_metabolitos": "N/A",
+            "union_proteinas_plasmaticas": "N/D",
+            "volumen_distribucion": "N/D",
+            "excrecion_renal": "96",
+            "excrecion_fecal": "1",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "Eliminación via hidrólisis en sangre (no CYP)",
+            "inhibicion_enzimatica_relevante": "Nula",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "Dextroanfetamina",
+            "polimorfismos_relevantes": "No conocidos",
+            "ajuste_insuficiencia_hepatica": "No requiere",
+            "ajuste_insuficiencia_renal": "Máximo 50 mg/día si IR severa",
+            "dosis_inicio_adulto": "20–30 mg/día (como potenciador)",
+            "rango_terapeutico_adulto": "30–70 mg/día (como potenciador)",
+            "dosis_maxima_autorizada": "70 mg/día",
+            "frecuencia_administracion": "1 vez al día (mañana)",
+            "tiempo_estado_estacionario": "2 días",
+            "titulacion_paso": "Incrementos de 10-20 mg semanales",
+            "efectos_muy_frecuentes": "Anorexia; insomnio; boca seca; taquicardia",
+            "efectos_frecuentes": "Cefalea; ansiedad; irritabilidad",
+            "efectos_poco_frecuentes": "Hipotensión ortostática",
+            "efectos_raros_graves": "Psicosis; dependencia; eventos cardiovasculares",
+            "perfil_impacto_peso": "Pérdida",
+            "perfil_disfuncion_sexual": "Bajo (posible mejora)",
+            "nivel_sedacion": "0",
+            "perfil_activacion": "Alto",
+            "fecha_aprobacion_fda": "2007-02-23",
+            "indicaciones_aprobadas_fda": "TDAH; Trastorno por atracón",
+            "estado_comercial_fda": "Activo",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "TDAH (No autorizada para depresión mayor)",
+            "restricciones_ue": "Sustancia controlada",
+            "aprobado_uso_pediatrico": true,
+            "riesgo_embarazo_multifuente": "FDA: evitar (datos limitados); EMA: evitar",
+            "indicaciones_off_label": "Potenciación en Depresión Mayor Resistente (TRD) con anergia",
+            "utilidad_sintomatica_clave": "Depresión resistente con déficit ejecutivo y fatiga profunda",
+            "riesgo_sindrome_abstinencia": "Alto",
+            "riesgo_prolongacion_qt": "Bajo",
+            "interacciones_contraindicadas": "IMAO",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 0,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 2,
+                    "perfil_activacion_ord": 2
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": true,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 0,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 2,
+            "perfil_activacion_ord": 2,
+            "_search": "lisdexanfetamina adp_aug_07 estimulante (profármaco de d-anfetamina) inhibición recaptura da/ne + ↑ liberación monoaminas n06ba12 fatiga profunda deficit ejecutivo",
+            "perlas_clinicas": "Profármaco de la dextroanfetamina con menor potencial de abuso inyectado/nasal por requerir hidrólisis enzimática en el glóbulo rojo. Útil como potenciación 'off-label' en depresión con gran componente de anergia y disfunción ejecutiva. Vigilar TA y sueño.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Treatment-resistant major depression... Nuñez et al. 2022",
+                        "section": "Stimulant and wakefulness-promoting agent augmentation",
+                        "quote": "Lisdexamfetamine is being increasingly used for cognitive and fatigue symptoms in TRD... evidence is growing"
                     }
                 ]
             }

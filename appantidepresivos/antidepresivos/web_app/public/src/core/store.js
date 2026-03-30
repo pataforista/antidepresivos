@@ -323,10 +323,12 @@ export const store = createStore(
       legal: null,
       glossary: null,
       criteria: null,
-      switchingMatrix: []
+      switchingMatrix: [],
+      locales: null
     },
     ui: {
       theme: "light",
+      locale: "es",
       disclaimerAccepted: false,
       toasts: []
     },

@@ -11,7 +11,7 @@
     "deploy": "npx wrangler pages deploy appantidepresivos/antidepresivos/web_app/public",
     "deploy:prod": "npx wrangler pages deploy appantidepresivos/antidepresivos/web_app/public --project-name=antidepresivos-prod",
     "lint": "echo 'No linter configured'",
-    "test": "echo 'No tests configured'"
+    "test": "jest"
   },
   "keywords": [
     "antidepresivos",
@@ -23,7 +23,8 @@
   "author": "Pataforista",
   "license": "MIT",
   "devDependencies": {
-    "wrangler": "^3.50.0"
+    "wrangler": "^3.50.0",
+    "jest": "^29.7.0"
   },
   "dependencies": {}
 }

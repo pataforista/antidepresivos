@@ -104,6 +104,66 @@ html, body {
     border: 1px solid var(--color-border);
 }
 
+/* Evidence and Citations (Clean View) */
+.evidence-container {
+  margin-top: 24px;
+  padding: 16px;
+  background: var(--color-bg-alt);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 4px 12px 12px 4px;
+}
+
+.evidence-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-headers);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+}
+
+.evidence-block {
+  margin-bottom: 20px;
+}
+
+.evidence-quote {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.5;
+  position: relative;
+  padding-left: 12px;
+  border-left: 1px solid var(--color-border);
+  margin-bottom: 8px;
+}
+
+.evidence-source {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+  display: flex;
+  justify-content: space-between;
+}
+
+.evidence-section {
+  color: var(--color-primary);
+  opacity: 0.8;
+}
+
+.monograph-footer {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--color-border);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
 .nav-gooey__blob {
     position: absolute;
     top: 6px;

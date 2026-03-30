@@ -87,7 +87,25 @@ export function mountInfoModal() {
           <div style="font-size:0.8rem; color:var(--color-text-muted); margin-top:8px;">
             <strong>Comentarios, dudas o errores:</strong> Envía un correo al email anterior con tu consulta.
           </div>
-        </div>
+        
+        <!-- Acerca de los datos -->
+        <details class="detail-section" style="margin-bottom:24px; border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden;">
+          <summary style="padding:12px 16px; background:var(--color-surface-raised); font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+            <span>📚 Acerca de los datos y fuentes</span>
+            <span style="font-size:0.8rem; opacity:0.5;">▼</span>
+          </summary>
+          <div style="padding:16px; font-size:0.85rem; line-height:1.6; color:var(--color-text-muted);">
+            <p style="margin-bottom:12px;">La información contenida en esta plataforma ha sido compilada y verificada a partir de las siguientes fuentes de referencia internacionales:</p>
+            <ul style="padding-left:20px; margin-bottom:12px; display:grid; gap:8px;">
+              <li><b>The Maudsley Prescribing Guidelines in Psychiatry</b> (14th Edition).</li>
+              <li><b>Stahl's Essential Psychopharmacology</b> (Prescriber's Guide).</li>
+              <li><b>CANMAT</b> (Canadian Network for Mood and Anxiety Treatments) Guidelines.</li>
+              <li>Fichas técnicas oficiales de la <b>AEMPS</b> (España), <b>FDA</b> (EE.UU.) y <b>EMA</b> (Europa).</li>
+              <li><b>WFSBP</b> (World Federation of Societies of Biological Psychiatry) Guidelines.</li>
+            </ul>
+            <p style="font-style:italic; font-size:0.8rem;">Última actualización de la base de datos: Marzo 2026.</p>
+          </div>
+        </details>
 
         <!-- Aviso y limitaciones de uso -->
         <div class="alert alert--warning" style="font-size:0.85rem; border-radius:var(--radius-md); line-height:1.5; margin-bottom: 24px; text-align: left;">

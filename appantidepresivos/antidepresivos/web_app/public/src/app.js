@@ -14,6 +14,18 @@ import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/
 import { initRibbons } from "./ribbons.js";
 import { escapeHtml } from "./core/utils.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
+import { i18n } from "./core/i18n.js";
+
+/* ============================================================
+   Event Tracking (Analytics)
+   ============================================================ */
+const analytics = {
+  track: (event, data = {}) => {
+    console.log(`[Analytics] ${event}`, { ...data, ts: new Date().toISOString() });
+    // Aquí se conectaría con Plausible, Google Analytics, etc.
+  }
+};
+window.appAnalytics = analytics;
 
 /* ============================================================
    App Initialization
@@ -23,10 +35,16 @@ async function main() {
   const root = document.getElementById("app");
   if (!root) throw new Error("#app no encontrado");
 
-  root.innerHTML = "<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>Cargando Antidepresivos…</p></div>";
+  // Detect language during first load
+  const initialLocale = store.getState().ui.locale || (navigator.language.startsWith("en") ? "en" : "es");
+  if (store.getState().ui.locale !== initialLocale) {
+    store.updatePath("ui.locale", initialLocale);
+  }
+
+  root.innerHTML = `<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>${initialLocale === 'en' ? 'Loading Antidepressants...' : 'Cargando Antidepresivos...'}</p></div>`;
 
   try {
-    const ctx = await loadAppData();
+    const ctx = await loadAppData(initialLocale);
 
     // Guardar datos antes del gatekeeper
     store.patch({
@@ -38,6 +56,7 @@ async function main() {
         glossary: ctx.glossary ?? null,
         criteria: ctx.criteria ?? null,
         switchingMatrix: ctx.switchingMatrix ?? [],
+        locales: ctx.locales ?? null
       },
     });
 
@@ -76,6 +95,19 @@ async function main() {
           updateHeaderNav(next);
           setTimeout(initEntranceAnimations, 10);
           trackInteraction();
+          analytics.track('page_view', { route: next.name });
+        });
+
+        // Re-render completo al cambiar el idioma
+        store.subscribe("state:path:ui", async ({ prev, next }) => {
+          if (prev.locale !== next.locale) {
+            root.innerHTML = `<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>${i18n.t('loading')}</p></div>`;
+            const newCtx = await loadAppData(next.locale);
+            store.patch({ data: { dataset: newCtx.dataset } });
+            mountShell(root);
+            renderRoute(store.getState().route);
+            updateHeaderNav(store.getState().route);
+          }
         });
 
         // Compare: contador + re-render si estás en compare (porque route no cambia)
@@ -100,7 +132,7 @@ async function main() {
 
         // Welcome toast
         setTimeout(() => {
-          showToast("¡Bienvenido al asistente de Antidepresivos 2026! 🚀", "info");
+          showToast(initialLocale === 'en' ? "Welcome to Antidepressants 2026! 🚀" : "¡Bienvenido al asistente de Antidepresivos 2026! 🚀", "info");
         }, 1200);
       },
     });
@@ -126,14 +158,23 @@ function attachGlobalListeners() {
         metaTheme.setAttribute('content', next === 'dark' ? '#020617' : '#f8fafc');
       }
     });
+  }
 
-    // Sync button icon on state change
-    store.subscribe("state:path:ui", ({ next }) => {
-      if (btnTheme) {
-        btnTheme.innerHTML = next.theme === 'dark' ? '☀️' : '🌙';
-      }
+  // Locale Toggle Logic
+  const btnLocale = document.getElementById("btnLocaleToggle");
+  if (btnLocale) {
+    btnLocale.addEventListener("click", () => {
+      const current = store.getState().ui.locale || 'es';
+      const next = current === 'es' ? 'en' : 'es';
+      store.updatePath("ui.locale", next);
     });
   }
+
+  // Sync button icons on state change
+  store.subscribe("state:path:ui", ({ next }) => {
+    if (btnTheme) btnTheme.innerHTML = next.theme === 'dark' ? '☀️' : '🌙';
+    if (btnLocale) btnLocale.innerHTML = next.locale === 'es' ? 'ES' : 'EN';
+  });
 
   // Listener para el botón de comparar en el header (si existe en mountShell)
   const btnHeaderCompare = document.getElementById("btnHeaderCompare");
@@ -155,7 +196,7 @@ function attachGlobalListeners() {
     btnClear.addEventListener("click", () => {
       store.setCompareIds([], { reason: "ui:clearCompare" });
       location.hash = "#/list";
-      showToast("Comparación limpiada", "info");
+      showToast(i18n.t("clear_compare"), "info");
     });
   }
 
@@ -241,6 +282,26 @@ function mountShell(root) {
           <span class="text-xs text-muted" style="font-weight:600">EDICIÓN 2026 · SOPORTE CLÍNICO</span>
         </div>
       </footer>
+
+      <!-- Floating Support Button -->
+      <a href="https://ko-fi.com/herramente" target="_blank" class="kofi-floating-btn" title="Apoya el proyecto">
+        <span class="kofi-icon">☕</span>
+      </a>
+
+      <style>
+        .kofi-floating-btn {
+          position: fixed; bottom: 85px; left: 20px; z-index: 900;
+          width: 50px; height: 50px; background: #FFDD00;
+          border-radius: 50%; display: flex; align-items: center; justify-content: center;
+          text-decoration: none; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          border: 2px solid white;
+        }
+        .kofi-floating-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        @media (min-width: 1024px) {
+          .kofi-floating-btn { bottom: 30px; left: 30px; width: 60px; height: 60px; font-size: 1.8rem; }
+        }
+      </style>
     </div>
   `;
 }
@@ -329,16 +390,16 @@ function addRecentItem(id, name, cls) {
    Task Filter definitions (filtros por tarea clínica)
    ============================================================ */
 const TASK_FILTERS = [
-  { id: "low_sedation",   label: "↓ Sedación",     icon: "😴",
+  { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "😴",
     test: d => parseInt(d.nivel_sedacion) <= 1 },
-  { id: "low_sexual",     label: "↓ D. sexual",    icon: "❤️",
-    test: d => /bajo|leve|mínima|minima|nula/i.test(d.perfil_disfuncion_sexual || "") },
-  { id: "low_qt",         label: "↓ Riesgo QT",    icon: "💓",
-    test: d => /bajo|leve|mínimo|minimo|nulo/i.test(d.riesgo_prolongacion_qt || "") },
-  { id: "low_weight",     label: "↓ Impacto peso", icon: "⚖️",
-    test: d => /neutro|bajo|pérdida|perdida/i.test(d.perfil_impacto_peso || "") },
-  { id: "low_withdrawal", label: "↓ Abstinencia",  icon: "🔄",
-    test: d => /bajo|leve|mínimo|minimo|nulo/i.test(d.riesgo_sindrome_abstinencia || "") },
+  { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "❤️",
+    test: d => /bajo|leve|mínima|minima|nula|low|mild|none/i.test(d.perfil_disfuncion_sexual || "") },
+  { id: "low_qt",         label: i18n.t("filter_qt"),    icon: "💓",
+    test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_prolongacion_qt || "") },
+  { id: "low_weight",     label: i18n.t("filter_weight"), icon: "⚖️",
+    test: d => /neutro|bajo|pérdida|perdida|neutral|low|loss/i.test(d.perfil_impacto_peso || "") },
+  { id: "low_withdrawal", label: i18n.t("filter_withdrawal"),  icon: "🔄",
+    test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_sindrome_abstinencia || "") },
   { id: "isrs",           label: "ISRS",            icon: "💊",
     test: d => /isrs/i.test(d.clase_terapeutica || "") },
   { id: "dual",           label: "Dual (IRSN)",     icon: "🔁",
@@ -359,27 +420,27 @@ function getClinicalChips(d) {
 
   // ATC code
   if (d.codigo_atc) {
-    chips.push({ label: d.codigo_atc, variant: "primary" });
+    chips.push({ label: `ATC: ${d.codigo_atc} 🔬`, variant: "primary" });
   }
 
   // Sedation level
   const sed = parseInt(d.nivel_sedacion, 10);
   if (!isNaN(sed)) {
     const variants = ["success", "success", "warning", "danger"];
-    const labels = ["Sin sedación 🌿", "Sedación ↓ 😴", "Sedación ↑↑ 😫", "Sedación ↑↑↑ 💤"];
+    const labels = ["Energía Pura ⚡", "Sedación Sutil 🧘", "Sedación Notoria 😫", "Sedación Profunda 💤"];
     chips.push({ label: labels[Math.min(sed, 3)], variant: variants[Math.min(sed, 3)] });
   }
 
   // QT risk — only flag if notable
   const qt = (d.riesgo_prolongacion_qt || "").toLowerCase();
   if (/alto|medio|moderado/i.test(qt)) {
-    chips.push({ label: "QT ↑ 💓", variant: /alto/i.test(qt) ? "danger" : "warning" });
+    chips.push({ label: "Riesgo QT ↑ 💓", variant: /alto/i.test(qt) ? "danger" : "warning" });
   }
 
   // Sexual dysfunction — only flag if notable
   const sex = (d.perfil_disfuncion_sexual || "").toLowerCase();
   if (/alto|medio|moderado|significativo/i.test(sex)) {
-    chips.push({ label: "D.sexual ↑ ❤️", variant: /alto/i.test(sex) ? "danger" : "warning" });
+    chips.push({ label: "Impacto Sexual ↑ ❤️", variant: /alto/i.test(sex) ? "danger" : "warning" });
   }
 
   return chips;
@@ -410,6 +471,23 @@ function renderSkeletonGrid(count = 6) {
       </div>
     </div>
   `).join("");
+}
+
+function renderSmartTip() {
+  const glossary = store.getState().data?.glossary || [];
+  if (!glossary.length) return "";
+
+  const tip = glossary[Math.floor(Math.random() * glossary.length)];
+  return `
+    <div class="smart-tip animate-on-scroll" style="margin-top:var(--space-8); padding:var(--space-6); border-radius:var(--radius-xl); background:var(--color-surface-raised); border:1px solid var(--color-border); display:flex; gap:var(--space-4); align-items:center;">
+      <div style="font-size:2rem;">💡</div>
+      <div>
+        <div style="font-family:var(--font-headers); font-weight:800; font-size:0.75rem; color:var(--color-primary); letter-spacing:0.1em; margin-bottom:4px; text-transform:uppercase;">¿Sabías que?</div>
+        <div style="font-weight:700; font-size:1rem; margin-bottom:2px;">${escapeHtml(tip.term)}</div>
+        <div class="text-xs text-muted" style="line-height:1.4;">${escapeHtml(tip.definition)}</div>
+      </div>
+    </div>
+  `;
 }
 
 /* ============================================================
@@ -469,7 +547,7 @@ function renderList(view) {
       <div class="search-hero">
         <span class="search-hero__icon-left">🔍</span>
         <input type="search" id="inputSearch" class="search-hero__input"
-          placeholder="Buscar antidepresivo…"
+          placeholder="${i18n.t("search_placeholder")}"
           value="${escapeHtml(state.filters.q || "")}"
           autocomplete="off" autocorrect="off" spellcheck="false" />
       </div>
@@ -484,9 +562,9 @@ function renderList(view) {
 
       <!-- List header -->
       <div class="list-header">
-        <span class="list-header__count">${items.length} fármaco${items.length !== 1 ? "s" : ""}</span>
+        <span class="list-header__count">${items.length} ${i18n.getLocale() === 'en' ? 'drug' : 'fármaco'}${items.length !== 1 ? (i18n.getLocale() === 'en' ? 's' : 's') : ""}</span>
         <button id="btnGoCompare" type="button" class="m3-fab" ${compareIds.length === 0 ? "disabled" : ""}>
-          ⚖️ ${compareIds.length ? `Comparar (${compareIds.length})` : "Comparar"}
+          ⚖️ ${compareIds.length ? `${i18n.t("btn_compare")} (${compareIds.length})` : i18n.t("btn_compare")}
         </button>
       </div>
 
@@ -495,11 +573,13 @@ function renderList(view) {
         ${items.map(d => renderDrugCard(d, selected)).join("") || `
           <div style="grid-column:1/-1; text-align:center; padding:var(--space-8); color:var(--color-text-muted)">
             <div style="font-size:2.5rem; margin-bottom:var(--space-3)">🔍</div>
-            <p style="font-weight:700">Sin resultados para esos criterios.</p>
-            <p class="text-sm" style="margin-top:var(--space-2)">Prueba quitando algún filtro de tarea.</p>
+            <p style="font-weight:700">${i18n.t("no_results")}</p>
           </div>
         `}
       </div>
+
+      <!-- Smart Tip (Did you know?) -->
+      ${renderSmartTip()}
     </div>
   `;
 
@@ -523,20 +603,25 @@ function renderDrugCard(d, selected) {
   const cls = d.clase_terapeutica ?? "";
   const isOn = selected.has(id);
 
-  // Determinar emoji según clase
+  // Determinar emoji según clase (Mapeo extendido 2026)
   let emoji = "💊";
   if (/isrs/i.test(cls)) emoji = "🧠";
   if (/dual|irsn/i.test(cls)) emoji = "🔁";
   if (/triciclico/i.test(cls)) emoji = "🧬";
   if (/imao/i.test(cls)) emoji = "🔬";
+  if (/melatonina|agomelatina/i.test(cls)) emoji = "🌙";
+  if (/bupropion|ndri/i.test(cls)) emoji = "🎯";
+  if (/mirtazapina|nassa/i.test(cls)) emoji = "😴";
+  if (/estabilizador/i.test(cls)) emoji = "⚖️";
+  if (/antipsicotico/i.test(cls)) emoji = "🛡️";
 
   return `
-    <div class="card card--hoverable card--spotlight">
+    <div class="card card--hoverable card--spotlight animate-on-scroll">
       <div class="card-drug__header">
         <div class="card-drug__emoji">${emoji}</div>
         <a href="#/detail/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
         <button type="button"
-          class="card-drug__compare-btn chkCompareBtn ${isOn ? "active" : ""}"
+          class="card-drug__compare-btn btn btn--circle chkCompareBtn ${isOn ? "active" : ""}"
           data-id="${escapeHtml(id)}"
           title="${isOn ? "Quitar del comparador" : "Agregar al comparador"}"
           aria-pressed="${isOn}">
@@ -590,7 +675,11 @@ function attachFilterListeners(view) {
 
       // Playful feedback
       if (isNowOn) {
-        showToast(`✨ Fármaco agregado`, 'success');
+        if (set.size === 2) {
+          celebrate("¡Comparación lista para análisis! ⚖️✨");
+        } else {
+          showToast(`✨ Fármaco agregado`, 'success');
+        }
       }
 
       // Update compare FAB
@@ -965,15 +1054,23 @@ function showToast(message, type = 'info', duration = 3500) {
     return c;
   })();
 
+  const icons = {
+    info: 'ℹ️',
+    success: '✅',
+    warning: '⚠️',
+    error: '❌',
+    motivational: '🚀'
+  };
+
   const toast = document.createElement("div");
   toast.className = `toast toast--${type}`;
-  toast.textContent = message;
+  toast.innerHTML = `<span class="toast__icon">${icons[type] || '✨'}</span> <span class="toast__text">${message}</span>`;
   toast.style.pointerEvents = "auto";
   container.appendChild(toast);
 
   setTimeout(() => {
     toast.style.opacity = "0";
-    toast.style.transform = "translateX(100%)";
+    toast.style.transform = "translateX(20px)";
     setTimeout(() => toast.remove(), 400);
   }, duration);
 }

@@ -1,16 +1,20 @@
 {
   "name": "Antidepresivos 2026",
   "short_name": "Antidep 2026",
+  "description": "Herramienta avanzada de soporte clínico para el manejo de antidepresivos, perfiles de riesgo y guías de switching psicofarmacológico.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#f8fafc",
   "theme_color": "#4f46e5",
+  "categories": ["education", "medical"],
   "icons": [
     {
       "src": "./assets/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "./assets/icons/icon-512.png",

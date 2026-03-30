@@ -1,6 +1,7 @@
 // src/ui/switchView.js
 import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
+import { i18n } from "../core/i18n.js";
 
 export function renderSwitching(view) {
     const state = store.getState();
@@ -12,64 +13,68 @@ export function renderSwitching(view) {
     view.innerHTML = `
         <div class="animate-fade-in">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
-                <h2 class="h2" style="margin:0">Plan de Switching</h2>
-                <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← VOLVER AL LISTADO</a>
+                <h2 class="h2" style="margin:0">${i18n.t("switching_plan")}</h2>
+                <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
             </div>
 
             <p class="text-muted" style="margin-bottom: var(--space-8);">
-                Herramienta interactiva para la rotación de antidepresivos. Basado en guías clínicas (Maudsley, CANMAT).
+                ${i18n.t("switching_intro")}
             </p>
 
             <div class="card glass-effect" style="padding: var(--space-6); margin-bottom: var(--space-8);">
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
                     <div>
-                        <label class="field-box__label">Fármaco Actual (Desde)</label>
+                        <label class="field-box__label">${i18n.t("current_drug")}</label>
                         <select id="switchFrom" class="btn btn--outline" style="width:100%; text-align:left; background: var(--color-surface); padding: 12px;">
-                            <option value="">Seleccione...</option>
+                            <option value="">${i18n.t("select")}</option>
                             ${farmacos.map(f => `<option value="${f.id_farmaco}">${f.nombre_generico}</option>`).join('')}
                         </select>
                     </div>
                     <div>
-                        <label class="field-box__label">Fármaco Nuevo (Hacia)</label>
+                        <label class="field-box__label">${i18n.t("new_drug")}</label>
                         <select id="switchTo" class="btn btn--outline" style="width:100%; text-align:left; background: var(--color-surface); padding: 12px;">
-                            <option value="">Seleccione...</option>
+                            <option value="">${i18n.t("select")}</option>
                             ${farmacos.map(f => `<option value="${f.id_farmaco}">${f.nombre_generico}</option>`).join('')}
                         </select>
                     </div>
                 </div>
                 
                 <div id="switchPlanContainer" style="margin-top: 30px; display:none;">
+                    <div style="display:flex; justify-content:flex-end; margin-bottom: 20px;">
+                        <button id="btnSwitchPDF" class="btn btn--outline" style="display:flex; align-items:center; gap:8px;">
+                            <span>📄 ${i18n.t("download_plan_pdf")}</span>
+                        </button>
+                    </div>
                     <div id="strategyHeader" class="alert alert--info" style="margin-bottom: 20px; display:none;">
                         <div>
-                            <strong id="strategyTitle" style="display:block; margin-bottom: 4px; font-size: 1.1rem;">Estrategia Sugerida</strong>
+                            <strong id="strategyTitle" style="display:block; margin-bottom: 4px; font-size: 1.1rem;">${i18n.t("suggested_strategy")}</strong>
                             <p id="strategyDesc" class="text-sm"></p>
                         </div>
                     </div>
                     
                     <div id="visualTimeline" class="card" style="padding:var(--space-6); background:rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.02); margin-bottom:var(--space-6);">
-                        <h4 class="h4" style="margin-bottom:var(--space-4)">Esquema de Transición</h4>
+                        <h4 class="h4" style="margin-bottom:var(--space-4)">${i18n.t("transition_scheme")}</h4>
                         <div style="height:350px; width:100%;">
                             <canvas id="switchChart"></canvas>
                         </div>
-                        <p class="text-xs text-muted" style="margin-top:var(--space-4)">* Representación porcentual de dosis. El ascenso del fármaco nuevo suele ser más lento que el descenso del anterior.</p>
+                        <p class="text-xs text-muted" style="margin-top:var(--space-4)">${i18n.t("transition_note")}</p>
                     </div>
                     
                     <div id="clinicalNotes" style="margin-top:24px;">
-                        <h4 class="h4" style="margin-bottom: 12px;">Consideraciones Clínicas</h4>
+                        <h4 class="h4" style="margin-bottom: 12px;">${i18n.t("clinical_considerations")}</h4>
                         <ul id="notesList" class="text-sm" style="padding-left: 20px; line-height:1.7;"></ul>
                     </div>
                 </div>
 
                 <div id="switchEmpty" style="text-align:center; padding: 60px; color: var(--color-text-muted);">
                     <div style="font-size:3rem; margin-bottom:var(--space-4); opacity:0.3">🔄</div>
-                    <p style="font-weight:600">Seleccione ambos fármacos para generar un esquema de transición detallado.</p>
+                    <p style="font-weight:600">${i18n.t("switch_empty_prompt")}</p>
                 </div>
             </div>
 
             <div class="alert alert--danger" style="margin-top: var(--space-8);">
                 <div class="text-xs" style="line-height:1.6">
-                    <strong>ADVERTENCIA:</strong> Esta herramienta es un apoyo logístico y no sustituye el juicio clínico. 
-                    El riesgo de Síndrome Serotoninérgico o recurrencia de síntomas debe evaluarse individualmente.
+                    ${i18n.t("switching_warning")}
                 </div>
             </div>
         </div >
@@ -80,6 +85,22 @@ export function renderSwitching(view) {
 
     fromSel.addEventListener('change', () => updatePlan(fromSel.value, toSel.value, view));
     toSel.addEventListener('change', () => updatePlan(fromSel.value, toSel.value, view));
+
+    // PDF Export listener
+    view.querySelector('#btnSwitchPDF')?.addEventListener('click', () => {
+        const fromName = fromSel.options[fromSel.selectedIndex]?.text || "DrugA";
+        const toName = toSel.options[toSel.selectedIndex]?.text || "DrugB";
+        const element = view.querySelector('#switchPlanContainer');
+        
+        const opt = {
+            margin: 10,
+            filename: `Plan_Switching_${fromName}_a_${toName}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+    });
 }
 
 let activeSwitchChart = null;
@@ -114,32 +135,31 @@ function updatePlan(fromId, toId, view) {
 
     if (entry) {
         strategy = entry.strategy.replace("_", " ").toUpperCase();
-        desc = `Protocolo específico de ${entry.taper_days} días de transición.`;
+        desc = i18n.t("protocol_desc_days").replace("{days}", entry.taper_days);
         notes = entry.notes;
         entryData = entry;
     } else {
         // Fallback clinical logic
-        strategy = "Cross-taper (Reducción Gradual Cruzada)";
-        desc = "Estrategia estándar: disminuir el fármaco actual mientras se introduce el nuevo a dosis bajas.";
-        notes = [
-            "Vigilar síntomas de discontinuación.",
-            "Titular el nuevo fármaco según tolerancia clínica.",
-            "Riesgo de interacción farmacodinámica persistente."
-        ];
+        strategy = i18n.t("standard_cross_taper");
+        desc = i18n.t("standard_taper_desc");
+        notes = i18n.getLocale() === 'en' ? 
+            ["Monitor for discontinuation symptoms.", "Titrate new drug based on clinical tolerance.", "Risk of persistent PD interaction."] :
+            ["Vigilar síntomas de discontinuación.", "Titular el nuevo fármaco según tolerancia clínica.", "Riesgo de interacción farmacodinámica persistente."];
+        
         entryData = { taper_days: 14, washout_days: 0, strategy: "cross_taper" };
 
-        const isMAOI = (d) => d?.clase_terapeutica?.toLowerCase().includes('imao');
-        const isFluoxetine = (d) => d?.nombre_generico?.toLowerCase().includes('fluoxetina');
+        const isMAOI = (d) => d?.clase_terapeutica?.toLowerCase().includes('imao') || d?.clase_terapeutica?.toLowerCase().includes('maoi');
+        const isFluoxetine = (d) => d?.nombre_generico?.toLowerCase().includes('fluoxetina') || d?.nombre_generico?.toLowerCase().includes('fluoxetine');
 
         if (isMAOI(fromDrug) || isMAOI(toDrug)) {
-            strategy = "Washout Estricto (LAVADO)";
-            desc = "Requiere un periodo libre de fármaco de 14 días.";
-            notes.unshift("REGLA DE ORO: 14 días de espera obligatorios para evitar crisis hipertensivas o serotoninérgicas.");
+            strategy = i18n.t("washout_strict");
+            desc = i18n.t("washout_desc");
+            notes.unshift(i18n.t("washout_golden_rule"));
             entryData = { taper_days: 0, washout_days: 14, strategy: "washout" };
         } else if (isFluoxetine(fromDrug)) {
-            strategy = "Taper prolongado / Washout parcial";
-            desc = "Fluoxetina tiene una vida media extremadamente larga.";
-            notes.unshift("La inhibición del CYP2D6 persiste semanas tras suspender Fluoxetina.");
+            strategy = i18n.t("fluoxetine_switch_title");
+            desc = i18n.t("fluoxetine_switch_desc");
+            notes.unshift(i18n.t("fluoxetine_switch_note"));
             entryData = { taper_days: 5, washout_days: 3, strategy: "fluoxetine_switch" };
         }
     }
@@ -168,7 +188,7 @@ function renderSwitchChart(entry, fromName, toName) {
     const washoutDays = entry.washout_days || 0;
     const totalDays = Math.max(taperDays + washoutDays + 14, 21);
 
-    const labels = Array.from({ length: totalDays + 1 }, (_, i) => `Día ${i}`);
+    const labels = Array.from({ length: totalDays + 1 }, (_, i) => `${i18n.getLocale() === 'en' ? 'Day' : 'Día'} ${i}`);
 
     const fromData = [];
     for (let i = 0; i <= totalDays; i++) {
