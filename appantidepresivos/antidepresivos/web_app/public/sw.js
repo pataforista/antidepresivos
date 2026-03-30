@@ -1,4 +1,4 @@
-const CACHE_NAME = 'antidepresivos-v4';
+const CACHE_NAME = 'antidepresivos-v5';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -11,6 +11,8 @@ const ASSETS_TO_CACHE = [
     './src/styles/variables.css',
     './src/styles/layout.css',
     './src/styles/components.css',
+    './src/styles/playful.css',
+    './src/styles/quiz.css',
     './src/core/dataLoader.js',
     './src/core/normalize.js',
     './src/core/selectors.js',

@@ -30,7 +30,29 @@ export async function loadAppData(locale = "es") {
   // 5) normalización runtime (NO modifica CSV, solo añade _search/_norm)
   // dataset.items = normalizeDatasetItems(dataset.items, schema);
 
-  // 6) locales
+  // 6) clinical data
+  let switchingMatrix = [];
+  try {
+    switchingMatrix = await fetchJson("./data/switching_matrix.json");
+  } catch (e) {
+    console.warn("Switching matrix not found or invalid", e);
+  }
+
+  let glossary = [];
+  try {
+    glossary = await fetchJson("./data/glosario_terminos.json");
+  } catch (e) {
+    console.warn("Glossary not found or invalid", e);
+  }
+
+  let criteria = [];
+  try {
+    criteria = await fetchJson("./data/criterios_inclusion_exclusion.json");
+  } catch (e) {
+    console.warn("Criteria not found or invalid", e);
+  }
+
+  // 7) locales
   let locales = null;
   try {
     locales = await fetchJson("./data/locales.json");
@@ -38,7 +60,7 @@ export async function loadAppData(locale = "es") {
     console.warn("Locales not found", e);
   }
 
-  return { manifest, schema, legal, dataset, switchingMatrix, locales };
+  return { manifest, schema, legal, dataset, switchingMatrix, glossary, criteria, locales };
 }
 
 async function fetchJson(url) {
