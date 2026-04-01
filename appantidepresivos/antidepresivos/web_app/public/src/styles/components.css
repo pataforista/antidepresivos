@@ -101,19 +101,20 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--space-3) var(--space-6);
-    border-radius: var(--radius-md);
+    padding: 14px 28px;
+    border-radius: var(--radius-full);
     font-weight: 700;
     cursor: pointer;
     transition: all var(--transition-spring);
     border: 1px solid transparent;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     text-decoration: none;
     gap: var(--space-2);
     position: relative;
     box-shadow: var(--shadow-sm);
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    letter-spacing: -0.01em;
 }
 
 .btn--primary {
@@ -191,9 +192,9 @@ body {
 .card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     padding: var(--space-6);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-glass);
     transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
@@ -352,8 +353,8 @@ body {
 }
 
 .alert {
-    padding: var(--space-5);
-    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    border-radius: var(--radius-2xl);
     display: flex;
     gap: var(--space-4);
     align-items: flex-start;
@@ -361,7 +362,7 @@ body {
 
 .alert--info {
     background: hsla(210, 100%, 97%, 1);
-    border: 1px solid hsla(210, 100%, 90%, 1);
+    border: 1.5px solid hsla(210, 100%, 90%, 1);
     color: hsla(210, 100%, 30%, 1);
 }
 

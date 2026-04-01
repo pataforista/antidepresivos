@@ -1,0 +1,76 @@
+[
+  {
+    "id": "california_rocket_fuel",
+    "name": "California Rocket Fuel 🚀",
+    "drugs": ["Mirtazapina", "Venlafaxina"],
+    "drug_classes": ["nassa", "irsn"],
+    "type": "synergy",
+    "description": "Una de las combinaciones más potentes en psicofarmacología para la depresión resistente.",
+    "mechanism": "La Mirtazapina (bloqueador alfa-2) actúa como un 'acelerador' liberando noradrenalina y serotonina, mientras que la Venlafaxina (IRSN) actúa como un 'freno bloqueado' impidiendo su recaptura. El resultado es un aumento masivo de dichos neurotransmisores en la hendidura sináptica.",
+    "clinical_benefits": [
+      "Eficacia extrema en depresión severa o resistente.",
+      "La Mirtazapina compensa los efectos secundarios de la Venlafaxina (náusea y disfunción sexual).",
+      "Mejora rápida del sueño por el efecto antihistamínico de la Mirtazapina."
+    ],
+    "warnings": [
+      "Riesgo aumentado de aumento de peso (por Mirtazapina).",
+      "Posible aumento de la presión arterial (supervisar, dosis altas de Venlafaxina).",
+      "Riesgo (raro) de Síndrome Serotoninérgico."
+    ],
+    "sources": ["Stahl, S. M. (2013). Stahl's Essential Psychopharmacology.", "Guías Clínicas CANMAT"]
+  },
+  {
+    "id": "welloft_heroic",
+    "name": "Welloft / Heroic Combo 🛡️",
+    "drugs": ["Sertralina", "Bupropión"],
+    "drug_classes": ["isrs", "irnd"],
+    "type": "synergy",
+    "description": "Combinación clásica ('Wellbutrin' + 'Zoloft') para mitigar la disfunción sexual y la apatía de los ISRS.",
+    "mechanism": "Los ISRS (Sertralina) elevan la serotonina, lo que puede causar embotamiento afectivo y disfunción sexual. El Bupropión (IRND) aumenta la dopamina y noradrenalina, revirtiendo estos efectos 'apáticos' y mejorando la energía.",
+    "clinical_benefits": [
+      "Excelente para revertir la disfunción sexual inducida por ISRS.",
+      "Mejora síntomas residuales de anhedonia (incapacidad de sentir placer).",
+      "Puede mitigar el aumento de peso provocado por el ISRS."
+    ],
+    "warnings": [
+      "Cuidado en pacientes con alta ansiedad o insomnio (Bupropión puede activarlos).",
+      "El Bupropión reduce el umbral convulsivo (evitar en epilepsia o TCA)."
+    ],
+    "sources": ["Stahl, S. M. (2013). Stahl's Essential Psychopharmacology.", "APA Practice Guidelines"]
+  },
+  {
+    "id": "ssri_trazodone",
+    "name": "ISRS + Trazodona 🌙",
+    "drugs": ["Fluoxetina", "Trazodona", "Sertralina", "Escitalopram", "Paroxetina", "Citalopram"],
+    "drug_classes": ["isrs", "sari"],
+    "type": "adjunct",
+    "description": "Estrategia común para tratar el insomnio secundario asociado al inicio de ISRS o depresión.",
+    "mechanism": "Los ISRS aumentan la serotonina pero pueden interrumpir la arquitectura del sueño. La Trazodona a dosis bajas (25-100mg) actúa como antagonista 5HT2A, H1 y Alfa-1, induciendo el sueño de forma potente sin generar tolerancia como las benzodiacepinas.",
+    "clinical_benefits": [
+      "Mejora profunda y sostenida del sueño profundo.",
+      "Carece del riesgo de dependencia de las benzodiacepinas o drogas Z.",
+      "El antagonismo 5HT2A de Trazodona puede sinergizar el efecto antidepresivo."
+    ],
+    "warnings": [
+      "Riesgo de priapismo (raro, 1 en 10,000) por bloqueo alfa-1.",
+      "Hipotensión ortostática al levantarse rápido por la mañana.",
+      "Somnolencia residual 'resaca' a dosis altas."
+    ],
+    "sources": ["Stahl, S. M. (2013). Stahl's Essential Psychopharmacology."]
+  },
+  {
+    "id": "ssri_maoi_warning",
+    "name": "SÍNDROME SEROTONINÉRGICO ☠️",
+    "drugs": [],
+    "drug_classes": ["isrs", "imao", "irsn", "triciclico"],
+    "type": "danger",
+    "description": "¡ALERTA! Combinación CONTRAINDICADA que puede resultar fatal.",
+    "mechanism": "Mezclar un inhibidor de la monoaminooxidasa (IMAO) con un agente que aumente la liberación o inhiba la recaptura de serotonina (ISRS/IRSN/Tricíclicos) provoca una acumulación tóxica de Serotonina en el SNC.",
+    "clinical_benefits": [],
+    "warnings": [
+      "SÍNTOMAS CRÍTICOS: Hipertermia, clonus, temblor, agitación, diaforesis, rigidez.",
+      "Requiere periodo de lavado estricto (washout) de 14 días al cambiar de IMAO a otros. (5 semanas de lavado as ser Fluoxetina)."
+    ],
+    "sources": ["Stahl, S. M. (2013). Stahl's Essential Psychopharmacology."]
+  }
+]

@@ -60,7 +60,14 @@ export async function loadAppData(locale = "es") {
     console.warn("Locales not found", e);
   }
 
-  return { manifest, schema, legal, dataset, switchingMatrix, glossary, criteria, locales };
+  let synergies = [];
+  try {
+    synergies = await fetchJson("./data/synergies.json");
+  } catch (e) {
+    console.warn("Synergies not found", e);
+  }
+
+  return { manifest, schema, legal, dataset, switchingMatrix, glossary, criteria, locales, synergies };
 }
 
 async function fetchJson(url) {

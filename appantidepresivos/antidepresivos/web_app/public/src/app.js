@@ -9,6 +9,7 @@ import { renderSwitching } from "./ui/switchView.js";
 import { renderAjuste } from "./ui/ajusteView.js";
 import { renderInteract } from "./ui/interactView.js";
 import { renderQuiz } from "./ui/quizView.js";
+import { renderCombo } from "./ui/comboView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
 import { initRibbons } from "./ribbons.js";
@@ -56,7 +57,8 @@ async function main() {
         glossary: ctx.glossary ?? null,
         criteria: ctx.criteria ?? null,
         switchingMatrix: ctx.switchingMatrix ?? [],
-        locales: ctx.locales ?? null
+        locales: ctx.locales ?? null,
+        synergies: ctx.synergies ?? []
       },
     });
 
@@ -364,6 +366,7 @@ function renderRoute(route) {
     else if (route.name === "ajuste") renderAjuste(view);
     else if (route.name === "interact") renderInteract(view);
     else if (route.name === "quiz") renderQuiz(view);
+    else if (route.name === "combo") renderCombo(view);
     else view.innerHTML = "<p>Ruta no reconocida.</p>";
   }, 50);
 }
@@ -988,10 +991,11 @@ function renderRadarChart(data, colors) {
 function mountDock(container) {
   const navItems = [
     { id: "list",      label: "Inicio",    icon: "🏠",  hash: "#/list",      isRoute: true },
-    { id: "compare",   label: "Comparar",  icon: "⚖️",  hash: "#/compare",   isRoute: true },
-    { id: "switching", label: "Switching", icon: "🔄",  hash: "#/switching", isRoute: true },
-    { id: "interact",  label: "Interact.", icon: "⚡",  hash: "#/interact",  isRoute: true },
-    { id: "quiz",      label: "Quiz",      icon: "🎮",  hash: "#/quiz",      isRoute: true },
+    { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖️",  hash: "#/compare",   isRoute: true },
+    { id: "switching", label: i18n.t("btn_switching"), icon: "🔄",  hash: "#/switching", isRoute: true },
+    { id: "combo",     label: i18n.t("btn_combo"), icon: "🚀",  hash: "#/combo",     isRoute: true },
+    { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "#/interact",  isRoute: true },
+    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "🎮",  hash: "#/quiz",      isRoute: true },
   ];
   const actionItems = [
     { id: "legal", label: "Legal",    icon: "📜", hash: "#", isRoute: false, action: "legal" },

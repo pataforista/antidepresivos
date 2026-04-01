@@ -151,6 +151,8 @@ export function createRouter(store, opts = {}) {
       name = "interact";
     } else if (head === "quiz") {
       name = "quiz";
+    } else if (head === "combo") {
+      name = "combo";
     } else {
       name = "unknown";
     }
@@ -183,6 +185,8 @@ export function createRouter(store, opts = {}) {
       path = "/#/interact";
     } else if (name === "quiz") {
       path = "/#/quiz";
+    } else if (name === "combo") {
+      path = "/#/combo";
     } else {
       path = options.defaultRoute;
     }
@@ -213,8 +217,8 @@ export function createRouter(store, opts = {}) {
       };
     }
 
-    // list, switching, ajuste, interact, quiz
-    if (["list", "switching", "ajuste", "interact", "quiz"].includes(route.name)) {
+    // list, switching, ajuste, interact, quiz, combo
+    if (["list", "switching", "ajuste", "interact", "quiz", "combo"].includes(route.name)) {
       return { ...route, params: {}, query: route.query ?? {} };
     }
 

@@ -45,10 +45,11 @@ export function renderSwitching(view) {
                             <span>📄 ${i18n.t("download_plan_pdf")}</span>
                         </button>
                     </div>
-                    <div id="strategyHeader" class="alert alert--info" style="margin-bottom: 20px; display:none;">
+                    <div id="strategyHeader" class="alert alert--info" style="margin-bottom: 20px; display:none; border-radius: var(--radius-xl);">
                         <div>
-                            <strong id="strategyTitle" style="display:block; margin-bottom: 4px; font-size: 1.1rem;">${i18n.t("suggested_strategy")}</strong>
-                            <p id="strategyDesc" class="text-sm"></p>
+                            <strong id="strategyTitle" style="display:block; margin-bottom: 4px; font-size: 1.1rem; font-family: var(--font-headers);"></strong>
+                            <p id="strategyDesc" class="text-sm" style="font-weight: 500;"></p>
+                            <div id="strategyRationale" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.05); font-size: 0.8rem; font-style: italic; opacity: 0.8;"></div>
                         </div>
                     </div>
                     
@@ -167,8 +168,30 @@ function updatePlan(fromId, toId, view) {
     const header = view.querySelector('#strategyHeader');
     if (header) header.style.display = 'block';
 
+    const rationaleEl = view.querySelector('#strategyRationale');
+    let rationale = "";
+
+    const isSSRI = (d) => d?.clase_terapeutica?.toLowerCase().includes('isrs') || d?.clase_terapeutica?.toLowerCase().includes('ssri');
+    const isSNRI = (d) => d?.clase_terapeutica?.toLowerCase().includes('irsn') || d?.clase_terapeutica?.toLowerCase().includes('snri');
+    const isMAOI = (d) => d?.clase_terapeutica?.toLowerCase().includes('imao') || d?.clase_terapeutica?.toLowerCase().includes('maoi');
+
+    if (isMAOI(fromDrug) || isMAOI(toDrug)) {
+        rationale = i18n.getLocale() === 'en' ? 
+            "MAOIs require a strict washout to prevent serotonin syndrome or hypertensive crisis due to irreversible enzyme inhibition." :
+            "Los IMAO requieren un lavado estricto para prevenir el síndrome serotoninérgico o crisis hipertensivas debido a la inhibición enzimática irreversible.";
+    } else if (isSSRI(fromDrug) && isSNRI(toDrug)) {
+        rationale = i18n.getLocale() === 'en' ?
+            "Switching from SSRI to SNRI usually allows cross-tapering as they share mechanisms, but monitor for cumulative serotonergic effects." :
+            "El cambio de ISRS a IRSN suele permitir una reducción cruzada ya que comparten mecanismos, pero vigile efectos serotoninérgicos acumulativos.";
+    } else {
+        rationale = i18n.getLocale() === 'en' ?
+            "A standard cross-taper minimizes withdrawal symptoms while allowing the new medication to reach therapeutic levels." :
+            "Una reducción cruzada estándar minimiza los síntomas de abstinencia mientras permite que el nuevo medicamento alcance niveles terapéuticos.";
+    }
+
     view.querySelector('#strategyTitle').textContent = strategy;
     view.querySelector('#strategyDesc').textContent = desc;
+    if (rationaleEl) rationaleEl.textContent = rationale;
 
     const list = view.querySelector('#notesList');
     list.innerHTML = notes.map(n => `<li>${escapeHtml(n)}</li>`).join('');

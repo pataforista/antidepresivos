@@ -73,12 +73,12 @@
   --color-accent-cyan: hsl(185, 100%, 50%);
   --color-accent-emerald: hsl(150, 80%, 50%);
 
-  /* --- Border Radii --- */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-2xl: 32px;
+  /* --- Border Radii (M3 Naive & Playful) --- */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-2xl: 40px;
   --radius-full: 9999px;
 
   /* --- Navigation --- */
