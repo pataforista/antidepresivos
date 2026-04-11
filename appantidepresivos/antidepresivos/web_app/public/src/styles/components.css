@@ -1,25 +1,25 @@
 /* src/styles/components.css */
 
-/* Typography Utils */
+/* Typography Utils — Neo Bauhaus Geometric (Montserrat) */
 .h1,
 .h2,
 .h3,
 .h4 {
     font-family: var(--font-headers);
     color: var(--color-text-main);
-    letter-spacing: -0.03em;
-    line-height: 1.15;
+    letter-spacing: -0.02em;
+    line-height: 1.18;
 }
 
 .h1 {
     font-size: clamp(1.75rem, 5vw, 3rem);
-    font-weight: 800;
+    font-weight: 900;
     margin-bottom: var(--space-5);
 }
 
 .h2 {
     font-size: clamp(1.4rem, 4vw, 2.25rem);
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: var(--space-4);
 }
 
@@ -30,7 +30,7 @@
 }
 
 .h4 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
 }
 
@@ -89,61 +89,66 @@ body {
     font-weight: 800;
     font-size: 1.5rem;
     color: var(--color-primary);
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.01em;
 }
 
-/* --- Buttons --- */
+/* --- Buttons (Neo Bauhaus: rectangular, 2px hard border, physical press) --- */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 28px;
-    border-radius: var(--radius-full);
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-headers);
     font-weight: 700;
     cursor: pointer;
-    transition: all var(--transition-spring);
-    border: 1px solid transparent;
-    font-size: 0.95rem;
+    transition: transform var(--transition-spring), box-shadow var(--transition-spring), background var(--transition-fast);
+    border: 2px solid var(--color-stroke);
+    font-size: 0.9rem;
     text-decoration: none;
     gap: var(--space-2);
     position: relative;
     box-shadow: var(--shadow-sm);
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+}
+
+/* Physical press: shift down-right on active */
+.btn:active:not(:disabled) {
+    transform: translateY(2px) translateX(1px) !important;
+    box-shadow: none !important;
 }
 
 .btn--primary {
     background: var(--color-primary);
     color: var(--color-on-primary);
-    border-color: var(--color-primary);
-    box-shadow: 0 4px 12px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.25);
+    border-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
 }
 
 @media (hover: hover) {
     .btn--primary:hover:not(:disabled) {
         background: var(--color-primary-dark);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.35);
+        transform: translateY(-2px) translateX(-1px);
+        box-shadow: 4px 6px 0px var(--color-primary-dark);
     }
 }
 
 .btn--outline {
-    border: 1.5px solid var(--color-border);
+    border: 2px solid var(--color-stroke);
     color: var(--color-text-main);
     background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
 }
 
 @media (hover: hover) {
     .btn--outline:hover:not(:disabled) {
         border-color: var(--color-primary);
         color: var(--color-primary);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
+        transform: translateY(-2px) translateX(-1px);
+        box-shadow: 3px 4px 0px var(--color-border-strong);
     }
 }
 
@@ -151,23 +156,25 @@ body {
     background: transparent;
     color: var(--color-text-muted);
     box-shadow: none;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
+    text-transform: none;
 }
 
 .btn--ghost:hover:not(:disabled) {
     background: var(--color-surface-raised);
     color: var(--color-primary);
-    border-color: var(--color-border);
+    border-color: var(--color-border-strong);
 }
 
 .btn--ghost:active:not(:disabled) {
     background: var(--color-surface-container);
+    transform: translateY(1px) !important;
 }
 
 .btn--circle {
     aspect-ratio: 1/1;
     padding: 0;
-    border-radius: 50%;
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,35 +183,34 @@ body {
 
 @media (hover: hover) {
     .btn--circle:hover:not(:disabled) {
-        transform: scale(1.05) !important;
+        transform: scale(1.05) translateY(-1px) !important;
+        box-shadow: var(--shadow-md);
     }
 }
 
-/* --- Cards & Glassmorphism --- */
+/* --- Cards (Neo Bauhaus: hard 2px border, physical offset shadow on hover) --- */
 .glass-effect {
-    background: var(--color-surface-translucent);
-    backdrop-filter: var(--backdrop-blur);
-    -webkit-backdrop-filter: var(--backdrop-blur);
-    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    border: 2px solid var(--color-border-strong);
     box-shadow: var(--shadow-glass);
 }
 
 .card {
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-6);
-    box-shadow: var(--shadow-glass);
-    transition: all var(--transition-normal);
+    border: 2px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-spring), box-shadow var(--transition-spring), border-color var(--transition-fast);
     position: relative;
     overflow: hidden;
 }
 
 @media (hover: hover) {
     .card--hoverable:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-xl);
-        border-color: var(--color-primary-light);
+        transform: translateY(-4px) translateX(-2px);
+        box-shadow: 5px 8px 0px var(--color-border-hard);
+        border-color: var(--color-primary);
     }
 }
 
@@ -237,28 +243,30 @@ body {
 
 /* --- Clinical Elements --- */
 .chip {
-    padding: 8px 14px;
-    border-radius: var(--radius-full);
-    font-size: 0.8rem;
+    padding: 7px 13px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-headers);
+    font-size: 0.75rem;
     font-weight: 700;
     background: var(--color-surface-raised);
     color: var(--color-text-muted);
-    border: 1.5px solid var(--color-border);
+    border: 2px solid var(--color-border-strong);
     transition: all var(--transition-normal);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
     min-width: 32px;
     height: 32px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
 
 .chip--active {
     background: var(--color-primary);
     color: white;
-    border-color: var(--color-primary);
-    box-shadow: 0 2px 8px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.3);
+    border-color: var(--color-primary-dark);
+    box-shadow: 2px 3px 0px var(--color-primary-dark);
     font-weight: 800;
 }
 
@@ -292,18 +300,17 @@ body {
     color: #475569;
 }
 
-/* --- Tabs --- */
+/* --- Tabs (Neo Bauhaus: solid underline, bold uppercase) --- */
 .tabs-nav {
     display: flex;
-    gap: var(--space-5);
-    border-bottom: 2px solid var(--color-border);
+    gap: var(--space-4);
+    border-bottom: 2px solid var(--color-border-hard);
     margin-bottom: var(--space-6);
-    padding-bottom: 2px;
+    padding-bottom: 0;
 }
 
 .tab-btn {
-    padding: 14px 16px;
-    /* Larger targets for thumbs */
+    padding: 12px 14px;
     font-family: var(--font-headers);
     font-weight: 700;
     color: var(--color-text-muted);
@@ -312,7 +319,9 @@ body {
     border-bottom: 3px solid transparent;
     cursor: pointer;
     transition: all var(--transition-normal);
-    font-size: 1rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     position: relative;
     top: 2px;
     margin-bottom: -2px;
@@ -325,6 +334,7 @@ body {
 .tab-btn--active {
     color: var(--color-primary);
     border-bottom-color: var(--color-primary);
+    border-bottom-width: 3px;
 }
 
 /* --- Animations --- */
@@ -346,30 +356,33 @@ body {
 
 /* Specialized Detail View (Monograph) */
 .monograph__header {
-    border-radius: var(--radius-xl);
-    background: linear-gradient(135deg, var(--color-surface) 0%, hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.03) 100%);
-    border-left: 12px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 2px solid var(--color-border-strong);
+    border-left: 6px solid var(--color-primary);
     padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
 }
 
 .alert {
-    padding: var(--space-6);
-    border-radius: var(--radius-2xl);
+    padding: var(--space-5);
+    border-radius: var(--radius-md);
     display: flex;
     gap: var(--space-4);
     align-items: flex-start;
+    border: 2px solid;
 }
 
 .alert--info {
-    background: hsla(210, 100%, 97%, 1);
-    border: 1.5px solid hsla(210, 100%, 90%, 1);
-    color: hsla(210, 100%, 30%, 1);
+    background: var(--color-primary-container);
+    border-color: var(--color-primary-light);
+    color: var(--color-on-primary-container);
 }
 
 .alert--danger {
-    background: hsla(350, 100%, 97%, 1);
-    border: 1px solid hsla(350, 100%, 90%, 1);
-    color: hsla(350, 100%, 30%, 1);
+    background: var(--color-danger-container);
+    border-color: var(--color-danger);
+    color: var(--color-danger);
 }
 
 /* Grid Layouts moved to layout.css */
