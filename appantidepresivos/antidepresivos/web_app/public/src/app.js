@@ -10,6 +10,7 @@ import { renderAjuste } from "./ui/ajusteView.js";
 import { renderInteract } from "./ui/interactView.js";
 import { renderQuiz } from "./ui/quizView.js";
 import { renderCombo } from "./ui/comboView.js";
+import { renderGuias } from "./ui/guiasView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
 import { initRibbons } from "./ribbons.js";
@@ -58,7 +59,8 @@ async function main() {
         criteria: ctx.criteria ?? null,
         switchingMatrix: ctx.switchingMatrix ?? [],
         locales: ctx.locales ?? null,
-        synergies: ctx.synergies ?? []
+        synergies: ctx.synergies ?? [],
+        guias: ctx.guias ?? null
       },
     });
 
@@ -367,6 +369,7 @@ function renderRoute(route) {
     else if (route.name === "interact") renderInteract(view);
     else if (route.name === "quiz") renderQuiz(view);
     else if (route.name === "combo") renderCombo(view);
+    else if (route.name === "guias") renderGuias(view);
     else view.innerHTML = "<p>Ruta no reconocida.</p>";
   }, 50);
 }
@@ -997,6 +1000,7 @@ function mountDock(container) {
     { id: "combo",     label: i18n.t("btn_combo"), icon: "🚀",  hash: "#/combo",     isRoute: true },
     { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "#/interact",  isRoute: true },
     { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "🎮",  hash: "#/quiz",      isRoute: true },
+    { id: "guias",     label: i18n.t("btn_guias"), icon: "📖",  hash: "#/guias",     isRoute: true },
   ];
   const actionItems = [
     { id: "legal", label: "Legal",    icon: "📜", hash: "#", isRoute: false, action: "legal" },

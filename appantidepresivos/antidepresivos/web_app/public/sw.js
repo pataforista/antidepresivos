@@ -1,4 +1,4 @@
-const CACHE_NAME = 'antidepresivos-v6';
+const CACHE_NAME = 'antidepresivos-v7';
 
 // Recursos locales críticos: si falla alguno, la instalación se reintenta.
 const CORE_ASSETS = [
@@ -39,6 +39,7 @@ const CORE_ASSETS = [
     './src/ui/quizView.js',
     './src/ui/switchView.js',
     './src/ui/visuals.js',
+    './src/ui/guiasView.js',
     // Datos (los que carga dataLoader.js)
     './data/manifest.json',
     './data/schemaUI.schema001.js',
@@ -49,7 +50,8 @@ const CORE_ASSETS = [
     './data/switching_matrix.json',
     './data/synergies.json',
     './data/glosario_terminos.json',
-    './data/criterios_inclusion_exclusion.json'
+    './data/criterios_inclusion_exclusion.json',
+    './data/guias_clinicas.json'
 ];
 
 // Recursos externos (CDN/fuentes): best-effort. El navegador los descarga una
