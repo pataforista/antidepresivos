@@ -51,6 +51,9 @@
             "utilidad_sintomatica_clave": "Rapid antidepressant response; suicidal crisis",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "None",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Alcohol; benzodiazepines; opioids; CNS depressants",
             "_norm": {
                 "ord": {
@@ -139,6 +142,9 @@
             "utilidad_sintomatica_clave": "Anxiety; obsessive-compulsive symptoms; rumination",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "High",
+            "equiv_fluoxetina": "≈50 mg",
             "interacciones_contraindicadas": "MAOIs; Pimozide",
             "_norm": {
                 "ord": {
@@ -227,6 +233,9 @@
             "utilidad_sintomatica_clave": "Anhedonia; apathy; obsessive-compulsive symptoms",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "High",
+            "equiv_fluoxetina": "20 mg (reference)",
             "interacciones_contraindicadas": "MAOIs; Pimozide; Thioridazine",
             "_norm": {
                 "ord": {
@@ -315,6 +324,9 @@
             "utilidad_sintomatica_clave": "Somatic anxiety; insomnia with anxiety",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Moderate",
+            "riesgo_siadh": "High",
+            "equiv_fluoxetina": "≈20 mg",
             "interacciones_contraindicadas": "MAOIs; Thioridazine",
             "_norm": {
                 "ord": {
@@ -403,6 +415,9 @@
             "utilidad_sintomatica_clave": "Anxiety; rumination",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "Low",
+            "riesgo_siadh": "High",
+            "equiv_fluoxetina": "≈20 mg",
             "interacciones_contraindicadas": "MAOIs; Pimozide; Linezolid; Methylene Blue; Dapoxetine",
             "_norm": {
                 "ord": {
@@ -491,6 +506,9 @@
             "utilidad_sintomatica_clave": "Anxiety; rumination",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Moderate",
+            "carga_aec": "Low",
+            "riesgo_siadh": "High",
+            "equiv_fluoxetina": "≈10 mg",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {
@@ -579,6 +597,9 @@
             "utilidad_sintomatica_clave": "Obsessive-compulsive symptoms; anxiety",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "High",
+            "equiv_fluoxetina": "≈100 mg",
             "interacciones_contraindicadas": "MAOIs; Tizanidine; Terfenadine; Astemizole",
             "_norm": {
                 "ord": {
@@ -653,6 +674,9 @@
             "utilidad_sintomatica_clave": "Depression with anxiety and comorbid pain",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "High",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "MAOIs; Risk of cardiac arrhythmia; Uncontrolled hypertension",
             "_norm": {
                 "ord": {
@@ -741,6 +765,9 @@
             "utilidad_sintomatica_clave": "Depression with fatigue/anergy",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈50 mg",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {
@@ -815,6 +842,9 @@
             "utilidad_sintomatica_clave": "Depression with somatic pain",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "High",
+            "equiv_fluoxetina": "≈60 mg",
             "interacciones_contraindicadas": "MAOIs; Thioridazine; Uncontrolled narrow-angle glaucoma; Strong CYP1A2 inhibitors (fluvoxamine, ciprofloxacin)",
             "_norm": {
                 "ord": {
@@ -903,6 +933,9 @@
             "utilidad_sintomatica_clave": "Depression with apathy and low energy",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈80 mg",
             "interacciones_contraindicadas": "MAOIs; linezolid; methylene blue IV",
             "_norm": {
                 "ord": {
@@ -977,6 +1010,9 @@
             "utilidad_sintomatica_clave": "Resistant depression; rapid symptom reduction; suicidal crisis",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "None",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Alcohol; benzodiazepines; opioids; CNS depressants",
             "_norm": {
                 "ord": {
@@ -1065,6 +1101,9 @@
             "utilidad_sintomatica_clave": "Rapid and sustained response in PPD with hospital logistics",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "None",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Alcohol; opioids; benzodiazepines; CNS depressants",
             "_norm": {
                 "ord": {
@@ -1148,6 +1187,9 @@
             "utilidad_sintomatica_clave": "Short oral treatment for PPD",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "None",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Alcohol; opioids; benzodiazepines; CYP3A4 inhibitors; CNS depressants",
             "_norm": {
                 "ord": {
@@ -1231,6 +1273,9 @@
             "utilidad_sintomatica_clave": "Apathy; fatigue; anhedonia; weight gain concerns",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "≈150 mg",
             "interacciones_contraindicadas": "MAOIs; Seizure disorders; Eating disorders (Bulimia/Anorexia); Alcohol/Sedative withdrawal",
             "_norm": {
                 "ord": {
@@ -1319,6 +1364,9 @@
             "utilidad_sintomatica_clave": "Insomnia; anorexia; underweight patients",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "≈30 mg",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {
@@ -1407,6 +1455,9 @@
             "utilidad_sintomatica_clave": "Insomnia; agitation in elderly",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Moderate",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈150 mg",
             "interacciones_contraindicadas": "MAOIs; CYP3A4 strong inhibitors/inducers",
             "_norm": {
                 "ord": {
@@ -1495,6 +1546,9 @@
             "utilidad_sintomatica_clave": "Cognitive symptoms; geriatric depression",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈10 mg",
             "interacciones_contraindicadas": "MAOIs; Linezolid; Methylene Blue IV",
             "_norm": {
                 "ord": {
@@ -1583,6 +1637,9 @@
             "utilidad_sintomatica_clave": "Depression with anxious features",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈20 mg",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {
@@ -1666,6 +1723,9 @@
             "utilidad_sintomatica_clave": "Sleep architecture restoration; seasonal depression",
             "riesgo_sindrome_abstinencia": "Neutral",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "≈25 mg",
             "interacciones_contraindicadas": "Potent CYP1A2 inhibitors (Ciprofloxacin, Fluvoxamine)",
             "_norm": {
                 "ord": {
@@ -1754,6 +1814,9 @@
             "utilidad_sintomatica_clave": "Melancholic depression; chronic neuropathic pain; insomnia",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "High",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "MAOIs; Recovery phase of MI; Arrhythmias; Linezolid; Methylene Blue IV",
             "_norm": {
                 "ord": {
@@ -1842,6 +1905,9 @@
             "utilidad_sintomatica_clave": "Refractory OCD; severe depression",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "High",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "MAOIs; Antihypertensives (Guanethidine)",
             "_norm": {
                 "ord": {
@@ -1925,6 +1991,9 @@
             "utilidad_sintomatica_clave": "Geriatric depression; depression with apathy",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "Moderate",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈50 mg",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {
@@ -2008,6 +2077,9 @@
             "utilidad_sintomatica_clave": "Refractory depression; childhood enuresis",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "High",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {
@@ -2091,6 +2163,9 @@
             "utilidad_sintomatica_clave": "Depression with severe insomnia",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "High",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "MAOIs; Recovery phase of MI",
             "_norm": {
                 "ord": {
@@ -2174,6 +2249,9 @@
             "utilidad_sintomatica_clave": "TCA with lower cardiotoxicity profile",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "Moderate",
+            "carga_aec": "Moderate",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈140 mg",
             "interacciones_contraindicadas": "MAOIs; Liver disease",
             "_norm": {
                 "ord": {
@@ -2257,6 +2335,9 @@
             "utilidad_sintomatica_clave": "Atypical depression; refractory anxiety",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Tyramine-rich foods; Sympathomimetics; SSRIs; SNRIs; TCAs; Pethidine; Dextromethorphan",
             "_norm": {
                 "ord": {
@@ -2345,6 +2426,9 @@
             "utilidad_sintomatica_clave": "Refractory depression; anergic/apathetic depression",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Sympathomimetics; Tyramine; SSRIs; SNRIs",
             "_norm": {
                 "ord": {
@@ -2428,6 +2512,9 @@
             "utilidad_sintomatica_clave": "Social phobia; depression where sexual function is a priority",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Citalopram; Clomipramine; SSRIs/SNRIs (Risk of Serotonin Syndrome); Sympathomimetics",
             "_norm": {
                 "ord": {
@@ -2511,6 +2598,9 @@
             "utilidad_sintomatica_clave": "Refractory depression without dietary restrictions (at 6mg)",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Sympathomimetics; SSRIs; SNRIs; Pethidine; Cyclobenzaprine",
             "_norm": {
                 "ord": {
@@ -2594,6 +2684,9 @@
             "utilidad_sintomatica_clave": "Refractory depression",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Sympathomimetics; Tyramine; SSRIs; SNRIs",
             "_norm": {
                 "ord": {
@@ -2677,6 +2770,9 @@
             "utilidad_sintomatica_clave": "Depression with severe insomnia; need for weight gain",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Moderate",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "≈30 mg",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {
@@ -2765,6 +2861,9 @@
             "utilidad_sintomatica_clave": "Anxious depression; patient intolerant to classic side effects",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {
@@ -2848,6 +2947,9 @@
             "utilidad_sintomatica_clave": "Depression with severe anergia and lack of motivation",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "≈8 mg",
             "interacciones_contraindicadas": "MAOIs; dual tricyclic antidepressants (caution)",
             "_norm": {
                 "ord": {
@@ -2936,6 +3038,9 @@
             "utilidad_sintomatica_clave": "Depression with severe anergia requiring nighttime sedation",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "Moderate",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "MAOIs; drugs that lower the seizure threshold",
             "_norm": {
                 "ord": {
@@ -3019,6 +3124,9 @@
             "utilidad_sintomatica_clave": "Major depression with psychotic features or severe agitation",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "High",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈100 mg",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {
@@ -3102,6 +3210,9 @@
             "utilidad_sintomatica_clave": "Depression with retardation/fatigue (if activation tolerated)",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "Moderate",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "MAOIs; linezolid; IV methylene blue",
             "_norm": {
                 "ord": {
@@ -3190,6 +3301,9 @@
             "utilidad_sintomatica_clave": "Severe comorbid insomnia; anxious depression with insomnia",
             "riesgo_sindrome_abstinencia": "Moderate",
             "riesgo_prolongacion_qt": "High",
+            "carga_aec": "High",
+            "riesgo_siadh": "Moderate",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "MAOIs; linezolid; IV methylene blue",
             "_norm": {
                 "ord": {
@@ -3278,6 +3392,9 @@
             "utilidad_sintomatica_clave": "Resistant depression with anhedonia and inhibition symptoms",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "None absolute (caution with CYP inhibitors)",
             "_norm": {
                 "ord": {
@@ -3361,6 +3478,9 @@
             "utilidad_sintomatica_clave": "Resistant depression with severe insomnia and prominent anxiety",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Moderate",
+            "carga_aec": "Moderate",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Potent CYP3A4 inhibitors",
             "_norm": {
                 "ord": {
@@ -3444,6 +3564,9 @@
             "utilidad_sintomatica_clave": "Resistant depression needing better tolerability than aripiprazole",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "Low",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Potent CYP2D6/3A4 inhibitors",
             "_norm": {
                 "ord": {
@@ -3527,6 +3650,9 @@
             "utilidad_sintomatica_clave": "Depression with suicide risk; 'classic' resistant depression",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low (rare arrhythmias)",
+            "carga_aec": "None",
+            "riesgo_siadh": "Low",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "NSAIDs; thiazide diuretics; ACE inhibitors (↑lithium levels)",
             "_norm": {
                 "ord": {
@@ -3602,6 +3728,9 @@
             "utilidad_sintomatica_clave": "Resistant depression with subclinical hypothyroid symptoms or sluggishness",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "None",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Anticoagulants (caution)",
             "_norm": {
                 "ord": {
@@ -3685,6 +3814,9 @@
             "utilidad_sintomatica_clave": "Depression with residual sleepiness and severe cognitive fatigue",
             "riesgo_sindrome_abstinencia": "Low",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "None",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Oral contraceptives (reduces their efficacy)",
             "_norm": {
                 "ord": {
@@ -3768,6 +3900,9 @@
             "utilidad_sintomatica_clave": "Resistant depression with executive deficit and profound fatigue",
             "riesgo_sindrome_abstinencia": "High",
             "riesgo_prolongacion_qt": "Low",
+            "carga_aec": "None",
+            "riesgo_siadh": "None",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "MAOIs",
             "_norm": {
                 "ord": {

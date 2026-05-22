@@ -51,6 +51,9 @@
             "utilidad_sintomatica_clave": "Respuesta antidepresiva rápida; crisis suicida",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Nula",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Alcohol; benzodiacepinas; opioides; depresores SNC",
             "_norm": {
                 "ord": {
@@ -138,6 +141,9 @@
             "utilidad_sintomatica_clave": "Depresión resistente; reducción rápida de síntomas; crisis suicida",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Nula",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Alcohol; benzodiacepinas; opioides; depresores SNC",
             "_norm": {
                 "ord": {
@@ -225,6 +231,9 @@
             "utilidad_sintomatica_clave": "Respuesta rápida y sostenida en PPD con logística hospitalaria",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Nula",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Alcohol; opioides; benzodiacepinas; depresores SNC",
             "_norm": {
                 "ord": {
@@ -313,6 +322,9 @@
             "utilidad_sintomatica_clave": "Tratamiento oral breve para PPD",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Nula",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Alcohol; opioides; benzodiacepinas; inhibidores CYP3A4; depresores SNC",
             "_norm": {
                 "ord": {
@@ -401,6 +413,9 @@
             "utilidad_sintomatica_clave": "Anhedonia; fatiga; enlentecimiento psicomotor",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "≈150 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV; alcohol en exceso",
             "_norm": {
                 "ord": {
@@ -489,6 +504,9 @@
             "utilidad_sintomatica_clave": "Insomnio severo; pérdida de peso; ansiedad comórbida",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "≈30 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -577,6 +595,9 @@
             "utilidad_sintomatica_clave": "Insomnio comórbido; ansiedad nocturna",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Moderado",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈150 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -665,6 +686,9 @@
             "utilidad_sintomatica_clave": "Déficit cognitivo; buena tolerabilidad",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈10 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -753,6 +777,9 @@
             "utilidad_sintomatica_clave": "Depresión con ansiedad prominente",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈20 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -841,6 +868,9 @@
             "utilidad_sintomatica_clave": "Desregulación circadiana; insomnio",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "≈25 mg",
             "interacciones_contraindicadas": "IMAO; fluvoxamina; ciprofloxacino",
             "_norm": {
                 "ord": {
@@ -929,6 +959,9 @@
             "utilidad_sintomatica_clave": "Depresión con insomnio severo; necesidad de aumento de peso",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Moderado",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "≈30 mg",
             "interacciones_contraindicadas": "IMAO",
             "_norm": {
                 "ord": {
@@ -1017,6 +1050,9 @@
             "utilidad_sintomatica_clave": "Depresión ansiosa; paciente con intolerancia a efectos secundarios clásicos",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "IMAO",
             "_norm": {
                 "ord": {
@@ -1100,6 +1136,9 @@
             "utilidad_sintomatica_clave": "Depresión con anergia severa y falta de motivación",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "≈8 mg",
             "interacciones_contraindicadas": "IMAO; antidepresivos tricíclicos duales (precaución)",
             "_norm": {
                 "ord": {
@@ -1188,6 +1227,9 @@
             "utilidad_sintomatica_clave": "Depresión atípica; hipersomnia; hiperfagia; sensibilidad interpersonal",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Moderado",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "IMAO concomitante; linezolid; azul de metileno IV; meperidina; tramadol; dextrometorfano; simpaticomiméticos; ISRS/IRSN/ATC sin lavado; tiramina",
             "_norm": {
                 "ord": {
@@ -1276,6 +1318,9 @@
             "utilidad_sintomatica_clave": "Depresión con enlentecimiento y fatiga; refractaria con necesidad de activación",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Moderado",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "IMAO concomitante; linezolid; azul de metileno IV; meperidina; tramadol; dextrometorfano; simpaticomiméticos; ISRS/IRSN/ATC sin lavado; tiramina",
             "_norm": {
                 "ord": {
@@ -1364,6 +1409,9 @@
             "utilidad_sintomatica_clave": "Depresión refractaria tras fallo de múltiples líneas",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Moderado",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "IMAO concomitante; linezolid; azul de metileno IV; meperidina; tramadol; dextrometorfano; simpaticomiméticos; ISRS/IRSN/ATC sin lavado; tiramina",
             "_norm": {
                 "ord": {
@@ -1447,6 +1495,9 @@
             "utilidad_sintomatica_clave": "Depresión con mala tolerancia oral; necesidad de evitar primer paso; adherencia con parche",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Moderado",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "IMAO concomitante; linezolid; azul de metileno IV; meperidina; tramadol; dextrometorfano; simpaticomiméticos; ISRS/IRSN/ATC sin lavado; tiramina (solo ≥9 mg/24 h)",
             "_norm": {
                 "ord": {
@@ -1535,6 +1586,9 @@
             "utilidad_sintomatica_clave": "Fobia social; depresión donde la función sexual es prioritaria",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Citalopram; Clomipramina; ISRS/IRSN (riesgo de síndrome serotoninérgico); Simpaticomiméticos",
             "_norm": {
                 "ord": {
@@ -1617,6 +1671,9 @@
             "utilidad_sintomatica_clave": "Ansiedad; síntomas obsesivo-compulsivos; rumiación",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Alto",
+            "equiv_fluoxetina": "≈50 mg",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Pimozida",
             "_norm": {
                 "ord": {
@@ -1705,6 +1762,9 @@
             "utilidad_sintomatica_clave": "Anhedonia; apatía; síntomas obsesivo-compulsivos",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Alto",
+            "equiv_fluoxetina": "20 mg (referencia)",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Pimozida; Tioridazina",
             "_norm": {
                 "ord": {
@@ -1793,6 +1853,9 @@
             "utilidad_sintomatica_clave": "Ansiedad somática; insomnio con ansiedad",
             "riesgo_sindrome_abstinencia": "Alto",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Moderado",
+            "riesgo_siadh": "Alto",
+            "equiv_fluoxetina": "≈20 mg",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Tioridazina",
             "_norm": {
                 "ord": {
@@ -1881,6 +1944,9 @@
             "utilidad_sintomatica_clave": "Ansiedad; rumiación",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Alto",
+            "equiv_fluoxetina": "≈20 mg",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Pimozida; Linezolid; Azul de metileno; Dapoxetina",
             "_norm": {
                 "ord": {
@@ -1969,6 +2035,9 @@
             "utilidad_sintomatica_clave": "Ansiedad; rumiación",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Moderado",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Alto",
+            "equiv_fluoxetina": "≈10 mg",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO)",
             "_norm": {
                 "ord": {
@@ -2057,6 +2126,9 @@
             "utilidad_sintomatica_clave": "Síntomas obsesivo-compulsivos; ansiedad",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Alto",
+            "equiv_fluoxetina": "≈100 mg",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Tizanidina; Terfenadina; Astemizol",
             "_norm": {
                 "ord": {
@@ -2131,6 +2203,9 @@
             "utilidad_sintomatica_clave": "Depresión con ansiedad y dolor comórbido",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Alto",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAOs); Riesgo de arritmia cardíaca; Hipertensión no controlada",
             "_norm": {
                 "ord": {
@@ -2219,6 +2294,9 @@
             "utilidad_sintomatica_clave": "Depresión con fatiga/anergia",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈50 mg",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAOs)",
             "_norm": {
                 "ord": {
@@ -2293,6 +2371,9 @@
             "utilidad_sintomatica_clave": "Depresión con dolor somático",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Alto",
+            "equiv_fluoxetina": "≈60 mg",
             "interacciones_contraindicadas": "Inhibidores de la Monoaminooxidasa (IMAO); Tioridazina; Glaucoma de ángulo estrecho no controlado; Inhibidores potentes de CYP1A2 (fluvoxamina, ciprofloxacino)",
             "_norm": {
                 "ord": {
@@ -2381,6 +2462,9 @@
             "utilidad_sintomatica_clave": "Depresión con apatía y baja energía",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈80 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -2455,6 +2539,9 @@
             "utilidad_sintomatica_clave": "Depresión con dolor; insomnio (si sedación deseada)",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Alto",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -2543,6 +2630,9 @@
             "utilidad_sintomatica_clave": "Dolor neuropático; insomnio comórbido; depresión ansiosa (si sedación útil)",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Alto",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -2631,6 +2721,9 @@
             "utilidad_sintomatica_clave": "Dolor neuropático con mejor tolerancia TCA; depresión con fatiga",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Moderado",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈50 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -2719,6 +2812,9 @@
             "utilidad_sintomatica_clave": "Depresión con enlentecimiento/fatiga (si tolera activación)",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Moderado",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -2807,6 +2903,9 @@
             "utilidad_sintomatica_clave": "Insomnio severo comórbido; depresión ansiosa con insomnio",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Alto",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -2895,6 +2994,9 @@
             "utilidad_sintomatica_clave": "Síntomas obsesivo-compulsivos graves; rumiación intensa",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Alto",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "IMAO; linezolid; azul de metileno IV",
             "_norm": {
                 "ord": {
@@ -2983,6 +3085,9 @@
             "utilidad_sintomatica_clave": "Depresión con anergia severa que requiere sedación nocturna",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Moderado",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "IMAO; fármacos que disminuyen umbral convulsivo",
             "_norm": {
                 "ord": {
@@ -3066,6 +3171,9 @@
             "utilidad_sintomatica_clave": "Depresión mayor con características psicóticas o agitación severa",
             "riesgo_sindrome_abstinencia": "Moderado",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Alto",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈100 mg",
             "interacciones_contraindicadas": "IMAO",
             "_norm": {
                 "ord": {
@@ -3149,6 +3257,9 @@
             "utilidad_sintomatica_clave": "Depresión con insomnio severo",
             "riesgo_sindrome_abstinencia": "Alto",
             "riesgo_prolongacion_qt": "Alto",
+            "carga_aec": "Alto",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈75 mg",
             "interacciones_contraindicadas": "IMAO; fase de recuperación del infarto de miocardio",
             "_norm": {
                 "ord": {
@@ -3232,6 +3343,9 @@
             "utilidad_sintomatica_clave": "TCA con menor perfil de cardiotoxicidad",
             "riesgo_sindrome_abstinencia": "Alto",
             "riesgo_prolongacion_qt": "Moderado",
+            "carga_aec": "Moderado",
+            "riesgo_siadh": "Moderado",
+            "equiv_fluoxetina": "≈140 mg",
             "interacciones_contraindicadas": "IMAO; enfermedad hepática",
             "_norm": {
                 "ord": {
@@ -3315,6 +3429,9 @@
             "utilidad_sintomatica_clave": "Depresión resistente con anhedonia y síntoma de inhibición",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Nula absoluta (precaución con inhibidores CYP)",
             "_norm": {
                 "ord": {
@@ -3398,6 +3515,9 @@
             "utilidad_sintomatica_clave": "Depresión resistente con insomnio severo y ansiedad prominente",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Moderado",
+            "carga_aec": "Moderado",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Inhibidores potentes CYP3A4",
             "_norm": {
                 "ord": {
@@ -3481,6 +3601,9 @@
             "utilidad_sintomatica_clave": "Depresión resistente con necesidad de mejor tolerabilidad que aripiprazol",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Bajo",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Inhibidores potentes CYP2D6/3A4",
             "_norm": {
                 "ord": {
@@ -3564,6 +3687,9 @@
             "utilidad_sintomatica_clave": "Depresión con riesgo suicida; depresión resistente 'clásica'",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo (raras arritmias)",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Bajo",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "AINEs; Diuréticos tiazídicos; IECAs (↑niveles litio)",
             "_norm": {
                 "ord": {
@@ -3639,6 +3765,9 @@
             "utilidad_sintomatica_clave": "Depresión resistente con síntomas de hipotiroidismo subclínico o lentitud",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Nula",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Anticoagulantes (precaución)",
             "_norm": {
                 "ord": {
@@ -3722,6 +3851,9 @@
             "utilidad_sintomatica_clave": "Depresión con somnolencia residual y fatiga cognitiva severa",
             "riesgo_sindrome_abstinencia": "Bajo",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Nula",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "Anticonceptivos orales (disminuye su eficacia)",
             "_norm": {
                 "ord": {
@@ -3805,6 +3937,9 @@
             "utilidad_sintomatica_clave": "Depresión resistente con déficit ejecutivo y fatiga profunda",
             "riesgo_sindrome_abstinencia": "Alto",
             "riesgo_prolongacion_qt": "Bajo",
+            "carga_aec": "Nula",
+            "riesgo_siadh": "Nula",
+            "equiv_fluoxetina": "N/A",
             "interacciones_contraindicadas": "IMAO",
             "_norm": {
                 "ord": {
