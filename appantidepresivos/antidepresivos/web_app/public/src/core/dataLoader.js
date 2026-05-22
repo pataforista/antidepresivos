@@ -67,7 +67,14 @@ export async function loadAppData(locale = "es") {
     console.warn("Synergies not found", e);
   }
 
-  return { manifest, schema, legal, dataset, switchingMatrix, glossary, criteria, locales, synergies };
+  let guias = null;
+  try {
+    guias = await fetchJson("./data/guias_clinicas.json");
+  } catch (e) {
+    console.warn("Guias not found", e);
+  }
+
+  return { manifest, schema, legal, dataset, switchingMatrix, glossary, criteria, locales, synergies, guias };
 }
 
 async function fetchJson(url) {

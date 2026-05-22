@@ -157,6 +157,18 @@ function updatePlan(fromId, toId, view) {
             desc = i18n.t("washout_desc");
             notes.unshift(i18n.t("washout_golden_rule"));
             entryData = { taper_days: 0, washout_days: 14, strategy: "washout" };
+
+            // Fluoxetina → IMAO requiere 5 semanas (35 días) de lavado por la vida
+            // media prolongada de la norfluoxetina; los 14 días estándar NO bastan.
+            if (isFluoxetine(fromDrug) && isMAOI(toDrug)) {
+                desc = i18n.getLocale() === 'en'
+                    ? "Requires a drug-free period of 5 weeks (35 days)."
+                    : "Requiere un periodo libre de fármaco de 5 semanas (35 días).";
+                notes.unshift(i18n.getLocale() === 'en'
+                    ? "Fluoxetine → MAOI: a 5-week (35-day) washout is MANDATORY due to the long half-life of norfluoxetine. The standard 14 days are NOT sufficient."
+                    : "Fluoxetina → IMAO: el lavado obligatorio es de 5 semanas (35 días) por la vida media prolongada de la norfluoxetina. Los 14 días estándar NO son suficientes.");
+                entryData = { taper_days: 0, washout_days: 35, strategy: "washout" };
+            }
         } else if (isFluoxetine(fromDrug)) {
             strategy = i18n.t("fluoxetine_switch_title");
             desc = i18n.t("fluoxetine_switch_desc");

@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "note_es": "Resumen educativo de orientaciones generales de guías. NO sustituye la lectura de la guía original ni el juicio clínico. Verifique siempre contra la fuente vigente.",
+    "note_en": "Educational summary of general guideline orientations. It does NOT replace reading the original guideline or clinical judgment. Always verify against the current source."
+  },
+  "conditions": [
+    {
+      "id": "depresion",
+      "icon": "🌧️",
+      "label": { "es": "Depresión Mayor", "en": "Major Depression" },
+      "guidelines": [
+        {
+          "org": "NICE NG222 (2022)",
+          "recs": {
+            "es": [
+              "En depresión menos grave, no ofrecer antidepresivos de rutina como primera opción; priorizar intervenciones psicológicas y de estilo de vida (según preferencia).",
+              "En depresión más grave, ofrecer antidepresivo (ISRS de primera elección) y/o psicoterapia.",
+              "Revisar a las 2–4 semanas; mantener el tratamiento ≥6 meses tras la remisión."
+            ],
+            "en": [
+              "In less severe depression, do not routinely offer antidepressants first-line; prioritize psychological and lifestyle interventions (per preference).",
+              "In more severe depression, offer an antidepressant (SSRI first-line) and/or psychotherapy.",
+              "Review at 2–4 weeks; continue treatment ≥6 months after remission."
+            ]
+          }
+        },
+        {
+          "org": "CANMAT (2016)",
+          "recs": {
+            "es": [
+              "Primera línea: ISRS, IRSN, bupropión, mirtazapina, vortioxetina y agomelatina.",
+              "Elegir según perfil de efectos adversos, comorbilidad, interacciones y preferencia.",
+              "Evaluar respuesta a las 2–4 semanas; optimizar dosis antes de cambiar."
+            ],
+            "en": [
+              "First-line: SSRIs, SNRIs, bupropion, mirtazapine, vortioxetine and agomelatine.",
+              "Choose by adverse-effect profile, comorbidity, interactions and preference.",
+              "Assess response at 2–4 weeks; optimize dose before switching."
+            ]
+          }
+        },
+        {
+          "org": "APA (2010, reaf.)",
+          "recs": {
+            "es": [
+              "ISRS, IRSN, mirtazapina y bupropión son adecuados como primera línea para la mayoría.",
+              "Reservar IMAO/tricíclicos para casos seleccionados por su perfil de seguridad."
+            ],
+            "en": [
+              "SSRIs, SNRIs, mirtazapine and bupropion are appropriate first-line for most patients.",
+              "Reserve MAOIs/tricyclics for selected cases due to their safety profile."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tag",
+      "icon": "😰",
+      "label": { "es": "Ansiedad Generalizada (TAG)", "en": "Generalized Anxiety (GAD)" },
+      "guidelines": [
+        {
+          "org": "NICE CG113",
+          "recs": {
+            "es": [
+              "Primera línea farmacológica: un ISRS (sertralina como opción coste-efectiva inicial).",
+              "Si no hay respuesta, otro ISRS o un IRSN.",
+              "Considerar pregabalina si no se toleran ISRS/IRSN. Evitar benzodiacepinas salvo crisis a corto plazo."
+            ],
+            "en": [
+              "First-line pharmacological option: an SSRI (sertraline as a cost-effective initial choice).",
+              "If no response, another SSRI or an SNRI.",
+              "Consider pregabalin if SSRIs/SNRIs not tolerated. Avoid benzodiazepines except short-term crises."
+            ]
+          }
+        },
+        {
+          "org": "CANMAT Anxiety (2014)",
+          "recs": {
+            "es": [
+              "Primera línea: ISRS (escitalopram, paroxetina, sertralina) e IRSN (venlafaxina, duloxetina).",
+              "Pregabalina de primera línea alternativa.",
+              "Combinar con TCC cuando esté disponible."
+            ],
+            "en": [
+              "First-line: SSRIs (escitalopram, paroxetine, sertraline) and SNRIs (venlafaxine, duloxetine).",
+              "Pregabalin as an alternative first-line.",
+              "Combine with CBT when available."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "panico",
+      "icon": "💥",
+      "label": { "es": "Trastorno de Pánico", "en": "Panic Disorder" },
+      "guidelines": [
+        {
+          "org": "NICE / APA",
+          "recs": {
+            "es": [
+              "Primera línea: ISRS; IRSN como alternativa.",
+              "Iniciar a dosis bajas para evitar la activación inicial; titular gradualmente.",
+              "Evitar benzodiacepinas como tratamiento de mantenimiento. TCC de primera línea."
+            ],
+            "en": [
+              "First-line: SSRIs; SNRIs as an alternative.",
+              "Start at low doses to avoid initial activation; titrate gradually.",
+              "Avoid benzodiazepines as maintenance treatment. CBT is first-line."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "toc",
+      "icon": "🔁",
+      "label": { "es": "TOC", "en": "OCD" },
+      "guidelines": [
+        {
+          "org": "NICE CG31 / APA",
+          "recs": {
+            "es": [
+              "Primera línea: ISRS, a menudo a dosis más altas que en depresión.",
+              "Ensayo más prolongado: evaluar respuesta a las 8–12 semanas.",
+              "Clomipramina de segunda línea (eficaz, pero peor tolerada). TCC con exposición y prevención de respuesta (EPR)."
+            ],
+            "en": [
+              "First-line: SSRIs, often at higher doses than in depression.",
+              "Longer trial: assess response at 8–12 weeks.",
+              "Clomipramine second-line (effective but less tolerated). CBT with exposure and response prevention (ERP)."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ansiedad_social",
+      "icon": "🫥",
+      "label": { "es": "Ansiedad Social", "en": "Social Anxiety" },
+      "guidelines": [
+        {
+          "org": "NICE CG159",
+          "recs": {
+            "es": [
+              "TCC individual es el tratamiento de primera elección.",
+              "Si se prefiere fármaco: ISRS (escitalopram o sertralina); venlafaxina como alternativa.",
+              "Considerar IMAO/moclobemida en casos resistentes seleccionados."
+            ],
+            "en": [
+              "Individual CBT is the first-choice treatment.",
+              "If medication preferred: SSRIs (escitalopram or sertraline); venlafaxine as an alternative.",
+              "Consider MAOIs/moclobemide in selected resistant cases."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "perinatal",
+      "icon": "🤰",
+      "label": { "es": "Depresión Perinatal / Posparto", "en": "Perinatal / Postpartum Depression" },
+      "guidelines": [
+        {
+          "org": "ACOG / NICE",
+          "recs": {
+            "es": [
+              "Ponderar el riesgo de la depresión materna NO tratada frente a la exposición al fármaco.",
+              "Si se requiere ISRS en lactancia, la sertralina tiene de los menores niveles en leche materna.",
+              "En depresión posparto grave, considerar brexanolona o zuranolona (aprobadas por la FDA para PPD)."
+            ],
+            "en": [
+              "Weigh the risk of UNtreated maternal depression against drug exposure.",
+              "If an SSRI is needed during lactation, sertraline has among the lowest breast-milk levels.",
+              "In severe postpartum depression, consider brexanolone or zuranolone (FDA-approved for PPD)."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "trd",
+      "icon": "🧱",
+      "label": { "es": "Depresión Resistente (TRD)", "en": "Treatment-Resistant Depression (TRD)" },
+      "guidelines": [
+        {
+          "org": "CANMAT / APA",
+          "recs": {
+            "es": [
+              "Antes de etiquetar como resistente: confirmar adherencia, dosis y duración adecuadas del ensayo.",
+              "Estrategias: optimizar dosis, cambiar de antidepresivo o potenciar.",
+              "Potenciación con mejor evidencia: litio, antipsicóticos atípicos (aripiprazol, quetiapina, brexpiprazol) y T3.",
+              "Esketamina intranasal y TEC (terapia electroconvulsiva) en casos seleccionados."
+            ],
+            "en": [
+              "Before labeling as resistant: confirm adherence and an adequate dose/duration trial.",
+              "Strategies: optimize dose, switch antidepressant, or augment.",
+              "Best-evidence augmentation: lithium, atypical antipsychotics (aripiprazole, quetiapine, brexpiprazole) and T3.",
+              "Intranasal esketamine and ECT in selected cases."
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
