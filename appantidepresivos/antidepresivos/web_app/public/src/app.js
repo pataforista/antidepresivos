@@ -993,6 +993,7 @@ function mountDock(container) {
     { id: "list",      label: "Inicio",    icon: "🏠",  hash: "#/list",      isRoute: true },
     { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖️",  hash: "#/compare",   isRoute: true },
     { id: "switching", label: i18n.t("btn_switching"), icon: "🔄",  hash: "#/switching", isRoute: true },
+    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "🩺",  hash: "#/ajuste",    isRoute: true },
     { id: "combo",     label: i18n.t("btn_combo"), icon: "🚀",  hash: "#/combo",     isRoute: true },
     { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "#/interact",  isRoute: true },
     { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "🎮",  hash: "#/quiz",      isRoute: true },
