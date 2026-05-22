@@ -174,7 +174,23 @@
         "quiz_question_qt": "¿Cuál es el riesgo de prolongación del QT?",
         "quiz_clinical_scenario_p": "Un paciente necesita tratamiento para:",
         "quiz_clinical_scenario_q": "¿Qué antidepresivo sería ideal?",
-        "btn_guias": "GUÍAS"
+        "btn_guias": "GUÍAS",
+        "btn_settings": "CONFIG",
+        "settings_title": "Configuración",
+        "settings_language": "Idioma",
+        "settings_theme": "Tema visual",
+        "settings_theme_light": "Claro",
+        "settings_theme_dark": "Oscuro",
+        "settings_font_size": "Tamaño de texto",
+        "settings_font_normal": "Normal",
+        "settings_font_large": "Grande",
+        "settings_font_xl": "Muy grande",
+        "settings_animations": "Animaciones",
+        "settings_compact": "Modo compacto",
+        "settings_reset": "Restablecer valores predeterminados",
+        "settings_on": "Activado",
+        "settings_off": "Desactivado",
+        "settings_saved": "Configuración guardada"
     },
     "en": {
         "app_title": "Antidepressants 2026",
@@ -351,6 +367,22 @@
         "quiz_question_qt": "What is the risk of QT prolongation?",
         "quiz_clinical_scenario_p": "A patient needs treatment for:",
         "quiz_clinical_scenario_q": "Which antidepressant would be ideal?",
-        "btn_guias": "GUIDELINES"
+        "btn_guias": "GUIDELINES",
+        "btn_settings": "SETTINGS",
+        "settings_title": "Settings",
+        "settings_language": "Language",
+        "settings_theme": "Visual theme",
+        "settings_theme_light": "Light",
+        "settings_theme_dark": "Dark",
+        "settings_font_size": "Text size",
+        "settings_font_normal": "Normal",
+        "settings_font_large": "Large",
+        "settings_font_xl": "Extra large",
+        "settings_animations": "Animations",
+        "settings_compact": "Compact mode",
+        "settings_reset": "Reset to defaults",
+        "settings_on": "On",
+        "settings_off": "Off",
+        "settings_saved": "Settings saved"
     }
 }
