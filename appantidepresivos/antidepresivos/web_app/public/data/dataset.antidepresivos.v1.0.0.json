@@ -4954,6 +4954,46 @@
             "farmaco_id": "ADP_TCA_06",
             "indicacion_id": "IND_085",
             "fuente": "Off-label"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "indicacion_id": "IND_013",
+            "fuente": "EMA"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "indicacion_id": "IND_043",
+            "fuente": "EMA"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "indicacion_id": "IND_023",
+            "fuente": "FDA"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "indicacion_id": "IND_013",
+            "fuente": "EMA"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "indicacion_id": "IND_023",
+            "fuente": "FDA"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "indicacion_id": "IND_018",
+            "fuente": "Off-label"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "indicacion_id": "IND_013",
+            "fuente": "EMA"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "indicacion_id": "IND_023",
+            "fuente": "FDA"
         }
     ],
     "efectos_adversos": [
@@ -6926,6 +6966,136 @@
             "farmaco_id": "ADP_TCA_06",
             "efecto_id": "EA_062",
             "frecuencia": "raro grave"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "efecto_id": "EA_026",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "efecto_id": "EA_001",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "efecto_id": "EA_002",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "efecto_id": "EA_078",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "efecto_id": "EA_063",
+            "frecuencia": "frecuente"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "efecto_id": "EA_034",
+            "frecuencia": "poco frecuente"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "efecto_id": "EA_068",
+            "frecuencia": "raro grave"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_078",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_048",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_042",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_065",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_052",
+            "frecuencia": "frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_092",
+            "frecuencia": "frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_075",
+            "frecuencia": "frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_027",
+            "frecuencia": "poco frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_039",
+            "frecuencia": "raro grave"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_055",
+            "frecuencia": "raro grave"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "efecto_id": "EA_062",
+            "frecuencia": "raro grave"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "efecto_id": "EA_078",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "efecto_id": "EA_042",
+            "frecuencia": "muy frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "efecto_id": "EA_092",
+            "frecuencia": "frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "efecto_id": "EA_075",
+            "frecuencia": "frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "efecto_id": "EA_001",
+            "frecuencia": "frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "efecto_id": "EA_027",
+            "frecuencia": "poco frecuente"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "efecto_id": "EA_050",
+            "frecuencia": "raro grave"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "efecto_id": "EA_039",
+            "frecuencia": "raro grave"
         }
     ],
     "interacciones": [
@@ -7530,6 +7700,22 @@
         {
             "farmaco_id": "ADP_TCA_06",
             "interaccion_id": "INT_008"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "interaccion_id": "INT_017"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "interaccion_id": "INT_016"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "interaccion_id": "INT_006"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "interaccion_id": "INT_006"
         }
     ],
     "enzimas": [
@@ -8073,6 +8259,31 @@
             "farmaco_id": "ADP_TCA_06",
             "enzima_id": "CYP_023",
             "rol": "inhibidor"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "enzima_id": "CYP_012",
+            "rol": "sustrato"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "enzima_id": "CYP_005",
+            "rol": "sustrato"
+        },
+        {
+            "farmaco_id": "ADP_MAOI_05",
+            "enzima_id": "CYP_025",
+            "rol": "inhibidor"
+        },
+        {
+            "farmaco_id": "ADP_TCA_09",
+            "enzima_id": "CYP_005",
+            "rol": "sustrato"
+        },
+        {
+            "farmaco_id": "ADP_TCA_10",
+            "enzima_id": "CYP_005",
+            "rol": "sustrato"
         }
     ],
     "catalogs": {
