@@ -17,6 +17,7 @@ import { initRibbons } from "./ribbons.js";
 import { escapeHtml } from "./core/utils.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
 import { i18n } from "./core/i18n.js";
+import { mountSettingsPanel, applySettingToDOM } from "./ui/settingsPanel.js";
 
 /* ============================================================
    Event Tracking (Analytics)
@@ -71,6 +72,13 @@ async function main() {
         const d = document.getElementById("debug-error");
         if (d) d.textContent += "[OK] Shell Mounted\n";
 
+        // Apply persisted UI settings on first mount
+        const uiState = store.getState().ui;
+        applySettingToDOM("theme",      uiState.theme      ?? "light");
+        applySettingToDOM("fontSize",   uiState.fontSize   ?? "normal");
+        applySettingToDOM("animations", uiState.animations !== false);
+        applySettingToDOM("compact",    uiState.compact    ?? false);
+
         const router = createRouter(store);
         router.start();
 
@@ -102,8 +110,14 @@ async function main() {
           analytics.track('page_view', { route: next.name });
         });
 
-        // Re-render completo al cambiar el idioma
+        // Re-render completo al cambiar el idioma; aplicar ajustes de UI al DOM
         store.subscribe("state:path:ui", async ({ prev, next }) => {
+          // Apply non-locale settings immediately to DOM
+          if (prev.theme      !== next.theme)      applySettingToDOM("theme",      next.theme);
+          if (prev.fontSize   !== next.fontSize)   applySettingToDOM("fontSize",   next.fontSize);
+          if (prev.animations !== next.animations) applySettingToDOM("animations", next.animations);
+          if (prev.compact    !== next.compact)     applySettingToDOM("compact",    next.compact);
+
           if (prev.locale !== next.locale) {
             root.innerHTML = `<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>${i18n.t('loading')}</p></div>`;
             const newCtx = await loadAppData(next.locale);
@@ -147,37 +161,20 @@ async function main() {
 }
 
 function attachGlobalListeners() {
-  // Theme Toggle Logic
+  // Theme Toggle Logic (header button)
   const btnTheme = document.getElementById("btnThemeToggle");
   if (btnTheme) {
     btnTheme.addEventListener("click", () => {
-      const current = store.getState().ui.theme || 'light';
-      const next = current === 'light' ? 'dark' : 'light';
+      const current = store.getState().ui.theme || "light";
+      const next = current === "light" ? "dark" : "light";
       store.updatePath("ui.theme", next);
-
-      // Apply theme immediately for visual snappiness
-      document.documentElement.setAttribute('data-theme', next);
-      const metaTheme = document.getElementById("meta-theme-color");
-      if (metaTheme) {
-        metaTheme.setAttribute('content', next === 'dark' ? '#020617' : '#f8fafc');
-      }
+      applySettingToDOM("theme", next);
     });
   }
 
-  // Locale Toggle Logic
-  const btnLocale = document.getElementById("btnLocaleToggle");
-  if (btnLocale) {
-    btnLocale.addEventListener("click", () => {
-      const current = store.getState().ui.locale || 'es';
-      const next = current === 'es' ? 'en' : 'es';
-      store.updatePath("ui.locale", next);
-    });
-  }
-
-  // Sync button icons on state change
+  // Sync theme button icon on state change
   store.subscribe("state:path:ui", ({ next }) => {
-    if (btnTheme) btnTheme.innerHTML = next.theme === 'dark' ? '☀️' : '🌙';
-    if (btnLocale) btnLocale.innerHTML = next.locale === 'es' ? 'ES' : 'EN';
+    if (btnTheme) btnTheme.innerHTML = next.theme === "dark" ? "☀️" : "🌙";
   });
 
   // Listener para el botón de comparar en el header (si existe en mountShell)
@@ -1003,8 +1000,9 @@ function mountDock(container) {
     { id: "guias",     label: i18n.t("btn_guias"), icon: "📖",  hash: "#/guias",     isRoute: true },
   ];
   const actionItems = [
-    { id: "legal", label: "Legal",    icon: "📜", hash: "#", isRoute: false, action: "legal" },
-    { id: "info",  label: "Créditos", icon: "💡", hash: "#", isRoute: false, action: "info"  },
+    { id: "legal",    label: "Legal",             icon: "📜", hash: "#", isRoute: false, action: "legal"    },
+    { id: "info",     label: "Créditos",          icon: "💡", hash: "#", isRoute: false, action: "info"     },
+    { id: "settings", label: i18n.t("btn_settings"), icon: "⚙️", hash: "#", isRoute: false, action: "settings" },
   ];
 
   let navBar = document.getElementById("floating-dock");
@@ -1022,6 +1020,7 @@ function mountDock(container) {
       const action = btn.dataset.action;
       if (action === "info") mountInfoModal();
       else if (action === "legal") mountLegalModal();
+      else if (action === "settings") mountSettingsPanel();
     });
 
     document.body.appendChild(navBar);

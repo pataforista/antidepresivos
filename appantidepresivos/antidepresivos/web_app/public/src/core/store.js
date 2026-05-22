@@ -330,7 +330,10 @@ export const store = createStore(
       theme: "light",
       locale: "es",
       disclaimerAccepted: false,
-      toasts: []
+      toasts: [],
+      fontSize: "normal",
+      animations: true,
+      compact: false
     },
     filters: {
       q: "",

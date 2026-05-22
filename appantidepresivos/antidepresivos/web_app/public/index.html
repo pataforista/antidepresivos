@@ -71,12 +71,22 @@
   <meta name="theme-color" content="#f8fafc" id="meta-theme-color" />
 
   <script>
-    // Theme Bootstrap: Set theme immediately to avoid FOUC
+    // Bootstrap UI settings immediately to avoid FOUC
     try {
       const persisted = JSON.parse(localStorage.getItem('pwa_antidep_2026::v0'));
-      const theme = persisted?.state?.ui?.theme || 'light';
+      const ui = persisted?.state?.ui ?? {};
+
+      const theme = ui.theme || 'light';
       document.documentElement.setAttribute('data-theme', theme);
       if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#020617');
+
+      const fontSizeMap = { normal: '1rem', large: '1.125rem', xl: '1.25rem' };
+      const fontSize = ui.fontSize || 'normal';
+      document.documentElement.style.setProperty('--font-size-base', fontSizeMap[fontSize] || '1rem');
+      document.documentElement.setAttribute('data-font-size', fontSize);
+
+      if (ui.animations === false) document.documentElement.setAttribute('data-reduced-motion', 'true');
+      if (ui.compact === true) document.documentElement.setAttribute('data-compact', 'true');
     } catch (e) { }
   </script>
 </head>
