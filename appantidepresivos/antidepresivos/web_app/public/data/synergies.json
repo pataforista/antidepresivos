@@ -42,6 +42,7 @@
     "id": "ssri_trazodone",
     "name": "ISRS + Trazodona 🌙",
     "drugs": ["Fluoxetina", "Trazodona", "Sertralina", "Escitalopram", "Paroxetina", "Citalopram"],
+    "require": ["Trazodona"],
     "drug_classes": ["isrs", "sari"],
     "type": "adjunct",
     "description": "Estrategia común para tratar el insomnio secundario asociado al inicio de ISRS o depresión.",
@@ -69,7 +70,7 @@
     "clinical_benefits": [],
     "warnings": [
       "SÍNTOMAS CRÍTICOS: Hipertermia, clonus, temblor, agitación, diaforesis, rigidez.",
-      "Requiere periodo de lavado estricto (washout) de 14 días al cambiar de IMAO a otros. (5 semanas de lavado as ser Fluoxetina)."
+      "Requiere periodo de lavado estricto (washout) de 14 días al cambiar de IMAO a otros antidepresivos (5 semanas en el caso de la Fluoxetina, por la vida media prolongada de su metabolito norfluoxetina)."
     ],
     "sources": ["Stahl, S. M. (2013). Stahl's Essential Psychopharmacology."]
   }

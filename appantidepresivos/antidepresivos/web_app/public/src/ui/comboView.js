@@ -88,8 +88,27 @@ function renderResult(id1, id2, view, synergies, dataset) {
 
     if (!drug1 || !drug2) return;
 
-    // Logic to find synergy
-    const found = findSynergy(drug1, drug2, synergies);
+    if (String(id1) === String(id2)) {
+        container.innerHTML = `
+            <div class="animate-fade-in card" style="text-align:center; padding: 32px; background: var(--color-surface-raised); border-radius: var(--radius-2xl);">
+                <div style="font-size: 2rem; margin-bottom: 12px;">↩️</div>
+                <p class="text-sm" style="max-width: 400px; margin: 0 auto; color: var(--color-text-muted);">
+                    ${i18n.getLocale() === 'en' ? 'Select two different drugs to evaluate a combination.' : 'Selecciona dos fármacos distintos para evaluar una combinación.'}
+                </p>
+            </div>`;
+        return;
+    }
+
+    // Comprobación de seguridad IMAO: detecta de forma robusta (insensible a acentos)
+    // las combinaciones contraindicadas IMAO + serotoninérgico (ISRS/IRSN/tricíclicos),
+    // que la búsqueda por clases no captaba por desajustes de acento/abreviatura.
+    const maoiDanger =
+        (isMAOIDrug(drug1) && isSerotonergicDrug(drug2)) ||
+        (isMAOIDrug(drug2) && isSerotonergicDrug(drug1)) ||
+        (isMAOIDrug(drug1) && isMAOIDrug(drug2));
+    const dangerEntry = synergies.find(s => s.type === "danger");
+
+    const found = (maoiDanger && dangerEntry) ? dangerEntry : findSynergy(drug1, drug2, synergies);
 
     if (found) {
         container.innerHTML = `
@@ -148,21 +167,55 @@ function renderResult(id1, id2, view, synergies, dataset) {
     }
 }
 
+/* ── Detección de clase insensible a acentos/abreviaturas ─────────── */
+function norm(s) {
+    return String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function isMAOIDrug(d) {
+    const s = norm(d.clase_terapeutica) + " " + norm(d.mecanismo_principal);
+    return /\bimao\b|maoi|\brima\b|monoaminooxidasa|monoamine oxidase|\bmao-?[ab]\b/.test(s);
+}
+
+function isSerotonergicDrug(d) {
+    const s = norm(d.clase_terapeutica) + " " + norm(d.mecanismo_principal) + " " + norm(d.nombre_generico);
+    return /isrs|ssri|irsn|snri|dual|triciclico|tricyclic|\bsari\b|vortioxetina|vilazodona|trazodona|clomipramina|imipramina/.test(s);
+}
+
 function findSynergy(d1, d2, synergies) {
     const n1 = d1.nombre_generico.toLowerCase();
     const n2 = d2.nombre_generico.toLowerCase();
     const c1 = d1.clase_terapeutica?.toLowerCase() || "";
     const c2 = d2.clase_terapeutica?.toLowerCase() || "";
 
-    // 1. Search by exact drug names
-    const exact = synergies.find(s => 
-        (s.drugs.some(d => n1.includes(d.toLowerCase())) && s.drugs.some(d => n2.includes(d.toLowerCase())))
-    );
+    // 1. Coincidencia por nombres de fármaco. Admite un campo opcional `require`
+    //    (todos sus nombres deben estar presentes) para combinaciones del tipo
+    //    "cualquier ISRS + Trazodona" y evitar falsos positivos (p. ej. ISRS+ISRS).
+    const exact = synergies.find(s => {
+        if (!Array.isArray(s.drugs) || s.drugs.length < 2) return false;
+        const hit1 = s.drugs.some(d => n1.includes(d.toLowerCase()));
+        const hit2 = s.drugs.some(d => n2.includes(d.toLowerCase()));
+        if (!hit1 || !hit2) return false;
+        if (Array.isArray(s.require) &&
+            !s.require.every(r => n1.includes(r.toLowerCase()) || n2.includes(r.toLowerCase()))) {
+            return false;
+        }
+        return true;
+    });
     if (exact) return exact;
 
-    // 2. Search by classes (generic matches)
-    const classMatch = synergies.find(s => 
-        (s.drug_classes.some(c => c1.includes(c.toLowerCase())) && s.drug_classes.some(c => c2.includes(c.toLowerCase())))
-    );
+    // 2. Coincidencia por clases. Exige DOS clases distintas (una por fármaco) para no
+    //    marcar como sinergia una pareja de la misma clase (p. ej. ISRS + ISRS).
+    //    La alerta IMAO se gestiona aparte en renderResult.
+    const classMatch = synergies.find(s => {
+        if (s.type === "danger" || !Array.isArray(s.drug_classes)) return false;
+        const cls = s.drug_classes.map(c => c.toLowerCase());
+        for (let i = 0; i < cls.length; i++) {
+            for (let j = 0; j < cls.length; j++) {
+                if (i !== j && c1.includes(cls[i]) && c2.includes(cls[j])) return true;
+            }
+        }
+        return false;
+    });
     return classMatch;
 }
