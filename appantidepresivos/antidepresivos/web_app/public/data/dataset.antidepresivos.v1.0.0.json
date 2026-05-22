@@ -1319,7 +1319,7 @@
             "nombre_quimico_iupac": "1-bencil-2-(5-metil-3-isoxazolilcarbonil)hidrazina",
             "clase_terapeutica": "IMAO irreversible no selectivo",
             "mecanismo_principal": "Inhibición irreversible MAO-A y MAO-B",
-            "codigo_atc": "N06AF02",
+            "codigo_atc": "N06AF01",
             "grupo_quimico": "Hidrazida/isoxazolil",
             "biodisponibilidad_oral": "N/D",
             "t_max": "1–2 h",
@@ -1384,7 +1384,7 @@
             "riesgo_prolongacion_qt_ord": 1,
             "riesgo_sindrome_abstinencia_ord": 0,
             "perfil_activacion_ord": 1,
-            "_search": "isocarboxazida adp_maoi_03 imao irreversible no selectivo inhibicion irreversible mao-a y mao-b n06af02 depresion refractaria tras fallo de multiples lineas depresion refractaria",
+            "_search": "isocarboxazida adp_maoi_03 imao irreversible no selectivo inhibicion irreversible mao-a y mao-b n06af01 depresion refractaria tras fallo de multiples lineas depresion refractaria",
             "perlas_clinicas": "IMAO irreversible no selectivo de acción prolongada. Perfil similar a fenelzina/tranilcipromina con riesgo de crisis hipertensiva (efecto queso). Reservado para depresión refractaria debido a restricciones dietéticas y de interacciones.",
             "evidence": {
                 "perlas_clinicas": [
@@ -1480,6 +1480,89 @@
                         "source": "The Maudsley Prescribing Guidelines in Psychiatry",
                         "section": "MAOIs",
                         "quote": "Selective inhibitors of MAO-B (i.e. selegiline) have not been reported to produce hypertensive-crisis associated with ingestion of dietary amines"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_MAOI_05",
+            "nombre_generico": "Moclobemida",
+            "nombre_quimico_iupac": "4-cloro-N-(2-morfolin-4-iletil)benzamida",
+            "clase_terapeutica": "IMAO reversible (RIMA)",
+            "mecanismo_principal": "Inhibición reversible de la MAO-A (RIMA)",
+            "codigo_atc": "N06AG02",
+            "grupo_quimico": "Benzamida",
+            "biodisponibilidad_oral": "80",
+            "t_max": "1 h",
+            "vida_media_parental": "2 h",
+            "vida_media_metabolitos": "No",
+            "union_proteinas_plasmaticas": "50",
+            "volumen_distribucion": ">1 L/kg",
+            "excrecion_renal": "95",
+            "excrecion_fecal": "1",
+            "linealidad_farmacocinetica": "No lineal",
+            "sustrato_enzimatico_principal": "CYP2C19; CYP2D6",
+            "inhibicion_enzimatica_relevante": "CYP2C19: inhibidor moderado",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "No",
+            "polimorfismos_relevantes": "Variabilidad CYP2C19",
+            "ajuste_insuficiencia_hepatica": "Reducir dosis 50–66%",
+            "ajuste_insuficiencia_renal": "No requiere ajuste",
+            "dosis_inicio_adulto": "300 mg/día",
+            "rango_terapeutico_adulto": "300–600 mg/día",
+            "dosis_maxima_autorizada": "600 mg/día",
+            "frecuencia_administracion": "Dos tomas divididas tras las comidas",
+            "tiempo_estado_estacionario": "2 días",
+            "titulacion_paso": "Incrementos de 150 mg cada ≥3 días",
+            "efectos_muy_frecuentes": "Alteración del sueño; mareo; náusea; xerostomía",
+            "efectos_frecuentes": "Agitación; irritabilidad",
+            "efectos_poco_frecuentes": "Edema",
+            "efectos_raros_graves": "Síndrome serotoninérgico (en combinación)",
+            "perfil_impacto_peso": "Neutro",
+            "perfil_disfuncion_sexual": "Bajo",
+            "nivel_sedacion": "0",
+            "perfil_activacion": "Neutro",
+            "fecha_aprobacion_fda": "Nunca_aprobado",
+            "indicaciones_aprobadas_fda": "Nunca aprobado FDA",
+            "estado_comercial_fda": "N/D",
+            "black_box_warning": false,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Trastorno depresivo mayor; Trastorno de ansiedad social",
+            "restricciones_ue": "Tomar tras las comidas; en general no requiere dieta estricta baja en tiramina a dosis habituales",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "EMA: individualizar",
+            "indicaciones_off_label": "No aplica",
+            "utilidad_sintomatica_clave": "Fobia social; depresión donde la función sexual es prioritaria",
+            "riesgo_sindrome_abstinencia": "Bajo",
+            "riesgo_prolongacion_qt": "Bajo",
+            "interacciones_contraindicadas": "Citalopram; Clomipramina; ISRS/IRSN (riesgo de síndrome serotoninérgico); Simpaticomiméticos",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 1,
+                    "perfil_disfuncion_sexual_ord": 0,
+                    "riesgo_prolongacion_qt_ord": 0,
+                    "riesgo_sindrome_abstinencia_ord": 0,
+                    "perfil_activacion_ord": 1
+                },
+                "flags": {
+                    "black_box_warning": false,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 1,
+            "perfil_disfuncion_sexual_ord": 0,
+            "riesgo_prolongacion_qt_ord": 0,
+            "riesgo_sindrome_abstinencia_ord": 0,
+            "perfil_activacion_ord": 1,
+            "_search": "moclobemida adp_maoi_05 imao reversible (rima) inhibicion reversible de la mao-a (rima) n06ag02 fobia social; depresion donde la funcion sexual es prioritaria no aplica",
+            "perlas_clinicas": "Inhibidor reversible de la MAO-A (RIMA). En general no requiere dieta estricta baja en tiramina salvo a dosis muy altas (>900 mg). Riesgo muy bajo de disfunción sexual. No aprobado por la FDA. Respetar el intervalo de lavado con agentes serotoninérgicos para evitar el síndrome serotoninérgico.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "The Maudsley Prescribing Guidelines (15th Ed)",
+                        "section": "IMAO",
+                        "quote": "Moclobemide has much lower dietary restriction requirements than irreversible MAOIs"
                     }
                 ]
             }
@@ -3011,6 +3094,172 @@
                         "source": "Psychiatry - Clinical Gate",
                         "section": "Tricyclic Antidepressants",
                         "quote": "Amoxapine is a metabolite of loxapine... potent D2 receptor blocking properties... associated with neuroleptic side effects"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_TCA_09",
+            "nombre_generico": "Dosulepina",
+            "nombre_quimico_iupac": "(3E)-3-(dibenzo[b,e]tiepin-11(6H)-iliden)-N,N-dimetilpropan-1-amina",
+            "clase_terapeutica": "Antidepresivo tricíclico (TCA)",
+            "mecanismo_principal": "Inhibición de SERT y NET; antihistamínico/anticolinérgico",
+            "codigo_atc": "N06AA16",
+            "grupo_quimico": "Dibenzotiepina",
+            "biodisponibilidad_oral": "30",
+            "t_max": "3 h",
+            "vida_media_parental": "20 h",
+            "vida_media_metabolitos": "No",
+            "union_proteinas_plasmaticas": "95",
+            "volumen_distribucion": ">15 L/kg",
+            "excrecion_renal": "70",
+            "excrecion_fecal": "30",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP2D6",
+            "inhibicion_enzimatica_relevante": "Ninguna relevante",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "No",
+            "polimorfismos_relevantes": "Variabilidad CYP2D6",
+            "ajuste_insuficiencia_hepatica": "Reducir; precaución",
+            "ajuste_insuficiencia_renal": "No requiere ajuste",
+            "dosis_inicio_adulto": "75 mg/día (nocturna)",
+            "rango_terapeutico_adulto": "75–150 mg/día",
+            "dosis_maxima_autorizada": "225 mg/día",
+            "frecuencia_administracion": "1 vez al día (nocturna)",
+            "tiempo_estado_estacionario": "7 días",
+            "titulacion_paso": "Incrementos de 25 mg cada ≥7 días",
+            "efectos_muy_frecuentes": "Xerostomía; somnolencia; estreñimiento; aumento de peso",
+            "efectos_frecuentes": "Hipotensión ortostática; visión borrosa; sudoración",
+            "efectos_poco_frecuentes": "Temblor",
+            "efectos_raros_graves": "Arritmias; convulsiones; muerte súbita cardíaca",
+            "perfil_impacto_peso": "Aumento",
+            "perfil_disfuncion_sexual": "Moderado",
+            "nivel_sedacion": "3",
+            "perfil_activacion": "Bajo",
+            "fecha_aprobacion_fda": "Nunca_aprobado",
+            "indicaciones_aprobadas_fda": "Nunca aprobado FDA",
+            "estado_comercial_fda": "N/D",
+            "black_box_warning": false,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Trastorno depresivo mayor",
+            "restricciones_ue": "Sí / Retirado en algunos mercados por toxicidad en sobredosis",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "EMA: individualizar",
+            "indicaciones_off_label": "Insomnio",
+            "utilidad_sintomatica_clave": "Depresión con insomnio severo",
+            "riesgo_sindrome_abstinencia": "Alto",
+            "riesgo_prolongacion_qt": "Alto",
+            "interacciones_contraindicadas": "IMAO; fase de recuperación del infarto de miocardio",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 2,
+                    "perfil_disfuncion_sexual_ord": 1,
+                    "riesgo_prolongacion_qt_ord": 2,
+                    "riesgo_sindrome_abstinencia_ord": 2,
+                    "perfil_activacion_ord": 0
+                },
+                "flags": {
+                    "black_box_warning": false,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 2,
+            "perfil_disfuncion_sexual_ord": 1,
+            "riesgo_prolongacion_qt_ord": 2,
+            "riesgo_sindrome_abstinencia_ord": 2,
+            "perfil_activacion_ord": 0,
+            "_search": "dosulepina adp_tca_09 antidepresivo triciclico (tca) inhibicion de sert y net; antihistaminico/anticolinergico n06aa16 depresion con insomnio severo insomnio",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA de amina terciaria similar a la amitriptilina pero con cardiotoxicidad aún mayor en sobredosis. Su uso ha disminuido o se ha restringido en muchos países (p. ej. Reino Unido). Evitar en pacientes con alto riesgo de suicidio.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "The Maudsley Prescribing Guidelines (15th Ed)",
+                        "section": "Elección de antidepresivo",
+                        "quote": "Due to its toxicity in overdose, dosulepin is no longer recommended for routine use"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_TCA_10",
+            "nombre_generico": "Lofepramina",
+            "nombre_quimico_iupac": "1-(4-clorofenil)-2-[3-(10,11-dihidro-5H-dibenzo[b,f]azepin-5-il)propil(metil)amino]etanona",
+            "clase_terapeutica": "Antidepresivo tricíclico (TCA)",
+            "mecanismo_principal": "Inhibición potente de NET; inhibición leve de SERT",
+            "codigo_atc": "N06AA07",
+            "grupo_quimico": "Dibenzazepina",
+            "biodisponibilidad_oral": "30",
+            "t_max": "3 h",
+            "vida_media_parental": "5 h",
+            "vida_media_metabolitos": "Desipramina (activo): 20 h",
+            "union_proteinas_plasmaticas": "95",
+            "volumen_distribucion": ">15 L/kg",
+            "excrecion_renal": "70",
+            "excrecion_fecal": "30",
+            "linealidad_farmacocinetica": "Lineal",
+            "sustrato_enzimatico_principal": "CYP2D6",
+            "inhibicion_enzimatica_relevante": "Ninguna relevante",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "Desipramina",
+            "polimorfismos_relevantes": "Variabilidad CYP2D6",
+            "ajuste_insuficiencia_hepatica": "Contraindicado en enfermedad hepática grave",
+            "ajuste_insuficiencia_renal": "No requiere ajuste",
+            "dosis_inicio_adulto": "70 mg dos veces al día",
+            "rango_terapeutico_adulto": "140–210 mg/día",
+            "dosis_maxima_autorizada": "210 mg/día",
+            "frecuencia_administracion": "Dosis divididas",
+            "tiempo_estado_estacionario": "5 días",
+            "titulacion_paso": "Incrementos de 70 mg cada 3–7 días",
+            "efectos_muy_frecuentes": "Xerostomía; estreñimiento",
+            "efectos_frecuentes": "Visión borrosa; sudoración; mareo",
+            "efectos_poco_frecuentes": "Temblor",
+            "efectos_raros_graves": "Hepatotoxicidad; arritmias (menor riesgo que otros TCA)",
+            "perfil_impacto_peso": "Aumento moderado",
+            "perfil_disfuncion_sexual": "Moderado",
+            "nivel_sedacion": "1",
+            "perfil_activacion": "Neutro",
+            "fecha_aprobacion_fda": "Nunca_aprobado",
+            "indicaciones_aprobadas_fda": "Nunca aprobado FDA",
+            "estado_comercial_fda": "N/D",
+            "black_box_warning": false,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Trastorno depresivo mayor",
+            "restricciones_ue": "Sí",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "EMA: individualizar",
+            "indicaciones_off_label": "No aplica",
+            "utilidad_sintomatica_clave": "TCA con menor perfil de cardiotoxicidad",
+            "riesgo_sindrome_abstinencia": "Alto",
+            "riesgo_prolongacion_qt": "Moderado",
+            "interacciones_contraindicadas": "IMAO; enfermedad hepática",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 1,
+                    "perfil_disfuncion_sexual_ord": 1,
+                    "riesgo_prolongacion_qt_ord": 1,
+                    "riesgo_sindrome_abstinencia_ord": 2,
+                    "perfil_activacion_ord": 1
+                },
+                "flags": {
+                    "black_box_warning": false,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 1,
+            "perfil_disfuncion_sexual_ord": 1,
+            "riesgo_prolongacion_qt_ord": 1,
+            "riesgo_sindrome_abstinencia_ord": 2,
+            "perfil_activacion_ord": 1,
+            "_search": "lofepramina adp_tca_10 antidepresivo triciclico (tca) inhibicion potente de net; inhibicion leve de sert n06aa07 tca con menor perfil de cardiotoxicidad no aplica",
+            "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA muy lipófilo que se comporta como profármaco de la desipramina. Es notablemente menos cardiotóxico que la amitriptilina o la imipramina. Sin embargo, se asocia de forma característica con riesgo de hepatotoxicidad.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "The Maudsley Prescribing Guidelines (15th Ed)",
+                        "section": "Elección de antidepresivo",
+                        "quote": "Lofepramine is the least cardiotoxic of the older tricyclic antidepressants"
                     }
                 ]
             }

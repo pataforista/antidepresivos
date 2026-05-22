@@ -1704,7 +1704,7 @@
             }
         },
         {
-            "id_farmaco": "ADP_TCA_01",
+            "id_farmaco": "ADP_TCA_02",
             "nombre_generico": "Amitriptyline",
             "nombre_quimico_iupac": "3-(10,11-dihydro-5H-dibenzo[a,d]cyclohepten-5-ylidene)-N,N-dimethylpropan-1-amine",
             "clase_terapeutica": "Antidepressant (TCA)",
@@ -1774,7 +1774,7 @@
             "riesgo_prolongacion_qt_ord": 2,
             "riesgo_sindrome_abstinencia_ord": 2,
             "perfil_activacion_ord": 0,
-            "_search": "amitriptyline adp_tca_01 antidepressant tca tricyclic SERT and NET inhibition N06AA09 melancholic depression; chronic neuropathic pain; insomnia",
+            "_search": "amitriptyline adp_tca_02 antidepressant tca tricyclic SERT and NET inhibition N06AA09 melancholic depression; chronic neuropathic pain; insomnia",
             "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nGold standard tertiary amine TCA for efficacy in severe/melancholic depression. Significant anticholinergic and antihistaminic burden. Widely used at low doses for chronic pain and migraine prophylaxis. Lethal in overdose (sodium channel blockade).",
             "evidence": {
                 "perlas_clinicas": [
@@ -1792,7 +1792,7 @@
             }
         },
         {
-            "id_farmaco": "ADP_TCA_02",
+            "id_farmaco": "ADP_TCA_06",
             "nombre_generico": "Clomipramine",
             "nombre_quimico_iupac": "3-(3-chloro-10,11-dihydro-5H-dibenzo[b,f]azepin-5-yl)-N,N-dimethylpropan-1-amine",
             "clase_terapeutica": "Antidepressant (TCA)",
@@ -1862,7 +1862,7 @@
             "riesgo_prolongacion_qt_ord": 2,
             "riesgo_sindrome_abstinencia_ord": 2,
             "perfil_activacion_ord": 0,
-            "_search": "clomipramine adp_tca_02 antidepressant tca tricyclic Potent SERT inhibition N06AA04 refractory ocd; severe depression",
+            "_search": "clomipramine adp_tca_06 antidepressant tca tricyclic Potent SERT inhibition N06AA04 refractory ocd; severe depression",
             "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nThe only TCA with potency for SERT inhibition comparable to SSRIs. Gold standard for refractory OCD. Higher risk of seizures (dose-dependent, >250mg) than other TCAs. Tertiary amine.",
             "evidence": {
                 "perlas_clinicas": [
@@ -1958,7 +1958,7 @@
             }
         },
         {
-            "id_farmaco": "ADP_TCA_04",
+            "id_farmaco": "ADP_TCA_01",
             "nombre_generico": "Imipramine",
             "nombre_quimico_iupac": "3-(10,11-dihydro-5H-dibenz[b,f]azepin-5-yl)-N,N-dimethylpropan-1-amine",
             "clase_terapeutica": "Antidepressant (TCA)",
@@ -2028,7 +2028,7 @@
             "riesgo_prolongacion_qt_ord": 2,
             "riesgo_sindrome_abstinencia_ord": 2,
             "perfil_activacion_ord": 0,
-            "_search": "imipramine adp_tca_04 antidepressant tca tricyclic Inhibition of SERT and NET N06AA02 refractory depression; childhood enuresis",
+            "_search": "imipramine adp_tca_01 antidepressant tca tricyclic Inhibition of SERT and NET N06AA02 refractory depression; childhood enuresis",
             "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nThe first antidepressant ever discovered (1950s). Tertiary amine. Historically the benchmark for comparing newer antidepressants. Frequent orthostatic hypotension.",
             "evidence": {
                 "perlas_clinicas": [
@@ -2041,7 +2041,7 @@
             }
         },
         {
-            "id_farmaco": "ADP_TCA_05",
+            "id_farmaco": "ADP_TCA_09",
             "nombre_generico": "Dosulepin",
             "nombre_quimico_iupac": "(3E)-3-(dibenzo[b,e]thiepin-11(6H)-ylidene)-N,N-dimethylpropan-1-amine",
             "clase_terapeutica": "Antidepressant (TCA)",
@@ -2111,7 +2111,7 @@
             "riesgo_prolongacion_qt_ord": 2,
             "riesgo_sindrome_abstinencia_ord": 2,
             "perfil_activacion_ord": 0,
-            "_search": "dosulepin adp_tca_05 antidepressant tca tricyclic Inhibition of SERT and NET N06AA16 depression with severe insomnia",
+            "_search": "dosulepin adp_tca_09 antidepressant tca tricyclic Inhibition of SERT and NET N06AA16 depression with severe insomnia",
             "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nTertiary amine TCA similar to amitriptyline but associated with even higher cardiotoxicity in overdose. Use has declined or been restricted in many countries (e.g. UK). Avoid in patients at high suicide risk.",
             "evidence": {
                 "perlas_clinicas": [
@@ -2124,7 +2124,7 @@
             }
         },
         {
-            "id_farmaco": "ADP_TCA_06",
+            "id_farmaco": "ADP_TCA_10",
             "nombre_generico": "Lofepramine",
             "nombre_quimico_iupac": "1-(4-chlorophenyl)-2-[3-(10,11-dihydro-5H-dibenz[b,f]azepin-5-yl)propyl(methyl)amino]ethanone",
             "clase_terapeutica": "Antidepressant (TCA)",
@@ -2194,7 +2194,7 @@
             "riesgo_prolongacion_qt_ord": 1,
             "riesgo_sindrome_abstinencia_ord": 2,
             "perfil_activacion_ord": 1,
-            "_search": "lofepramine adp_tca_06 antidepressant tca tricyclic Potent NET inhibition N06AA07 TCA with lower cardiotoxicity profile",
+            "_search": "lofepramine adp_tca_10 antidepressant tca tricyclic Potent NET inhibition N06AA07 TCA with lower cardiotoxicity profile",
             "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nA TCA that is highly lipophilic and behaves like a prodrug for desipramine. It is significantly less cardiotoxic than amitriptyline or imipramine. However, it is uniquely associated with hepatotoxicity risk.",
             "evidence": {
                 "perlas_clinicas": [
@@ -2378,7 +2378,7 @@
             }
         },
         {
-            "id_farmaco": "ADP_MAOI_03",
+            "id_farmaco": "ADP_MAOI_05",
             "nombre_generico": "Moclobemide",
             "nombre_quimico_iupac": "4-chloro-N-(2-morpholin-4-ylethyl)benzamide",
             "clase_terapeutica": "Antidepressant (RIMA)",
@@ -2448,7 +2448,7 @@
             "riesgo_prolongacion_qt_ord": 0,
             "riesgo_sindrome_abstinencia_ord": 1,
             "perfil_activacion_ord": 1,
-            "_search": "moclobemide adp_maoi_03 antidepressant rima reversible inhibition of mao-a N06AG02 social phobia; priority sexual function",
+            "_search": "moclobemide adp_maoi_05 antidepressant rima reversible inhibition of mao-a N06AG02 social phobia; priority sexual function",
             "perlas_clinicas": "Reversible inhibitor of MAO-A (RIMA). Does not typically require a strict low-tyramine diet unless doses are very high (>900mg). Very low risk of sexual dysfunction. Not FDA approved.",
             "evidence": {
                 "perlas_clinicas": [
@@ -2466,7 +2466,7 @@
             "nombre_quimico_iupac": "(R)-N-methyl-N-(1-phenylpropan-2-yl)prop-2-yn-1-amine",
             "clase_terapeutica": "Antidepressant (MAOI Patch)",
             "mecanismo_principal": "Irreversible MAO-A and MAO-B inhibition (Brain); spares intestinal MAO-A at 6mg",
-            "codigo_atc": "N06AF04",
+            "codigo_atc": "N04BD01",
             "grupo_quimico": "Phenethylamine",
             "biodisponibilidad_oral": "73 (Transdermal)",
             "t_max": "N/A (Steady state in 5 days)",
@@ -2544,7 +2544,7 @@
             }
         },
         {
-            "id_farmaco": "ADP_MAOI_05",
+            "id_farmaco": "ADP_MAOI_03",
             "nombre_generico": "Isocarboxazid",
             "nombre_quimico_iupac": "5-methyl-N-[(5-methyl-1,2-oxazol-3-yl)carbonyl]-1H-benzotriazole (analogue)",
             "clase_terapeutica": "Antidepressant (Irreversible MAOI)",
@@ -2614,7 +2614,7 @@
             "riesgo_prolongacion_qt_ord": 0,
             "riesgo_sindrome_abstinencia_ord": 2,
             "perfil_activacion_ord": 1,
-            "_search": "isocarboxazid adp_maoi_05 antidepressant irreversible maoi non-selective maO inhibition N06AF01 refractory depression",
+            "_search": "isocarboxazid adp_maoi_03 antidepressant irreversible maoi non-selective maO inhibition N06AF01 refractory depression",
             "perlas_clinicas": "One of the older irreversible non-selective MAOIs. Less frequently used today than tranylcypromine or phenelzine, but still a potent option for refractory depression. Requires strict tyramine-free diet.",
             "evidence": {
                 "perlas_clinicas": [
@@ -3047,6 +3047,182 @@
                         "source": "Psychiatry - Clinical Gate",
                         "section": "Tricyclic Antidepressants",
                         "quote": "Amoxapine is a metabolite of loxapine... potent D2 receptor blocking properties... associated with neuroleptic side effects"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_TCA_04",
+            "nombre_generico": "Desipramine",
+            "nombre_quimico_iupac": "3-(10,11-dihydro-5H-dibenzo[b,f]azepin-5-yl)-N-methylpropan-1-amine",
+            "clase_terapeutica": "Antidepressant (TCA)",
+            "mecanismo_principal": "Reuptake inhibition NET>>SERT; M1/H1/α1 antagonism (less sedation)",
+            "codigo_atc": "N06AA01",
+            "grupo_quimico": "Dibenzazepine (secondary amine)",
+            "biodisponibilidad_oral": "60",
+            "t_max": "1–4 h",
+            "vida_media_parental": "12–24 h",
+            "vida_media_metabolitos": "N/A",
+            "union_proteinas_plasmaticas": "91",
+            "volumen_distribucion": ">10 L/kg",
+            "excrecion_renal": "70",
+            "excrecion_fecal": "30",
+            "linealidad_farmacocinetica": "Functionally non-linear (CYP2D6 dependent)",
+            "sustrato_enzimatico_principal": "CYP2D6",
+            "inhibicion_enzimatica_relevante": "CYP2D6: weak inhibitor",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "N/A",
+            "polimorfismos_relevantes": "CYP2D6 (PM/UM: variability; arrhythmia/toxicity risk)",
+            "ajuste_insuficiencia_hepatica": "Reduce; titrate slowly",
+            "ajuste_insuficiencia_renal": "Caution in advanced CKD; titrate slowly",
+            "dosis_inicio_adulto": "25–50 mg/day",
+            "rango_terapeutico_adulto": "100–200 mg/day",
+            "dosis_maxima_autorizada": "300 mg/day",
+            "frecuencia_administracion": "Once daily or divided",
+            "tiempo_estado_estacionario": "5–7 days",
+            "titulacion_paso": "Increments of 25–50 mg every 3–7 days",
+            "efectos_muy_frecuentes": "Xerostomia; constipation; insomnia",
+            "efectos_frecuentes": "Dizziness; tachycardia; sweating",
+            "efectos_poco_frecuentes": "Urinary retention; tremor",
+            "efectos_raros_graves": "Arrhythmias; seizures; anticholinergic delirium; death in overdose",
+            "perfil_impacto_peso": "Neutral",
+            "perfil_disfuncion_sexual": "Moderate",
+            "nivel_sedacion": "1",
+            "perfil_activacion": "High",
+            "fecha_aprobacion_fda": "1964-01-01",
+            "indicaciones_aprobadas_fda": "Major depressive disorder",
+            "estado_comercial_fda": "Active",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Depression (country-dependent)",
+            "restricciones_ue": "High toxicity in overdose; monitor BP/HR",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: neonatal risk with late exposure; EMA: individualize; ACOG: individualize",
+            "indicaciones_off_label": "ADHD (select); neuropathic pain (select)",
+            "utilidad_sintomatica_clave": "Depression with retardation/fatigue (if activation tolerated)",
+            "riesgo_sindrome_abstinencia": "Moderate",
+            "riesgo_prolongacion_qt": "High",
+            "interacciones_contraindicadas": "MAOIs; linezolid; IV methylene blue",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 1,
+                    "perfil_disfuncion_sexual_ord": 1,
+                    "riesgo_prolongacion_qt_ord": 2,
+                    "riesgo_sindrome_abstinencia_ord": 1,
+                    "perfil_activacion_ord": 2
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 1,
+            "perfil_disfuncion_sexual_ord": 1,
+            "riesgo_prolongacion_qt_ord": 2,
+            "riesgo_sindrome_abstinencia_ord": 1,
+            "perfil_activacion_ord": 2,
+            "_search": "desipramine adp_tca_04 antidepressant (tca) reuptake inhibition net>>sert; m1/h1/α1 antagonism (less sedation) n06aa01 depression with retardation/fatigue (if activation tolerated) adhd (select); neuropathic pain (select)",
+            "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic effect, sedation, and orthostatic hypotension risk.\n\nSecondary amine (metabolite of imipramine). Potent selective norepinephrine reuptake inhibitor (NET). Lower anticholinergic burden than tertiary TCAs, but monitor cardiac risk.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Stahl's Essential Psychopharmacology (5th Ed)",
+                        "section": "Tricyclic Antidepressants",
+                        "quote": "Desipramine: NE >> 5-HT; low H1 and M1 affinity"
+                    },
+                    {
+                        "source": "Clinical Gate - Psychiatry",
+                        "section": "Tricyclic Antidepressants",
+                        "quote": "Desipramine is a metabolite of imipramine"
+                    }
+                ]
+            }
+        },
+        {
+            "id_farmaco": "ADP_TCA_05",
+            "nombre_generico": "Doxepin",
+            "nombre_quimico_iupac": "3-(dibenzo[b,e]oxepin-11(6H)-ylidene)-N,N-dimethylpropan-1-amine",
+            "clase_terapeutica": "Antidepressant (TCA)",
+            "mecanismo_principal": "Reuptake inhibition SERT/NET; H1/M1/α1 antagonism (highly sedating)",
+            "codigo_atc": "N06AA12",
+            "grupo_quimico": "Dibenzoxepine",
+            "biodisponibilidad_oral": "30",
+            "t_max": "2–4 h",
+            "vida_media_parental": "8–24 h",
+            "vida_media_metabolitos": "Nordoxepin 8–24 h",
+            "union_proteinas_plasmaticas": "80",
+            "volumen_distribucion": ">10 L/kg",
+            "excrecion_renal": "70",
+            "excrecion_fecal": "30",
+            "linealidad_farmacocinetica": "Functionally non-linear (CYP2D6 dependent)",
+            "sustrato_enzimatico_principal": "CYP2D6; CYP2C19",
+            "inhibicion_enzimatica_relevante": "CYP2C19: inhibitor; CYP2D6: inhibitor; CYP1A2: inhibitor; CYP3A4: inhibitor; CYP2C9: inhibitor",
+            "induccion_enzimatica": "No",
+            "metabolito_activo_nombre": "Nordoxepin",
+            "polimorfismos_relevantes": "CYP2D6; CYP2C19 (exposure variability)",
+            "ajuste_insuficiencia_hepatica": "Reduce; titrate slowly",
+            "ajuste_insuficiencia_renal": "Caution in advanced CKD; titrate slowly",
+            "dosis_inicio_adulto": "25–50 mg/day",
+            "rango_terapeutico_adulto": "75–150 mg/day",
+            "dosis_maxima_autorizada": "300 mg/day",
+            "frecuencia_administracion": "Once daily (at night) or divided",
+            "tiempo_estado_estacionario": "7–10 days",
+            "titulacion_paso": "Increments of 25 mg every 3–7 days",
+            "efectos_muy_frecuentes": "Somnolence; xerostomia; constipation",
+            "efectos_frecuentes": "Weight gain; dizziness; orthostatic hypotension",
+            "efectos_poco_frecuentes": "Urinary retention",
+            "efectos_raros_graves": "Arrhythmias; seizures; anticholinergic delirium; death in overdose",
+            "perfil_impacto_peso": "High Increase",
+            "perfil_disfuncion_sexual": "Moderate",
+            "nivel_sedacion": "3",
+            "perfil_activacion": "Low",
+            "fecha_aprobacion_fda": "1969-01-01",
+            "indicaciones_aprobadas_fda": "Major depressive disorder",
+            "estado_comercial_fda": "Active",
+            "black_box_warning": true,
+            "autorizado_ema": true,
+            "indicaciones_aprobadas_ema": "Depression/anxiety (country-dependent)",
+            "restricciones_ue": "High sedation; high toxicity in overdose",
+            "aprobado_uso_pediatrico": false,
+            "riesgo_embarazo_multifuente": "FDA: neonatal risk with late exposure; EMA: individualize; ACOG: individualize",
+            "indicaciones_off_label": "Insomnia (low doses); pruritus (select)",
+            "utilidad_sintomatica_clave": "Severe comorbid insomnia; anxious depression with insomnia",
+            "riesgo_sindrome_abstinencia": "Moderate",
+            "riesgo_prolongacion_qt": "High",
+            "interacciones_contraindicadas": "MAOIs; linezolid; IV methylene blue",
+            "_norm": {
+                "ord": {
+                    "perfil_impacto_peso_ord": 2,
+                    "perfil_disfuncion_sexual_ord": 1,
+                    "riesgo_prolongacion_qt_ord": 2,
+                    "riesgo_sindrome_abstinencia_ord": 1,
+                    "perfil_activacion_ord": 0
+                },
+                "flags": {
+                    "black_box_warning": true,
+                    "aprobado_uso_pediatrico": false,
+                    "autorizado_ema": true
+                }
+            },
+            "perfil_impacto_peso_ord": 2,
+            "perfil_disfuncion_sexual_ord": 1,
+            "riesgo_prolongacion_qt_ord": 2,
+            "riesgo_sindrome_abstinencia_ord": 1,
+            "perfil_activacion_ord": 0,
+            "_search": "doxepin adp_tca_05 antidepressant (tca) reuptake inhibition sert/net; h1/m1/α1 antagonism (highly sedating) n06aa12 severe comorbid insomnia; anxious depression with insomnia insomnia (low doses); pruritus (select)",
+            "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic effect, sedation, and orthostatic hypotension risk.\n\nTCA with extremely high H1 affinity, used at low doses for insomnia (Silenor) and topically for pruritus. Prominent sedative effect. Cardiac risk in overdose.",
+            "evidence": {
+                "perlas_clinicas": [
+                    {
+                        "source": "Antidepressant drugs | IUPHAR",
+                        "section": "Tricyclic",
+                        "quote": "Doxepin – used for depressive illness (especially where sedation is required) and pruritus of eczema (topical application)"
+                    },
+                    {
+                        "source": "Clinical References",
+                        "section": "Drug Brand Names",
+                        "quote": "Doxepin • Adapin, Silenor"
                     }
                 ]
             }
