@@ -8,6 +8,8 @@ const CORE_ASSETS = [
     './assets/icons/icon-192.png',
     './assets/icons/icon-512.png',
     './src/vendor/ogl.mjs',
+    // Arranque anti-FOUC
+    './src/theme-bootstrap.js',
     // Estilos
     './src/styles/reset.css',
     './src/styles/variables.css',

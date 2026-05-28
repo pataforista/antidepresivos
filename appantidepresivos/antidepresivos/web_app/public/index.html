@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; worker-src 'self' blob:;">
+    content="default-src 'self'; script-src 'self' blob: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://antidepresivos.drcelada.com; connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://buymeacoffee.com; worker-src 'self' blob:;">
   
   <!-- SEO Primario -->
   <title>Antidepresivos — Comparador Clínico de Psicofármacos | Dr. Celada</title>
@@ -75,10 +75,10 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Montserrat:wght@600;700;800;900&display=swap"
     rel="stylesheet">
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/zingtouch@1.0.6/dist/zingtouch.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/zingtouch@1.0.6/dist/zingtouch.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="./src/styles/reset.css" />
@@ -92,25 +92,8 @@
   <link rel="manifest" href="./manifest.webmanifest" />
   <meta name="theme-color" content="#F9F7F2" id="meta-theme-color" />
 
-  <script>
-    // Bootstrap UI settings immediately to avoid FOUC
-    try {
-      const persisted = JSON.parse(localStorage.getItem('pwa_antidep_2026::v0'));
-      const ui = persisted?.state?.ui ?? {};
-
-      const theme = ui.theme || 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-      if (theme === 'dark') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#020617');
-
-      const fontSizeMap = { normal: '1rem', large: '1.125rem', xl: '1.25rem' };
-      const fontSize = ui.fontSize || 'normal';
-      document.documentElement.style.setProperty('--font-size-base', fontSizeMap[fontSize] || '1rem');
-      document.documentElement.setAttribute('data-font-size', fontSize);
-
-      if (ui.animations === false) document.documentElement.setAttribute('data-reduced-motion', 'true');
-      if (ui.compact === true) document.documentElement.setAttribute('data-compact', 'true');
-    } catch (e) { }
-  </script>
+  <!-- Anti-FOUC: applies persisted theme/fontSize before first paint (synchronous, no defer) -->
+  <script src="./src/theme-bootstrap.js"></script>
 </head>
 
 <body>

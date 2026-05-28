@@ -341,10 +341,6 @@ function renderStart(view, allDrugs) {
     <div class="quiz-view animate-fade-in">
       <div class="quiz-scanlines" aria-hidden="true"></div>
       <div class="quiz-container">
-        <div class="quiz-mascot-wrap">
-          <div class="quiz-mascot">ʕ •ᴥ•ʔ</div>
-          <div class="quiz-stars-deco" aria-hidden="true">✦ ✧ ✦</div>
-        </div>
         <h1 class="quiz-title">${i18n.t("quiz_title").slice(0,6)}<span class="quiz-title-accent">${i18n.t("quiz_title").slice(6)}</span></h1>
         <p class="quiz-subtitle">${i18n.t("quiz_subtitle")}</p>
  
@@ -602,9 +598,7 @@ function renderResults(view) {
     <div class="quiz-view animate-fade-in">
       <div class="quiz-scanlines" aria-hidden="true"></div>
       <div class="quiz-container">
-        <div class="quiz-mascot-wrap">
-          <div class="quiz-mascot quiz-mascot--result">${emoji}</div>
-        </div>
+        <div class="quiz-result-emoji" aria-hidden="true">${emoji}</div>
         <h2 class="quiz-results-title">${i18n.t("quiz_results")}</h2>
         <div class="quiz-results-card">
           <div class="quiz-results-stars">${stars}</div>

@@ -37,6 +37,17 @@ export function mountInfoModal() {
           .modal-backdrop.active .modal-content {
             transform: translateY(0) scale(1);
           }
+          .bmac-modal-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #FFDD00; color: #111;
+            padding: 12px 24px; border-radius: 10px;
+            font-weight: 800; font-size: 0.9rem;
+            text-decoration: none; font-family: var(--font-headers);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(255,221,0,0.35);
+          }
+          .bmac-modal-link:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,221,0,0.5); }
+          .bmac-modal-link:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
         `;
       document.head.appendChild(s);
     }
@@ -126,9 +137,7 @@ export function mountInfoModal() {
           <a href="https://buymeacoffee.com/herramente"
              target="_blank"
              rel="noopener noreferrer"
-             style="display:inline-flex; align-items:center; gap:8px; background:#FFDD00; color:#111; padding:12px 24px; border-radius:10px; font-weight:800; font-size:0.9rem; text-decoration:none; font-family:var(--font-headers); transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow:0 4px 12px rgba(255,221,0,0.35); border:none; cursor:pointer;"
-             onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(255,221,0,0.5)';"
-             onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 12px rgba(255,221,0,0.35)';">
+             class="bmac-modal-link">
             ☕ Invitar un café
           </a>
         </div>
