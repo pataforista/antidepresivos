@@ -291,7 +291,7 @@ function mountShell(root) {
 
       <style>
         .kofi-floating-btn {
-          position: fixed; bottom: 85px; left: 20px; z-index: 900;
+          position: fixed; bottom: calc(var(--dock-height, 82px) + 16px); left: 20px; z-index: 900;
           width: 50px; height: 50px; background: #FFDD00;
           border-radius: 50%; display: flex; align-items: center; justify-content: center;
           text-decoration: none; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -300,7 +300,7 @@ function mountShell(root) {
         }
         .kofi-floating-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
         @media (min-width: 1024px) {
-          .kofi-floating-btn { bottom: 30px; left: 30px; width: 60px; height: 60px; font-size: 1.8rem; }
+          .kofi-floating-btn { bottom: calc(var(--dock-height, 82px) + 20px); left: 30px; width: 60px; height: 60px; font-size: 1.8rem; }
         }
       </style>
     </div>

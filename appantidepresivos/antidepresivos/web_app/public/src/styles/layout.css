@@ -408,6 +408,16 @@ html, body {
     }
 }
 
+@media (max-width: 480px) {
+    .dock-nav-item__label {
+        display: none;
+    }
+    .dock-nav-item {
+        min-width: 44px;
+        padding: 6px 8px;
+    }
+}
+
 /* Dock separator */
 .dock-separator {
     width: 2px;
@@ -482,7 +492,7 @@ html, body {
 }
 
 .dock-nav-item__label {
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.04em;
     font-family: var(--font-headers);
