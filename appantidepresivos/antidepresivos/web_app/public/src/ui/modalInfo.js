@@ -37,6 +37,17 @@ export function mountInfoModal() {
           .modal-backdrop.active .modal-content {
             transform: translateY(0) scale(1);
           }
+          .bmac-modal-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #FFDD00; color: #111;
+            padding: 12px 24px; border-radius: 10px;
+            font-weight: 800; font-size: 0.9rem;
+            text-decoration: none; font-family: var(--font-headers);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(255,221,0,0.35);
+          }
+          .bmac-modal-link:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,221,0,0.5); }
+          .bmac-modal-link:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
         `;
       document.head.appendChild(s);
     }
@@ -70,7 +81,7 @@ export function mountInfoModal() {
         <hr style="border:0; border-top:1px solid var(--color-border); margin:24px 0;">
 
         <!-- Créditos principales -->
-        <div style="background:linear-gradient(135deg, var(--color-primary-light) 0%, rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.08) 100%); padding:20px; border-radius:var(--radius-lg); margin-bottom:24px; border-left:4px solid var(--color-primary);">
+        <div style="background:linear-gradient(135deg, var(--color-primary-container) 0%, hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.06) 100%); padding:20px; border-radius:var(--radius-lg); margin-bottom:24px; border-left:4px solid var(--color-primary);">
           <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-primary); font-weight:800; margin-bottom:12px;">
             ✓ Desarrollado por
           </div>
@@ -87,7 +98,8 @@ export function mountInfoModal() {
           <div style="font-size:0.8rem; color:var(--color-text-muted); margin-top:8px;">
             <strong>Comentarios, dudas o errores:</strong> Envía un correo al email anterior con tu consulta.
           </div>
-        
+        </div>
+
         <!-- Acerca de los datos -->
         <details class="detail-section" style="margin-bottom:24px; border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden;">
           <summary style="padding:12px 16px; background:var(--color-surface-raised); font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
@@ -126,9 +138,7 @@ export function mountInfoModal() {
           <a href="https://buymeacoffee.com/herramente"
              target="_blank"
              rel="noopener noreferrer"
-             style="display:inline-flex; align-items:center; gap:8px; background:#FFDD00; color:#111; padding:12px 24px; border-radius:10px; font-weight:800; font-size:0.9rem; text-decoration:none; font-family:var(--font-headers); transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow:0 4px 12px rgba(255,221,0,0.35); border:none; cursor:pointer;"
-             onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(255,221,0,0.5)';"
-             onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 12px rgba(255,221,0,0.35)';">
+             class="bmac-modal-link">
             ☕ Invitar un café
           </a>
         </div>

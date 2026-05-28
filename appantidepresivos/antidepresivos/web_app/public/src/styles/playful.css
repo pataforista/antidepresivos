@@ -97,12 +97,16 @@
     font-size: 1.4rem;
     margin-right: 6px;
     display: inline-block;
-    animation: emojiFloat 2s ease-in-out infinite;
+    transition: transform var(--transition-spring);
+}
+
+.card--hoverable:hover .card-drug__emoji {
+    animation: emojiFloat 0.6s ease-in-out 1;
 }
 
 @keyframes emojiFloat {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-4px) rotate(2deg); }
+    50% { transform: translateY(-5px) rotate(4deg); }
 }
 
 /* ─── Button Tactile Press (Neo Bauhaus: physical stamp feel) ──────────── */

@@ -285,22 +285,23 @@ function mountShell(root) {
       </footer>
 
       <!-- Floating Support Button -->
-      <a href="https://ko-fi.com/herramente" target="_blank" class="kofi-floating-btn" title="Apoya el proyecto">
-        <span class="kofi-icon">☕</span>
+      <a href="https://buymeacoffee.com/herramente" target="_blank" rel="noopener noreferrer" class="bmac-floating-btn" title="Apoya el proyecto">
+        <span aria-hidden="true">☕</span>
       </a>
 
       <style>
-        .kofi-floating-btn {
-          position: fixed; bottom: 85px; left: 20px; z-index: 900;
+        .bmac-floating-btn {
+          position: fixed; bottom: calc(var(--dock-height, 82px) + 16px); left: 20px; z-index: 900;
           width: 50px; height: 50px; background: #FFDD00;
           border-radius: 50%; display: flex; align-items: center; justify-content: center;
           text-decoration: none; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          border: 2px solid white;
+          transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+          border: 2px solid rgba(0,0,0,0.08);
         }
-        .kofi-floating-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .bmac-floating-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .bmac-floating-btn:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
         @media (min-width: 1024px) {
-          .kofi-floating-btn { bottom: 30px; left: 30px; width: 60px; height: 60px; font-size: 1.8rem; }
+          .bmac-floating-btn { bottom: calc(var(--dock-height, 82px) + 20px); left: 30px; width: 60px; height: 60px; font-size: 1.8rem; }
         }
       </style>
     </div>

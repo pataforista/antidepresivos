@@ -16,6 +16,7 @@
   --color-secondary-s: 50%;
   --color-secondary-l: 50%;
   --color-secondary: hsl(var(--color-secondary-h), var(--color-secondary-s), var(--color-secondary-l));
+  --color-secondary-light: hsl(var(--color-secondary-h), 50%, 68%);
   --color-secondary-container: hsl(var(--color-secondary-h), 55%, 90%);
   --color-on-secondary-container: hsl(var(--color-secondary-h), 55%, 14%);
 
@@ -41,8 +42,8 @@
 
   /* --- Text (Warm Near-Black) --- */
   --color-text-main: #2C2420;
-  --color-text-muted: #6B5B4E;
-  --color-text-dim: #A89088;
+  --color-text-muted: #5C4A3E;
+  --color-text-dim: #9A8078;
 
   /* --- Status --- */
   --color-danger: #C0392B;

@@ -145,7 +145,7 @@ export function applySettingToDOM(key, value) {
     case "theme": {
       html.setAttribute("data-theme", value);
       const meta = document.getElementById("meta-theme-color");
-      if (meta) meta.setAttribute("content", value === "dark" ? "#020617" : "#f8fafc");
+      if (meta) meta.setAttribute("content", value === "dark" ? "#1A1610" : "#F9F7F2");
       break;
     }
     case "fontSize": {
