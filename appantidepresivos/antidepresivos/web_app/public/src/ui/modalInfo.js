@@ -81,7 +81,7 @@ export function mountInfoModal() {
         <hr style="border:0; border-top:1px solid var(--color-border); margin:24px 0;">
 
         <!-- Créditos principales -->
-        <div style="background:linear-gradient(135deg, var(--color-primary-light) 0%, rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.08) 100%); padding:20px; border-radius:var(--radius-lg); margin-bottom:24px; border-left:4px solid var(--color-primary);">
+        <div style="background:linear-gradient(135deg, var(--color-primary-container) 0%, hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.06) 100%); padding:20px; border-radius:var(--radius-lg); margin-bottom:24px; border-left:4px solid var(--color-primary);">
           <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-primary); font-weight:800; margin-bottom:12px;">
             ✓ Desarrollado por
           </div>
@@ -98,7 +98,8 @@ export function mountInfoModal() {
           <div style="font-size:0.8rem; color:var(--color-text-muted); margin-top:8px;">
             <strong>Comentarios, dudas o errores:</strong> Envía un correo al email anterior con tu consulta.
           </div>
-        
+        </div>
+
         <!-- Acerca de los datos -->
         <details class="detail-section" style="margin-bottom:24px; border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden;">
           <summary style="padding:12px 16px; background:var(--color-surface-raised); font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
