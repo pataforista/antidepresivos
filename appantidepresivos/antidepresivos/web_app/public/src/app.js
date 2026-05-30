@@ -15,6 +15,7 @@ import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
 import { initRibbons } from "./ribbons.js";
 import { escapeHtml } from "./core/utils.js";
+import { drugEmoji, isNotableRisk, isHighRisk } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
 import { i18n } from "./core/i18n.js";
 import { mountSettingsPanel, applySettingToDOM } from "./ui/settingsPanel.js";
@@ -44,7 +45,7 @@ async function main() {
     store.updatePath("ui.locale", initialLocale);
   }
 
-  root.innerHTML = `<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>${initialLocale === 'en' ? 'Loading Antidepressants...' : 'Cargando Antidepresivos...'}</p></div>`;
+  root.innerHTML = `<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>${initialLocale === 'en' ? 'Loading Antidepressants…' : 'Cargando Antidepresivos…'}</p></div>`;
 
   try {
     const ctx = await loadAppData(initialLocale);
@@ -156,7 +157,22 @@ async function main() {
     });
   } catch (e) {
     console.error(e);
-    root.innerHTML = `<pre style="padding:40px; color:var(--color-danger); font-family:monospace;">${escapeHtml(String(e?.stack ?? e))}</pre>`;
+    const isOffline = !navigator.onLine;
+    const msg = isOffline
+      ? (initialLocale === "en" ? "No connection. Check your network and try again." : "Sin conexión. Verifica tu red e intenta de nuevo.")
+      : (initialLocale === "en" ? "Could not load data. Please reload the page." : "No se pudieron cargar los datos. Por favor, recarga la página.");
+    root.innerHTML = `
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:24px; padding:40px; text-align:center;">
+        <div style="font-size:3rem;">${isOffline ? "📡" : "⚠️"}</div>
+        <p style="font-family:var(--font-headers); font-weight:700; color:var(--color-danger); font-size:1.25rem; max-width:400px;">${escapeHtml(msg)}</p>
+        <button onclick="location.reload()" style="padding:12px 28px; border-radius:999px; background:var(--color-primary); color:white; border:none; cursor:pointer; font-weight:700; font-size:1rem;">
+          ${initialLocale === "en" ? "Retry" : "Reintentar"}
+        </button>
+        <details style="max-width:600px; text-align:left;">
+          <summary style="cursor:pointer; font-size:0.8rem; color:var(--color-text-muted);">Detalles técnicos</summary>
+          <pre style="margin-top:8px; font-size:0.75rem; color:var(--color-text-muted); white-space:pre-wrap;">${escapeHtml(String(e?.stack ?? e))}</pre>
+        </details>
+      </div>`;
   }
 }
 
@@ -266,13 +282,13 @@ function mountShell(root) {
         </div>
 
         <div class="header__actions">
-          <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" aria-label="Limpiar comparación" style="display:none;">
-            Limpiar
+          <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" aria-label="${i18n.t("aria_clear_compare")}" style="display:none;">
+            ${i18n.t("clear_compare")}
           </button>
-          <button id="btnThemeToggle" type="button" aria-label="Alternar tema" class="btn btn--circle btn--ghost" style="width: 44px; height: 44px; font-size: 1.25rem;">
+          <button id="btnThemeToggle" type="button" aria-label="${i18n.t("aria_theme_toggle")}" class="btn btn--circle btn--ghost" style="width: 44px; height: 44px; font-size: 1.25rem;">
             ${theme === 'dark' ? '☀️' : '🌙'}
           </button>
-          <div id="compareCount" class="chip chip--active text-xs" aria-label="Elementos seleccionados" role="status" style="display:none;"></div>
+          <div id="compareCount" class="chip chip--active text-xs" aria-label="${i18n.t("aria_compare_count")}" role="status" style="display:none;"></div>
         </div>
       </header>
 
@@ -285,7 +301,7 @@ function mountShell(root) {
       </footer>
 
       <!-- Floating Support Button -->
-      <a href="https://buymeacoffee.com/herramente" target="_blank" rel="noopener noreferrer" class="bmac-floating-btn" title="Apoya el proyecto">
+      <a href="https://buymeacoffee.com/herramente" target="_blank" rel="noopener noreferrer" class="bmac-floating-btn" title="${i18n.t("aria_support_project")}" aria-label="${i18n.t("aria_support_project")}">
         <span aria-hidden="true">☕</span>
       </a>
 
@@ -436,15 +452,13 @@ function getClinicalChips(d) {
   }
 
   // QT risk — only flag if notable
-  const qt = (d.riesgo_prolongacion_qt || "").toLowerCase();
-  if (/alto|medio|moderado/i.test(qt)) {
-    chips.push({ label: "Riesgo QT ↑ 💓", variant: /alto/i.test(qt) ? "danger" : "warning" });
+  if (isNotableRisk(d.riesgo_prolongacion_qt)) {
+    chips.push({ label: "Riesgo QT ↑ 💓", variant: isHighRisk(d.riesgo_prolongacion_qt) ? "danger" : "warning" });
   }
 
   // Sexual dysfunction — only flag if notable
-  const sex = (d.perfil_disfuncion_sexual || "").toLowerCase();
-  if (/alto|medio|moderado|significativo/i.test(sex)) {
-    chips.push({ label: "Impacto Sexual ↑ ❤️", variant: /alto/i.test(sex) ? "danger" : "warning" });
+  if (isNotableRisk(d.perfil_disfuncion_sexual)) {
+    chips.push({ label: "Impacto Sexual ↑ ❤️", variant: isHighRisk(d.perfil_disfuncion_sexual) ? "danger" : "warning" });
   }
 
   return chips;
@@ -486,7 +500,7 @@ function renderSmartTip() {
     <div class="smart-tip animate-on-scroll" style="margin-top:var(--space-8); padding:var(--space-6); border-radius:var(--radius-xl); background:var(--color-surface-raised); border:1px solid var(--color-border); display:flex; gap:var(--space-4); align-items:center;">
       <div style="font-size:2rem;">💡</div>
       <div>
-        <div style="font-family:var(--font-headers); font-weight:800; font-size:0.75rem; color:var(--color-primary); letter-spacing:0.1em; margin-bottom:4px; text-transform:uppercase;">¿Sabías que?</div>
+        <div style="font-family:var(--font-headers); font-weight:800; font-size:0.75rem; color:var(--color-primary); letter-spacing:0.1em; margin-bottom:4px; text-transform:uppercase;">${i18n.t("smart_tip_title")}</div>
         <div style="font-weight:700; font-size:1rem; margin-bottom:2px;">${escapeHtml(tip.term)}</div>
         <div class="text-xs text-muted" style="line-height:1.4;">${escapeHtml(tip.definition)}</div>
       </div>
@@ -532,7 +546,7 @@ function renderList(view) {
   // Recents HTML
   const recentsHTML = recentFarmacos.length ? `
     <section class="recents-section animate-fade-in">
-      <div class="recents-section__title">Recientes</div>
+      <div class="recents-section__title">${i18n.t("recent_items")}</div>
       <div class="recents-list">
         ${recentFarmacos.map(d => `
           <a href="#/detail/${encodeURIComponent(d.id_farmaco)}" class="recent-item">
@@ -566,7 +580,7 @@ function renderList(view) {
 
       <!-- List header -->
       <div class="list-header">
-        <span class="list-header__count">${items.length} ${i18n.getLocale() === 'en' ? 'drug' : 'fármaco'}${items.length !== 1 ? (i18n.getLocale() === 'en' ? 's' : 's') : ""}</span>
+        <span class="list-header__count">${items.length} ${items.length !== 1 ? i18n.t("drug_count_plural") : i18n.t("drug_count_singular")}</span>
         <button id="btnGoCompare" type="button" class="m3-fab" ${compareIds.length === 0 ? "disabled" : ""}>
           ⚖️ ${compareIds.length ? `${i18n.t("btn_compare")} (${compareIds.length})` : i18n.t("btn_compare")}
         </button>
@@ -607,17 +621,7 @@ function renderDrugCard(d, selected) {
   const cls = d.clase_terapeutica ?? "";
   const isOn = selected.has(id);
 
-  // Determinar emoji según clase terapéutica
-  let emoji = "💊";
-  if (/isrs/i.test(cls)) emoji = "🧠";
-  if (/dual|irsn/i.test(cls)) emoji = "🔁";
-  if (/triciclico/i.test(cls)) emoji = "🧬";
-  if (/imao/i.test(cls)) emoji = "🔬";
-  if (/melatonina|agomelatina/i.test(cls)) emoji = "🌙";
-  if (/bupropion|ndri/i.test(cls)) emoji = "🎯";
-  if (/mirtazapina|nassa/i.test(cls)) emoji = "😴";
-  if (/estabilizador/i.test(cls)) emoji = "⚖️";
-  if (/antipsicotico/i.test(cls)) emoji = "🛡️";
+  const emoji = drugEmoji(cls);
 
   return `
     <div class="card card--hoverable card--spotlight animate-on-scroll">
@@ -627,7 +631,7 @@ function renderDrugCard(d, selected) {
         <button type="button"
           class="card-drug__compare-btn btn btn--circle chkCompareBtn ${isOn ? "active" : ""}"
           data-id="${escapeHtml(id)}"
-          title="${isOn ? "Quitar del comparador" : "Agregar al comparador"}"
+          title="${isOn ? i18n.t("aria_remove_from_compare") : i18n.t("aria_add_to_compare")}"
           aria-pressed="${isOn}">
           ${isOn ? "✓" : "+"}
         </button>
@@ -680,9 +684,9 @@ function attachFilterListeners(view) {
       // Playful feedback
       if (isNowOn) {
         if (set.size === 2) {
-          celebrate("¡Comparación lista para análisis! ⚖️✨");
+          celebrate(i18n.t("toast_compare_ready"));
         } else {
-          showToast(`✨ Fármaco agregado`, 'success');
+          showToast(`✨ ${i18n.t("toast_drug_added")}`, 'success');
         }
       }
 
@@ -691,7 +695,7 @@ function attachFilterListeners(view) {
       if (go) {
         const newIds = [...set];
         go.disabled = newIds.length === 0;
-        go.textContent = newIds.length ? `⚖️ Comparar (${newIds.length})` : "⚖️ Comparar";
+        go.textContent = newIds.length ? `⚖️ ${i18n.t("btn_compare")} (${newIds.length})` : `⚖️ ${i18n.t("btn_compare")}`;
       }
     });
   });
@@ -726,18 +730,18 @@ function renderCompare(view) {
   if (!rows.length) {
     view.innerHTML = `
       <div class="animate-fade-in" style="text-align:center; padding:var(--space-8);">
-        <h2 class="h2">Comparador</h2>
-        <p class="text-muted" style="margin-bottom:var(--space-6)">No has seleccionado ningún fármaco para comparar.</p>
-        
+        <h2 class="h2">${i18n.t("compare_empty_title")}</h2>
+        <p class="text-muted" style="margin-bottom:var(--space-6)">${i18n.t("compare_empty_msg")}</p>
+
         <!-- Empty State Dropdown -->
         <div style="max-width:300px; margin:0 auto var(--space-6);">
             <select id="selCompareEmpty" class="btn btn--outline" style="width:100%; text-align:left; padding:12px;">
-                <option value="">+ Agregar Fármaco</option>
+                <option value="">${i18n.t("compare_add_drug_empty")}</option>
                 ${availableDrugs.map(d => `<option value="${d.id_farmaco}">${d.nombre_generico}</option>`).join('')}
             </select>
         </div>
 
-        <a href="#/list" class="btn btn--primary">VOLVER A LA LISTA</a>
+        <a href="#/list" class="btn btn--primary">${i18n.t("compare_back")}</a>
       </div>
     `;
 
@@ -755,7 +759,7 @@ function renderCompare(view) {
   // Si llegamos aquí con 2 o más, celebrar (pero solo una vez por navegación)
   if (rows.length >= 2) {
     setTimeout(() => {
-      celebrate("¡Comparación lista para análisis! ✨");
+      celebrate(i18n.t("toast_compare_ready"));
     }, 400);
   }
 
@@ -800,8 +804,8 @@ function renderCompare(view) {
   view.innerHTML = `
     <div class="animate-fade-in">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
-        <h2 class="h2" style="margin:0">Perfil Comparativo</h2>
-        <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← VOLVER AL LISTADO</a>
+        <h2 class="h2" style="margin:0">${i18n.t("compare_title")}</h2>
+        <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">${i18n.t("compare_back")}</a>
       </div>
 
       <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:var(--space-4); align-items:center;">
@@ -810,7 +814,7 @@ function renderCompare(view) {
         <!-- Add Drug Dropdown -->
         <div style="position:relative;">
             <select id="selCompareAdd" class="chip" style="cursor:pointer; padding-right:24px; appearance:none; -webkit-appearance:none; border:1px dashed var(--color-border); background:var(--color-bg);">
-                <option value="">+ Añadir...</option>
+                <option value="">${i18n.t("compare_add_drug")}</option>
                 ${availableDrugs.map(d => `<option value="${d.id_farmaco}">${d.nombre_generico}</option>`).join('')}
             </select>
         </div>
@@ -818,24 +822,24 @@ function renderCompare(view) {
 
       <div class="grid-compare">
         <section class="card glass-effect" style="padding:var(--space-6); border-radius:var(--radius-xl);">
-          <h3 class="h3" style="margin-bottom:var(--space-4); font-size:1.25rem;">Impacto Clínico</h3>
+          <h3 class="h3" style="margin-bottom:var(--space-4); font-size:1.25rem;">${i18n.t("compare_chart_title")}</h3>
           ${radarSVG}
           <div class="alert alert--info" style="margin-top:var(--space-8); padding:var(--space-4);">
             <div class="text-xs" style="line-height:1.5; font-weight:500">
-              <strong>Nota:</strong> Los valores son normalizados (0-1). Un área mayor representa mayor carga de efectos adversos o intensidad clínica según el eje. Los colores del gráfico coinciden con los botones de arriba.
+              <strong>${i18n.getLocale() === 'en' ? 'Note' : 'Nota'}:</strong> ${i18n.t("compare_chart_note")}
             </div>
           </div>
         </section>
 
         <section class="card glass-effect" style="overflow:hidden; padding:0; border-radius:var(--radius-xl);">
           <div style="padding:var(--space-6); border-bottom:1px solid var(--color-border); background:var(--color-bg);">
-            <h3 class="h3" style="margin:0; font-size:1.25rem;">Especificaciones</h3>
+            <h3 class="h3" style="margin:0; font-size:1.25rem;">${i18n.t("compare_specs_title")}</h3>
           </div>
           <div class="compare-container" style="overflow-x:auto;">
             <table class="compare-table" style="width:100%; border-collapse:collapse;">
               <thead>
                 <tr style="text-align:left;">
-                  <th style="padding:var(--space-4) var(--space-5); color:var(--color-primary); background:var(--color-bg); font-family:var(--font-headers); font-size:0.75rem; letter-spacing:0.1em; border-bottom:2px solid var(--color-border);">RASGO</th>
+                  <th style="padding:var(--space-4) var(--space-5); color:var(--color-primary); background:var(--color-bg); font-family:var(--font-headers); font-size:0.75rem; letter-spacing:0.1em; border-bottom:2px solid var(--color-border);" scope="col">${i18n.t("compare_col_trait")}</th>
                   ${rows.map((d, i) => {
     const color = colors[i % colors.length];
     return `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:800; border-bottom:2px solid ${color}; min-width:180px; color:${color}">${escapeHtml(d.nombre_generico)}</th>`
@@ -991,7 +995,7 @@ function renderRadarChart(data, colors) {
 
 function mountDock(container) {
   const navItems = [
-    { id: "list",      label: "Inicio",    icon: "🏠",  hash: "#/list",      isRoute: true },
+    { id: "list",      label: i18n.t("nav_home"),    icon: "🏠",  hash: "#/list",      isRoute: true },
     { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖️",  hash: "#/compare",   isRoute: true },
     { id: "switching", label: i18n.t("btn_switching"), icon: "🔄",  hash: "#/switching", isRoute: true },
     { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "🩺",  hash: "#/ajuste",    isRoute: true },
@@ -1001,8 +1005,8 @@ function mountDock(container) {
     { id: "guias",     label: i18n.t("btn_guias"), icon: "📖",  hash: "#/guias",     isRoute: true },
   ];
   const actionItems = [
-    { id: "legal",    label: "Legal",             icon: "📜", hash: "#", isRoute: false, action: "legal"    },
-    { id: "info",     label: "Créditos",          icon: "💡", hash: "#", isRoute: false, action: "info"     },
+    { id: "legal",    label: i18n.t("nav_legal"),    icon: "📜", hash: "#", isRoute: false, action: "legal"    },
+    { id: "info",     label: i18n.t("nav_credits"), icon: "💡", hash: "#", isRoute: false, action: "info"     },
     { id: "settings", label: i18n.t("btn_settings"), icon: "⚙️", hash: "#", isRoute: false, action: "settings" },
   ];
 
@@ -1011,7 +1015,7 @@ function mountDock(container) {
     navBar = document.createElement("nav");
     navBar.id = "floating-dock";
     navBar.className = "floating-dock";
-    navBar.setAttribute("aria-label", "Navegación principal");
+    navBar.setAttribute("aria-label", i18n.t("aria_main_nav"));
 
     // Event delegation for action buttons
     navBar.addEventListener("click", (e) => {
