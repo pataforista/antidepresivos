@@ -1,6 +1,6 @@
 {
     "es": {
-        "app_title": "Antidepresivos 2026",
+        "app_title": "Antidepresivos",
         "app_subtitle": "SOPORTE CLÍNICO",
         "btn_back": "VOLVER",
         "btn_list": "LISTADO",
@@ -33,7 +33,7 @@
         "recent_items": "Recientes",
         "no_results": "Sin resultados para esos criterios.",
         "clear_compare": "Limpiar",
-        "monograph_footer_note": "Información científica auditada para la versión Antidepresivos 2026.",
+        "monograph_footer_note": "Información científica auditada y actualizada para profesionales de la salud mental.",
         "loading": "Cargando...",
         "data_not_found": "Datos no encontrados",
         "drug_not_found": "No se encontró el fármaco con ID",
@@ -193,7 +193,7 @@
         "settings_saved": "Configuración guardada"
     },
     "en": {
-        "app_title": "Antidepressants 2026",
+        "app_title": "Antidepressants",
         "app_subtitle": "CLINICAL SUPPORT",
         "btn_back": "BACK",
         "btn_list": "LIST",
@@ -226,7 +226,7 @@
         "recent_items": "Recents",
         "no_results": "No results for those criteria.",
         "clear_compare": "Clear",
-        "monograph_footer_note": "Scientific information audited for the Antidepressants 2026 version.",
+        "monograph_footer_note": "Scientific information audited and updated for mental health professionals.",
         "loading": "Loading...",
         "data_not_found": "Data not found",
         "drug_not_found": "No drug found with ID",

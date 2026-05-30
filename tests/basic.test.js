@@ -1,12 +1,12 @@
-// Basic test for Antidepresivos 2026
+// Basic test for Antidepresivos
 
 describe('App Integrity', () => {
   test('Environmental requirements', () => {
     expect(true).toBe(true);
   });
-  
+
   test('Core configuration (simulation)', () => {
-    const appTitle = "Antidepresivos 2026";
-    expect(appTitle).toContain("2026");
+    const appTitle = "Antidepresivos";
+    expect(appTitle).toContain("Antidepresivos");
   });
 });

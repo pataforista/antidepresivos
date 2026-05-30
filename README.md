@@ -1,9 +1,9 @@
-# Antidepresivos 2026 — Edición Profesional
+# Antidepresivos — Soporte Clínico Inteligente
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-**Antidepresivos 2026** es una Herramienta de Soporte Clínico Inteligente diseñada para profesionales de la salud mental. Combina una base de datos farmacológica rigurosa con utilidades interactivas para mejorar la toma de decisiones clínicas.
+**Antidepresivos** es una Herramienta de Soporte Clínico Inteligente diseñada para profesionales de la salud mental. Combina una base de datos farmacológica rigurosa con utilidades interactivas para mejorar la toma de decisiones clínicas.
 
 ![Preview](https://antidepresivos.drcelada.com/assets/icons/icon-512.png)
 

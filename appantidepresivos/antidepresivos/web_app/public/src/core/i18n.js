@@ -1,7 +1,7 @@
 import { store } from "./store.js";
 
 /**
- * i18n core utility for Antidepresivos 2026.
+ * i18n core utility for Antidepresivos.
  * Manages UI translations based on locales.json.
  */
 

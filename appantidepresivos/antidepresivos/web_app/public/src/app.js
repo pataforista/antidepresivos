@@ -150,7 +150,7 @@ async function main() {
 
         // Welcome toast
         setTimeout(() => {
-          showToast(initialLocale === 'en' ? "Welcome to Antidepressants 2026! 🚀" : "¡Bienvenido al asistente de Antidepresivos 2026! 🚀", "info");
+          showToast(initialLocale === 'en' ? "Welcome to Antidepressants! 🧠✨" : "¡Bienvenido al asistente de Antidepresivos! 🧠✨", "info");
         }, 1200);
       },
     });
@@ -280,7 +280,7 @@ function mountShell(root) {
 
       <footer class="footer">
         <div class="footer__inner">
-          <span class="text-xs text-muted" style="font-weight:600">EDICIÓN 2026 · SOPORTE CLÍNICO</span>
+          <span class="text-xs text-muted" style="font-weight:600">SOPORTE CLÍNICO · DR. CELADA</span>
         </div>
       </footer>
 
@@ -607,7 +607,7 @@ function renderDrugCard(d, selected) {
   const cls = d.clase_terapeutica ?? "";
   const isOn = selected.has(id);
 
-  // Determinar emoji según clase (Mapeo extendido 2026)
+  // Determinar emoji según clase terapéutica
   let emoji = "💊";
   if (/isrs/i.test(cls)) emoji = "🧠";
   if (/dual|irsn/i.test(cls)) emoji = "🔁";
