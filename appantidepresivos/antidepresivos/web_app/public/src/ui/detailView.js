@@ -2,6 +2,7 @@ import { store } from "../core/store.js";
 import { selectItemById } from "../core/selectors.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
+import { riskVariant, sedationLabel, sedationVariant } from "../core/drugNormalization.js";
 
 export function renderDetail(view, id) {
    const state = store.getState();
@@ -30,7 +31,7 @@ export function renderDetail(view, id) {
       <header class="monograph__header glass-effect" style="border-radius:var(--radius-xl); padding:var(--space-6);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-5); flex-wrap:wrap;">
           <div style="flex:1; min-width:200px;">
-            ${hasBBW ? `<div class="clinical-chip clinical-chip--danger" style="display:inline-flex; margin-bottom:var(--space-3); font-size:0.7rem;">⚠️ BLACK BOX WARNING</div>` : ""}
+            ${hasBBW ? `<div class="clinical-chip clinical-chip--danger" style="display:inline-flex; margin-bottom:var(--space-3); font-size:0.7rem;">⚠️ ${i18n.t("bbw_label")}</div>` : ""}
             <h1 class="h1" style="margin:0; letter-spacing:-0.03em;">${escapeHtml(item.nombre_generico)}</h1>
             <div style="font-size:1rem; font-weight:600; font-family:var(--font-headers); color:var(--color-text-muted); margin-top:var(--space-2);">${escapeHtml(item.clase_terapeutica)}</div>
             <div style="display:flex; gap:var(--space-2); margin-top:var(--space-3); flex-wrap:wrap; align-items:center;">
@@ -39,7 +40,7 @@ export function renderDetail(view, id) {
             </div>
           </div>
           <div style="display:flex; gap:var(--space-2); align-self:flex-start; flex-shrink:0;">
-            <button id="btnMonoPDF" class="btn btn--outline btn--circle" title="Descargar PDF" style="width: 44px; height: 44px;">
+            <button id="btnMonoPDF" class="btn btn--outline btn--circle" title="${i18n.t("aria_download_pdf")}" aria-label="${i18n.t("aria_download_pdf")}" style="width: 44px; height: 44px;">
               📄
             </button>
             <button id="btnMonoCompare" class="m3-fab">
@@ -82,16 +83,16 @@ export function renderDetail(view, id) {
 
          const tabKey = e.target.dataset.tab;
          const container = view.querySelector("#tabContent");
-         if (container) {
-            if (tabKey === "resumen") container.innerHTML = renderTabResumen(item);
-            if (tabKey === "dosis") container.innerHTML = renderTabDosis(item);
-            if (tabKey === "seguridad") container.innerHTML = renderTabSeguridad(item);
-            if (tabKey === "farmaco") container.innerHTML = renderTabFarmaco(item);
-            if (tabKey === "switching") {
-               container.innerHTML = renderTabSwitching(item);
-               setTimeout(() => initTitrationChart(item), 50);
-            }
-         }
+         if (!container) return;
+
+         const TAB_RENDERERS = {
+           resumen:   () => { container.innerHTML = renderTabResumen(item); },
+           dosis:     () => { container.innerHTML = renderTabDosis(item); },
+           seguridad: () => { container.innerHTML = renderTabSeguridad(item); },
+           farmaco:   () => { container.innerHTML = renderTabFarmaco(item); },
+           switching: () => { container.innerHTML = renderTabSwitching(item); setTimeout(() => initTitrationChart(item), 50); },
+         };
+         TAB_RENDERERS[tabKey]?.();
       });
    });
 
@@ -114,7 +115,7 @@ export function renderDetail(view, id) {
          const element = document.querySelector(".monograph");
          const opt = {
             margin: 10,
-            filename: `Monografia_${item.nombre_generico}_2026.pdf`,
+            filename: `Monografia_${item.nombre_generico}.pdf`,
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -127,20 +128,8 @@ export function renderDetail(view, id) {
 // --- Clinical Summary Strip builder ---
 
 function buildClinicalSummary(item) {
-   function riskVariant(val) {
-      if (!val) return "neutral";
-      const s = String(val).toLowerCase();
-      if (/alto|severo|grave/i.test(s)) return "danger";
-      if (/medio|moderado|significativo/i.test(s)) return "warning";
-      if (/bajo|leve|mínimo|minimo|nulo|neutro/i.test(s)) return "success";
-      return "neutral";
-   }
-
-   const sed = parseInt(item.nivel_sedacion, 10);
-   const sedEnLabels = ["None", "Low", "Moderate", "High"];
-   const sedEsLabels = ["Nula", "Baja", "Moderada", "Alta"];
-   const sedLabel = isNaN(sed) ? (item.nivel_sedacion || "N/D") : (i18n.getLocale() === 'en' ? sedEnLabels[Math.min(sed, 3)] : sedEsLabels[Math.min(sed, 3)]);
-   const sedVariant = isNaN(sed) ? "neutral" : ["success", "success", "warning", "danger"][Math.min(sed, 3)];
+   const sedLabel = sedationLabel(item.nivel_sedacion);
+   const sedVariant = sedationVariant(item.nivel_sedacion);
 
    const items = [
       { label: i18n.t("sedation"), value: sedLabel, variant: sedVariant },

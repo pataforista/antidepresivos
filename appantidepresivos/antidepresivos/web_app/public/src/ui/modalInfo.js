@@ -71,7 +71,7 @@ export function mountInfoModal() {
             Guía Clínica
           </div>
           <div style="font-size:1.75rem; font-weight:800; color:var(--color-text-main); font-family:var(--font-headers);">
-            Antidepresivos 2026
+            Antidepresivos
           </div>
           <div class="text-muted text-sm" style="margin-top:4px; font-weight:600">
             Edición Profesional • Soporte Clínico
@@ -115,7 +115,7 @@ export function mountInfoModal() {
               <li>Fichas técnicas oficiales de la <b>AEMPS</b> (España), <b>FDA</b> (EE.UU.) y <b>EMA</b> (Europa).</li>
               <li><b>WFSBP</b> (World Federation of Societies of Biological Psychiatry) Guidelines.</li>
             </ul>
-            <p style="font-style:italic; font-size:0.8rem;">Última actualización de la base de datos: Marzo 2026.</p>
+            <p style="font-style:italic; font-size:0.8rem;">Base de datos actualizada con las últimas guías clínicas internacionales.</p>
           </div>
         </details>
 
