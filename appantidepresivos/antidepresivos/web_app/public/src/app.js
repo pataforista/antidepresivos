@@ -87,7 +87,7 @@ async function main() {
           try {
             updateGooeyNav();
             initEntranceAnimations();
-mountDock(document.getElementById("dock-container"));
+            mountDock(document.getElementById("dock-container"));
 
             // Render inicial
             renderRoute(store.getState().route);

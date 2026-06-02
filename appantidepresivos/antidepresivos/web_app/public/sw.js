@@ -19,7 +19,6 @@ const CORE_ASSETS = [
     './src/styles/quiz.css',
     // Núcleo
     './src/app.js',
-    './src/ribbons.js',
     './src/core/dataLoader.js',
     './src/core/i18n.js',
     './src/core/normalize.js',
