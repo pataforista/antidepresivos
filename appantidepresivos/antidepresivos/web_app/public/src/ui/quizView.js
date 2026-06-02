@@ -639,11 +639,11 @@ function renderResults(view) {
                 <div style="font-size:0.8rem; color:#666;">${i18n.getLocale() === 'en' ? 'Smart Clinical Support' : 'Soporte Clínico Inteligente'}</div>
               </div>
               <div style="text-align:right; font-family:monospace; font-size:0.7rem; color:#999;">
-                HASH_VAL: ${Math.random().toString(36).substr(2, 9).toUpperCase()}
+                ID: ${new Date().toISOString().slice(0,10).replace(/-/g,'')}-${Q.score}
               </div>
             </div>
           </div>
-          <div class="alert alert--success animate-bounce" style="margin-bottom:24px; text-align:center;">
+          <div class="alert alert--success" style="margin-bottom:24px; text-align:center;">
             <div style="font-size:1.5rem; margin-bottom:8px;">🏆 ${i18n.getLocale() === 'en' ? 'GURU LEVEL REACHED!' : '¡NIVEL GURU ALCANZADO!'} 🏆</div>
             <p class="text-sm">${i18n.t("quiz_guru_unlocked")}</p>
             <button id="btnDownloadCert" class="btn btn--primary" style="margin-top:12px; background:var(--quiz-neon-purp); border:none; box-shadow:var(--quiz-glow-md);">

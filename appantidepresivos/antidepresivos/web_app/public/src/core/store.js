@@ -243,7 +243,7 @@ function persistIfNeeded(state, options, extra = {}) {
   try {
     localStorage.setItem(storageKey(options), JSON.stringify(payload));
   } catch (err) {
-    if (extra.force) console.warn("[store] persist failed", err);
+    console.warn("[store] persist failed", err);
   }
 }
 
