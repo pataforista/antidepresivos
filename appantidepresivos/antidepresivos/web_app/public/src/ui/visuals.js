@@ -32,8 +32,9 @@ export function initEntranceAnimations() {
         });
     }, { threshold: 0.1 });
 
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     document.querySelectorAll(".card, .section-title, .monograph__header").forEach(el => {
-        el.style.opacity = "0"; // Initial state
+        if (!prefersReduced) el.style.opacity = "0";
         observer.observe(el);
     });
 }

@@ -735,7 +735,7 @@ function renderCompare(view) {
         <div style="max-width:300px; margin:0 auto var(--space-6);">
             <select id="selCompareEmpty" class="btn btn--outline" style="width:100%; text-align:left; padding:12px;">
                 <option value="">${i18n.t("compare_add_drug_empty")}</option>
-                ${availableDrugs.map(d => `<option value="${d.id_farmaco}">${d.nombre_generico}</option>`).join('')}
+                ${availableDrugs.map(d => `<option value="${escapeHtml(d.id_farmaco)}">${escapeHtml(d.nombre_generico)}</option>`).join('')}
             </select>
         </div>
 
@@ -812,7 +812,7 @@ function renderCompare(view) {
         <div style="position:relative;">
             <select id="selCompareAdd" class="chip" style="cursor:pointer; padding-right:24px; appearance:none; -webkit-appearance:none; border:1px dashed var(--color-border); background:var(--color-bg);">
                 <option value="">${i18n.t("compare_add_drug")}</option>
-                ${availableDrugs.map(d => `<option value="${d.id_farmaco}">${d.nombre_generico}</option>`).join('')}
+                ${availableDrugs.map(d => `<option value="${escapeHtml(d.id_farmaco)}">${escapeHtml(d.nombre_generico)}</option>`).join('')}
             </select>
         </div>
       </div>
@@ -1074,7 +1074,7 @@ function showToast(message, type = 'info', duration = 3500) {
 
   const toast = document.createElement("div");
   toast.className = `toast toast--${type}`;
-  toast.innerHTML = `<span class="toast__icon">${icons[type] || '✨'}</span> <span class="toast__text">${message}</span>`;
+  toast.innerHTML = `<span class="toast__icon">${icons[type] || '✨'}</span> <span class="toast__text">${escapeHtml(message)}</span>`;
   toast.style.pointerEvents = "auto";
   container.appendChild(toast);
 
@@ -1121,10 +1121,7 @@ if ('serviceWorker' in navigator) {
     });
   });
 
-  let refreshing = false;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (refreshing) return;
-    refreshing = true;
-    window.location.reload();
+    showToast(i18n.t('sw_updated'), 'info', 8000);
   });
 }
