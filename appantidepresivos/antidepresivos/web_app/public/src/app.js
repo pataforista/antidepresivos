@@ -13,7 +13,6 @@ import { renderCombo } from "./ui/comboView.js";
 import { renderGuias } from "./ui/guiasView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
-import { initRibbons } from "./ribbons.js";
 import { escapeHtml } from "./core/utils.js";
 import { drugEmoji, isNotableRisk, isHighRisk } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
@@ -88,8 +87,7 @@ async function main() {
           try {
             updateGooeyNav();
             initEntranceAnimations();
-            initRibbons("ribbons-container");
-            mountDock(document.getElementById("dock-container"));
+mountDock(document.getElementById("dock-container"));
 
             // Render inicial
             renderRoute(store.getState().route);
@@ -684,7 +682,7 @@ function attachFilterListeners(view) {
       // Playful feedback
       if (isNowOn) {
         if (set.size === 2) {
-          celebrate(i18n.t("toast_compare_ready"));
+          showToast(i18n.t("toast_compare_ready"), 'success');
         } else {
           showToast(`✨ ${i18n.t("toast_drug_added")}`, 'success');
         }
@@ -756,10 +754,9 @@ function renderCompare(view) {
     return;
   }
 
-  // Si llegamos aquí con 2 o más, celebrar (pero solo una vez por navegación)
   if (rows.length >= 2) {
     setTimeout(() => {
-      celebrate(i18n.t("toast_compare_ready"));
+      showToast(i18n.t("toast_compare_ready"), 'success');
     }, 400);
   }
 
@@ -1086,18 +1083,6 @@ function showToast(message, type = 'info', duration = 3500) {
     toast.style.transform = "translateX(20px)";
     setTimeout(() => toast.remove(), 400);
   }, duration);
-}
-
-function celebrate(message = i18n.t("mascot_celebrate")) {
-  if (window.confetti) {
-    window.confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#6366f1', '#ec4899', '#10b981', '#f59e0b']
-    });
-  }
-  showToast(message, 'motivational');
 }
 
 /* ============================================================
