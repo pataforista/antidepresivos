@@ -39,7 +39,21 @@ export async function loadAppData() {
     console.warn("Switching matrix not found", e);
   }
 
-  return { manifest, schema, legal, dataset, switchingMatrix };
+  // 7) glossary & criteria (opcionales, no bloqueantes)
+  let glossary = null;
+  let criteria = null;
+  try {
+    glossary = await fetchJson("./data/glosario_terminos.json");
+  } catch (e) {
+    console.warn("Glossary not found or empty", e);
+  }
+  try {
+    criteria = await fetchJson("./data/criterios_inclusion_exclusion.json");
+  } catch (e) {
+    console.warn("Criteria not found or empty", e);
+  }
+
+  return { manifest, schema, legal, dataset, switchingMatrix, glossary, criteria };
 }
 
 async function fetchJson(url) {

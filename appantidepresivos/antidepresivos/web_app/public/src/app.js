@@ -10,7 +10,7 @@ import { renderAjuste } from "./ui/ajusteView.js";
 import { renderInteract } from "./ui/interactView.js";
 import { renderQuiz } from "./ui/quizView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
-import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
+import { initCardSpotlight, updateGooeyNav, initEntranceAnimations, initSearchEnhancements, applyStaggerAnimation } from "./ui/visuals.js";
 import { initRibbons } from "./ribbons.js";
 import { escapeHtml } from "./core/utils.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
@@ -56,6 +56,7 @@ async function main() {
           try {
             updateGooeyNav();
             initEntranceAnimations();
+            initSearchEnhancements();
             initRibbons("ribbons-container");
             mountDock(document.getElementById("dock-container"));
 
@@ -412,6 +413,8 @@ function renderList(view) {
   });
 
   initCardSpotlight();
+  initSearchEnhancements();
+  applyStaggerAnimation('.grid-cards', '.card');
 }
 
 function renderFilters(filters) {
