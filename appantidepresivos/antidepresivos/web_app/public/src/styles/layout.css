@@ -36,7 +36,8 @@ html, body {
     background: var(--color-bg);
     border-bottom: 2px solid var(--color-border-hard);
     box-shadow: var(--shadow-sm);
-    transition: background var(--transition-normal), border-color var(--transition-normal);
+    transition: background var(--transition-normal), border-color var(--transition-normal),
+                transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow var(--transition-normal);
     gap: var(--space-6);
 }
 

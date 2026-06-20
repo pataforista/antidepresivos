@@ -386,3 +386,147 @@
     color: white;
     border: 2px solid var(--color-primary-dark);
 }
+
+/* ─── Ripple Wave (ink touch feedback) ──────────────────────────────────── */
+.ripple-wave {
+    position: absolute;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.16;
+    transform: scale(0);
+    animation: ripple-expand 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes ripple-expand {
+    to {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* ─── Header Scroll-Hide ─────────────────────────────────────────────────── */
+.header--hidden {
+    transform: translateY(-110%);
+    box-shadow: none !important;
+}
+
+/* ─── Staggered Drug Card Entrance ──────────────────────────────────────── */
+.card-drug--enter {
+    animation: cardDrugEnter 0.42s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+
+@keyframes cardDrugEnter {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Card selected for compare: glowing ring */
+.card--in-compare {
+    border-color: var(--color-primary) !important;
+    box-shadow:
+        0 0 0 3px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.28),
+        var(--shadow-md) !important;
+}
+
+/* ─── Empty State (no results) ───────────────────────────────────────────── */
+.empty-state {
+    animation: emptyStatePop 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+
+@keyframes emptyStatePop {
+    from {
+        opacity: 0;
+        transform: scale(0.88) translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.empty-state__icon {
+    display: inline-block;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: emptyIconBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes emptyIconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* ─── Undo Toast ─────────────────────────────────────────────────────────── */
+.toast--undo {
+    background: var(--color-text-main);
+    color: var(--color-bg);
+    border: 2px solid rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: toastUndoIn 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+
+@keyframes toastUndoIn {
+    from { opacity: 0; transform: translateX(100%) scale(0.92); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.toast__undo-btn {
+    background: none;
+    border: 1.5px solid var(--color-accent-mustard);
+    color: var(--color-accent-mustard);
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-headers);
+    font-weight: 700;
+    font-size: 0.7rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+.toast__undo-btn:hover {
+    background: var(--color-accent-mustard);
+    color: var(--color-text-main);
+}
+
+/* ─── View Transitions (page-to-page crossfade + subtle lift) ────────────── */
+@media (prefers-reduced-motion: no-preference) {
+    ::view-transition-old(root) {
+        animation: 160ms ease-out both vt-out;
+    }
+    ::view-transition-new(root) {
+        animation: 240ms cubic-bezier(0.2, 0, 0, 1) both vt-in;
+    }
+}
+
+@keyframes vt-out {
+    to { opacity: 0; transform: translateY(-6px); }
+}
+
+@keyframes vt-in {
+    from { opacity: 0; transform: translateY(8px); }
+}
+
+/* ─── Haptic-Sync: compare button burst ─────────────────────────────────── */
+.card-drug__compare-btn.active {
+    animation: compareBurst 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes compareBurst {
+    0%   { transform: scale(0.65); }
+    65%  { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
