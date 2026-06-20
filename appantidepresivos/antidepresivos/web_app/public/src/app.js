@@ -12,7 +12,7 @@ import { renderQuiz } from "./ui/quizView.js";
 import { renderCombo } from "./ui/comboView.js";
 import { renderGuias } from "./ui/guiasView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
-import { initCardSpotlight, updateGooeyNav, initEntranceAnimations } from "./ui/visuals.js";
+import { initCardSpotlight, updateGooeyNav, initEntranceAnimations, initScrollHideHeader, initRippleEffect, haptic, withViewTransition } from "./ui/visuals.js";
 import { escapeHtml } from "./core/utils.js";
 import { drugEmoji, isNotableRisk, isHighRisk } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
@@ -87,6 +87,8 @@ async function main() {
           try {
             updateGooeyNav();
             initEntranceAnimations();
+            initScrollHideHeader();
+            initRippleEffect();
             mountDock(document.getElementById("dock-container"));
 
             // Render inicial
@@ -205,13 +207,17 @@ function attachGlobalListeners() {
     });
   }
 
-  // Botón limpiar compare
+  // Botón limpiar compare — con Undo
   const btnClear = document.getElementById("btnClearCompare");
   if (btnClear) {
     btnClear.addEventListener("click", () => {
+      const prevIds = store.getState().compare?.ids ?? [];
       store.setCompareIds([], { reason: "ui:clearCompare" });
       location.hash = "#/list";
-      showToast(i18n.t("clear_compare"), "info");
+      haptic('light');
+      showUndoToast(i18n.t("clear_compare"), () => {
+        store.setCompareIds(prevIds, { reason: "ui:undoClearCompare" });
+      });
     });
   }
 
@@ -360,13 +366,11 @@ function renderRoute(route) {
     return;
   }
 
-  // Clean scroll inside the app viewport to avoid whole-page jumps.
   view.scrollTo({ top: 0, behavior: "auto" });
 
-  setTimeout(() => {
+  const doRender = () => {
     if (route.name === "list") renderList(view);
     else if (route.name === "detail") {
-      // Registrar en recientes antes de renderizar
       const itemId = route.params?.id;
       if (itemId) {
         const allFarmacos = store.getState().data?.dataset?.farmacos ?? [];
@@ -383,7 +387,9 @@ function renderRoute(route) {
     else if (route.name === "combo") renderCombo(view);
     else if (route.name === "guias") renderGuias(view);
     else view.innerHTML = "<p>Ruta no reconocida.</p>";
-  }, 50);
+  };
+
+  withViewTransition(doRender);
 }
 
 /* ============================================================
@@ -586,10 +592,12 @@ function renderList(view) {
 
       <!-- Drug grid -->
       <div class="grid-cards">
-        ${items.map(d => renderDrugCard(d, selected)).join("") || `
-          <div style="grid-column:1/-1; text-align:center; padding:var(--space-8); color:var(--color-text-muted)">
-            <div style="font-size:2.5rem; margin-bottom:var(--space-3)">🔍</div>
-            <p style="font-weight:700">${i18n.t("no_results")}</p>
+        ${items.map((d, i) => renderDrugCard(d, selected, i)).join("") || `
+          <div id="emptyState" class="empty-state" style="grid-column:1/-1; text-align:center; padding:var(--space-8) var(--space-5);">
+            <span class="empty-state__icon">🔍</span>
+            <p style="font-family:var(--font-headers); font-weight:800; font-size:1.15rem; color:var(--color-text-main); margin-bottom:var(--space-3);">${i18n.t("no_results")}</p>
+            <p class="text-muted" style="font-size:0.9rem; margin-bottom:var(--space-5); max-width:280px; margin-left:auto; margin-right:auto; line-height:1.5;">${i18n.getLocale() === 'en' ? 'Try a different name or clear active filters.' : 'Prueba otro nombre o elimina los filtros activos.'}</p>
+            <button id="btnClearEmptySearch" type="button" class="btn btn--outline" style="font-size:0.8rem; padding:8px 20px; text-transform:none; letter-spacing:0;">${i18n.getLocale() === 'en' ? 'Clear filters' : 'Limpiar filtros'}</button>
           </div>
         `}
       </div>
@@ -613,16 +621,18 @@ function renderList(view) {
   }
 }
 
-function renderDrugCard(d, selected) {
+function renderDrugCard(d, selected, index = 0) {
   const id = String(d.id_farmaco);
   const name = d.nombre_generico ?? id;
   const cls = d.clase_terapeutica ?? "";
   const isOn = selected.has(id);
-
   const emoji = drugEmoji(cls);
+  // Stagger cap at 480ms so the last card doesn't wait forever
+  const delay = Math.min(index * 38, 480);
 
   return `
-    <div class="card card--hoverable card--spotlight animate-on-scroll">
+    <div class="card card--hoverable card--spotlight card-drug--enter ${isOn ? "card--in-compare" : ""}"
+         style="animation-delay:${delay}ms">
       <div class="card-drug__header">
         <div class="card-drug__emoji">${emoji}</div>
         <a href="#/detail/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
@@ -673,13 +683,15 @@ function attachFilterListeners(view) {
       else set.add(id);
       store.setCompareIds([...set], { reason: "ui:listToggleCompare" });
 
-      // Update button visually immediately
+      // Update button and card visually immediately (optimistic UI)
       const isNowOn = set.has(id);
       btn.classList.toggle("active", isNowOn);
       btn.textContent = isNowOn ? "✓" : "+";
       btn.setAttribute("aria-pressed", String(isNowOn));
+      btn.closest(".card")?.classList.toggle("card--in-compare", isNowOn);
 
-      // Playful feedback
+      // Haptic + toast feedback
+      haptic(isNowOn ? 'success' : 'tap');
       if (isNowOn) {
         if (set.size === 2) {
           showToast(i18n.t("toast_compare_ready"), 'success');
@@ -697,6 +709,17 @@ function attachFilterListeners(view) {
       }
     });
   });
+
+  // Empty state clear button
+  const btnClearEmptySearch = view.querySelector('#btnClearEmptySearch');
+  if (btnClearEmptySearch) {
+    btnClearEmptySearch.addEventListener('click', () => {
+      store.updatePath('filters.q', '');
+      store.updatePath('filters.tasks', []);
+      const input = view.querySelector('#inputSearch');
+      if (input) { input.value = ''; input.focus(); }
+    });
+  }
 }
 
 /* ============================================================
@@ -1014,6 +1037,12 @@ function mountDock(container) {
     navBar.className = "floating-dock";
     navBar.setAttribute("aria-label", i18n.t("aria_main_nav"));
 
+    // Haptic on any dock tap
+    navBar.addEventListener("click", (e) => {
+      const item = e.target.closest(".dock-nav-item");
+      if (item) haptic('tap');
+    }, { passive: true });
+
     // Event delegation for action buttons
     navBar.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-action]");
@@ -1055,22 +1084,26 @@ function mountDock(container) {
    Feedback & Motivation (Playful)
    ============================================================ */
 
-function showToast(message, type = 'info', duration = 3500) {
-  const container = document.getElementById("toast-container") || (() => {
+function getToastContainer() {
+  return document.getElementById("toast-container") || (() => {
     const c = document.createElement("div");
     c.id = "toast-container";
-    c.style.cssText = "position:fixed; bottom:110px; right:20px; z-index:10000; display:flex; flex-direction:column; gap:10px; pointer-events:none;";
+    c.style.cssText = "position:fixed; bottom:110px; right:20px; z-index:10000; display:flex; flex-direction:column; gap:10px; pointer-events:none; max-width:calc(100vw - 40px);";
     document.body.appendChild(c);
     return c;
   })();
+}
 
-  const icons = {
-    info: 'ℹ️',
-    success: '✅',
-    warning: '⚠️',
-    error: '❌',
-    motivational: '🚀'
-  };
+function dismissToast(toast) {
+  toast.style.opacity = "0";
+  toast.style.transform = "translateX(20px)";
+  setTimeout(() => toast.remove(), 400);
+}
+
+function showToast(message, type = 'info', duration = 3500) {
+  const container = getToastContainer();
+
+  const icons = { info: 'ℹ️', success: '✅', warning: '⚠️', error: '❌', motivational: '🚀' };
 
   const toast = document.createElement("div");
   toast.className = `toast toast--${type}`;
@@ -1078,11 +1111,30 @@ function showToast(message, type = 'info', duration = 3500) {
   toast.style.pointerEvents = "auto";
   container.appendChild(toast);
 
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.transform = "translateX(20px)";
-    setTimeout(() => toast.remove(), 400);
-  }, duration);
+  setTimeout(() => dismissToast(toast), duration);
+}
+
+/** Toast with an Undo button — fires `onUndo()` if tapped within `duration` ms. */
+function showUndoToast(message, onUndo, duration = 5500) {
+  const container = getToastContainer();
+  let undid = false;
+
+  const toast = document.createElement("div");
+  toast.className = "toast toast--undo";
+  toast.innerHTML = `<span class="toast__text">${escapeHtml(message)}</span><button class="toast__undo-btn" type="button">↩ ${i18n.getLocale() === 'en' ? 'Undo' : 'Deshacer'}</button>`;
+  toast.style.pointerEvents = "auto";
+  container.appendChild(toast);
+
+  const undoBtn = toast.querySelector('.toast__undo-btn');
+  const timer = setTimeout(() => { if (!undid) dismissToast(toast); }, duration);
+
+  undoBtn.addEventListener('click', () => {
+    undid = true;
+    clearTimeout(timer);
+    onUndo();
+    haptic('success');
+    dismissToast(toast);
+  }, { once: true });
 }
 
 /* ============================================================
