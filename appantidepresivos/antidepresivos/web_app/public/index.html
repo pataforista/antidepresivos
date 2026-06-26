@@ -39,7 +39,7 @@
     "description": "Asistente clínico para psiquiatría y salud mental. Comparador de antidepresivos con perfiles de riesgo, guías de switching NICE/APA/CANMAT e interacciones farmacológicas.",
     "url": "https://antidepresivos.drcelada.com/",
     "inLanguage": "es",
-    "dateModified": "2025-05-30",
+    "dateModified": "2026-06-26",
     "medicalSpecialty": [
       "https://health-lifesci.schema.org/Psychiatry",
       "https://health-lifesci.schema.org/Pharmacology"
@@ -60,6 +60,30 @@
     "publisher": {
       "@type": "Person",
       "name": "Dr. César Celada"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data: Software Application (PWA) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Antidepresivos — Comparador Clínico",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web, Android, iOS",
+    "description": "Aplicación web instalable (PWA) para comparar antidepresivos, generar planes de switching, revisar interacciones y consultar monografías clínicas.",
+    "url": "https://antidepresivos.drcelada.com/",
+    "inLanguage": "es",
+    "isAccessibleForFree": true,
+    "author": {
+      "@type": "Person",
+      "name": "Dr. César Celada"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
     }
   }
   </script>
@@ -91,6 +115,13 @@
   <link rel="manifest" href="./manifest.webmanifest" />
   <meta name="theme-color" content="#F9F7F2" id="meta-theme-color" />
 
+  <!-- PWA / iOS instalable -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Antidepresivos" />
+  <meta name="application-name" content="Antidepresivos" />
+
   <!-- Anti-FOUC: applies persisted theme/fontSize before first paint (synchronous, no defer) -->
   <script src="./src/theme-bootstrap.js"></script>
 </head>
@@ -99,13 +130,40 @@
   <div id="debug-error"
     style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:rgba(0,0,0,0.9); color:red; padding:20px; font-family:monospace; display:none; pointer-events:auto; white-space:pre-wrap;">
   </div>
+  <a href="#appView" class="skip-link">Saltar al contenido principal</a>
   <div id="dock-container"></div>
 
   <div id="app" style="position:relative; z-index:1;">
     <div id="appShell" class="shell">
-      <!-- content will be rendered here -->
+      <!-- Splash de carga estático: se reemplaza cuando arranca la app (mejora la percepción de velocidad) -->
+      <div id="appSplash" role="status" aria-live="polite" style="display:flex; min-height:100vh; flex-direction:column; align-items:center; justify-content:center; gap:16px; text-align:center; padding:24px;">
+        <div aria-hidden="true" style="width:64px; height:64px; border-radius:18px; background:#336699; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Montserrat',sans-serif; font-weight:800; font-size:2rem; box-shadow:4px 6px 0 rgba(44,36,32,0.18);">A</div>
+        <p style="font-family:'Montserrat',sans-serif; font-weight:700; color:#336699; font-size:1.25rem; margin:0;">Cargando Antidepresivos…</p>
+        <noscript>
+          <p style="font-family:'DM Sans',sans-serif; color:#5C4A3E; max-width:520px; margin:0;">Esta aplicación necesita JavaScript para funcionar. Activa JavaScript en tu navegador para usar el comparador clínico.</p>
+        </noscript>
+      </div>
     </div>
   </div>
+
+  <!-- Contenido rastreable para buscadores y sin JavaScript -->
+  <noscript>
+    <main style="max-width:760px; margin:0 auto; padding:32px 20px; font-family:'DM Sans',sans-serif; color:#2C2420; line-height:1.6;">
+      <h1 style="font-family:'Montserrat',sans-serif;">Antidepresivos — Comparador Clínico de Psicofármacos</h1>
+      <p>Herramienta de soporte clínico para profesionales de la salud mental: comparador interactivo de antidepresivos, perfiles de riesgo (QT, sedación, peso), guías de switching basadas en Maudsley, NICE, APA y CANMAT, interacciones farmacológicas y monografías detalladas.</p>
+      <h2>Funcionalidades principales</h2>
+      <ul>
+        <li>Monografías de farmacocinética, farmacodinámica, seguridad y dosis.</li>
+        <li>Calculadora de switching entre fármacos.</li>
+        <li>Comparador radial de perfiles de efectos adversos.</li>
+        <li>Ajuste de dosis en poblaciones especiales (renal, hepático, geriátrico).</li>
+        <li>PharmaQuiz: repaso gamificado de psicofarmacología.</li>
+      </ul>
+      <h2>Familias de antidepresivos incluidas</h2>
+      <p>ISRS (fluoxetina, sertralina, escitalopram, paroxetina), IRSN (venlafaxina, duloxetina), tricíclicos, IMAO, mirtazapina, bupropión, agomelatina, vortioxetina y más.</p>
+      <p>Información elaborada por el Dr. César Celada. Solo para uso consultivo por profesionales cualificados.</p>
+    </main>
+  </noscript>
 
   <!-- App bootstrap -->
   <script type="module" src="./src/app.js"></script>

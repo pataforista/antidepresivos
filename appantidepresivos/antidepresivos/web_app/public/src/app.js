@@ -230,9 +230,13 @@ function updateHeaderNav(route) {
   // Floating Dock Navigation
   document.querySelectorAll(".dock-link").forEach(el => {
     el.classList.remove("active");
+    el.removeAttribute("aria-current");
     const id = el.dataset.id;
     const matches = id === routeName || (routeName === "list" && id === "list");
-    if (matches) el.classList.add("active");
+    if (matches) {
+      el.classList.add("active");
+      el.setAttribute("aria-current", "page");
+    }
   });
 }
 
@@ -296,7 +300,7 @@ function mountShell(root) {
         </div>
       </header>
 
-      <main id="appView" class="main"></main>
+      <main id="appView" class="main" tabindex="-1"></main>
 
       <footer class="footer">
         <div class="footer__inner">
