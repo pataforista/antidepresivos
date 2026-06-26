@@ -570,10 +570,12 @@ function renderList(view) {
     <div class="animate-fade-in">
 
       <!-- Hero search protagonista -->
-      <div class="search-hero">
-        <span class="search-hero__icon-left">🔍</span>
+      <div class="search-hero" role="search">
+        <span class="search-hero__icon-left" aria-hidden="true">🔍</span>
         <input type="search" id="inputSearch" class="search-hero__input"
           placeholder="${i18n.t("search_placeholder")}"
+          aria-label="${i18n.t("search_placeholder")}"
+          enterkeyhint="search"
           value="${escapeHtml(state.filters.q || "")}"
           autocomplete="off" autocorrect="off" spellcheck="false" />
       </div>
@@ -598,7 +600,7 @@ function renderList(view) {
       <div class="grid-cards">
         ${items.map((d, i) => renderDrugCard(d, selected, i)).join("") || `
           <div id="emptyState" class="empty-state" style="grid-column:1/-1; text-align:center; padding:var(--space-8) var(--space-5);">
-            <span class="empty-state__icon">🔍</span>
+            <span class="empty-state__icon" aria-hidden="true">🔍</span>
             <p style="font-family:var(--font-headers); font-weight:800; font-size:1.15rem; color:var(--color-text-main); margin-bottom:var(--space-3);">${i18n.t("no_results")}</p>
             <p class="text-muted" style="font-size:0.9rem; margin-bottom:var(--space-5); max-width:280px; margin-left:auto; margin-right:auto; line-height:1.5;">${i18n.getLocale() === 'en' ? 'Try a different name or clear active filters.' : 'Prueba otro nombre o elimina los filtros activos.'}</p>
             <button id="btnClearEmptySearch" type="button" class="btn btn--outline" style="font-size:0.8rem; padding:8px 20px; text-transform:none; letter-spacing:0;">${i18n.getLocale() === 'en' ? 'Clear filters' : 'Limpiar filtros'}</button>
@@ -638,7 +640,7 @@ function renderDrugCard(d, selected, index = 0) {
     <div class="card card--hoverable card--spotlight card-drug--enter ${isOn ? "card--in-compare" : ""}"
          style="animation-delay:${delay}ms">
       <div class="card-drug__header">
-        <div class="card-drug__emoji">${emoji}</div>
+        <div class="card-drug__emoji" aria-hidden="true">${emoji}</div>
         <a href="#/detail/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
         <button type="button"
           class="card-drug__compare-btn btn btn--circle chkCompareBtn ${isOn ? "active" : ""}"
