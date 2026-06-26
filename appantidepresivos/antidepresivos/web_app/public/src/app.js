@@ -332,7 +332,7 @@ function mountShell(root) {
       <header class="header">
         <div class="header__brand">
           <div class="header__logo" title="${escapeHtml(title)}">A</div>
-          <h1 class="header__title">${escapeHtml(title)}</h1>
+          <span class="header__title">${escapeHtml(title)}</span>
         </div>
 
         <div class="header__actions">
@@ -612,8 +612,21 @@ function renderList(view) {
     </section>
   ` : "";
 
+  // Hero de bienvenida (H1 descriptivo para SEO + orientación).
+  // Se oculta en cuanto hay búsqueda o filtros activos para no estorbar.
+  const hasQuery = !!(state.filters?.q || "").trim();
+  const showHero = !hasQuery && activeTasks.length === 0;
+  const heroHTML = showHero ? `
+    <header class="home-hero animate-fade-in">
+      <h1 class="home-hero__title">${i18n.t("home_hero_title")}</h1>
+      <p class="home-hero__subtitle">${i18n.t("home_hero_subtitle")}</p>
+    </header>
+  ` : `<h1 class="u-sr-only">${i18n.t("home_hero_title")}</h1>`;
+
   view.innerHTML = `
     <div class="animate-fade-in">
+
+      ${heroHTML}
 
       <!-- Hero search protagonista -->
       <div class="search-hero" role="search">

@@ -1,5 +1,29 @@
 /* src/styles/components.css */
 
+/* Home hero — encabezado descriptivo (orientación + SEO) */
+.home-hero {
+    text-align: center;
+    margin: var(--space-5) auto var(--space-4);
+    max-width: 640px;
+    padding: 0 var(--space-3);
+}
+.home-hero__title {
+    font-family: var(--font-headers);
+    font-weight: 900;
+    font-size: clamp(1.5rem, 5vw, 2.1rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--color-text-main);
+    margin: 0 0 var(--space-2);
+}
+.home-hero__subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 2.4vw, 1.02rem);
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
 /* Typography Utils — Neo Bauhaus Geometric (Montserrat) */
 .h1,
 .h2,
