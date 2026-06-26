@@ -18,7 +18,7 @@ export function renderCombo(view) {
                     <h2 class="h2" style="margin:0">${i18n.t("combo_title")} 🚀</h2>
                     <p class="text-sm text-muted">${i18n.t("combo_subtitle")}</p>
                 </div>
-                <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
+                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
             </div>
 
             <div class="card glass-effect" style="padding: var(--space-6); border-radius: var(--radius-2xl); margin-bottom: var(--space-8);">
