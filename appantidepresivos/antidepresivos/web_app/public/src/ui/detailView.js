@@ -13,7 +13,7 @@ export function renderDetail(view, id) {
       <div style="padding:var(--space-8); text-align:center">
         <h2 class="h2">${i18n.t("data_not_found")}</h2>
         <p class="text-muted">${i18n.t("drug_not_found")} <b>${escapeHtml(id)}</b>.</p>
-        <a href="#/list" class="btn btn--primary" style="margin-top:var(--space-6)">${i18n.t("back_to_list")}</a>
+        <a href="/" class="btn btn--primary" style="margin-top:var(--space-6)">${i18n.t("back_to_list")}</a>
       </div>
     `;
       return;
@@ -25,7 +25,7 @@ export function renderDetail(view, id) {
    const contentHTML = `
     <div class="monograph animate-fade-in">
       <!-- Nav Back -->
-      <a href="#/list" class="btn btn--ghost text-sm" style="margin-bottom:var(--space-4); font-weight:700; display:inline-flex; align-items:center; gap:6px;">← ${i18n.t("btn_list")}</a>
+      <a href="/" class="btn btn--ghost text-sm" style="margin-bottom:var(--space-4); font-weight:700; display:inline-flex; align-items:center; gap:6px;">← ${i18n.t("btn_list")}</a>
 
       <!-- Header Principal — M3 style -->
       <header class="monograph__header glass-effect" style="border-radius:var(--radius-xl); padding:var(--space-6);">
@@ -104,7 +104,7 @@ export function renderDetail(view, id) {
          const set = new Set(curr);
          set.add(String(item.id_farmaco));
          store.setCompareIds([...set], { reason: "ui:detailAddCompare" });
-         location.hash = `#/compare?ids=${encodeURIComponent([...set].join(","))}`;
+         window.appRouter?.navigate(`/comparador?ids=${encodeURIComponent([...set].join(","))}`);
       });
    }
 

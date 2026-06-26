@@ -17,28 +17,28 @@
       "name": "Comparador",
       "short_name": "Comparar",
       "description": "Comparar perfiles de antidepresivos",
-      "url": "./#/compare",
+      "url": "/comparador",
       "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "Plan de Switching",
       "short_name": "Switching",
       "description": "Generar un plan de transición entre fármacos",
-      "url": "./#/switching",
+      "url": "/switching",
       "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "Ajuste de Dosis",
       "short_name": "Ajuste",
       "description": "Ajuste en poblaciones especiales (renal, hepático, geriátrico)",
-      "url": "./#/ajuste",
+      "url": "/ajuste",
       "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "PharmaQuiz",
       "short_name": "Quiz",
       "description": "Repaso gamificado de psicofarmacología",
-      "url": "./#/quiz",
+      "url": "/quiz",
       "icons": [{ "src": "./assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ],

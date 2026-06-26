@@ -34,7 +34,7 @@ export function renderAjuste(view) {
                         ${i18n.t("adjustment_subtitle")}
                     </p>
                 </div>
-                <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
+                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
             </div>
 
             <!-- Nota clínica geriátrica -->

@@ -14,7 +14,7 @@ export function renderSwitching(view) {
         <div class="animate-fade-in">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
                 <h2 class="h2" style="margin:0">${i18n.t("switching_plan")}</h2>
-                <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
+                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
             </div>
 
             <p class="text-muted" style="margin-bottom: var(--space-8);">

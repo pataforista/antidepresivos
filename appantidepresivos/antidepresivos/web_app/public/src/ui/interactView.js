@@ -75,7 +75,7 @@ export function renderInteract(view) {
                         Inhibición enzimática por antidepresivos · <strong>${cypData.length}</strong> fármacos con inhibición relevante
                     </p>
                 </div>
-                <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← VOLVER AL LISTADO</a>
+                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← VOLVER AL LISTADO</a>
             </div>
 
             <!-- Leyenda -->

@@ -1,71 +1,102 @@
 /* ============================================================
    src/core/router.js
-   Hash Router + Sync compare.ids (URL <-> Store)
+   History API Router (URLs reales) + Sync compare.ids (URL <-> Store)
    Rutas:
-     /#/list
-     /#/detail/:id
-     /#/compare?ids=a,b,c
+     /                       -> list (home)
+     /farmaco/:id            -> detail
+     /comparador?ids=a,b,c   -> compare
+     /switching              -> switching
+     /ajuste                 -> ajuste
+     /interacciones          -> interact
+     /quiz                   -> quiz
+     /combinaciones          -> combo
+     /guias                  -> guias
+
+   Incluye un shim que migra enlaces antiguos basados en hash
+   (p.ej. /#/compare?ids=a,b) a las nuevas URLs reales, para no
+   romper marcadores ni enlaces ya compartidos.
    ============================================================ */
 
 export function createRouter(store, opts = {}) {
   const options = {
-    defaultRoute: "/#/list",
+    defaultPath: "/",
     maxCompareDesktop: opts.maxCompareDesktop ?? 4,
     maxCompareMobile: opts.maxCompareMobile ?? 2,
-    // Si quieres limitar siempre a maxMobile en móvil, se hace en UI;
-    // aquí solo sanitizamos y quitamos duplicados.
+  };
+
+  // Tabla canónica nombre <-> path (detail se trata aparte por el :id)
+  const NAME_TO_PATH = {
+    list: "/",
+    compare: "/comparador",
+    switching: "/switching",
+    ajuste: "/ajuste",
+    interact: "/interacciones",
+    quiz: "/quiz",
+    combo: "/combinaciones",
+    guias: "/guias",
+  };
+  const HEAD_TO_NAME = {
+    comparador: "compare",
+    switching: "switching",
+    ajuste: "ajuste",
+    interacciones: "interact",
+    quiz: "quiz",
+    combinaciones: "combo",
+    guias: "guias",
   };
 
   let started = false;
-  let internalHashWrite = false;  // evita loops store->hash->store
-  let internalStoreWrite = false; // evita loops hash->store->hash
+  let internalWrite = false;   // evita loops history->store->history
+  let internalStoreWrite = false;
 
   function start() {
     if (started) return;
     started = true;
 
-    // 1) Primer parse al arrancar
-    handleHashChange({ reason: "router:init" });
+    // 0) Migrar enlaces legacy basados en hash (#/...) a URLs reales
+    migrateLegacyHash();
 
-    // 2) Listener hashchange
-    window.addEventListener("hashchange", () => handleHashChange({ reason: "router:hashchange" }));
+    // 1) Primer parse al arrancar
+    handleLocationChange({ reason: "router:init" });
+
+    // 2) Listener popstate (atrás/adelante del navegador)
+    window.addEventListener("popstate", () => handleLocationChange({ reason: "router:popstate" }));
 
     // 3) Sync store -> URL para compare.ids
-    store.subscribe("state:path:compare", ({ next }, meta) => {
-      if (internalStoreWrite) return;
+    store.subscribe("state:path:compare", ({ next }) => {
+      if (internalWrite) return;
       const route = store.getState().route;
       if (!route || route.name !== "compare") return;
 
       const ids = normalizeIds(next?.ids ?? []);
-      // Escribe al hash solo si realmente difiere
-      const current = parseHash(location.hash);
+      const current = parseLocation();
       const urlIds = normalizeIds(current.query?.ids ?? []);
       if (sameArray(ids, urlIds)) return;
 
-      internalHashWrite = true;
+      internalWrite = true;
       try {
-        const nextHash = buildHash({
+        const nextUrl = buildPath({
           name: "compare",
           params: {},
           query: { ...current.query, ids: ids.join(",") },
         });
-        replaceHash(nextHash);
+        replaceUrl(nextUrl);
       } finally {
-        // microtask para dejar que termine el ciclo del navegador
-        queueMicrotask(() => { internalHashWrite = false; });
+        queueMicrotask(() => { internalWrite = false; });
       }
     });
   }
 
-  function navigate(to, meta = {}) {
-    // to puede ser string "#/list" o objeto route
-    const hash = typeof to === "string" ? normalizeHash(to) : buildHash(to);
-    writeHash(hash, meta);
+  function navigate(to) {
+    const url = typeof to === "string" ? normalizePath(to) : buildPath(to);
+    pushUrl(url);
+    handleLocationChange({ reason: "router:navigate" });
   }
 
-  function replace(to, meta = {}) {
-    const hash = typeof to === "string" ? normalizeHash(to) : buildHash(to);
-    replaceHash(hash, meta);
+  function replace(to) {
+    const url = typeof to === "string" ? normalizePath(to) : buildPath(to);
+    replaceUrl(url);
+    handleLocationChange({ reason: "router:replace" });
   }
 
   function getCurrentRoute() {
@@ -76,20 +107,20 @@ export function createRouter(store, opts = {}) {
      Core handlers
      ========================= */
 
-  function handleHashChange(meta = {}) {
-    if (internalHashWrite) return;
+  function handleLocationChange(meta = {}) {
+    if (internalWrite) return;
 
-    const parsed = parseHash(location.hash);
+    const parsed = parseLocation();
     const fixed = coerceRoute(parsed);
 
-    // Si el hash es inválido o incompleto, lo corregimos a una forma canónica
-    const canonical = buildHash(fixed);
-    if (normalizeHash(location.hash) !== canonical) {
-      internalHashWrite = true;
+    // Canonicaliza la URL si difiere de la forma esperada
+    const canonical = buildPath(fixed);
+    if (currentUrl() !== canonical) {
+      internalWrite = true;
       try {
-        replaceHash(canonical);
+        replaceUrl(canonical);
       } finally {
-        queueMicrotask(() => { internalHashWrite = false; });
+        queueMicrotask(() => { internalWrite = false; });
       }
     }
 
@@ -124,75 +155,39 @@ export function createRouter(store, opts = {}) {
      Parsing / Building
      ========================= */
 
-  function parseHash(hash) {
-    const h = normalizeHash(hash);
-    // h siempre tipo "/#/something"
-    const raw = h.slice(2); // quita "/#"
-    // raw empieza con "/"
-    const [pathPart, queryPart] = raw.split("?");
-    const path = pathPart || "/list";
-
-    const segs = path.split("/").filter(Boolean); // ["list"] etc.
-    const head = segs[0] || "list";
+  function parseLocation() {
+    const pathname = location.pathname || "/";
+    const segs = pathname.split("/").filter(Boolean); // [] | ["comparador"] | ["farmaco","sertralina"]
+    const head = segs[0] || "";
 
     let name = "list";
     let params = {};
-    if (head === "list") name = "list";
-    else if (head === "detail") {
+
+    if (!head) {
+      name = "list";
+    } else if (head === "farmaco") {
       name = "detail";
       params = { id: segs[1] ? decodeURIComponent(segs[1]) : "" };
-    } else if (head === "compare") {
-      name = "compare";
-    } else if (head === "switching") {
-      name = "switching";
-    } else if (head === "ajuste") {
-      name = "ajuste";
-    } else if (head === "interact") {
-      name = "interact";
-    } else if (head === "quiz") {
-      name = "quiz";
-    } else if (head === "combo") {
-      name = "combo";
-    } else if (head === "guias") {
-      name = "guias";
+    } else if (HEAD_TO_NAME[head]) {
+      name = HEAD_TO_NAME[head];
     } else {
       name = "unknown";
     }
 
-    const query = parseQuery(queryPart || "");
-    return {
-      path: h,
-      name,
-      params,
-      query,
-    };
+    const query = parseQuery((location.search || "").replace(/^\?/, ""));
+    return { path: currentUrl(), name, params, query };
   }
 
-  function buildHash(route) {
+  function buildPath(route) {
     const name = route?.name ?? "list";
     const q = route?.query ?? {};
-    let path = "/#/list";
+    let path;
 
-    if (name === "list") path = "/#/list";
-    else if (name === "detail") {
+    if (name === "detail") {
       const id = route?.params?.id ? encodeURIComponent(String(route.params.id)) : "";
-      path = `/#/detail/${id}`;
-    } else if (name === "compare") {
-      path = "/#/compare";
-    } else if (name === "switching") {
-      path = "/#/switching";
-    } else if (name === "ajuste") {
-      path = "/#/ajuste";
-    } else if (name === "interact") {
-      path = "/#/interact";
-    } else if (name === "quiz") {
-      path = "/#/quiz";
-    } else if (name === "combo") {
-      path = "/#/combo";
-    } else if (name === "guias") {
-      path = "/#/guias";
+      path = `/farmaco/${id}`;
     } else {
-      path = options.defaultRoute;
+      path = NAME_TO_PATH[name] ?? options.defaultPath;
     }
 
     const qs = buildQuery(q);
@@ -200,20 +195,18 @@ export function createRouter(store, opts = {}) {
   }
 
   function coerceRoute(route) {
-    // Normaliza rutas inválidas a algo usable
     if (!route || route.name === "unknown") {
-      return { name: "list", params: {}, query: {}, path: options.defaultRoute };
+      return { name: "list", params: {}, query: {}, path: options.defaultPath };
     }
 
     if (route.name === "detail") {
       const id = (route.params?.id ?? "").trim();
-      if (!id) return { name: "list", params: {}, query: {}, path: options.defaultRoute };
+      if (!id) return { name: "list", params: {}, query: {}, path: options.defaultPath };
       return { ...route, params: { id }, query: route.query ?? {} };
     }
 
     if (route.name === "compare") {
       const ids = normalizeIds(route.query?.ids ?? []);
-      // Canon: siempre guardamos ids en query como string
       return {
         ...route,
         params: {},
@@ -221,41 +214,79 @@ export function createRouter(store, opts = {}) {
       };
     }
 
-    // list, switching, ajuste, interact, quiz, combo, guias
     if (["list", "switching", "ajuste", "interact", "quiz", "combo", "guias"].includes(route.name)) {
       return { ...route, params: {}, query: route.query ?? {} };
     }
 
-    return { name: "list", params: {}, query: {}, path: options.defaultRoute };
+    return { name: "list", params: {}, query: {}, path: options.defaultPath };
   }
 
   /* =========================
-     Hash writers
+     Legacy hash migration (#/...) -> URLs reales
      ========================= */
 
-  function writeHash(hash) {
-    location.hash = hash.startsWith("/#/") ? hash.slice(2) : hash; // permite "#/list" también
+  function migrateLegacyHash() {
+    const h = location.hash || "";
+    if (!h.startsWith("#/")) return;
+
+    const raw = h.slice(2); // quita "#/"
+    const [pathPart, queryPart] = raw.split("?");
+    const segs = (pathPart || "").split("/").filter(Boolean);
+    const head = segs[0] || "list";
+
+    let route;
+    if (head === "detail") {
+      route = { name: "detail", params: { id: segs[1] ? decodeURIComponent(segs[1]) : "" }, query: {} };
+    } else if (head === "compare") {
+      route = { name: "compare", params: {}, query: parseQuery(queryPart || "") };
+    } else {
+      route = { name: mapLegacyHead(head), params: {}, query: parseQuery(queryPart || "") };
+    }
+
+    const url = buildPath(coerceRoute(route));
+    history.replaceState(null, "", url); // limpia el #/ y deja la URL real
   }
 
-  function replaceHash(hash) {
-    const h = hash.startsWith("/#/") ? hash : normalizeHash(hash);
-    const url = `${location.pathname}${location.search}#${h.slice(2)}`; // "#/list"
-    history.replaceState(null, "", url);
+  // Mapea los nombres antiguos del hash a los nombres de ruta internos
+  function mapLegacyHead(head) {
+    const legacy = {
+      list: "list",
+      switching: "switching",
+      ajuste: "ajuste",
+      interact: "interact",
+      quiz: "quiz",
+      combo: "combo",
+      guias: "guias",
+    };
+    return legacy[head] ?? "list";
   }
 
-  function normalizeHash(hash) {
-    // Acepta "#/list", "/#/list", "", etc. Devuelve siempre "/#/list..."
-    if (!hash) return options.defaultRoute;
-    let h = String(hash).trim();
+  /* =========================
+     History writers
+     ========================= */
 
-    // location.hash viene como "#/list"
-    if (h.startsWith("#")) h = "/#" + h.slice(1);
-    if (!h.startsWith("/#/")) return options.defaultRoute;
+  function currentUrl() {
+    return `${location.pathname}${location.search}`;
+  }
 
-    // si es solo "/#/" => list
-    if (h === "/#/") return options.defaultRoute;
+  function pushUrl(url) {
+    const target = normalizePath(url);
+    if (currentUrl() === target) return;
+    history.pushState(null, "", target);
+  }
 
-    return h;
+  function replaceUrl(url) {
+    history.replaceState(null, "", normalizePath(url));
+  }
+
+  function normalizePath(url) {
+    if (!url) return options.defaultPath;
+    let u = String(url).trim();
+    // Tolera formatos legacy "#/list" o "/#/list"
+    if (u.startsWith("/#/")) u = u.slice(2);
+    if (u.startsWith("#/")) u = u.slice(1);
+    if (!u.startsWith("/")) u = "/" + u;
+    return u;
   }
 
   /* =========================
@@ -321,8 +352,8 @@ export function createRouter(store, opts = {}) {
     start,
     navigate,
     replace,
-    parseHash,
-    buildHash,
+    parseLocation,
+    buildPath,
     getCurrentRoute,
   };
 }

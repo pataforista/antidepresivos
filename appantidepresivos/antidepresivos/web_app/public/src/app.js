@@ -30,6 +30,49 @@ const analytics = {
 };
 window.appAnalytics = analytics;
 
+// Instancia del router (History API). Se asigna en onAllow tras montar la shell.
+let appRouter = null;
+
+/* ============================================================
+   Link Interceptor — navegación SPA con History API
+   Convierte clicks en <a href="/..."> en navegación sin recarga.
+   ============================================================ */
+function initLinkInterceptor() {
+  document.addEventListener("click", (e) => {
+    // Respeta clicks modificados (nueva pestaña, etc.) y botones no primarios
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    const a = e.target.closest("a");
+    if (!a) return;
+
+    const href = a.getAttribute("href");
+    if (!href) return;
+
+    // Enlaces externos, descargas o nueva pestaña: comportamiento nativo
+    if (a.target === "_blank" || a.hasAttribute("download") || (a.getAttribute("rel") || "").includes("external")) return;
+    if (a.origin && a.origin !== location.origin) return;
+
+    // Enlaces de fragmento (#id): foco accesible sin navegar (p.ej. skip-link)
+    if (href.startsWith("#")) {
+      const id = href.slice(1);
+      if (!id) { e.preventDefault(); return; }
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        target.focus({ preventScroll: false });
+        target.scrollIntoView({ block: "start", behavior: "smooth" });
+      }
+      return;
+    }
+
+    // Enlaces internos absolutos (/...): navegación SPA
+    if (href.startsWith("/") && appRouter) {
+      e.preventDefault();
+      appRouter.navigate(href);
+    }
+  });
+}
+
 /* ============================================================
    App Initialization
    ============================================================ */
@@ -80,7 +123,10 @@ async function main() {
         applySettingToDOM("compact",    uiState.compact    ?? false);
 
         const router = createRouter(store);
+        appRouter = router;
+        window.appRouter = router;   // navegación programática desde otros módulos
         router.start();
+        initLinkInterceptor();       // intercepta clicks en enlaces internos (History API)
 
         // Init Visuals
         setTimeout(() => {
@@ -200,10 +246,10 @@ function attachGlobalListeners() {
       ev.preventDefault();
       const ids = store.getState().compare?.ids ?? [];
       if (!ids.length) {
-        location.hash = "#/list";
+        appRouter?.navigate("/");
         return;
       }
-      location.hash = `#/compare?ids=${encodeURIComponent(ids.join(","))}`;
+      appRouter?.navigate(`/comparador?ids=${encodeURIComponent(ids.join(","))}`);
     });
   }
 
@@ -213,7 +259,7 @@ function attachGlobalListeners() {
     btnClear.addEventListener("click", () => {
       const prevIds = store.getState().compare?.ids ?? [];
       store.setCompareIds([], { reason: "ui:clearCompare" });
-      location.hash = "#/list";
+      appRouter?.navigate("/");
       haptic('light');
       showUndoToast(i18n.t("clear_compare"), () => {
         store.setCompareIds(prevIds, { reason: "ui:undoClearCompare" });
@@ -557,7 +603,7 @@ function renderList(view) {
       <div class="recents-section__title">${i18n.t("recent_items")}</div>
       <div class="recents-list">
         ${recentFarmacos.map(d => `
-          <a href="#/detail/${encodeURIComponent(d.id_farmaco)}" class="recent-item">
+          <a href="/farmaco/${encodeURIComponent(d.id_farmaco)}" class="recent-item">
             <span class="recent-item__name">${escapeHtml(d.nombre_generico)}</span>
             <span class="recent-item__class">${escapeHtml(d.clase_terapeutica || "")}</span>
           </a>
@@ -622,7 +668,7 @@ function renderList(view) {
     go.addEventListener("click", () => {
       const ids = store.getState().compare?.ids ?? [];
       if (!ids.length) return;
-      location.hash = `#/compare?ids=${encodeURIComponent(ids.join(","))}`;
+      appRouter?.navigate(`/comparador?ids=${encodeURIComponent(ids.join(","))}`);
     });
   }
 }
@@ -641,7 +687,7 @@ function renderDrugCard(d, selected, index = 0) {
          style="animation-delay:${delay}ms">
       <div class="card-drug__header">
         <div class="card-drug__emoji" aria-hidden="true">${emoji}</div>
-        <a href="#/detail/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
+        <a href="/farmaco/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
         <button type="button"
           class="card-drug__compare-btn btn btn--circle chkCompareBtn ${isOn ? "active" : ""}"
           data-id="${escapeHtml(id)}"
@@ -768,7 +814,7 @@ function renderCompare(view) {
             </select>
         </div>
 
-        <a href="#/list" class="btn btn--primary">${i18n.t("compare_back")}</a>
+        <a href="/" class="btn btn--primary">${i18n.t("compare_back")}</a>
       </div>
     `;
 
@@ -831,7 +877,7 @@ function renderCompare(view) {
     <div class="animate-fade-in">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
         <h2 class="h2" style="margin:0">${i18n.t("compare_title")}</h2>
-        <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">${i18n.t("compare_back")}</a>
+        <a href="/" class="btn btn--outline text-xs" style="font-weight:700">${i18n.t("compare_back")}</a>
       </div>
 
       <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:var(--space-4); align-items:center;">
@@ -1021,14 +1067,14 @@ function renderRadarChart(data, colors) {
 
 function mountDock(container) {
   const navItems = [
-    { id: "list",      label: i18n.t("nav_home"),    icon: "🏠",  hash: "#/list",      isRoute: true },
-    { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖️",  hash: "#/compare",   isRoute: true },
-    { id: "switching", label: i18n.t("btn_switching"), icon: "🔄",  hash: "#/switching", isRoute: true },
-    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "🩺",  hash: "#/ajuste",    isRoute: true },
-    { id: "combo",     label: i18n.t("btn_combo"), icon: "🚀",  hash: "#/combo",     isRoute: true },
-    { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "#/interact",  isRoute: true },
-    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "🎮",  hash: "#/quiz",      isRoute: true },
-    { id: "guias",     label: i18n.t("btn_guias"), icon: "📖",  hash: "#/guias",     isRoute: true },
+    { id: "list",      label: i18n.t("nav_home"),    icon: "🏠",  hash: "/",      isRoute: true },
+    { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖️",  hash: "/comparador",   isRoute: true },
+    { id: "switching", label: i18n.t("btn_switching"), icon: "🔄",  hash: "/switching", isRoute: true },
+    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "🩺",  hash: "/ajuste",    isRoute: true },
+    { id: "combo",     label: i18n.t("btn_combo"), icon: "🚀",  hash: "/combinaciones",     isRoute: true },
+    { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "/interacciones",  isRoute: true },
+    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "🎮",  hash: "/quiz",      isRoute: true },
+    { id: "guias",     label: i18n.t("btn_guias"), icon: "📖",  hash: "/guias",     isRoute: true },
   ];
   const actionItems = [
     { id: "legal",    label: i18n.t("nav_legal"),    icon: "📜", hash: "#", isRoute: false, action: "legal"    },

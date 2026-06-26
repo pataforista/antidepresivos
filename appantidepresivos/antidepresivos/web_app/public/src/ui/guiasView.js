@@ -17,7 +17,7 @@ export function renderGuias(view) {
       <div class="animate-fade-in" style="text-align:center; padding:var(--space-8);">
         <h2 class="h2">${t("Guías Clínicas", "Clinical Guidelines")}</h2>
         <p class="text-muted">${t("No se pudieron cargar las guías.", "Could not load the guidelines.")}</p>
-        <a href="#/list" class="btn btn--primary" style="margin-top:var(--space-6)">${t("Volver", "Back")}</a>
+        <a href="/" class="btn btn--primary" style="margin-top:var(--space-6)">${t("Volver", "Back")}</a>
       </div>`;
     return;
   }
@@ -52,7 +52,7 @@ export function renderGuias(view) {
           <h2 class="h2" style="margin:0">${t("Guías Clínicas", "Clinical Guidelines")} 📖</h2>
           <p class="text-sm text-muted" style="margin-top:var(--space-2);">${t("Orientaciones de primera línea por trastorno (NICE · APA · CANMAT · ACOG).", "First-line orientations by disorder (NICE · APA · CANMAT · ACOG).")}</p>
         </div>
-        <a href="#/list" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
+        <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
       </div>
 
       <div>${cards}</div>
