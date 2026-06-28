@@ -1,0 +1,178 @@
+/* ============================================================
+   src/styles/enhancements.css
+   "Premium Polish" layer — micro-detalles inspirados en uiverse,
+   adaptados al sistema de diseño Neo Bauhaus + Naive.
+   Aislado y fácil de revertir: solo añade detalles, no reestructura.
+   Respeta tokens, modo oscuro y prefers-reduced-motion.
+   ============================================================ */
+
+/* Ángulo animable para bordes de gradiente giratorios (uiverse signature).
+   Con @property la animación es fluida; navegadores antiguos lo ignoran
+   y muestran el gradiente estático (degradación elegante). */
+@property --grad-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes spinGradient {
+    to {
+        --grad-angle: 360deg;
+    }
+}
+
+/* ─── 1. Botones CTA: barrido de brillo (shine sweep) ────────────────────── */
+.btn--primary,
+.m3-fab,
+.card-drug__compare-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn--primary::after,
+.m3-fab::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -130%;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.38) 50%,
+        transparent 100%
+    );
+    transform: skewX(-22deg);
+    pointer-events: none;
+    z-index: 1;
+}
+
+@media (hover: hover) {
+    .btn--primary:hover:not(:disabled)::after,
+    .m3-fab:hover:not(:disabled)::after {
+        animation: btnShine 0.85s cubic-bezier(0.2, 0, 0, 1);
+    }
+}
+
+@keyframes btnShine {
+    from { left: -130%; }
+    to   { left: 135%; }
+}
+
+/* Mantener el texto/iconos por encima del barrido */
+.btn--primary > *,
+.m3-fab > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* ─── 2. Barra de búsqueda: borde de gradiente giratorio al enfocar ──────── */
+.search-hero::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: calc(var(--radius-xl) + 2px);
+    padding: 2px;
+    background: conic-gradient(
+        from var(--grad-angle),
+        var(--color-primary),
+        var(--color-secondary),
+        var(--color-accent-mustard),
+        var(--color-primary)
+    );
+    /* Solo muestra el "anillo" (recorta el centro) */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.search-hero:focus-within::after {
+    opacity: 1;
+    animation: spinGradient 4s linear infinite;
+}
+
+/* El input debe quedar por encima del anillo */
+.search-hero__input {
+    position: relative;
+    z-index: 1;
+}
+
+/* ─── 3. Dock activo: gradiente sutil + glow ─────────────────────────────── */
+.dock-nav-item.active .dock-nav-item__indicator {
+    background: linear-gradient(
+        140deg,
+        var(--color-primary-light),
+        var(--color-primary)
+    );
+    box-shadow:
+        2px 3px 0px var(--color-primary-dark),
+        0 0 14px -3px hsla(var(--color-primary-h), var(--color-primary-s), 52%, 0.55);
+}
+
+/* ─── 4. Toggle de ajustes: halo al activarse ────────────────────────────── */
+.settings-toggle__input:checked ~ .settings-toggle__track {
+    box-shadow: 0 0 10px -1px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.45);
+}
+
+/* ─── 5. Logo de cabecera: brillo sutil al hover (toque "naive") ─────────── */
+@media (hover: hover) {
+    .header__logo {
+        position: relative;
+        overflow: hidden;
+    }
+    .header__logo::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -130%;
+        width: 70%;
+        height: 100%;
+        background: linear-gradient(
+            100deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.45) 50%,
+            transparent 100%
+        );
+        transform: skewX(-22deg);
+        pointer-events: none;
+    }
+    .header__logo:hover::after {
+        animation: btnShine 0.8s cubic-bezier(0.2, 0, 0, 1);
+    }
+}
+
+/* ─── Dark mode: ajustes de intensidad ───────────────────────────────────── */
+[data-theme="dark"] .btn--primary::after,
+[data-theme="dark"] .m3-fab::after {
+    background: linear-gradient(
+        100deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.22) 50%,
+        transparent 100%
+    );
+}
+
+[data-theme="dark"] .dock-nav-item.active .dock-nav-item__indicator {
+    box-shadow:
+        2px 3px 0px var(--color-primary-dark),
+        0 0 16px -2px hsla(var(--color-primary-h), var(--color-primary-s), 62%, 0.6);
+}
+
+/* ─── Accesibilidad: sin movimiento ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .btn--primary::after,
+    .m3-fab::after,
+    .header__logo::after {
+        display: none;
+    }
+    .search-hero:focus-within::after {
+        animation: none;
+    }
+}
