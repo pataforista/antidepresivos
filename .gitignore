@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build / tooling
+.wrangler/
+dist/
+
+# OS / editor
+.DS_Store
+*.log
