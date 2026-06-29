@@ -530,3 +530,379 @@
     65%  { transform: scale(1.25); }
     100% { transform: scale(1); }
 }
+
+/* ============================================================
+   NEO-BRUTALIST DESIGN SYSTEM ENHANCEMENTS
+   ============================================================ */
+
+/* ─── Global Card & Button Thickness ─── */
+.card {
+    border-width: 3px !important;
+    border-color: var(--color-stroke) !important;
+}
+
+.btn {
+    border-width: 3px !important;
+    border-color: var(--color-stroke) !important;
+}
+
+.task-chip {
+    border: 2px solid var(--color-stroke) !important;
+    box-shadow: 2px 2px 0 var(--color-stroke);
+}
+
+.task-chip.active {
+    box-shadow: none;
+    transform: translate(1px, 1px);
+}
+
+/* Dark mode adjustments for borders (respecting existing colors) */
+[data-theme="dark"] .card {
+    border-color: var(--color-border-hard) !important;
+}
+
+[data-theme="dark"] .btn {
+    border-color: var(--color-border-hard) !important;
+}
+
+[data-theme="dark"] .task-chip {
+    border-color: var(--color-border-hard) !important;
+    box-shadow: 2px 2px 0 var(--color-border-hard);
+}
+
+[data-theme="dark"] .task-chip.active {
+    box-shadow: none;
+}
+
+/* ─── Brutalist Search Input & Tilted Label ─── */
+.brutalist-container {
+    position: relative;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.brutalist-input {
+    width: 100%;
+    padding: 18px 52px 18px 52px !important;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--color-text-main);
+    background-color: var(--color-surface) !important;
+    border: 3px solid var(--color-stroke) !important;
+    border-radius: var(--radius-md) !important;
+    outline: none;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 4px 4px 0 var(--color-stroke), 8px 8px 0 var(--color-primary) !important;
+}
+
+[data-theme="dark"] .brutalist-input {
+    border-color: var(--color-border-hard) !important;
+    box-shadow: 4px 4px 0 var(--color-border-hard), 8px 8px 0 var(--color-primary) !important;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.brutalist-input:focus {
+    animation: focus-pulse-brutal 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite,
+               glitch 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+    box-shadow: 2px 2px 0 var(--color-stroke), 4px 4px 0 var(--color-primary) !important;
+}
+
+[data-theme="dark"] .brutalist-input:focus {
+    box-shadow: 2px 2px 0 var(--color-border-hard), 4px 4px 0 var(--color-primary) !important;
+}
+
+@keyframes focus-pulse-brutal {
+    0%, 100% { border-color: var(--color-stroke); }
+    50% { border-color: var(--color-primary); }
+}
+
+[data-theme="dark"] @keyframes focus-pulse-brutal {
+    0%, 100% { border-color: var(--color-border-hard); }
+    50% { border-color: var(--color-primary); }
+}
+
+.brutalist-label {
+    position: absolute;
+    left: 14px;
+    top: -12px;
+    font-size: 0.72rem;
+    font-family: var(--font-headers);
+    font-weight: 900;
+    color: var(--color-on-primary);
+    background-color: var(--color-stroke);
+    padding: 3px 10px;
+    transform: rotate(-2.5deg);
+    z-index: 2;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 2px solid var(--color-stroke);
+    pointer-events: none;
+}
+
+[data-theme="dark"] .brutalist-label {
+    background-color: var(--color-border-hard);
+    color: var(--color-bg);
+    border-color: var(--color-border-hard);
+}
+
+.brutalist-input:focus + .brutalist-label,
+.brutalist-input:not(:placeholder-shown) + .brutalist-label {
+    transform: rotate(0deg) scale(1.05);
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary-dark) !important;
+    color: var(--color-on-primary) !important;
+}
+
+[data-theme="dark"] .brutalist-input:focus + .brutalist-label,
+[data-theme="dark"] .brutalist-input:not(:placeholder-shown) + .brutalist-label {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary-light) !important;
+    color: var(--color-on-primary-container) !important;
+}
+
+/* Smooth Type Sweep effect */
+.smooth-type {
+    position: relative;
+    overflow: hidden;
+}
+
+.smooth-type::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: linear-gradient(90deg, var(--color-surface) 0%, rgba(255, 255, 255, 0) 100%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.smooth-type:focus::before {
+    opacity: 0.12;
+    animation: type-gradient 2s linear infinite;
+}
+
+@keyframes type-gradient {
+    0% { background-position: 300px 0; }
+    100% { background-position: 0 0; }
+}
+
+/* ─── Card Diagonal Stripe Textures ─── */
+.card-drug__header {
+    position: relative;
+}
+
+.card--hoverable:hover .card-drug__header::before {
+    content: "";
+    position: absolute;
+    inset: -12px -16px 0 -16px;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent 0px,
+        transparent 8px,
+        var(--color-border-strong) 8px,
+        var(--color-border-strong) 10px
+    );
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+    border-bottom: 2px solid var(--color-stroke);
+}
+
+[data-theme="dark"] .card--hoverable:hover .card-drug__header::before {
+    border-bottom-color: var(--color-border-hard);
+}
+
+.card-drug__emoji,
+.card-drug__name,
+.card-drug__compare-btn {
+    position: relative;
+    z-index: 1;
+}
+
+/* ─── Sliding Shine on Buttons (Angry Button) ─── */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:active:not(:disabled),
+.task-chip:active,
+.settings-option-btn:active,
+.quiz-option:not(:disabled):active,
+.chip:active {
+    transform: translateY(3px) translateX(2px) !important;
+    box-shadow: none !important;
+    transition-duration: 60ms !important;
+}
+
+/* ─── Bottom Sheet & Modals ─── */
+.bottom-sheet {
+    border-top: 3px solid var(--color-stroke) !important;
+}
+
+[data-theme="dark"] .bottom-sheet {
+    border-top-color: var(--color-border-hard) !important;
+}
+
+.gatekeeper__card {
+    border: 3px solid var(--color-stroke) !important;
+    box-shadow: var(--shadow-xl) !important;
+}
+
+[data-theme="dark"] .gatekeeper__card {
+    border-color: var(--color-border-hard) !important;
+}
+
+/* ─── Settings Panel Toggles & Option Buttons ─── */
+.settings-option-btn {
+    border: 2.5px solid var(--color-stroke) !important;
+    box-shadow: 2px 2px 0 var(--color-stroke);
+    border-radius: var(--radius-sm) !important;
+}
+
+.settings-option-btn.active {
+    box-shadow: none;
+    transform: translate(1px, 1px);
+}
+
+[data-theme="dark"] .settings-option-btn {
+    border-color: var(--color-border-hard) !important;
+    box-shadow: 2px 2px 0 var(--color-border-hard);
+}
+
+[data-theme="dark"] .settings-option-btn.active {
+    box-shadow: none;
+}
+
+/* Brutalist Custom Toggle Track */
+.settings-toggle__track {
+    border: 2.5px solid var(--color-stroke) !important;
+    border-radius: 6px !important;
+    background: var(--color-surface-raised) !important;
+}
+
+.settings-toggle__thumb {
+    border: 2px solid var(--color-stroke) !important;
+    border-radius: 3px !important;
+    background: var(--color-surface) !important;
+    top: 2px !important;
+    left: 2px !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.settings-toggle__input:checked ~ .settings-toggle__track {
+    background: var(--color-primary) !important;
+}
+
+.settings-toggle__input:checked ~ .settings-toggle__track .settings-toggle__thumb {
+    transform: translateX(20px) !important;
+    background: var(--color-on-primary) !important;
+}
+
+[data-theme="dark"] .settings-toggle__track {
+    border-color: var(--color-border-hard) !important;
+}
+
+[data-theme="dark"] .settings-toggle__thumb {
+    border-color: var(--color-border-hard) !important;
+}
+
+/* ─── Brutal Tooltips ─── */
+.brutal-tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.brutal-tooltip {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background-color: var(--color-stroke) !important;
+    color: var(--color-surface) !important;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+    border: 2px solid var(--color-primary-light) !important;
+    box-shadow: 3px 3px 0 var(--color-stroke) !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease-out;
+    z-index: 1000;
+}
+
+.brutal-tooltip-wrapper:hover .brutal-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Global Brutalist Form Elements ─── */
+select,
+input[type="text"],
+input[type="number"],
+input[type="search"] {
+    border: 2.5px solid var(--color-stroke) !important;
+    border-radius: var(--radius-sm) !important;
+    background-color: var(--color-surface) !important;
+    color: var(--color-text-main) !important;
+    box-shadow: 2px 2px 0 var(--color-stroke);
+    padding: 8px 12px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+[data-theme="dark"] select,
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="number"],
+[data-theme="dark"] input[type="search"] {
+    border-color: var(--color-border-hard) !important;
+    box-shadow: 2px 2px 0 var(--color-border-hard);
+}
+
+select:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow: 3px 3px 0 var(--color-primary) !important;
+}
+
+

@@ -629,14 +629,15 @@ function renderList(view) {
       ${heroHTML}
 
       <!-- Hero search protagonista -->
-      <div class="search-hero" role="search">
+      <div class="search-hero brutalist-container" role="search">
         <span class="search-hero__icon-left" aria-hidden="true">🔍</span>
-        <input type="search" id="inputSearch" class="search-hero__input"
-          placeholder="${i18n.t("search_placeholder")}"
+        <input type="search" id="inputSearch" class="search-hero__input brutalist-input smooth-type"
+          placeholder=" "
           aria-label="${i18n.t("search_placeholder")}"
           enterkeyhint="search"
           value="${escapeHtml(state.filters.q || "")}"
           autocomplete="off" autocorrect="off" spellcheck="false" />
+        <label class="brutalist-label" for="inputSearch">${i18n.t("search_placeholder")}</label>
       </div>
 
       <!-- Task chips (filtros por tarea clínica) -->
