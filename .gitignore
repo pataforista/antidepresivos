@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Lockfiles (project uses npm but does not pin a committed lockfile)
+package-lock.json
+
+# Logs
+*.log
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
