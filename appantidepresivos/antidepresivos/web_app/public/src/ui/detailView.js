@@ -339,7 +339,7 @@ function renderTabSeguridad(item) {
           </summary>
           <div class="detail-section__body">
             <div style="display:grid; gap:var(--space-3)">
-              ${rowRisk(i18n.t("sedation"), item.nivel_sedacion)}
+              ${rowRisk(i18n.t("sedation"), sedationLabel(item.nivel_sedacion), parseInt(item.nivel_sedacion, 10) >= 2)}
               ${rowRisk(i18n.t("weight_impact"), item.perfil_impacto_peso)}
               ${rowRisk(i18n.t("sexual_dys"), item.perfil_disfuncion_sexual)}
               ${rowRisk(i18n.t("qt_risk"), item.riesgo_prolongacion_qt)}
@@ -518,7 +518,7 @@ function initTitrationChart(item) {
 
          if (details) {
             details.innerHTML = `
-               <div class="card" style="border-left:4px solid var(--color-primary); background:rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.05)">
+               <div class="card" style="border-left:4px solid var(--color-primary); background:hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.05)">
                   <h5 class="h5" style="margin-bottom:var(--space-2)">Protocolo: ${entry.strategy.replace("_", " ").toUpperCase()}</h5>
                   <ul class="list-disc" style="padding-left:var(--space-5); margin-bottom:var(--space-3)">
                      <li><b>Periodo de cambio:</b> ${entry.taper_days} días</li>
@@ -538,6 +538,13 @@ let titrationChartInstance = null;
 function renderTitrationChart(entry, fromName, toName) {
    const ctx = document.getElementById('titrationChart');
    if (!ctx) return;
+
+   // Chart.js llega por CDN: si no cargó (offline/bloqueado), degradar sin romper
+   if (typeof Chart === "undefined") {
+      const box = ctx.parentElement;
+      if (box) box.innerHTML = `<p class="text-sm text-muted" style="padding:var(--space-4)">Gráfico no disponible sin conexión. El protocolo se describe arriba.</p>`;
+      return;
+   }
 
    if (titrationChartInstance) {
       titrationChartInstance.destroy();
@@ -619,7 +626,7 @@ function renderTitrationChart(entry, fromName, toName) {
                position: 'top',
                labels: {
                   font: {
-                     family: 'Outfit',
+                     family: 'Montserrat',
                      weight: 'bold'
                   }
                }
@@ -658,13 +665,15 @@ function rowDetail(label, val) {
     `;
 }
 
-function rowRisk(label, val) {
-   const isHigh = (val || "").toLowerCase().includes("alto") || (val === "3") || (val === "2");
+function rowRisk(label, val, forceHigh = false) {
+   // val puede llegar como número (nivel_sedacion normalizado): convertir siempre
+   const s = String(val ?? "").toLowerCase();
+   const isHigh = forceHigh || s.includes("alto") || s === "3" || s === "2";
    const style = isHigh ? "color:var(--color-danger); font-weight:800" : "font-weight:600";
    return `
       <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--color-border); padding-bottom:var(--space-2);">
          <span class="text-sm" style="font-weight:600">${escapeHtml(label)}</span>
-         <span style="${style}">${escapeHtml(val)}</span>
+         <span style="${style}">${escapeHtml(String(val ?? "N/D"))}</span>
       </div>
     `;
 }

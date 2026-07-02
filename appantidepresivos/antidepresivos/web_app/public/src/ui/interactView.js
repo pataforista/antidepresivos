@@ -101,7 +101,7 @@ export function renderInteract(view) {
                         </thead>
                         <tbody>
                             ${cypData.map((row, i) => `
-                                <tr style="${i % 2 === 1 ? "background:rgba(var(--color-primary-h),var(--color-primary-s),var(--color-primary-l),0.02);" : ""}">
+                                <tr style="${i % 2 === 1 ? "background:hsla(var(--color-primary-h),var(--color-primary-s),var(--color-primary-l),0.02);" : ""}">
                                     <td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border);">
                                         <span style="font-weight:700;">${escapeHtml(row.name)}</span>
                                         <div class="text-xs text-muted" style="font-weight:600; margin-top:2px;">${escapeHtml(row.clase)}</div>

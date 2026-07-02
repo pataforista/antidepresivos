@@ -86,6 +86,47 @@ body {
     letter-spacing: 0.05em;
 }
 
+/* Utilidades usadas por las vistas (antes sin definir) */
+.h5 {
+    font-family: var(--font-headers);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+.text-body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-main);
+}
+
+.list-disc {
+    list-style: disc;
+}
+
+.link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.link:hover {
+    color: var(--color-primary-dark);
+}
+
+.color-danger {
+    color: var(--color-danger);
+}
+
+.bg-soft {
+    background: var(--color-surface-raised);
+}
+
+.btn--sm {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+}
+
 /* --- Buttons (Neo Bauhaus: rectangular, 2px hard border, physical press) --- */
 .btn {
     display: inline-flex;
@@ -391,6 +432,18 @@ textarea:focus-visible {
     background: var(--color-danger-container);
     border-color: var(--color-danger);
     color: var(--color-danger);
+}
+
+.alert--warning {
+    background: var(--color-warning-container);
+    border-color: var(--color-warning);
+    color: var(--color-text-main);
+}
+
+.alert--success {
+    background: var(--color-success-container);
+    border-color: var(--color-success);
+    color: var(--color-text-main);
 }
 
 /* Grid Layouts moved to layout.css */

@@ -53,7 +53,7 @@ export function renderSwitching(view) {
                         </div>
                     </div>
                     
-                    <div id="visualTimeline" class="card" style="padding:var(--space-6); background:rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.02); margin-bottom:var(--space-6);">
+                    <div id="visualTimeline" class="card" style="padding:var(--space-6); background:hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.02); margin-bottom:var(--space-6);">
                         <h4 class="h4" style="margin-bottom:var(--space-4)">${i18n.t("transition_scheme")}</h4>
                         <div style="height:350px; width:100%;">
                             <canvas id="switchChart"></canvas>
@@ -215,6 +215,13 @@ function renderSwitchChart(entry, fromName, toName) {
     const canvas = document.getElementById('switchChart');
     if (!canvas) return;
 
+    // Chart.js llega por CDN: si no cargó (offline/bloqueado), degradar sin romper
+    if (typeof Chart === "undefined") {
+        const box = canvas.parentElement;
+        if (box) box.innerHTML = `<p class="text-sm text-muted" style="padding:var(--space-4)">Gráfico no disponible sin conexión. Consulte las notas clínicas del plan.</p>`;
+        return;
+    }
+
     if (activeSwitchChart) {
         activeSwitchChart.destroy();
     }
@@ -286,7 +293,7 @@ function renderSwitchChart(entry, fromName, toName) {
             plugins: {
                 legend: {
                     position: 'top',
-                    labels: { font: { family: 'Outfit', weight: 'bold' } }
+                    labels: { font: { family: 'Montserrat', weight: 'bold' } }
                 }
             }
         }

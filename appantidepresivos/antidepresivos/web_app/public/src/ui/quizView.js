@@ -566,6 +566,10 @@ function renderResults(view) {
   const MODES = getModes();
   const modeConfig = MODES[Q.mode];
 
+  // Nivel Guru: ronda perfecta en un modo completo. (El antiguo umbral de 1000
+  // puntos era inalcanzable: el máximo teórico con rachas ronda los 450.)
+  const guruUnlocked = Q.wrong.length === 0 && Q.total >= 10;
+
   // Review section for wrong answers
   const reviewHTML = Q.wrong.length ? `
     <div class="quiz-review-section">
@@ -625,7 +629,7 @@ function renderResults(view) {
 
         ${reviewHTML}
 
-        ${Q.score >= 1000 ? `
+        ${guruUnlocked ? `
           <div id="guruCertificate" style="display:none; padding:40px; background:white; color:#111; font-family:'Outfit',sans-serif; border:10px double #4f46e5; text-align:center; position:relative;">
             <div style="font-size:1.5rem; letter-spacing:4px; color:#4f46e5; font-weight:800; margin-bottom:20px;">${i18n.getLocale() === 'en' ? 'EXPERT CERTIFICATE' : 'CERTIFICADO DE EXPERTO'}</div>
             <div style="font-size:0.9rem; text-transform:uppercase; margin-bottom:10px;">${i18n.getLocale() === 'en' ? 'The Antidepressants Guide certifies:' : 'La Guía Antidepresivos certifica a:'}</div>

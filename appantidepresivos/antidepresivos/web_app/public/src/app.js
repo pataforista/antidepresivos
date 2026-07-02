@@ -14,7 +14,7 @@ import { renderGuias } from "./ui/guiasView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations, initScrollHideHeader, initRippleEffect, haptic, withViewTransition } from "./ui/visuals.js";
 import { escapeHtml } from "./core/utils.js";
-import { drugEmoji, isNotableRisk, isHighRisk } from "./core/drugNormalization.js";
+import { drugEmoji, isNotableRisk, isHighRisk, sedationLabel, sedationVariant } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
 import { i18n } from "./core/i18n.js";
 import { mountSettingsPanel, applySettingToDOM } from "./ui/settingsPanel.js";
@@ -159,6 +159,10 @@ async function main() {
 
         // Re-render completo al cambiar el idioma; aplicar ajustes de UI al DOM
         store.subscribe("state:path:ui", async ({ prev, next }) => {
+          // Sync theme button icon (se busca en cada evento: el shell puede re-montarse)
+          const btnTheme = document.getElementById("btnThemeToggle");
+          if (btnTheme) btnTheme.innerHTML = next.theme === "dark" ? "☀️" : "🌙";
+
           // Apply non-locale settings immediately to DOM
           if (prev.theme      !== next.theme)      applySettingToDOM("theme",      next.theme);
           if (prev.fontSize   !== next.fontSize)   applySettingToDOM("fontSize",   next.fontSize);
@@ -168,8 +172,12 @@ async function main() {
           if (prev.locale !== next.locale) {
             root.innerHTML = `<div style='display:flex; height:100vh; align-items:center; justify-content:center;'><p style='font-family:var(--font-headers); font-weight:700; color:var(--color-primary); font-size:1.5rem;' class='animate-fade-in'>${i18n.t('loading')}</p></div>`;
             const newCtx = await loadAppData(next.locale);
-            store.patch({ data: { dataset: newCtx.dataset } });
+            // Solo cambia el dataset: conserva locales, schema, manifest, legal, etc.
+            store.patch({ data: { ...store.getState().data, dataset: newCtx.dataset } });
             mountShell(root);
+            attachGlobalListeners();
+            updateCompareCount();
+            mountDock(document.getElementById("dock-container"));
             renderRoute(store.getState().route);
             updateHeaderNav(store.getState().route);
           }
@@ -233,11 +241,6 @@ function attachGlobalListeners() {
       applySettingToDOM("theme", next);
     });
   }
-
-  // Sync theme button icon on state change
-  store.subscribe("state:path:ui", ({ next }) => {
-    if (btnTheme) btnTheme.innerHTML = next.theme === "dark" ? "☀️" : "🌙";
-  });
 
   // Listener para el botón de comparar en el header (si existe en mountShell)
   const btnHeaderCompare = document.getElementById("btnHeaderCompare");
@@ -462,27 +465,31 @@ function addRecentItem(id, name, cls) {
 
 /* ============================================================
    Task Filter definitions (filtros por tarea clínica)
+   Los labels se resuelven en cada render: locales.json aún no
+   está cargado cuando se evalúa este módulo.
    ============================================================ */
-const TASK_FILTERS = [
-  { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "😴",
-    test: d => parseInt(d.nivel_sedacion) <= 1 },
-  { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "❤️",
-    test: d => /bajo|leve|mínima|minima|nula|low|mild|none/i.test(d.perfil_disfuncion_sexual || "") },
-  { id: "low_qt",         label: i18n.t("filter_qt"),    icon: "💓",
-    test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_prolongacion_qt || "") },
-  { id: "low_weight",     label: i18n.t("filter_weight"), icon: "⚖️",
-    test: d => /neutro|bajo|pérdida|perdida|neutral|low|loss/i.test(d.perfil_impacto_peso || "") },
-  { id: "low_withdrawal", label: i18n.t("filter_withdrawal"),  icon: "🔄",
-    test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_sindrome_abstinencia || "") },
-  { id: "isrs",           label: "ISRS",            icon: "💊",
-    test: d => /isrs/i.test(d.clase_terapeutica || "") },
-  { id: "dual",           label: "Dual (IRSN)",     icon: "🔁",
-    test: d => /dual|irsn|snri/i.test(d.clase_terapeutica || d.mecanismo_principal || "") },
-];
+function getTaskFilters() {
+  return [
+    { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "😴",
+      test: d => parseInt(d.nivel_sedacion) <= 1 },
+    { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "❤️",
+      test: d => /bajo|leve|mínima|minima|nula|low|mild|none/i.test(d.perfil_disfuncion_sexual || "") },
+    { id: "low_qt",         label: i18n.t("filter_qt"),    icon: "💓",
+      test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_prolongacion_qt || "") },
+    { id: "low_weight",     label: i18n.t("filter_weight"), icon: "⚖️",
+      test: d => /neutro|bajo|pérdida|perdida|neutral|low|loss/i.test(d.perfil_impacto_peso || "") },
+    { id: "low_withdrawal", label: i18n.t("filter_withdrawal"),  icon: "🔄",
+      test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_sindrome_abstinencia || "") },
+    { id: "isrs",           label: "ISRS",            icon: "💊",
+      test: d => /isrs/i.test(d.clase_terapeutica || "") },
+    { id: "dual",           label: "Dual (IRSN)",     icon: "🔁",
+      test: d => /dual|irsn|snri/i.test(d.clase_terapeutica || d.mecanismo_principal || "") },
+  ];
+}
 
 function applyTaskFilters(items, activeTasks) {
   if (!activeTasks || activeTasks.length === 0) return items;
-  const defs = TASK_FILTERS.filter(t => activeTasks.includes(t.id));
+  const defs = getTaskFilters().filter(t => activeTasks.includes(t.id));
   return items.filter(d => defs.every(t => t.test(d)));
 }
 
@@ -497,22 +504,22 @@ function getClinicalChips(d) {
     chips.push({ label: `ATC: ${d.codigo_atc} 🔬`, variant: "primary" });
   }
 
-  // Sedation level
+  // Sedation level (label localizado según idioma activo)
   const sed = parseInt(d.nivel_sedacion, 10);
   if (!isNaN(sed)) {
-    const variants = ["success", "success", "warning", "danger"];
-    const labels = ["Energía Pura ⚡", "Sedación Sutil 🧘", "Sedación Notoria 😫", "Sedación Profunda 💤"];
-    chips.push({ label: labels[Math.min(sed, 3)], variant: variants[Math.min(sed, 3)] });
+    chips.push({ label: sedationLabel(sed), variant: sedationVariant(sed) });
   }
+
+  const en = i18n.getLocale() === "en";
 
   // QT risk — only flag if notable
   if (isNotableRisk(d.riesgo_prolongacion_qt)) {
-    chips.push({ label: "Riesgo QT ↑ 💓", variant: isHighRisk(d.riesgo_prolongacion_qt) ? "danger" : "warning" });
+    chips.push({ label: en ? "QT Risk ↑ 💓" : "Riesgo QT ↑ 💓", variant: isHighRisk(d.riesgo_prolongacion_qt) ? "danger" : "warning" });
   }
 
   // Sexual dysfunction — only flag if notable
   if (isNotableRisk(d.perfil_disfuncion_sexual)) {
-    chips.push({ label: "Impacto Sexual ↑ ❤️", variant: isHighRisk(d.perfil_disfuncion_sexual) ? "danger" : "warning" });
+    chips.push({ label: en ? "Sexual Impact ↑ ❤️" : "Impacto Sexual ↑ ❤️", variant: isHighRisk(d.perfil_disfuncion_sexual) ? "danger" : "warning" });
   }
 
   return chips;
@@ -590,7 +597,7 @@ function renderList(view) {
     .slice(0, 5);
 
   // Task chips HTML
-  const taskChipsHTML = TASK_FILTERS.map(t => {
+  const taskChipsHTML = getTaskFilters().map(t => {
     const isActive = activeTasks.includes(t.id);
     return `<button type="button" class="task-chip ${isActive ? "active" : ""} task-filter-btn" data-task="${escapeHtml(t.id)}">
       <span class="task-chip__icon">${t.icon}</span>${escapeHtml(t.label)}
@@ -843,12 +850,6 @@ function renderCompare(view) {
     return;
   }
 
-  if (rows.length >= 2) {
-    setTimeout(() => {
-      showToast(i18n.t("toast_compare_ready"), 'success');
-    }, 400);
-  }
-
   const chips = rows
     .map((d, i) => {
       const id = d.id_farmaco;
@@ -935,12 +936,15 @@ function renderCompare(view) {
               <tbody>
                 ${tableFields.map(tr => `
                   <tr>
-                    <td style="padding:var(--space-4) var(--space-5); font-weight:700; color:var(--color-text-muted); font-size:0.85rem; border-bottom:1px solid var(--color-border); background:rgba(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.02)">${escapeHtml(tr.label)}</td>
+                    <td style="padding:var(--space-4) var(--space-5); font-weight:700; color:var(--color-text-muted); font-size:0.85rem; border-bottom:1px solid var(--color-border); background:hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.02)">${escapeHtml(tr.label)}</td>
                     ${rows.map(d => {
-    const val = d[tr.key] ?? "-";
-    const isHigh = tr.highlight && (val.toString().toLowerCase().includes("alto") || val === "3" || val === "2");
+    const raw = d[tr.key] ?? "-";
+    // La sedación llega como ordinal 0-3: se muestra con su etiqueta clínica
+    const val = tr.key === "nivel_sedacion" ? sedationLabel(raw) : raw;
+    const s = String(raw).toLowerCase();
+    const isHigh = tr.highlight && (s.includes("alto") || s === "3" || s === "2");
     const textStyle = isHigh ? 'color:var(--color-danger); font-weight:800;' : 'font-weight:500;';
-    return `<td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border); font-size:0.95rem; ${textStyle}">${escapeHtml(val)}</td>`;
+    return `<td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border); font-size:0.95rem; ${textStyle}">${escapeHtml(String(val))}</td>`;
   }).join("")}
                   </tr>
                 `).join("")}
@@ -1166,8 +1170,15 @@ function dismissToast(toast) {
   setTimeout(() => toast.remove(), 400);
 }
 
+const MAX_VISIBLE_TOASTS = 3;
+
 function showToast(message, type = 'info', duration = 3500) {
   const container = getToastContainer();
+
+  // Evita la pila de avisos: descarta los más antiguos si ya hay 3 visibles
+  while (container.children.length >= MAX_VISIBLE_TOASTS) {
+    container.firstElementChild.remove();
+  }
 
   const icons = { info: 'ℹ️', success: '✅', warning: '⚠️', error: '❌', motivational: '🚀' };
 
@@ -1239,7 +1250,10 @@ if ('serviceWorker' in navigator) {
     });
   });
 
+  // En la primera visita el SW toma control con clients.claim() y dispara
+  // controllerchange: solo avisamos de "actualización" si ya había un controlador.
+  const hadController = !!navigator.serviceWorker.controller;
   navigator.serviceWorker.addEventListener('controllerchange', () => {
-    showToast(i18n.t('sw_updated'), 'info', 8000);
+    if (hadController) showToast(i18n.t('sw_updated'), 'info', 8000);
   });
 }
