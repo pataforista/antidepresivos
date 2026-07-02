@@ -1170,8 +1170,15 @@ function dismissToast(toast) {
   setTimeout(() => toast.remove(), 400);
 }
 
+const MAX_VISIBLE_TOASTS = 3;
+
 function showToast(message, type = 'info', duration = 3500) {
   const container = getToastContainer();
+
+  // Evita la pila de avisos: descarta los más antiguos si ya hay 3 visibles
+  while (container.children.length >= MAX_VISIBLE_TOASTS) {
+    container.firstElementChild.remove();
+  }
 
   const icons = { info: 'ℹ️', success: '✅', warning: '⚠️', error: '❌', motivational: '🚀' };
 
