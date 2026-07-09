@@ -577,6 +577,14 @@ function renderList(view) {
   const state = store.getState();
   const activeTasks = state.filters?.tasks ?? [];
 
+  // Preserve search input focus/caret across re-render (innerHTML replace below
+  // would otherwise destroy the focused element, forcing the user to re-click
+  // after every keystroke).
+  const activeEl = document.activeElement;
+  const wasSearchFocused = activeEl && activeEl.id === "inputSearch";
+  const searchSelStart = wasSearchFocused ? activeEl.selectionStart : null;
+  const searchSelEnd = wasSearchFocused ? activeEl.selectionEnd : null;
+
   // Show skeleton while data loads
   if (!state.data?.dataset) {
     view.innerHTML = `<div class="animate-fade-in"><div class="grid-cards">${renderSkeletonGrid(6)}</div></div>`;
@@ -682,6 +690,17 @@ function renderList(view) {
 
   attachFilterListeners(view);
   initCardSpotlight();
+
+  // Restore focus/caret on the search input if it was focused before this re-render
+  if (wasSearchFocused) {
+    const restoredInput = view.querySelector("#inputSearch");
+    if (restoredInput) {
+      restoredInput.focus();
+      if (searchSelStart != null) {
+        restoredInput.setSelectionRange(searchSelStart, searchSelEnd);
+      }
+    }
+  }
 
   // Compare button
   const go = document.getElementById("btnGoCompare");
