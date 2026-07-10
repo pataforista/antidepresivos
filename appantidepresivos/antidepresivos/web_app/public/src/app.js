@@ -219,7 +219,7 @@ async function main() {
       <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:24px; padding:40px; text-align:center;">
         <div style="font-size:3rem;">${isOffline ? "📡" : "⚠️"}</div>
         <p style="font-family:var(--font-headers); font-weight:700; color:var(--color-danger); font-size:1.25rem; max-width:400px;">${escapeHtml(msg)}</p>
-        <button onclick="location.reload()" style="padding:12px 28px; border-radius:999px; background:var(--color-primary); color:white; border:none; cursor:pointer; font-weight:700; font-size:1rem;">
+        <button id="btnRetryLoad" type="button" style="padding:12px 28px; border-radius:999px; background:var(--color-primary); color:white; border:none; cursor:pointer; font-weight:700; font-size:1rem;">
           ${initialLocale === "en" ? "Retry" : "Reintentar"}
         </button>
         <details style="max-width:600px; text-align:left;">
@@ -227,6 +227,8 @@ async function main() {
           <pre style="margin-top:8px; font-size:0.75rem; color:var(--color-text-muted); white-space:pre-wrap;">${escapeHtml(String(e?.stack ?? e))}</pre>
         </details>
       </div>`;
+    // La CSP bloquea onclick inline: el botón de reintento se cablea aquí.
+    document.getElementById("btnRetryLoad")?.addEventListener("click", () => location.reload());
   }
 }
 
@@ -373,6 +375,12 @@ function mountShell(root) {
         }
         .bmac-floating-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
         .bmac-floating-btn:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+        /* Se retira al hacer scroll hacia abajo (misma lógica que el header)
+           para no tapar el contenido de las tarjetas. */
+        .bmac-floating-btn--hidden { transform: translateX(-140%); pointer-events: none; }
+        @media (max-width: 640px) {
+          .bmac-floating-btn { width: 42px; height: 42px; font-size: 1.2rem; left: 12px; }
+        }
         @media (min-width: 1024px) {
           .bmac-floating-btn { bottom: calc(var(--dock-height, 82px) + 20px); left: 30px; width: 60px; height: 60px; font-size: 1.8rem; }
         }

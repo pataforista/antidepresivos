@@ -14,7 +14,7 @@ export function mountLegalModal() {
     <div class="gatekeeper__card" style="position:relative; padding:0; overflow:hidden;">
       <div class="gatekeeper__card-header" style="background:var(--color-stroke); color:var(--color-bg); padding:10px 16px; font-family:var(--font-headers); font-weight:900; font-size:0.75rem; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid var(--color-stroke);">
         <span>⚖️ AVISO LEGAL</span>
-        <button class="btn btn--circle btn--ghost" style="width:24px; height:24px; font-size:0.75rem; border:none; box-shadow:none; color:var(--color-bg); background:none; margin:0; padding:0; min-width:auto; cursor:pointer;" onclick="this.closest('.gatekeeper').remove()">✕</button>
+        <button type="button" class="btn btn--circle btn--ghost legalModalClose" aria-label="Cerrar aviso legal" style="width:24px; height:24px; font-size:0.75rem; border:none; box-shadow:none; color:var(--color-bg); background:none; margin:0; padding:0; min-width:auto; cursor:pointer;">✕</button>
       </div>
       <div class="gatekeeper__card-body" style="padding:20px;">
         <h2 class="h2" style="margin-top:0; font-size:1.5rem;">Aviso Legal</h2>
@@ -26,6 +26,22 @@ export function mountLegalModal() {
       </div>
     </div>
   `;
+
+  // Cierre sin manejadores inline (la CSP bloquea onclick=""): botón ✕,
+  // clic en el fondo o tecla Escape.
+  function closeModal() {
+    document.removeEventListener("keydown", onKeydown);
+    modal.remove();
+  }
+  function onKeydown(e) {
+    if (e.key === "Escape") closeModal();
+  }
+  modal.querySelector(".legalModalClose").addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", onKeydown);
+
   document.body.appendChild(modal);
 }
 

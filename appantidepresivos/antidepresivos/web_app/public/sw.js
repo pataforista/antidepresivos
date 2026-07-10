@@ -1,4 +1,4 @@
-const CACHE_NAME = 'antidepresivos-v12';
+const CACHE_NAME = 'antidepresivos-v13';
 
 // Recursos locales críticos: si falla alguno, la instalación se reintenta.
 const CORE_ASSETS = [
