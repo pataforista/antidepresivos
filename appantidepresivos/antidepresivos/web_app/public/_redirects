@@ -1,4 +1,8 @@
-# Cloudflare Pages Redirects for SPA
-# Redirect all requests to index.html so the client-side router can handle them
-# This configuration works with both Netlify and Cloudflare Pages
-/*    /index.html   200
+# Cloudflare Pages — sin reglas.
+#
+# El fallback SPA es automático: al no existir un 404.html en la raíz,
+# Pages sirve index.html para cualquier ruta no encontrada, que es lo
+# que necesita el router (History API).
+#
+# La antigua regla `/* /index.html 200` era detectada por Pages como
+# bucle infinito y se ignoraba con un warning en cada build/dev.

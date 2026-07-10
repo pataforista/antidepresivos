@@ -117,12 +117,22 @@ Verificado y en orden:
 | 2 | Eliminar o arreglar `deploy.yml` (GitHub Pages) | Portabilidad | Bajo | ✅ Aplicado (workflow eliminado; Cloudflare Pages queda como único deploy) |
 | 3 | Sacar `antidepresivos.zip`, `tools/`, `update_pearls.js` de `public/` | Portabilidad | Trivial | ✅ Aplicado (zip eliminado; scripts movidos a `scripts/` en la raíz) |
 | 4 | Añadir `/quiz` y `/combinaciones` al sitemap | SEO | Trivial | ✅ Aplicado |
-| 5 | Sanear `wrangler.toml` a config Pages mínima | Portabilidad | Bajo | Pendiente |
-| 6 | Ocultar/reubicar el botón ☕ en móvil | Estética | Bajo | Pendiente |
-| 7 | Señalizar plan de switching "genérico" vs "curado" | Contenido | Medio | Pendiente |
-| 8 | Fuentes autohospedadas + icono maskable con padding | Portabilidad | Medio | Pendiente |
+| 5 | Sanear `wrangler.toml` a config Pages mínima | Portabilidad | Bajo | ✅ Aplicado (validado con `wrangler pages dev`: arranca y sirve la app) |
+| 6 | Ocultar/reubicar el botón ☕ en móvil | Estética | Bajo | ✅ Aplicado (se retira al hacer scroll hacia abajo, reaparece al subir; 42px en móvil) |
+| 7 | Señalizar plan de switching "genérico" vs "curado" | Contenido | Medio | ✅ Aplicado (badge "📚 Par curado (guías clínicas)" / "⚠️ Protocolo genérico — verificar en guías", verificado con par curado y genérico) |
+| 8 | Fuentes autohospedadas + icono maskable con padding | Portabilidad | Medio | Pendiente — ver plan abajo |
 
 Nota: al tocar `app.js` y `gatekeeperDisclaimer.js` (ambos precacheados) se subió `CACHE_NAME` a `antidepresivos-v13` en `sw.js` para que las instalaciones existentes reciban los fixes.
+
+### Hallazgos adicionales corregidos durante la aplicación de fixes
+
+- **El ocultado del header al hacer scroll nunca funcionó**: `html, body` llevan `overflow-y: auto`, así que el scroll real ocurre en `<body>`, cuyos eventos no llegan a `window` (donde escuchaba `initScrollHideHeader`). Se corrigió escuchando `scroll` en `document` con `capture: true` y leyendo la posición del scroller real. Verificado en navegador: header y botón ☕ se ocultan al bajar y reaparecen al subir.
+- **La regla de `_redirects` (`/* /index.html 200`) era ignorada por Cloudflare Pages** con warning de "infinite loop" en cada build (visible al validar `wrangler pages dev`). El SPA funciona por el fallback implícito de Pages (no existe `404.html`); el fichero queda documentando ese comportamiento, sin reglas.
+
+### Plan para el ítem 8 (no aplicado — requiere generar binarios)
+
+1. **Fuentes autohospedadas**: descargar los woff2 de Montserrat (600–900) y DM Sans (400–700) usados en `index.html`, colocarlos en `public/assets/fonts/`, declarar `@font-face` con `font-display: swap` en `variables.css`, eliminar los `<link>` a Google Fonts y las entradas `fonts.googleapis.com`/`fonts.gstatic.com` de la CSP, y añadir los woff2 a `CORE_ASSETS` del SW (nuevo bump de caché). Beneficio: cero dependencia externa en primera carga y sin FOUT.
+2. **Icono maskable**: regenerar `icon-192`/`icon-512` con ~20 % de margen de seguridad alrededor del logo (zona maskable), exportar como `icon-192-maskable.png`/`icon-512-maskable.png` y referenciarlos en el manifest con `"purpose": "maskable"` (dejando los actuales como `"any"`). Verificar con el probador de maskable de DevTools (Application → Manifest).
 
 ---
 

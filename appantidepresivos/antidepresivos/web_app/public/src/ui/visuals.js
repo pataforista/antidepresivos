@@ -85,27 +85,33 @@ export function haptic(type = 'tap') {
 /* ─── Scroll-Hide Header ────────────────────────────────────────────────── */
 
 /**
- * Hides the sticky header when scrolling down; reveals it on scroll up.
- * Reads scroll from window (body-level scroll).
+ * Hides the sticky header (and the floating support button) when scrolling
+ * down; reveals them on scroll up. Reads scroll from window (body-level
+ * scroll). Elements are re-queried on each frame because the shell can be
+ * re-mounted (e.g. on locale change).
  */
 export function initScrollHideHeader() {
-    const header = document.querySelector('.header');
-    if (!header) return;
-
     let lastScrollY = 0;
     let ticking = false;
 
-    window.addEventListener('scroll', () => {
+    // El scroll real ocurre en <body> (html/body llevan overflow-y:auto),
+    // cuyos eventos scroll NO llegan a window. Se escucha en document en
+    // fase de captura para cubrir cualquier contenedor de scroll.
+    document.addEventListener('scroll', () => {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(() => {
-            const currentY = window.scrollY;
+            const currentY = window.scrollY
+                || document.documentElement.scrollTop
+                || document.body.scrollTop
+                || 0;
             const goingDown = currentY > lastScrollY && currentY > 120;
-            header.classList.toggle('header--hidden', goingDown);
+            document.querySelector('.header')?.classList.toggle('header--hidden', goingDown);
+            document.querySelector('.bmac-floating-btn')?.classList.toggle('bmac-floating-btn--hidden', goingDown);
             lastScrollY = Math.max(0, currentY);
             ticking = false;
         });
-    }, { passive: true });
+    }, { passive: true, capture: true });
 }
 
 /* ─── Ripple Effect ─────────────────────────────────────────────────────── */

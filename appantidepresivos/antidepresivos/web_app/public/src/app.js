@@ -375,6 +375,12 @@ function mountShell(root) {
         }
         .bmac-floating-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
         .bmac-floating-btn:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+        /* Se retira al hacer scroll hacia abajo (misma lógica que el header)
+           para no tapar el contenido de las tarjetas. */
+        .bmac-floating-btn--hidden { transform: translateX(-140%); pointer-events: none; }
+        @media (max-width: 640px) {
+          .bmac-floating-btn { width: 42px; height: 42px; font-size: 1.2rem; left: 12px; }
+        }
         @media (min-width: 1024px) {
           .bmac-floating-btn { bottom: calc(var(--dock-height, 82px) + 20px); left: 30px; width: 60px; height: 60px; font-size: 1.8rem; }
         }

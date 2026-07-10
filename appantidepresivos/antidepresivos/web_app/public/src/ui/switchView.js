@@ -47,6 +47,7 @@ export function renderSwitching(view) {
                     </div>
                     <div id="strategyHeader" class="alert alert--info" style="margin-bottom: 20px; display:none; border-radius: var(--radius-xl);">
                         <div>
+                            <span id="strategySource" class="clinical-chip" style="display:inline-block; margin-bottom:10px;"></span>
                             <strong id="strategyTitle" style="display:block; margin-bottom: 4px; font-size: 1.1rem; font-family: var(--font-headers);"></strong>
                             <p id="strategyDesc" class="text-sm" style="font-weight: 500;"></p>
                             <div id="strategyRationale" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.05); font-size: 0.8rem; font-style: italic; opacity: 0.8;"></div>
@@ -179,6 +180,22 @@ function updatePlan(fromId, toId, view) {
 
     const header = view.querySelector('#strategyHeader');
     if (header) header.style.display = 'block';
+
+    // Señaliza el origen del plan: par curado en la matriz de switching
+    // (basado en guías) frente a protocolo genérico calculado por reglas.
+    const srcEl = view.querySelector('#strategySource');
+    if (srcEl) {
+        const en = i18n.getLocale() === 'en';
+        if (entry) {
+            srcEl.textContent = en ? '📚 Curated pair (clinical guidelines)' : '📚 Par curado (guías clínicas)';
+            srcEl.className = 'clinical-chip clinical-chip--success';
+        } else {
+            srcEl.textContent = en ? '⚠️ Generic protocol — verify against guidelines' : '⚠️ Protocolo genérico — verificar en guías';
+            srcEl.className = 'clinical-chip clinical-chip--warning';
+        }
+        srcEl.style.display = 'inline-block';
+        srcEl.style.marginBottom = '10px';
+    }
 
     const rationaleEl = view.querySelector('#strategyRationale');
     let rationale = "";
