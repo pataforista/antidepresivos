@@ -219,7 +219,7 @@ async function main() {
       <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:24px; padding:40px; text-align:center;">
         <div style="font-size:3rem;">${isOffline ? "📡" : "⚠️"}</div>
         <p style="font-family:var(--font-headers); font-weight:700; color:var(--color-danger); font-size:1.25rem; max-width:400px;">${escapeHtml(msg)}</p>
-        <button onclick="location.reload()" style="padding:12px 28px; border-radius:999px; background:var(--color-primary); color:white; border:none; cursor:pointer; font-weight:700; font-size:1rem;">
+        <button id="btnRetryLoad" type="button" style="padding:12px 28px; border-radius:999px; background:var(--color-primary); color:white; border:none; cursor:pointer; font-weight:700; font-size:1rem;">
           ${initialLocale === "en" ? "Retry" : "Reintentar"}
         </button>
         <details style="max-width:600px; text-align:left;">
@@ -227,6 +227,8 @@ async function main() {
           <pre style="margin-top:8px; font-size:0.75rem; color:var(--color-text-muted); white-space:pre-wrap;">${escapeHtml(String(e?.stack ?? e))}</pre>
         </details>
       </div>`;
+    // La CSP bloquea onclick inline: el botón de reintento se cablea aquí.
+    document.getElementById("btnRetryLoad")?.addEventListener("click", () => location.reload());
   }
 }
 

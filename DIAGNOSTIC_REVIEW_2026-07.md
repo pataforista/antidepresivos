@@ -111,16 +111,18 @@ Verificado y en orden:
 
 ## 6. Priorización sugerida
 
-| # | Acción | Área | Esfuerzo |
-|---|---|---|---|
-| 1 | Reemplazar los 2 `onclick` inline (modal Legal + Reintentar) por `addEventListener` | Funcionalidad | Trivial |
-| 2 | Eliminar o arreglar `deploy.yml` (GitHub Pages) | Portabilidad | Bajo |
-| 3 | Sacar `antidepresivos.zip`, `tools/`, `update_pearls.js` de `public/` | Portabilidad | Trivial |
-| 4 | Añadir `/quiz` y `/combinaciones` al sitemap | SEO | Trivial |
-| 5 | Sanear `wrangler.toml` a config Pages mínima | Portabilidad | Bajo |
-| 6 | Ocultar/reubicar el botón ☕ en móvil | Estética | Bajo |
-| 7 | Señalizar plan de switching "genérico" vs "curado" | Contenido | Medio |
-| 8 | Fuentes autohospedadas + icono maskable con padding | Portabilidad | Medio |
+| # | Acción | Área | Esfuerzo | Estado |
+|---|---|---|---|---|
+| 1 | Reemplazar los 2 `onclick` inline (modal Legal + Reintentar) por `addEventListener` | Funcionalidad | Trivial | ✅ Aplicado en esta rama (verificado en navegador: el modal cierra por ✕, backdrop y Esc; 0 violaciones CSP) |
+| 2 | Eliminar o arreglar `deploy.yml` (GitHub Pages) | Portabilidad | Bajo | ✅ Aplicado (workflow eliminado; Cloudflare Pages queda como único deploy) |
+| 3 | Sacar `antidepresivos.zip`, `tools/`, `update_pearls.js` de `public/` | Portabilidad | Trivial | ✅ Aplicado (zip eliminado; scripts movidos a `scripts/` en la raíz) |
+| 4 | Añadir `/quiz` y `/combinaciones` al sitemap | SEO | Trivial | ✅ Aplicado |
+| 5 | Sanear `wrangler.toml` a config Pages mínima | Portabilidad | Bajo | Pendiente |
+| 6 | Ocultar/reubicar el botón ☕ en móvil | Estética | Bajo | Pendiente |
+| 7 | Señalizar plan de switching "genérico" vs "curado" | Contenido | Medio | Pendiente |
+| 8 | Fuentes autohospedadas + icono maskable con padding | Portabilidad | Medio | Pendiente |
+
+Nota: al tocar `app.js` y `gatekeeperDisclaimer.js` (ambos precacheados) se subió `CACHE_NAME` a `antidepresivos-v13` en `sw.js` para que las instalaciones existentes reciban los fixes.
 
 ---
 
