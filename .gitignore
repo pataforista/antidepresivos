@@ -10,3 +10,6 @@ package-lock.json
 # OS / editor cruft
 .DS_Store
 Thumbs.db
+
+# Wrangler local dev artifacts
+.wrangler/
