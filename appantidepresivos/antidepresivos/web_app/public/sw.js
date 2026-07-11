@@ -1,4 +1,4 @@
-const CACHE_NAME = 'antidepresivos-v13';
+const CACHE_NAME = 'antidepresivos-v14';
 
 // Recursos locales críticos: si falla alguno, la instalación se reintenta.
 const CORE_ASSETS = [
@@ -16,6 +16,21 @@ const CORE_ASSETS = [
     './src/styles/components.css',
     './src/styles/playful.css',
     './src/styles/quiz.css',
+    './assets/fonts/fonts.css',
+    './assets/fonts/font_1.woff2',
+    './assets/fonts/font_2.woff2',
+    './assets/fonts/font_3.woff2',
+    './assets/fonts/font_4.woff2',
+    './assets/fonts/font_5.woff2',
+    './assets/fonts/font_6.woff2',
+    './assets/fonts/font_7.woff2',
+    './assets/fonts/font_8.woff2',
+    './assets/fonts/font_9.woff2',
+    './assets/fonts/font_10.woff2',
+    './assets/fonts/font_11.woff2',
+    './assets/fonts/font_12.woff2',
+    './assets/fonts/font_13.woff2',
+    './assets/fonts/font_14.woff2',
     // Núcleo
     './src/app.js',
     './src/core/dataLoader.js',

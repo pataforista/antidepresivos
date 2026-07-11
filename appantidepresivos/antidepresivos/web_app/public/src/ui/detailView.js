@@ -2,7 +2,7 @@ import { store } from "../core/store.js";
 import { selectItemById } from "../core/selectors.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
-import { riskVariant, sedationLabel, sedationVariant } from "../core/drugNormalization.js";
+import { riskVariant, sedationLabel, sedationVariant, drugEmoji } from "../core/drugNormalization.js";
 
 export function renderDetail(view, id) {
    const state = store.getState();
@@ -32,7 +32,7 @@ export function renderDetail(view, id) {
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-5); flex-wrap:wrap;">
           <div style="flex:1; min-width:200px;">
             ${hasBBW ? `<div class="clinical-chip clinical-chip--danger" style="display:inline-flex; margin-bottom:var(--space-3); font-size:0.7rem;">⚠️ ${i18n.t("bbw_label")}</div>` : ""}
-            <h1 class="h1" style="margin:0; letter-spacing:-0.03em;">${escapeHtml(item.nombre_generico)}</h1>
+            <h1 class="h1" style="margin:0; letter-spacing:-0.03em;"><span class="card-drug__emoji" aria-hidden="true" style="animation: emojiFloat 2s ease-in-out infinite; display: inline-block;">${drugEmoji(item.clase_terapeutica)}</span> ${escapeHtml(item.nombre_generico)}</h1>
             <div style="font-size:1rem; font-weight:600; font-family:var(--font-headers); color:var(--color-text-muted); margin-top:var(--space-2);">${escapeHtml(item.clase_terapeutica)}</div>
             <div style="display:flex; gap:var(--space-2); margin-top:var(--space-3); flex-wrap:wrap; align-items:center;">
               <span class="chip chip--active" style="font-size:0.75rem; font-weight:700;">${escapeHtml(item.codigo_atc)}</span>
