@@ -13,3 +13,7 @@ Thumbs.db
 
 # Wrangler local dev artifacts
 .wrangler/
+
+# Vite build output
+dist/
+dev-dist/

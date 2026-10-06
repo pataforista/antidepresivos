@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "format": "legal-v1",
+    "hash": "legal001",
+    "author": "César Celada"
+  },
+  "disclaimer": {
+    "title": "Aviso legal",
+    "body": [
+      "Esta aplicación es educativa y de apoyo informativo.",
+      "No sustituye juicio clínico, guías de práctica clínica ni indicaciones regulatorias oficiales.",
+      "El uso es responsabilidad del profesional."
+    ],
+    "acceptText": "Entiendo y acepto"
+  },
+  "credits": {
+    "author": "César Celada",
+    "notice": "© César Celada. Derechos reservados.",
+    "license": "Uso personal/educativo. Prohibida reventa del contenido sin autorización."
+  }
+}

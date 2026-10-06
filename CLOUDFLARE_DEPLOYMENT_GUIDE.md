@@ -388,3 +388,21 @@ Para problemas con:
 
 **Última actualización:** 2026-03-26
 **Versión:** 1.0.0
+
+
+## 👁️ Preview Deployments por Pull Request
+
+El proyecto está configurado para generar entornos de preview automáticos cada vez que se abre un Pull Request (PR) hacia la rama de producción (`main`/`master`).
+
+### Cómo funciona
+
+1. Al abrir o actualizar un PR desde una rama que no sea producción, Cloudflare Pages lanza un build automático.
+2. Se genera una URL de preview única (ej. `https://<hash-commit>.antidepresivos.pages.dev`).
+3. El GitHub Action `cf-preview-bot` (o la integración nativa de Cloudflare) comenta automáticamente en el PR con el enlace al preview.
+4. Esta URL no afecta a producción y sirve para revisión visual, QA y testing antes de hacer merge.
+
+### Configuración en Cloudflare Dashboard
+- **Proyecto**: `antidepresivos`
+- **Settings → Builds & deployments → Configure Production deployments (o Branch control)**:
+  - **Preview branch**: `All non-Production branches`
+- **Settings → General → Access policy**: (Opcional) Puedes restringir el acceso a estas URLs usando Cloudflare Access.

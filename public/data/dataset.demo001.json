@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "canonicalFormat": "dataset-canonical-v1",
+    "hash": "demo001",
+    "createdAt": "2025-12-20",
+    "source": "CSV"
+  },
+  "items": [
+    {
+      "id_farmaco": "ADP_ATYP_01",
+      "nombre_generico": "Bupropión",
+      "clase_terapeutica": "Antidepresivo atípico",
+      "mecanismo_principal": "NDRI: inhibición recaptura dopamina y noradrenalina",
+      "codigo_atc": "N06AX12",
+      "nivel_sedacion": "0",
+      "perfil_impacto_peso": "Pérdida",
+      "perfil_disfuncion_sexual": "Bajo",
+      "riesgo_prolongacion_qt": "Bajo",
+      "riesgo_sindrome_abstinencia": "Bajo",
+      "black_box_warning": "Sí",
+      "aprobado_uso_pediatrico": "No",
+      "autorizado_ema": "Sí"
+    }
+  ]
+}

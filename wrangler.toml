@@ -8,4 +8,4 @@
 # dentro del directorio publicado), no desde este TOML.
 name = "antidepresivos"
 compatibility_date = "2026-01-01"
-pages_build_output_dir = "appantidepresivos/antidepresivos/web_app/public"
+pages_build_output_dir = "dist"

@@ -1,0 +1,161 @@
+import { escapeHtml } from "../core/utils.js";
+
+export function mountInfoModal() {
+  // Check if modal container exists, if not create it
+  let modal = document.getElementById("infoModal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "infoModal";
+    modal.className = "modal-backdrop hidden";
+
+    const styleId = "modalStyles";
+    if (!document.getElementById(styleId)) {
+      const s = document.createElement("style");
+      s.id = styleId;
+      s.textContent = `
+          .modal-backdrop {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999;
+            opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(8px);
+          }
+          .modal-backdrop.active {
+            opacity: 1; pointer-events: auto;
+          }
+          .modal-content {
+            background: var(--color-surface);
+            color: var(--color-text-main);
+            border-radius: var(--radius-lg);
+            width: 90%; max-width: 600px;
+            max-height: 85vh; overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            transform: translateY(20px) scale(0.95); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid var(--color-border);
+          }
+          .modal-backdrop.active .modal-content {
+            transform: translateY(0) scale(1);
+          }
+          .bmac-modal-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #FFDD00; color: #111;
+            padding: 12px 24px; border-radius: 10px;
+            font-weight: 800; font-size: 0.9rem;
+            text-decoration: none; font-family: var(--font-headers);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(255,221,0,0.35);
+          }
+          .bmac-modal-link:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,221,0,0.5); }
+          .bmac-modal-link:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+        `;
+      document.head.appendChild(s);
+    }
+
+    document.body.appendChild(modal);
+  }
+
+  // Render Content
+  modal.innerHTML = `
+    <div class="modal-content">
+      <div style="padding:var(--space-5) var(--space-6); border-bottom:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center;">
+        <h2 class="h3" style="margin:0">Créditos</h2>
+        <button id="btnCloseModal" type="button" class="btn btn--ghost btn--circle" style="font-size:1.2rem;">✕</button>
+      </div>
+
+      <div style="padding:var(--space-6);">
+
+        <!-- Branding -->
+        <div style="margin-bottom:24px; text-align:center;">
+          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-primary); font-weight:800; margin-bottom:8px;">
+            Guía Clínica
+          </div>
+          <div style="font-size:1.75rem; font-weight:800; color:var(--color-text-main); font-family:var(--font-headers);">
+            Antidepresivos
+          </div>
+          <div class="text-muted text-sm" style="margin-top:4px; font-weight:600">
+            Edición Profesional • Soporte Clínico
+          </div>
+        </div>
+
+        <hr style="border:0; border-top:1px solid var(--color-border); margin:24px 0;">
+
+        <!-- Créditos principales -->
+        <div style="background:linear-gradient(135deg, var(--color-primary-container) 0%, hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.06) 100%); padding:20px; border-radius:var(--radius-lg); margin-bottom:24px; border-left:4px solid var(--color-primary);">
+          <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-primary); font-weight:800; margin-bottom:12px;">
+            ✓ Desarrollado por
+          </div>
+          <div style="font-weight:800; font-size:1.5rem; margin-bottom:8px; color:var(--color-text-main);">
+            Dr. César Celada
+          </div>
+          <div style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:16px; line-height:1.6;">
+            Psiquiatra especializado en psicofarmacología clínica. Edición y compilación de información farmacológica actualizada para profesionales de la salud mental.
+          </div>
+          <div style="font-size:0.8rem; color:var(--color-text-muted);">
+            <strong>Contacto:</strong><br>
+            <a href="mailto:drceladapsiquiatria@gmail.com" style="color:var(--color-primary); text-decoration:none; font-weight:600;">drceladapsiquiatria@gmail.com</a>
+          </div>
+          <div style="font-size:0.8rem; color:var(--color-text-muted); margin-top:8px;">
+            <strong>Comentarios, dudas o errores:</strong> Envía un correo al email anterior con tu consulta.
+          </div>
+        </div>
+
+        <!-- Acerca de los datos -->
+        <details class="detail-section" style="margin-bottom:24px; border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden;">
+          <summary style="padding:12px 16px; background:var(--color-surface-raised); font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+            <span>📚 Acerca de los datos y fuentes</span>
+            <span style="font-size:0.8rem; opacity:0.5;">▼</span>
+          </summary>
+          <div style="padding:16px; font-size:0.85rem; line-height:1.6; color:var(--color-text-muted);">
+            <p style="margin-bottom:12px;">La información contenida en esta plataforma ha sido compilada y verificada a partir de las siguientes fuentes de referencia internacionales:</p>
+            <ul style="padding-left:20px; margin-bottom:12px; display:grid; gap:8px;">
+              <li><b>The Maudsley Prescribing Guidelines in Psychiatry</b> (14th Edition).</li>
+              <li><b>Stahl's Essential Psychopharmacology</b> (Prescriber's Guide).</li>
+              <li><b>CANMAT</b> (Canadian Network for Mood and Anxiety Treatments) Guidelines.</li>
+              <li>Fichas técnicas oficiales de la <b>AEMPS</b> (España), <b>FDA</b> (EE.UU.) y <b>EMA</b> (Europa).</li>
+              <li><b>WFSBP</b> (World Federation of Societies of Biological Psychiatry) Guidelines.</li>
+            </ul>
+            <p style="font-style:italic; font-size:0.8rem;">Base de datos actualizada con las últimas guías clínicas internacionales.</p>
+          </div>
+        </details>
+
+        <!-- Aviso y limitaciones de uso -->
+        <div class="alert alert--warning" style="font-size:0.85rem; border-radius:var(--radius-md); line-height:1.5; margin-bottom: 24px; text-align: left;">
+          <strong>⚠️ Aviso y limitaciones de uso</strong><br><br>
+          Esta aplicación está dirigida exclusivamente a profesionales de salud mental como apoyo clínico. No sustituye el juicio clínico, la valoración presencial, las guías oficiales ni la ficha técnica vigente de cada medicamento.<br><br>
+          Las dosis, equivalencias (CPZ), estrategias de switching y contenido farmacológico son aproximaciones educativas para consulta rápida. Deben verificarse y personalizarse en cada paciente según comorbilidades, interacciones, edad, estado clínico y normativas locales.<br><br>
+          Esta herramienta no está diseñada para automedicación ni para decisiones terapéuticas sin supervisión profesional.
+        </div>
+
+        <!-- Apoyo / Buy Me a Coffee -->
+        <div style="background:var(--color-surface-raised); padding:20px; border-radius:var(--radius-lg); text-align:center; border:2px dashed var(--color-border);">
+          <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-text-dim); font-weight:800; margin-bottom:12px;">
+            ☕ Apoya el proyecto
+          </div>
+          <p style="font-size:0.9rem; color:var(--color-text-muted); line-height:1.6; margin:0 0 16px;">
+            Este es un proyecto <strong>sin fines de lucro</strong> que se mantiene de forma independiente. Si esta herramienta es útil en tu práctica clínica, considera hacer una pequeña donación para apoyar su desarrollo y mejoras continuas.
+          </p>
+          <a href="https://buymeacoffee.com/herramente"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="bmac-modal-link">
+            ☕ Invitar un café
+          </a>
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  const closeBtn = modal.querySelector("#btnCloseModal");
+  const close = () => modal.classList.remove("active");
+
+  closeBtn.addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) close();
+  });
+
+  requestAnimationFrame(() => {
+    modal.classList.add("active");
+  });
+}

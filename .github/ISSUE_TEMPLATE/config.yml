@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔐 Reportar vulnerabilidad de seguridad
+    url: https://github.com/TU-ORG/TU-REPO/security/advisories/new
+    about: No abras un issue público. Usa el canal privado descrito en SECURITY.md.
+  - name: 📖 Leer la gobernanza del proyecto
+    url: https://github.com/TU-ORG/TU-REPO/blob/master/docs/GOVERNANCE.md
+    about: Antes de contribuir, revisa roles, niveles de revisión y reglas de IA.
