@@ -79,7 +79,7 @@ export function acceptDisclaimer() {
 export function resetDisclaimer() {
   try {
     localStorage.removeItem(LS_KEY);
-  } catch {}
+  } catch { /* ignorado */ }
   store.updatePath("ui.disclaimerAccepted", false);
 
 }

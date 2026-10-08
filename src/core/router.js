@@ -47,7 +47,7 @@ export function createRouter(store, opts = {}) {
 
   let started = false;
   let internalWrite = false;   // evita loops history->store->history
-  let internalStoreWrite = false;
+  
 
   function start() {
     if (started) return;
@@ -125,14 +125,14 @@ export function createRouter(store, opts = {}) {
     }
 
     // 1) Actualiza route en store
-    internalStoreWrite = true;
+    
     try {
       store.patch(
         { route: { ...fixed, path: canonical } },
         { ...meta, reason: meta.reason ?? "router:setRoute" }
       );
     } finally {
-      queueMicrotask(() => { internalStoreWrite = false; });
+      /* nothing */
     }
 
     // 2) Sync URL -> store.compare.ids si estamos en compare
@@ -141,11 +141,11 @@ export function createRouter(store, opts = {}) {
       const currentIds = normalizeIds(store.getState().compare?.ids ?? []);
 
       if (!sameArray(ids, currentIds)) {
-        internalStoreWrite = true;
+        
         try {
           store.setCompareIds(ids, { ...meta, reason: "router:url->store:compareIds" });
         } finally {
-          queueMicrotask(() => { internalStoreWrite = false; });
+          /* nothing */
         }
       }
     }
@@ -160,7 +160,7 @@ export function createRouter(store, opts = {}) {
     const segs = pathname.split("/").filter(Boolean); // [] | ["comparador"] | ["farmaco","sertralina"]
     const head = segs[0] || "";
 
-    let name = "list";
+    let name;
     let params = {};
 
     if (!head) {

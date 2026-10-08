@@ -166,3 +166,12 @@ Marca solo si aplica:
 - [ ] Un humano ejecutó el preview deployment y probó el flujo afectado
 - [ ] Si toca UI: un humano verificó visualmente el cambio en desktop y móvil
 - [ ] Si toca lógica: un humano escribió o revisó un test que valida el comportamiento
+
+---
+
+## ⚠️ Bypass de hooks (excepcional)
+
+- [ ] Se utilizó `git commit --no-verify`
+- **Motivo justificado**: <!-- ej. Deuda técnica legacy que bloquea el hook pero no está en el scope del PR -->
+- [ ] El CI (`ci.yml`) pasará o se asume el fallo documentado.
+- [ ] Se ha notificado al Lead Developer.

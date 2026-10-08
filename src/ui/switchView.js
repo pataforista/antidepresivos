@@ -198,7 +198,7 @@ function updatePlan(fromId, toId, view) {
     }
 
     const rationaleEl = view.querySelector('#strategyRationale');
-    let rationale = "";
+    let rationale;
 
     const isSSRI = (d) => d?.clase_terapeutica?.toLowerCase().includes('isrs') || d?.clase_terapeutica?.toLowerCase().includes('ssri');
     const isSNRI = (d) => d?.clase_terapeutica?.toLowerCase().includes('irsn') || d?.clase_terapeutica?.toLowerCase().includes('snri');

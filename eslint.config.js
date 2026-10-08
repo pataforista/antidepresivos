@@ -4,6 +4,9 @@ import globals from "globals";
 export default [
   js.configs.recommended,
   {
+    ignores: ["dist/**", "appantidepresivos/**", "public/**", "coverage/**", "node_modules/**"]
+  },
+  {
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",

@@ -2,7 +2,6 @@ import { store } from "./core/store.js";
 import { loadAppData } from "./core/dataLoader.js";
 import { mountDisclaimerGate, mountLegalModal } from "./ui/gatekeeperDisclaimer.js";
 import { createRouter } from "./core/router.js";
-import * as policy from "./core/policy.js";
 import { selectFilteredItems, selectComparisonData } from "./core/selectors.js";
 import { renderDetail } from "./ui/detailView.js";
 import { renderSwitching } from "./ui/switchView.js";
@@ -295,33 +294,7 @@ function updateHeaderNav(route) {
    Schema helpers
    ============================================================ */
 
-function getSchema() {
-  return store.getState().data?.schema ?? null;
-}
-
-function getFieldSpecList(path, fallbackSpecs) {
-  const schema = getSchema();
-  if (!schema) return fallbackSpecs;
-
-  const parts = String(path).split(".");
-  let cur = schema;
-  for (const p of parts) {
-    cur = cur?.[p];
-    if (cur == null) return fallbackSpecs;
-  }
-
-  if (!Array.isArray(cur)) return fallbackSpecs;
-
-  const specs = cur
-    .map((x) => {
-      if (typeof x === "string") return { id: x, label: x };
-      if (x && typeof x === "object" && x.id) return { id: x.id, label: x.label ?? x.id };
-      return null;
-    })
-    .filter(Boolean);
-
-  return specs.length ? specs : fallbackSpecs;
-}
+/* deleted getSchema */
 
 /* ============================================================
    Shell
@@ -468,7 +441,7 @@ function addRecentItem(id, name, cls) {
   const recents = getRecentItems().filter(r => String(r.id) !== String(id));
   recents.unshift({ id: String(id), name, cls, ts: Date.now() });
   try { localStorage.setItem(RECENT_KEY, JSON.stringify(recents.slice(0, MAX_RECENTS))); }
-  catch {}
+  catch { /* Ignorado a propsito: localStorage puede fallar en modo privado */ }
 }
 
 /* ============================================================
@@ -895,7 +868,7 @@ function renderCompare(view) {
 
   // Dinamizar campos desde schema si existe
   const schema = state.data?.schema;
-  let tableFields = [];
+  let tableFields;
   if (schema && schema.compare?.fields) {
     tableFields = schema.compare.fields.map(f => ({
       label: f.label,
@@ -1110,7 +1083,7 @@ function renderRadarChart(data, colors) {
   `;
 }
 
-function mountDock(container) {
+function mountDock() {
   const navItems = [
     { id: "list",      label: i18n.t("nav_home"),    icon: "🏠",  hash: "/",      isRoute: true },
     { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖️",  hash: "/comparador",   isRoute: true },

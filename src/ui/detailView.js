@@ -682,7 +682,7 @@ function rowRisk(label, val, forceHigh = false) {
 // (No change to infoBox/rowDetail/etc as they already used escapeHtml)
 
 // --- Gesture Logic ---
-function initTabGestures(view, item) {
+function initTabGestures(view) {
    if (!window.ZingTouch) return;
 
    const zr = new ZingTouch.Region(view);

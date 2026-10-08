@@ -4,7 +4,7 @@
 
 import { store } from "../core/store.js";
 import * as policy from "../core/policy.js";
-import { escapeHtml } from "../core/utils.js";
+
 
 export function mountLegalModal() {
   const modal = document.createElement("div");
@@ -116,6 +116,6 @@ export function mountDisclaimerGate({ rootEl, onAllow }) {
   return () => {
     try {
       if (typeof unsub === "function") unsub();
-    } catch { }
+    } catch { /* ignorado */ }
   };
 }

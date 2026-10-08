@@ -231,7 +231,7 @@ function loadPersistedState(options) {
   }
 }
 
-function persistIfNeeded(state, options, extra = {}) {
+function persistIfNeeded(state, options) {
   // guarda solo persistPaths
   const persist = pickPaths(state, options.persistPaths);
   const payload = {
