@@ -42,6 +42,11 @@
     "sharp": "^0.35.5",
     "vite": "^8.3.2",
     "vite-plugin-pwa": "^2.0.0",
+    "workbox-core": "^7.4.1",
+    "workbox-expiration": "^7.4.1",
+    "workbox-precaching": "^7.4.1",
+    "workbox-routing": "^7.4.1",
+    "workbox-strategies": "^7.4.1",
     "workbox-window": "^7.4.1",
     "wrangler": "^3.50.0"
   }
