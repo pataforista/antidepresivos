@@ -1,6 +1,6 @@
 {
   "name": "antidepresivos",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Aplicación web educativa sobre antidepresivos - Material Design 3 + PWA",
   "type": "module",
   "private": true,
