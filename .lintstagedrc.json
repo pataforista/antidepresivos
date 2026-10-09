@@ -1,0 +1,8 @@
+{
+  "*.{js,mjs,cjs}": [
+    "eslint --fix"
+  ],
+  "tests/**/*.js": [
+    "jest --bail --findRelatedTests"
+  ]
+}

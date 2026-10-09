@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master", "main", "develop" ]
+  pull_request:
+    branches: [ "master", "main", "develop" ]
+
+jobs:
+  quality:
+    name: Code Quality & Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run Linter
+        # Rompe el build si hay algn warning (requerimiento de gobernanza N1-N4)
+        run: npm run lint -- --max-warnings=0
+        
+      - name: Run Tests with Coverage
+        run: npm test -- --coverage
+        
+      - name: Build production app
+        run: npm run build
+        
+      - name: Verify build output
+        run: |
+          test -f dist/index.html || (echo "❌ dist/index.html no generado" && exit 1)
+          test -d dist/assets || (echo "❌ dist/assets/ no generado" && exit 1)
+        
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 14

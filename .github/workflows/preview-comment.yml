@@ -1,0 +1,28 @@
+name: Comment Preview URL on PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find Cloudflare preview URL
+        id: cf
+        run: |
+          # Espera unos segundos a que el build termine o inicie (opcional)
+          sleep 10
+          echo "url=https://$(git rev-parse --short HEAD).antidepresivos.pages.dev" >> $GITHUB_OUTPUT
+      
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 **Preview deployment**: ${{ steps.cf.outputs.url }}`
+            })

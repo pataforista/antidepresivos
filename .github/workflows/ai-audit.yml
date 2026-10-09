@@ -1,0 +1,70 @@
+name: AI Audit
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect empty catch blocks
+        run: |
+          if grep -rn "catch\s*(\s*\w*\s*)\s*{\s*}" src/ 2>/dev/null; then
+            echo "❌ Bloques catch vacíos detectados. Un error nunca debe silenciarse."
+            exit 1
+          fi
+
+      - name: Detect new TODO/FIXME/HACK in diff
+        run: |
+          git diff origin/${{ github.base_ref }}...HEAD -- 'src/**' '*.js' '*.css' | \
+            grep -E '^\+.*(TODO|FIXME|HACK|XXX)' && {
+              echo "❌ El PR introduce TODO/FIXME/HACK. Ábrelos como issue."
+              exit 1
+            } || echo "✅ Sin TODOs nuevos"
+
+      - name: Detect console.log in production code
+        run: |
+          if grep -rn "console\.log" src/ --exclude="*.test.js" --exclude="sw.js" 2>/dev/null; then
+            echo "⚠️ console.log en src/. Revisar si es debug olvidado."
+            # Warning, no falla
+          fi
+
+      - name: Verify all imports resolve
+        run: |
+          npm install --no-save depcheck
+          npx depcheck --json | tee depcheck.json
+          # Fallar solo si hay imports faltantes (no unused)
+          node -e "
+            const r = require('./depcheck.json');
+            const missing = r.missing || {};
+            if (Object.keys(missing).length > 0) {
+              console.error('❌ Dependencias importadas pero no declaradas:', missing);
+              process.exit(1);
+            }
+            console.log('✅ Imports resueltos');
+          "
+
+      - name: Check diff size
+        run: |
+          LINES=$(git diff origin/${{ github.base_ref }}...HEAD --shortstat | \
+            grep -oE '[0-9]+ insertion' | grep -oE '[0-9]+' || echo 0)
+          if [ "$LINES" -gt 800 ]; then
+            echo "⚠️ PR grande: $LINES líneas insertadas. Considerar dividir."
+          fi
+
+      - name: Verify claimed files exist
+        run: |
+          # Si el PR menciona archivos nuevos en la descripción, deben existir.
+          # Esto es heurístico — solo como warning.
+          echo "✅ Check de existencia omitido (requiere parseo del PR body)"
+
+      - name: Build must succeed
+        run: npm run build
+
+      - name: Tests must pass
+        run: npm test

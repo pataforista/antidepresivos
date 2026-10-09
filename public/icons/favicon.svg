@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Antidepresivos 2026">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7F67BE"/>
+      <stop offset="100%" stop-color="#6750A4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo redondeado -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <!-- Cruz médica estilizada con esquinas redondeadas -->
+  <path
+    d="M 224 128
+       h 64
+       a 16 16 0 0 1 16 16
+       v 64
+       h 64
+       a 16 16 0 0 1 16 16
+       v 64
+       a 16 16 0 0 1 -16 16
+       h -64
+       v 64
+       a 16 16 0 0 1 -16 16
+       h -64
+       a 16 16 0 0 1 -16 -16
+       v -64
+       h -64
+       a 16 16 0 0 1 -16 -16
+       v -64
+       a 16 16 0 0 1 16 -16
+       h 64
+       v -64
+       a 16 16 0 0 1 16 -16
+       z"
+    fill="#FFFFFF"
+    opacity="0.95"
+  />
+
+  <!-- Punto decorativo inferior derecho (evoca "pastilla") -->
+  <circle cx="368" cy="368" r="28" fill="#FFFFFF" opacity="0.35"/>
+</svg>

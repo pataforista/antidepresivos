@@ -1,4 +1,4 @@
-const CACHE_NAME = 'antidepresivos-v14';
+const CACHE_NAME = 'antidepresivos-v15';
 
 // Recursos locales críticos: si falla alguno, la instalación se reintenta.
 const CORE_ASSETS = [
@@ -7,6 +7,8 @@ const CORE_ASSETS = [
     './manifest.webmanifest',
     './assets/icons/icon-192.png',
     './assets/icons/icon-512.png',
+    './assets/icons/icon-192-maskable.png',
+    './assets/icons/icon-512-maskable.png',
     // Arranque anti-FOUC
     './src/theme-bootstrap.js',
     // Estilos

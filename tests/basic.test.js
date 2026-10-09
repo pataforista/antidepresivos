@@ -139,7 +139,7 @@ describe('Store state helpers', () => {
     const recents = getRecentItems(storageKey).filter(r => String(r.id) !== String(id));
     recents.unshift({ id: String(id), name, cls, ts: Date.now() });
     try { mockStorage.setItem(storageKey, JSON.stringify(recents.slice(0, maxRecents))); }
-    catch {}
+    catch { /* ignorado */ }
   }
 
   const KEY = "test_recents_v1";

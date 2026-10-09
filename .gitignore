@@ -2,7 +2,7 @@
 node_modules/
 
 # Lockfiles (project uses npm but does not pin a committed lockfile)
-package-lock.json
+
 
 # Logs
 *.log
@@ -13,3 +13,7 @@ Thumbs.db
 
 # Wrangler local dev artifacts
 .wrangler/
+
+# Vite build output
+dist/
+dev-dist/

@@ -1,0 +1,139 @@
+/* src/styles/variables.css — Design System: Neo Bauhaus + Naive */
+:root {
+  /* --- Primary: Steel Blue (Azul Eléctrico Suave — Lipari palette) --- */
+  --color-primary-h: 210;
+  --color-primary-s: 50%;
+  --color-primary-l: 40%;
+  --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
+  --color-primary-light: hsl(var(--color-primary-h), 50%, 62%);
+  --color-primary-dark: hsl(var(--color-primary-h), 55%, 26%);
+  --color-on-primary: #ffffff;
+  --color-primary-container: hsl(var(--color-primary-h), 52%, 88%);
+  --color-on-primary-container: hsl(var(--color-primary-h), 55%, 16%);
+
+  /* --- Secondary: Terracotta (Rojo Tomate — Lipari palette) --- */
+  --color-secondary-h: 8;
+  --color-secondary-s: 50%;
+  --color-secondary-l: 50%;
+  --color-secondary: hsl(var(--color-secondary-h), var(--color-secondary-s), var(--color-secondary-l));
+  --color-secondary-light: hsl(var(--color-secondary-h), 50%, 68%);
+  --color-secondary-container: hsl(var(--color-secondary-h), 55%, 90%);
+  --color-on-secondary-container: hsl(var(--color-secondary-h), 55%, 14%);
+
+  /* --- Accent: Mostaza (Alertas / Resaltados) --- */
+  --color-accent-mustard: hsl(42, 88%, 48%);
+  --color-accent-mustard-container: hsl(42, 85%, 88%);
+
+  /* --- Hard Stroke (Neo Bauhaus outline — warm near-black) --- */
+  --color-stroke: #2C2420;
+  --color-border-hard: rgba(44, 36, 32, 0.80);
+
+  /* --- Surfaces (Warm Cream — Neo Bauhaus Naive base) --- */
+  --color-bg: #F9F7F2;
+  --color-surface: #FEFCF7;
+  --color-surface-raised: #F2EDE3;
+  --color-surface-container-lowest: #FEFCF7;
+  --color-surface-container-low: #F9F7F2;
+  --color-surface-container: #EDE8DE;
+  --color-surface-container-high: #E3DDD2;
+  --color-surface-translucent: rgba(254, 252, 247, 0.94);
+  --color-border: rgba(44, 36, 32, 0.09);
+  --color-border-strong: rgba(44, 36, 32, 0.18);
+
+  /* --- Text (Warm Near-Black) --- */
+  --color-text-main: #2C2420;
+  --color-text-muted: #5C4A3E;
+  --color-text-dim: #9A8078;
+
+  /* --- Status --- */
+  --color-danger: #C0392B;
+  --color-danger-container: #FCEAE8;
+  --color-success: #1E7E52;
+  --color-success-container: #E4F5EC;
+  --color-warning: #C47A00;
+  --color-warning-container: #FDF3DC;
+
+  /* --- Typography: Neo Bauhaus Geometric + Humanist --- */
+  --font-headers: 'Montserrat', 'Outfit', sans-serif;
+  --font-body: 'DM Sans', 'Inter', system-ui, sans-serif;
+  --font-sans: 'DM Sans', 'Inter', system-ui, sans-serif;
+
+  /* --- Spacing (8pt grid) --- */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.5rem;    /* 24px */
+  --space-6: 2rem;      /* 32px */
+  --space-8: 3rem;      /* 48px */
+
+  /* --- Elevation Shadows (Physical / Tactile — Bauhaus offset) --- */
+  --shadow-sm:  3px 3px 0px var(--color-stroke);
+  --shadow-md:  5px 5px 0px var(--color-stroke);
+  --shadow-lg:  7px 7px 0px var(--color-stroke);
+  --shadow-xl:  10px 10px 0px var(--color-stroke);
+  --shadow-glass: 3px 3px 0px rgba(44, 36, 32, 0.15);
+  --shadow-dock: 0 6px 20px rgba(44, 36, 32, 0.16), 0 2px 6px rgba(44, 36, 32, 0.10);
+  --shadow-premium: 4px 6px 0px var(--color-stroke);
+  --shadow-glow: 0 0 14px -2px hsla(var(--color-secondary-h), 65%, 52%, 0.28);
+
+  /* --- Legacy Accent Tokens (kept for compatibility) --- */
+  --color-accent-pink: hsl(330, 72%, 62%);
+  --color-accent-cyan: hsl(185, 72%, 42%);
+  --color-accent-emerald: hsl(150, 62%, 42%);
+
+  /* --- Border Radii (12-20px — Naive rounded, not bubbles) --- */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* --- Navigation --- */
+  --dock-height: 82px;
+  --nav-bar-height: 82px;
+
+  /* --- Motion (Physical / Tactile spring) --- */
+  --backdrop-blur: blur(16px);
+  --transition-fast: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-normal: 240ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-spring: 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-emphasized: 360ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* --- Dark Theme (Warm Darks — Lipari deep navy) --- */
+[data-theme="dark"] {
+  --color-bg: #1A1610;
+  --color-surface: #22201A;
+  --color-surface-raised: #2C2920;
+  --color-surface-container-lowest: #131008;
+  --color-surface-container-low: #1A1610;
+  --color-surface-container: #222018;
+  --color-surface-container-high: #2A2820;
+  --color-surface-translucent: rgba(26, 22, 16, 0.93);
+  --color-border: rgba(254, 252, 247, 0.07);
+  --color-border-strong: rgba(254, 252, 247, 0.13);
+  --color-border-hard: rgba(240, 234, 224, 0.55);
+
+  --color-text-main: #F0EAE0;
+  --color-text-muted: #A8988A;
+  --color-text-dim: #5C5048;
+
+  --color-primary-l: 62%;
+  --color-primary: hsl(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l));
+  --color-primary-container: hsl(var(--color-primary-h), 45%, 20%);
+  --color-on-primary-container: hsl(var(--color-primary-h), 60%, 88%);
+
+  --color-secondary-l: 66%;
+  --color-secondary: hsl(var(--color-secondary-h), var(--color-secondary-s), var(--color-secondary-l));
+  --color-secondary-container: hsl(var(--color-secondary-h), 40%, 20%);
+  --color-on-secondary-container: hsl(var(--color-secondary-h), 55%, 86%);
+
+  --color-danger-container: rgba(192, 57, 43, 0.18);
+  --color-success-container: rgba(30, 126, 82, 0.15);
+  --color-warning-container: rgba(196, 122, 0, 0.16);
+
+  --shadow-glass: 0 4px 16px rgba(0, 0, 0, 0.40);
+  --shadow-dock: 0 8px 28px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.30);
+}

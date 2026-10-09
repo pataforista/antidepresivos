@@ -1097,7 +1097,7 @@ function renderRadarChart(data, colors) {
   }).join("");
 
   return `
-    <svg viewBox="0 0 ${size} ${size}" style="max-width:400px; margin:0 auto; display:block;">
+    <svg role="img" aria-label="Gráfico de radar comparativo" viewBox="0 0 ${size} ${size}" style="max-width:400px; margin:0 auto; display:block;">
       <defs>
         <radialGradient id="radarGrad">
           <stop offset="0%" stop-color="var(--color-bg)" stop-opacity="0" />

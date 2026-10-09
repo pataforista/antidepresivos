@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Agrupar devDependencies para reducir el ruido
+    groups:
+      dev-dependencies:
+        dependency-type: "development"
+    # Las dependencias crticas (dependencies) sern gestionadas manualmente,
+    # exceptuando vulnerabilidades de seguridad que dependabot reporta automticamente.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major", "version-update:semver-minor", "version-update:semver-patch"]
