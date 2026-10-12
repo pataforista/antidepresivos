@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Husky hooks must always use LF
+.husky/* text eol=lf
