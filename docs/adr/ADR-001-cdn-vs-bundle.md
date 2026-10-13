@@ -42,8 +42,8 @@ Cargar **Chart.js** y **html2pdf** desde CDN (`<script>` en el HTML).
 ## Mitigaciones obligatorias
 
 - [x] Service Worker que cachee las URLs exactas de la CDN (con hash SRI). → Resuelto en [ADR-006](./ADR-006-offline-first.md)
-- [ ] Atributos `integrity` + `crossorigin` en los `<script>`.
-- [ ] Versiones **fijadas** (no `latest`) en las URLs.
+- [x] Atributos `integrity` + `crossorigin` en los `<script>`. → Resuelto en [sri-update.md](../sri-update.md)
+- [x] Versiones **fijadas** (no `latest`) en las URLs. → Resuelto en [sri-update.md](../sri-update.md)
 - [ ] Test de regresión manual offline antes de cada release.
 
 ## Referencias

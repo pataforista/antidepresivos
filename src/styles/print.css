@@ -1,0 +1,125 @@
+/**
+ * Print & PDF Export Stylesheet — Antidepresivos
+ * Origen: ADR-002, ADR-003, Issue #3 (BACKLOG_ISSUES.md)
+ * 
+ * Garantiza un layout determinista en motores de renderizado
+ * (Blink/Chrome, WebKit/Safari, Gecko/Firefox) y exportación de reportes clínicos con html2pdf.
+ */
+
+@page {
+  size: A4 portrait;
+  margin: 12mm 15mm 15mm 15mm;
+}
+
+@media print {
+  /* Reset de fondo y color para impresión nítida */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    font-size: 10pt;
+    line-height: 1.45;
+  }
+
+  /* Ocultar elementos de navegación, controles interactivos y overlays */
+  #dock-container,
+  .dock,
+  .nav-dock,
+  .bottom-dock,
+  .skip-link,
+  #bottom-sheet-container,
+  #debug-error,
+  .toast,
+  .toast-container,
+  .modal-overlay,
+  .fab,
+  .btn--pdf,
+  #btnMonoPDF,
+  #btnSwitchPDF,
+  button,
+  .search-container,
+  .filter-chips,
+  .filters,
+  .theme-toggle,
+  .app-header__actions {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Contenedores principales ocupan todo el ancho sin scrolls */
+  #app,
+  #appShell,
+  .shell,
+  .view-container,
+  .monograph,
+  #switchPlanContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    float: none !important;
+    background: transparent !important;
+  }
+
+  /* Evitar saltos de página a mitad de bloques clínicos críticos */
+  .monograph-header,
+  .monograph-section,
+  .monograph-card,
+  .switch-card,
+  .summary-strip,
+  .risk-badge,
+  .clinical-summary,
+  .warning-box,
+  .alert,
+  .switch-plan-step,
+  .table-container,
+  table,
+  tr,
+  figure,
+  .chart-container,
+  .clinical-pdf-footer {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Forzar salto de página limpio en encabezados principales si es necesario */
+  h1,
+  h2 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    color: #1a1a1a !important;
+  }
+
+  /* Asegurar que enlaces muestren texto claro sin subrayados estridentes */
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  /* Estilos específicos para la ficha de switching */
+  .switch-timeline {
+    border-left: 2px solid #6750A4 !important;
+    padding-left: 12px !important;
+  }
+
+  /* Trazabilidad: footer clínico siempre visible al pie de página */
+  .clinical-pdf-footer {
+    display: block !important;
+    margin-top: 20px !important;
+    padding-top: 10px !important;
+    border-top: 1px solid #cccccc !important;
+    font-size: 7.5pt !important;
+    color: #555555 !important;
+    text-align: center !important;
+  }
+}

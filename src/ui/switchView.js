@@ -2,6 +2,7 @@
 import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
+import { ensurePdfFooter } from "./pdfFooter.js";
 
 export function renderSwitching(view) {
     const state = store.getState();
@@ -93,6 +94,8 @@ export function renderSwitching(view) {
         const fromName = fromSel.options[fromSel.selectedIndex]?.text || "DrugA";
         const toName = toSel.options[toSel.selectedIndex]?.text || "DrugB";
         const element = view.querySelector('#switchPlanContainer');
+        if (!element) return;
+        ensurePdfFooter(element);
         
         const opt = {
             margin: 10,

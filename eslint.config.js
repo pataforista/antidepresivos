@@ -16,7 +16,8 @@ export default [
         ...globals.jest,
         Chart: "readonly",
         ZingTouch: "readonly",
-        html2pdf: "readonly"
+        html2pdf: "readonly",
+        __APP_VERSION__: "readonly"
       }
     },
     rules: {

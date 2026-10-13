@@ -3,6 +3,7 @@ import { selectItemById } from "../core/selectors.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
 import { riskVariant, sedationLabel, sedationVariant, drugEmoji } from "../core/drugNormalization.js";
+import { ensurePdfFooter } from "./pdfFooter.js";
 
 export function renderDetail(view, id) {
    const state = store.getState();
@@ -113,6 +114,8 @@ export function renderDetail(view, id) {
    if (btnPdf) {
       btnPdf.addEventListener("click", () => {
          const element = document.querySelector(".monograph");
+         if (!element) return;
+         ensurePdfFooter(element);
          const opt = {
             margin: 10,
             filename: `Monografia_${item.nombre_generico}.pdf`,

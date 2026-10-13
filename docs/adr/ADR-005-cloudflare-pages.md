@@ -65,8 +65,8 @@ La configuración de despliegue vive en `wrangler.toml` y está documentada en `
 
 ## Mitigaciones
 
-- [ ] **Fijar cabeceras de seguridad** en `public/_headers` (CSP, HSTS, X-Content-Type-Options, Referrer-Policy).
-- [ ] **Configurar Dependabot** para el `wrangler` en `devDependencies` (ya cubierto por `.github/dependabot.yml`).
+- [x] **Fijar cabeceras de seguridad** en `public/_headers` (CSP, HSTS, X-Content-Type-Options, Referrer-Policy).
+- [x] **Configurar Dependabot** para el `wrangler` en `devDependencies` (ya cubierto por `.github/dependabot.yml`).
 - [ ] **Documentar rollback** en `docs/runbooks/rollback-cloudflare.md` (pendiente de crear).
 - [ ] **Backup del `dist/`** en cada release como artifact de GitHub Actions (por si Cloudflare pierde el build).
 - [ ] **Activar Cloudflare Web Analytics** (gratis, sin cookies, compatible con RGPD).
