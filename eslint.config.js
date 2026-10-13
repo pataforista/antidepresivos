@@ -4,7 +4,7 @@ import globals from "globals";
 export default [
   js.configs.recommended,
   {
-    ignores: ["dist/**", "appantidepresivos/**", "public/**", "coverage/**", "node_modules/**"]
+    ignores: ["dist/**", "archive/**", "appantidepresivos/**", "public/**", "coverage/**", "node_modules/**"]
   },
   {
     languageOptions: {

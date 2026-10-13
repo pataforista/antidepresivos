@@ -7,7 +7,7 @@ Este documento describe la estructura técnica y lógica del proyecto, el flujo 
 El proyecto es una **Herramienta de Soporte Clínico** para profesionales de salud mental. Está compuesta por tres grandes bloques:
 1. **Los Datos Crudos (`DATASET_PSICOFARMACOLOGIA/`)**: La fuente de verdad (CSV) que contiene la información médica.
 2. **Scripts de Compilación y Validación**: Herramientas que procesan los CSV y los convierten en JSON estáticos.
-3. **La Aplicación Web (`appantidepresivos/.../web_app/public/`)**: Una Single Page Application (SPA) y Progressive Web App (PWA) construida en Vanilla JavaScript y CSS (sin frameworks como React o Vue) que consume los JSON generados.
+3. **La Aplicación Web (`src/`, `public/`, `dist/`)**: Una Single Page Application (SPA) y Progressive Web App (PWA) construida con Vite, Vanilla JavaScript y CSS (sin frameworks como React o Vue) que consume los JSON generados.
 
 ---
 
@@ -20,18 +20,18 @@ El proyecto es una **Herramienta de Soporte Clínico** para profesionales de sal
 │   ├── guias_clinicas/         # Archivos CSV de protocolos y guías (APA, NICE, CANMAT)
 │   ├── validator/              # Validadores de datos
 │   └── normalize.js            # Script que compila los CSV en JSON
-├── appantidepresivos/.../web_app/
-│   └── public/                 # CÓDIGO FUENTE DE LA APP Y DISTRIBUCIÓN
-│       ├── data/               # Datasets JSON compilados (listos para ser leídos por la app)
-│       ├── assets/             # Fuentes, íconos y otros estáticos (Maskable icons, woff2)
-│       ├── src/                # Código fuente de la SPA
-│       │   ├── core/           # Lógica central (Store, Router, i18n)
-│       │   ├── ui/             # Componentes de la interfaz
-│       │   └── styles/         # CSS modularizado (Material Design 3)
-│       ├── index.html          # Punto de entrada y Shell de la PWA
-│       ├── sw.js               # Service Worker para funcionamiento Offline
-│       └── manifest.webmanifest# Manifiesto de PWA para instalación
-├── scripts/                    # Utilidades de desarrollo (ej. generadores de iconos)
+├── public/                     # Archivos estáticos servidos directamente
+│   ├── data/                   # Datasets JSON compilados (fuente única en runtime)
+│   ├── assets/                 # Fuentes, íconos y otros estáticos
+│   └── _headers                # Cabeceras de seguridad y caché para Cloudflare
+├── src/                        # CÓDIGO FUENTE DE LA SPA
+│   ├── core/                   # Lógica central (Store, Router, i18n, Normalización)
+│   ├── ui/                     # Vistas y componentes de la interfaz
+│   ├── styles/                 # CSS modularizado (Material Design 3 + Print)
+│   └── sw.js                   # Service Worker custom (Workbox injectManifest)
+├── dist/                       # Artefacto compilado generado por Vite (desplegado a Cloudflare)
+├── archive/                    # Archivo histórico (árboles legacy preservados)
+├── scripts/                    # Utilidades de desarrollo
 └── .github/                    # Workflows de CI/CD para GitHub Actions
 ```
 
