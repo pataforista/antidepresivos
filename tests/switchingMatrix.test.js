@@ -10,8 +10,8 @@
  * 5. Detección de alerta de alto riesgo / síndrome serotoninérgico
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 // ─── Cargar matriz de switching desde JSON ────────────────────────────────────
 const switchingMatrixPath = path.resolve('public/data/switching_matrix.json');
