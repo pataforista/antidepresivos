@@ -145,7 +145,7 @@ npm run deploy
 O directamente:
 
 ```bash
-npx wrangler pages deploy appantidepresivos/antidepresivos/web_app/public \
+npx wrangler pages deploy dist \
   --project-name=antidepresivos \
   --branch=main
 ```
@@ -303,7 +303,7 @@ npx wrangler pages project list
 **Solución:** Verifica que `_redirects` esté en el directorio `public`:
 
 ```bash
-ls appantidepresivos/antidepresivos/web_app/public/_redirects
+ls public/_redirects
 ```
 
 ### Problema: Assets no cargan (CSS, JS en 404)
@@ -337,19 +337,19 @@ ls appantidepresivos/antidepresivos/web_app/public/_redirects
 # Desarrollo local
 npm run dev
 
-# Construir para producción
+# Construir para producción (genera dist/)
 npm run build
 
-# Desplegar a Cloudflare
+# Desplegar a Cloudflare (desde dist/)
 npm run deploy
 
 # Desplegar a producción
 npm run deploy:prod
 
-# Lint (no configurado aún)
+# Linting
 npm run lint
 
-# Tests (no configurado aún)
+# Pruebas unitarias
 npm run test
 ```
 

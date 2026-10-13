@@ -26,8 +26,7 @@ Este documento establece qué funcionalidades faltan, los pendientes técnicos (
   - El proyecto introdujo ESLint recientemente, pero arrojó múltiples advertencias (ej. "no-unused-vars", "Empty block statement").
   - Tarea: Limpiar exhaustivamente el código para tener cero advertencias al ejecutar `npm run lint`.
 - **Estructura del Proyecto**:
-  - `appantidepresivos/antidepresivos/web_app/public/`: La ruta de anidación actual es extremadamente redundante. 
-  - **Reorganización recomendada**: Mover todo el contenido de `public/` a la raíz o a un directorio único `/app`, lo cual simplificaría las rutas de desarrollo en Wrangler.
+  - Resuelto: Código de la SPA unificado en la raíz (`src/`, `public/`, `dist/`), con los árboles duplicados legacy aislados en `archive/appantidepresivos/` y deploy apuntando a `dist/`.
 
 ## 4. Despliegue y SEO
 

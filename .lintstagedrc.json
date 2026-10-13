@@ -3,6 +3,6 @@
     "eslint --fix"
   ],
   "tests/**/*.js": [
-    "jest --bail --findRelatedTests"
+    "node --experimental-vm-modules node_modules/jest/bin/jest.js --bail --findRelatedTests"
   ]
 }

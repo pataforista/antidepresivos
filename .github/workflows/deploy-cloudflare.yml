@@ -34,17 +34,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: antidepresivos
-          directory: appantidepresivos/antidepresivos/web_app/public
+          directory: dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Comment PR with deployment
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '✨ Cloudflare Pages deployment preview is ready!'
-            })
