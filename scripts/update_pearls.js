@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 
 const DATASET_PATH = 'c:/Users/Admin/Desktop/Antidepresivos/appantidepresivos/antidepresivos/web_app/public/data/dataset.antidepresivos.v1.0.0.json';
 const MISSING_PEARLS_PATH = 'c:/Users/Admin/Desktop/Antidepresivos/appantidepresivos/antidepresivos/web_app/public/data/missing_pearls.json';
