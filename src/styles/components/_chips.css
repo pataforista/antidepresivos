@@ -1,0 +1,162 @@
+/* --- Clinical Elements --- */
+.chip {
+    padding: 7px 13px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-headers);
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: var(--color-surface-raised);
+    color: var(--color-text-muted);
+    border: 2px solid var(--color-border-strong);
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 32px;
+    height: 32px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.chip--active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary-dark);
+    box-shadow: 2px 3px 0px var(--color-primary-dark);
+    font-weight: 800;
+}
+
+.badge {
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-block;
+}
+
+.badge--red {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge--yellow {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge--emerald {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.badge--gray {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+/* ============================================================
+   Task Chips Bar (filtros por tarea, no taxonomía)
+   ============================================================ */
+.task-chips-bar {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-5);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.task-chips-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.task-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    border: 1.5px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.task-chip:hover {
+    border-color: var(--color-primary-light);
+    color: var(--color-primary);
+    background: var(--color-primary-container);
+}
+
+.task-chip.active {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.3);
+}
+
+.task-chip__icon {
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   Clinical Chips (lectura rápida en tarjetas y fichas)
+   ============================================================ */
+.clinical-chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: var(--space-3);
+}
+
+.clinical-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.clinical-chip--success {
+    background: var(--color-success-container);
+    color: #065f46;
+}
+
+.clinical-chip--warning {
+    background: var(--color-warning-container);
+    color: #92400e;
+}
+
+.clinical-chip--danger {
+    background: var(--color-danger-container);
+    color: #991b1b;
+}
+
+.clinical-chip--neutral {
+    background: var(--color-surface-container);
+    color: var(--color-text-muted);
+}
+
+.clinical-chip--primary {
+    background: var(--color-primary-container);
+    color: var(--color-on-primary-container);
+}
