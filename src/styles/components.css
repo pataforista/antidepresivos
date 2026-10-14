@@ -1,5 +1,6 @@
 /* src/styles/components.css */
 @import './components/_buttons.css';
+@import './components/_cards.css';
 
 /* Home hero — encabezado descriptivo (orientación + SEO) */
 .home-hero {
@@ -121,59 +122,6 @@ body {
 
 .bg-soft {
     background: var(--color-surface-raised);
-}
-
-/* --- Cards (Neo Bauhaus: hard 2px border, physical offset shadow on hover) --- */
-.glass-effect {
-    background: var(--color-surface);
-    border: 2px solid var(--color-border-strong);
-    box-shadow: var(--shadow-glass);
-}
-
-.card {
-    background: var(--color-surface);
-    border: 2px solid var(--color-border-strong);
-    border-radius: var(--radius-lg);
-    padding: var(--space-5);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--transition-spring), box-shadow var(--transition-spring), border-color var(--transition-fast);
-    position: relative;
-    overflow: hidden;
-}
-
-@media (hover: hover) {
-    .card--hoverable:hover {
-        transform: translateY(-4px) translateX(-2px);
-        box-shadow: 5px 8px 0px var(--color-border-hard);
-        border-color: var(--color-primary);
-    }
-}
-
-.card__title {
-    font-family: var(--font-headers);
-    font-weight: 800;
-    font-size: 1.4rem;
-    color: var(--color-text-main);
-    letter-spacing: -0.01em;
-}
-
-.card--spotlight {
-    position: relative;
-    overflow: hidden;
-}
-
-.card--spotlight::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.08), transparent 80%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
-.card--spotlight:hover::before {
-    opacity: 1;
 }
 
 /* --- Clinical Elements --- */
@@ -532,19 +480,6 @@ body {
     .card {
         padding: var(--space-4);
     }
-}
-
-/* ============================================================
-   M3 Cards — Tonal & Filled variants
-   ============================================================ */
-.card--tonal {
-    background: var(--color-primary-container);
-    border-color: transparent;
-    box-shadow: none;
-}
-
-.card--tonal .card__title {
-    color: var(--color-on-primary-container);
 }
 
 /* ============================================================
