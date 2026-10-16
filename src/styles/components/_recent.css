@@ -1,0 +1,68 @@
+/* src/styles/components/_recent.css */
+/* ============================================================
+   Recent Items Section
+   ============================================================ */
+.recents-section {
+    margin-bottom: var(--space-5);
+}
+
+.recents-section__title {
+    font-family: var(--font-headers);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-2);
+}
+
+.recents-list {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    padding-bottom: var(--space-2);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.recents-list::-webkit-scrollbar {
+    display: none;
+}
+
+.recent-item {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    min-width: 130px;
+    max-width: 160px;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.recent-item:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-container);
+}
+
+.recent-item__name {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--color-text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recent-item__class {
+    font-size: 0.72rem;
+    color: var(--color-text-dim);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

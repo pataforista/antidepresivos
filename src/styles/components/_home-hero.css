@@ -1,0 +1,22 @@
+/* src/styles/components/_home-hero.css */
+/* ============================================================
+   Home Welcome Hero
+   ============================================================ */
+.home-hero {
+    margin-bottom: var(--space-6);
+}
+
+.home-hero__greeting {
+    font-family: var(--font-headers);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-1);
+}
+
+.home-hero__subtitle {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}

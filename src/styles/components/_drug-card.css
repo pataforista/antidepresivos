@@ -1,0 +1,64 @@
+/* src/styles/components/_drug-card.css */
+/* ============================================================
+   Enhanced Drug Card (M3 style)
+   ============================================================ */
+.card-drug__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-1);
+}
+
+.card-drug__name {
+    font-family: var(--font-headers);
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--color-text-main);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.card-drug__name:hover {
+    color: var(--color-primary);
+}
+
+.card-drug__class {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+    margin-bottom: var(--space-2);
+}
+
+.card-drug__compare-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    border: 1.5px solid var(--color-border);
+    background: var(--color-surface-container);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+    font-weight: 700;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.card-drug__compare-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-primary-container);
+}
+
+.card-drug__compare-btn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-on-primary);
+}

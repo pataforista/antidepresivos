@@ -1,0 +1,36 @@
+/* src/styles/components/_utilities.css */
+/* Utilidades usadas por las vistas (antes sin definir) */
+.h5 {
+    font-family: var(--font-headers);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+.text-body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-main);
+}
+
+.list-disc {
+    list-style: disc;
+}
+
+.link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.link:hover {
+    color: var(--color-primary-dark);
+}
+
+.color-danger {
+    color: var(--color-danger);
+}
+
+.bg-soft {
+    background: var(--color-surface-raised);
+}

@@ -1,0 +1,93 @@
+/* src/styles/components/_pwa-banner.css */
+/* === PWA Update Banner ================================================ */
+/* Notificación no intrusiva que aparece cuando hay una nueva versión.  */
+/* Respeta tokens M3 y sigue el patrón de snackbars de Material Design. */
+
+.pwa-update-banner {
+  position: fixed;
+  bottom: calc(var(--md-space-4) + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9000;
+
+  display: flex;
+  align-items: center;
+  gap: var(--md-space-3);
+
+  padding: var(--md-space-2) var(--md-space-2) var(--md-space-2) var(--md-space-4);
+  max-width: min(560px, calc(100vw - var(--md-space-4) * 2));
+
+  background: var(--md-inverse-surface, #313033);
+  color: var(--md-inverse-on-surface, #F4EFF4);
+
+  border-radius: var(--md-radius-md, 12px);
+  box-shadow: var(--md-elevation-3);
+
+  font-size: 0.875rem;
+  line-height: 1.4;
+
+  animation: pwa-update-banner-enter 220ms var(--md-transition-emphasized, cubic-bezier(.2,0,0,1));
+}
+
+.pwa-update-banner__message {
+  flex: 1;
+  min-width: 0;
+}
+
+.pwa-update-banner__actions {
+  display: flex;
+  gap: var(--md-space-1);
+  flex-shrink: 0;
+}
+
+.pwa-update-banner__btn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: var(--md-space-1) var(--md-space-3);
+  border-radius: var(--md-radius-sm, 6px);
+
+  font: inherit;
+  font-weight: 500;
+  color: inherit;
+  transition: background-color 150ms ease;
+}
+
+.pwa-update-banner__btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.pwa-update-banner__btn:focus-visible {
+  outline: 2px solid var(--md-inverse-primary, #D0BCFF);
+  outline-offset: 2px;
+}
+
+.pwa-update-banner__btn--primary {
+  color: var(--md-inverse-primary, #D0BCFF);
+}
+
+@keyframes pwa-update-banner-enter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pwa-update-banner { animation: none; }
+}
+
+@media (max-width: 480px) {
+  .pwa-update-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--md-space-2);
+  }
+  .pwa-update-banner__actions {
+    justify-content: flex-end;
+  }
+}

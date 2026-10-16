@@ -8,6 +8,7 @@ Este documento establece qué funcionalidades faltan, los pendientes técnicos (
   - Incluir más antidepresivos atípicos emergentes u off-label si falta alguno.
   - Asegurar la paridad completa de "Perlas Clínicas" entre Español e Inglés en los CSV correspondientes (algunos JSON podrían tener vacíos).
 - **Validación Médica Continua**: Establecer un flujo sistemático para actualizar las guías clínicas anualmente.
+- **Revisión clínica pendiente**: las preguntas concretas para el revisor (switching de RIMA, QT, dosis divergentes, tablas puente vacías, vigencia de guías) están en [`docs/REVISION_CLINICA_PENDIENTE.md`](docs/REVISION_CLINICA_PENDIENTE.md).
 
 ## 2. Pendientes de Interfaz (UI/UX)
 
@@ -21,10 +22,11 @@ Este documento establece qué funcionalidades faltan, los pendientes técnicos (
 ## 3. Deuda Técnica y Lógica
 
 - **Consolidación de Tests**: 
-  - La suite en `tests/basic.test.js` cubre requerimientos de Jest. Ampliar con Unit Tests el manejo complejo de la `switchingMatrix` para cambios entre IMAOs e ISRS (casos críticos de vida o muerte).
+  - `tests/switchingMatrix.test.js` cubre los casos IMAO/ISRS, pero sobre una copia de la lógica de `src/ui/switchView.js`, no sobre el código real (ver C-1 en `docs/REVISION_CLINICA_PENDIENTE.md`). Extraer la lógica a una función pura e importarla en el test, una vez validadas las reglas.
 - **Limpieza de Linting**:
-  - El proyecto introdujo ESLint recientemente, pero arrojó múltiples advertencias (ej. "no-unused-vars", "Empty block statement").
-  - Tarea: Limpiar exhaustivamente el código para tener cero advertencias al ejecutar `npm run lint`.
+  - Resuelto: `npm run lint` da cero advertencias, `.eslintignore` se retiró y los `catch` vacíos ahora registran un `console.warn`.
+- **CSS modular**:
+  - Resuelto: `src/styles/components.css` solo agrega `@import` de `src/styles/components/` (Issue #5), con el CSS del build idéntico byte a byte.
 - **Estructura del Proyecto**:
   - Resuelto: Código de la SPA unificado en la raíz (`src/`, `public/`, `dist/`), con los árboles duplicados legacy aislados en `archive/appantidepresivos/` y deploy apuntando a `dist/`.
 

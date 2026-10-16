@@ -1,0 +1,21 @@
+/* src/styles/components/_scrollbar.css */
+/* Grid Layouts moved to layout.css */
+
+/* Scrollbar refine */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-dim);
+}

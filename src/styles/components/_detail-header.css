@@ -1,0 +1,48 @@
+/* src/styles/components/_detail-header.css */
+/* ============================================================
+   M3 Detail Header — Clinical Summary Strip
+   ============================================================ */
+.clinical-summary-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+    background: var(--color-surface-container-low);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-4);
+    border: 1px solid var(--color-border);
+}
+
+.clinical-summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 80px;
+}
+
+.clinical-summary-item__label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-text-dim);
+}
+
+.clinical-summary-item__value {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+}
+
+.clinical-summary-item__value--danger {
+    color: var(--color-danger);
+}
+
+.clinical-summary-item__value--warning {
+    color: #b45309;
+}
+
+.clinical-summary-item__value--success {
+    color: #047857;
+}

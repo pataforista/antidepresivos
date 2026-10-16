@@ -441,7 +441,10 @@ function addRecentItem(id, name, cls) {
   const recents = getRecentItems().filter(r => String(r.id) !== String(id));
   recents.unshift({ id: String(id), name, cls, ts: Date.now() });
   try { localStorage.setItem(RECENT_KEY, JSON.stringify(recents.slice(0, MAX_RECENTS))); }
-  catch { /* Ignorado a propsito: localStorage puede fallar en modo privado */ }
+  catch (err) {
+    // localStorage puede fallar en modo privado; los recientes no se persisten.
+    console.warn('[recents] No se pudo guardar en localStorage:', err);
+  }
 }
 
 /* ============================================================
