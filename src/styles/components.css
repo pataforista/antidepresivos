@@ -2,6 +2,7 @@
 @import './components/_buttons.css';
 @import './components/_cards.css';
 @import './components/_chips.css';
+@import './components/_skeleton.css';
 
 /* Home hero — encabezado descriptivo (orientación + SEO) */
 .home-hero {
@@ -636,45 +637,6 @@ body {
     border-color: var(--color-primary);
     color: var(--color-on-primary);
 }
-
-/* ============================================================
-   Skeleton Loader (estados de carga modernos)
-   ============================================================ */
-@keyframes skeleton-shimmer {
-    0% { background-position: -400px 0; }
-    100% { background-position: 400px 0; }
-}
-
-.skeleton {
-    background: linear-gradient(
-        90deg,
-        var(--color-surface-raised) 25%,
-        var(--color-surface-container) 50%,
-        var(--color-surface-raised) 75%
-    );
-    background-size: 800px 100%;
-    animation: skeleton-shimmer 1.6s infinite linear;
-    border-radius: var(--radius-sm);
-}
-
-.skeleton-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-}
-
-.skeleton-line {
-    height: 14px;
-    border-radius: var(--radius-full);
-}
-
-.skeleton-line--title { height: 20px; width: 65%; }
-.skeleton-line--sub   { height: 13px; width: 45%; }
-.skeleton-line--chip  { height: 20px; width: 30%; border-radius: var(--radius-full); }
 
 /* ============================================================
    Home Welcome Hero
