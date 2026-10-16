@@ -72,23 +72,24 @@ Si tienes un dominio personalizado:
 
 ```
 antidepresivos/
-├── wrangler.toml              ← Configuración de Cloudflare
-├── package.json               ← Dependencias y scripts
-├── .github/
-│   └── workflows/
-│       ├── deploy.yml         ← GitHub Pages (antiguo)
-│       └── deploy-cloudflare.yml  ← Cloudflare Pages (nuevo)
-└── appantidepresivos/
-    └── antidepresivos/
-        └── web_app/
-            └── public/        ← Directorio raíz de despliegue
-                ├── index.html
-                ├── _redirects
-                ├── sw.js      ← Service Worker
-                ├── manifest.webmanifest
-                ├── assets/
-                ├── src/
-                └── data/
+├── wrangler.toml              ← Configuración de Cloudflare (pages_build_output_dir = "dist")
+├── package.json               ← Dependencias y scripts (build, deploy, deploy:prod)
+├── vite.config.js             ← Build de Vite → dist/
+├── index.html                 ← Entrada de la SPA
+├── src/                       ← Código fuente (JS, estilos, sw.js de Workbox)
+├── public/                    ← Estáticos copiados tal cual a dist/
+│   ├── _headers
+│   ├── _redirects
+│   ├── manifest.webmanifest
+│   ├── offline.html
+│   ├── icons/
+│   ├── assets/
+│   └── data/
+├── dist/                      ← Salida del build: directorio de despliegue
+├── archive/                   ← Árbol legacy archivado (no se despliega)
+└── .github/
+    └── workflows/
+        └── deploy-cloudflare.yml  ← Build + deploy de dist/ a Cloudflare Pages
 ```
 
 ---
