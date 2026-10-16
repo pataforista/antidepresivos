@@ -27,7 +27,10 @@ function getState() {
 function saveState(state) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch { /* storage lleno o privado: ignorar */ }
+  } catch (err) {
+    // Storage lleno o en modo privado: el popup sigue funcionando sin persistir.
+    console.warn('[coffeePopup] No se pudo guardar el estado en localStorage:', err);
+  }
 }
 
 /* ── API pública ─────────────────────────────────────────────── */

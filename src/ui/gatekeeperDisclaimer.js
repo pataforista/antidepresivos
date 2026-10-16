@@ -116,6 +116,8 @@ export function mountDisclaimerGate({ rootEl, onAllow }) {
   return () => {
     try {
       if (typeof unsub === "function") unsub();
-    } catch { /* ignorado */ }
+    } catch (err) {
+      console.warn('[gatekeeper] Error al cancelar la suscripción:', err);
+    }
   };
 }

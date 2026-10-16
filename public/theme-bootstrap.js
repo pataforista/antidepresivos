@@ -17,5 +17,8 @@
 
     if (ui.animations === false) document.documentElement.setAttribute('data-reduced-motion', 'true');
     if (ui.compact === true) document.documentElement.setAttribute('data-compact', 'true');
-  } catch (e) { /* silently ignore storage errors */ }
+  } catch (e) {
+    // Storage inaccesible: se aplica el tema por defecto.
+    console.warn('[theme-bootstrap] No se pudieron leer las preferencias:', e);
+  }
 }());

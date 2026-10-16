@@ -79,7 +79,9 @@ export function acceptDisclaimer() {
 export function resetDisclaimer() {
   try {
     localStorage.removeItem(LS_KEY);
-  } catch { /* ignorado */ }
+  } catch (err) {
+    console.warn('[policy] No se pudo borrar la aceptación del disclaimer en localStorage:', err);
+  }
   store.updatePath("ui.disclaimerAccepted", false);
 
 }
