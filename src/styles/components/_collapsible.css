@@ -1,0 +1,55 @@
+/* src/styles/components/_collapsible.css */
+/* ============================================================
+   Collapsible Detail Sections
+   ============================================================ */
+.detail-section {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.detail-section + .detail-section {
+    margin-top: var(--space-3);
+}
+
+.detail-section__summary {
+    padding: var(--space-4) var(--space-5);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--color-surface);
+    font-family: var(--font-headers);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-text-main);
+    transition: background var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.detail-section__summary::-webkit-details-marker {
+    display: none;
+}
+
+.detail-section__summary:hover {
+    background: var(--color-surface-container);
+}
+
+.detail-section__chevron {
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    transition: transform var(--transition-normal);
+}
+
+.detail-section[open] .detail-section__chevron {
+    transform: rotate(180deg);
+}
+
+.detail-section__body {
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+}

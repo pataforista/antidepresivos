@@ -1,0 +1,43 @@
+/* src/styles/components/_monograph.css */
+/* Specialized Detail View (Monograph) */
+.monograph__header {
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 2px solid var(--color-border-strong);
+    border-left: 6px solid var(--color-primary);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+}
+
+.alert {
+    padding: var(--space-5);
+    border-radius: var(--radius-md);
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    border: 2px solid;
+}
+
+.alert--info {
+    background: var(--color-primary-container);
+    border-color: var(--color-primary-light);
+    color: var(--color-on-primary-container);
+}
+
+.alert--danger {
+    background: var(--color-danger-container);
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+}
+
+.alert--warning {
+    background: var(--color-warning-container);
+    border-color: var(--color-warning);
+    color: var(--color-text-main);
+}
+
+.alert--success {
+    background: var(--color-success-container);
+    border-color: var(--color-success);
+    color: var(--color-text-main);
+}

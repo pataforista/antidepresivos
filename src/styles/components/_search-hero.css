@@ -1,0 +1,63 @@
+/* src/styles/components/_search-hero.css */
+/* ============================================================
+   Hero Search Bar (M3 Search — protagonista)
+   ============================================================ */
+.search-hero {
+    position: relative;
+    margin-bottom: var(--space-5);
+}
+
+.search-hero__input {
+    width: 100%;
+    padding: 18px 52px 18px 52px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    background: var(--color-surface);
+    color: var(--color-text-main);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.search-hero__input::placeholder {
+    color: var(--color-text-dim);
+    font-weight: 400;
+}
+
+.search-hero__input:focus {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md), 0 0 0 3px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.12);
+    background: var(--color-surface);
+}
+
+.search-hero__icon-left {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.search-hero__icon-right {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-dim);
+    font-size: 0.8rem;
+    pointer-events: none;
+    background: var(--color-surface-container);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-family: var(--font-body);
+    display: flex;
+    align-items: center;
+}

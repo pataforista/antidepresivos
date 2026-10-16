@@ -1,0 +1,55 @@
+/* src/styles/components/_responsive.css */
+@media (max-width: 768px) {
+    .compact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .risk-profile-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .tabs-nav {
+        overflow-x: auto;
+        gap: var(--space-3);
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .tabs-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-btn {
+        white-space: nowrap;
+    }
+
+
+}
+
+@media (max-width: 640px) {
+    /* Prevent iOS auto-zoom on input focus */
+    input, select, textarea {
+        font-size: max(1rem, 16px);
+    }
+
+    /* Hide desktop keyboard shortcut hint in search */
+    .search-hero__icon-right {
+        display: none;
+    }
+
+    /* Remove right padding offset when shortcut is hidden */
+    .search-hero__input {
+        padding-right: 18px;
+    }
+}
+
+@media (max-width: 420px) {
+    .compact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: var(--space-4);
+    }
+}

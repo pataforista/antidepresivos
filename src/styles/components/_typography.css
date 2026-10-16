@@ -1,0 +1,86 @@
+/* src/styles/components/_typography.css */
+/* Home hero — encabezado descriptivo (orientación + SEO) */
+.home-hero {
+    text-align: center;
+    margin: var(--space-5) auto var(--space-4);
+    max-width: 640px;
+    padding: 0 var(--space-3);
+}
+.home-hero__title {
+    font-family: var(--font-headers);
+    font-weight: 900;
+    font-size: clamp(1.5rem, 5vw, 2.1rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--color-text-main);
+    margin: 0 0 var(--space-2);
+}
+.home-hero__subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(0.9rem, 2.4vw, 1.02rem);
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* Typography Utils — Neo Bauhaus Geometric (Montserrat) */
+.h1,
+.h2,
+.h3,
+.h4 {
+    font-family: var(--font-headers);
+    color: var(--color-text-main);
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+}
+
+.h1 {
+    font-size: clamp(1.75rem, 5vw, 3rem);
+    font-weight: 900;
+    margin-bottom: var(--space-5);
+}
+
+.h2 {
+    font-size: clamp(1.4rem, 4vw, 2.25rem);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+}
+
+.h3 {
+    font-size: clamp(1.15rem, 3vw, 1.75rem);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+}
+
+.h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+.text-muted {
+    color: var(--color-text-muted);
+}
+
+.text-dim {
+    color: var(--color-text-dim);
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}

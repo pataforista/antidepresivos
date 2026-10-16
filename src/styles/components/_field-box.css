@@ -1,0 +1,32 @@
+/* src/styles/components/_field-box.css */
+/* Detail Specifics */
+.field-box {
+    background: var(--color-surface-raised);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5);
+    border: 1.5px solid transparent;
+    transition: all var(--transition-normal);
+}
+
+@media (hover: hover) {
+    .field-box:hover {
+        border-color: var(--color-primary-light);
+        transform: scale(1.01);
+    }
+}
+
+.field-box__label {
+    font-family: var(--font-headers);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-1);
+}
+
+.field-box__value {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-text-main);
+}
