@@ -1,6 +1,6 @@
 # Plan de migración estética: antidepresivos → sistema "humano"
 
-Versión 1.0 · 2026-10-17
+Versión 1.1 (decisiones cerradas, §11) · 2026-10-17
 
 Especificación maestra (valores, componentes, lista negra, contrato de integración):
 `antipsicoticos-v3/docs/PLAN_UNIFICACION_ESTETICA.md`. Este documento dice **qué cambia aquí,
@@ -215,8 +215,8 @@ señal de que se está conservando ornamento.
 - 13 mayúsculas: categorías, etiquetas de respuesta, encabezados de repaso → ninguna.
 - Opciones de respuesta: como `.guru-option` de antipsicóticos (radio 14 px, borde 1 px, hover acento suave).
 - Retroalimentación: como `.guru-feedback.is-correct/.is-wrong` (menta 12 % / frambuesa 8 %).
-- Pantalla de resultado: estrellas `★` en `--h-amber`; el emoji grande (`quiz-result-emoji`) queda
-  pendiente de la decisión abierta 3 de la maestra. Mientras tanto, se sustituye por un ícono SVG.
+- Pantalla de resultado: estrellas `★` en `--h-amber` con `aria-label` ("4 de 5"); el emoji grande
+  (`quiz-result-emoji`) se sustituye por un ícono SVG (decisión D3).
 
 ---
 
@@ -225,8 +225,8 @@ señal de que se está conservando ornamento.
 ### 5.1 Emojis
 | Origen | Cantidad | Acción |
 | --- | --- | --- |
-| `drugEmoji(clase_terapeutica)` en `drugNormalization.js` (18) y su uso en `detailView.js:36` y `app.js` | 18 + usos | Sustituir por un ícono SVG por clase (ISRS, IRSN, tricíclico, IMAO, atípico…) con `getIcon()`-like, o eliminar. No es contenido clínico: es decoración ligada a un campo clínico; el campo no se toca |
-| `quizView.js` (55) | 55 | Estrellas se quedan (son texto); emojis de resultado y de categoría → SVG |
+| `drugEmoji(clase_terapeutica)` en `drugNormalization.js` (18) y su uso en `detailView.js:36` y `app.js` | 18 + usos | Eliminar (decisión AD1, §11). El campo clínico no se toca |
+| `quizView.js` (55) | 55 | Estrellas se quedan (son texto) con `aria-label`; emojis de resultado y de categoría → SVG (D3) |
 | Toasts y botones en `app.js` (48) | 48 | Fuera de botones/pestañas/títulos; en toasts → ícono SVG |
 | Resto (`detailView`, `switchView`, `modalInfo`, `comboView`, `gatekeeperDisclaimer`, `settingsPanel`, `guiasView`, `coffeePopup`, `ajusteView`) | 41 | Uno por uno; si el emoji es la única señal de estado, se reemplaza por punto de estado (`.status-dot--*`) + texto |
 
@@ -301,7 +301,17 @@ Cada PR es independiente, revisable en una sentada y con capturas.
 | `print.css` hereda tokens y puede cambiar el PDF | Validar impresión en A1 |
 | Quitar animaciones elimina feedback que el usuario usa | Conservar las informativas (barra de riesgo, esqueleto, entrada de modal) |
 
-## 11. Pendiente de decisión
+## 11. Decisiones tomadas (2026-10-17)
 
-- Decisión abierta 3 de la maestra (emoji del resultado del quiz).
-- ¿Se conserva un acento propio (azul acero) en el ícono de la app para orientación entre las tres?
+Delegadas por el responsable del proyecto. Las comunes están justificadas en la maestra (§13).
+
+| # | Decisión | Efecto aquí |
+| --- | --- | --- |
+| D2 (maestra) | Interfaz en índigo; el azul acero sobrevive sólo en el ícono de la app | `manifest.webmanifest` e íconos de `public/icons/` conservan su tono; ningún token de interfaz lo usa |
+| D3 (maestra) | Emojis del quiz → íconos SVG; estrellas `★` se quedan con `aria-label` | `starsFor()` en `quizView.js` devuelve un nombre de ícono en vez de `emoji`; `.quiz-result-emoji` pasa a `.quiz-result-icon` |
+| D4 (maestra) | La escala `--space-*` de esta app es la común | `variables.css` deja de definirla cuando los tokens comunes la traigan; mismos valores, sin cambio visual |
+| AD1 | `drugEmoji(clase_terapeutica)` **se elimina**, no se reemplaza por un ícono por clase | Un ícono por clase terapéutica sería una taxonomía visual nueva que alguien debería validar clínicamente y mantener. La clase ya es un dato: si la ficha no la muestra como texto junto al nombre, se añade un chip neutro (`.clinical-chip--neutral`) con `item.clase_terapeutica` tal cual, sin transformar. La función se borra de `drugNormalization.js` sólo después de buscar todas sus referencias (AGENTS.md regla 5) |
+| AD2 | Clave de tema: se lee y escribe `localStorage["theme"]` **además** del store; la clave del store no se borra | Migración no destructiva: si la integración se retrasa o revierte, nada se pierde. Se retira la doble escritura cuando la Fase 3 esté en producción |
+| AD3 | `--color-text-dim` se fusiona con `--text-muted` | Corrige textos por debajo de AA (≈ 3.3:1); es una mejora de accesibilidad, no un gusto |
+| AD4 | Animaciones: se conservan sólo las que informan (barra de riesgo, esqueleto, entrada de modal/hoja); el resto se elimina, no se "suaviza" | Código que no aporta información es mantenimiento puro; `playful.css` objetivo < 200 líneas |
+| AD5 | Los PR de implementación usan ramas con prefijo `claude/` | Cumple la plantilla de PR del repo; esta rama de documentación (`ccr-…`) la asignó la sesión |
