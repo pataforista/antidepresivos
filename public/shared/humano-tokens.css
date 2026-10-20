@@ -1,0 +1,145 @@
+/* humano-tokens v1.1.0 — fuente: antipsicoticos-v3
+   Tokens del sistema visual "humano" (paleta, superficies por tema, tipografía,
+   forma, sombra y espaciado). Especificación: docs/PLAN_UNIFICACION_ESTETICA.md §3.
+   Se carga después de neobrutalism.css y antes de humano.css. Cambiar un token =
+   PR aquí primero, subir la versión, luego copiar a las otras apps (§8). */
+
+:root {
+  --font-display: "Poppins", "Inter", system-ui, sans-serif;
+  --font-base: "Inter", system-ui, -apple-system, sans-serif;
+
+  --radius-panel: 22px;
+  --radius-card: 20px;
+  --radius-btn: 14px;
+  --radius-input: 12px;
+  --stroke-hard: 1px;
+
+  /* Paleta */
+  --h-indigo: #3D4A8F;
+  --h-indigo-deep: #2E3870;
+  --h-indigo-soft: #E4E7F6;
+  --h-raspberry: #BE3650;   /* 5.5:1 sobre blanco (AA texto) */
+  --h-pink: #F08DB0;
+  --h-pink-soft: #FBE1EA;
+  --h-peach: #FCE5D8;
+  --h-peach-deep: #F6CDB8;
+  --h-mint: #3E9C7F;
+  --h-amber: #D98A3A;
+
+  --color-primary: var(--h-indigo);
+  --color-primary-light: #6874B8;
+  --color-primary-lighter: #C9CEEC;
+  --color-primary-dark: var(--h-indigo-deep);
+  --color-secondary: var(--h-raspberry);
+  --color-secondary-light: var(--h-pink);
+  --color-accent: var(--h-raspberry);
+  --color-success: var(--h-mint);
+  --color-warning: var(--h-amber);
+  --color-danger: var(--h-raspberry);
+
+  --ritual-red: var(--h-raspberry);
+  --ritual-red-muted: rgba(214, 69, 93, 0.08);
+  --ritual-red-bright: #E86A80;
+  --accent-muted: rgba(61, 74, 143, 0.1);
+  --accent-glow: rgba(61, 74, 143, 0.18);
+
+  /* Sombras difusas, teñidas de índigo (no grises ni negras) */
+  --shadow-neo-xs: 0 1px 2px rgba(46, 56, 112, 0.06);
+  --shadow-neo-sm: 0 4px 14px rgba(46, 56, 112, 0.07);
+  --shadow-neo-md: 0 8px 24px rgba(46, 56, 112, 0.09);
+  --shadow-neo-lg: 0 14px 34px rgba(46, 56, 112, 0.11);
+  --shadow-neo-xl: 0 20px 48px rgba(46, 56, 112, 0.13);
+  --shadow-press: 0 2px 6px rgba(46, 56, 112, 0.10);
+
+  /* Espaciado: rejilla de 8 pt común a las tres apps (D4). */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+
+  /* Aviso (toast de precaución): texto ámbar oscuro, nunca blanco sobre ámbar. */
+  --h-warn-bg: #FFF3E6;
+  --h-warn-text: #7A4310;
+
+  /* Semántica clínica como TEXTO (AA sobre superficies): riesgo alto / moderado / bajo.
+     Para rellenos y barras se pueden usar --h-raspberry, --h-amber y --h-mint. */
+  --risk-high: var(--ritual-red);
+  --risk-mod: #95540F;
+  --risk-low: #2E7A62;
+
+  /* Series de datos (comparador, radar): identidad de cada fármaco, no riesgo. */
+  --viz-1: #4F5BB0;
+  --viz-2: #C9507A;
+  --viz-3: #B8732A;
+  --viz-4: #2B8796;
+  --viz-5: #3E9C7F;
+}
+
+.theme-light,
+[data-theme="light"] {
+  --bg-app: #FBF1EC;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #FDF6F2;
+  --bg-input: #FDF6F2;
+  --bg-hover: #F7E8E1;
+  --text-main: #2A2D45;
+  --text-muted: #66687F;   /* ≥4.9:1 sobre fondos claros */
+  --border-subtle: #EEDDD5;
+  --border-strong: #2A2D45;
+  --accent: var(--h-indigo);
+  --accent-container: var(--h-indigo-soft);
+  --accent-soft: #F1F2FA;
+  --hero-gradient: linear-gradient(135deg, var(--h-peach) 0%, var(--h-pink-soft) 100%);
+  --glass-bg: rgba(251, 241, 236, 0.92);
+  --glass-border: rgba(42, 45, 69, 0.08);
+  --theme-color: #FBF1EC;
+}
+
+.theme-dark,
+[data-theme="dark"] {
+  --bg-app: #191A2B;
+  --bg-surface: #23253A;
+  --bg-elevated: #2B2E47;
+  --bg-input: #1E2034;
+  --bg-hover: #32354F;
+  --text-main: #F3EEF3;
+  --text-muted: #A6A8C0;
+  --border-subtle: #363955;
+  --border-strong: #F3EEF3;
+  --accent: #A9B3EE;
+  --accent-container: #2F3766;
+  --accent-soft: #262B4D;
+  /* Primario claro: se usa como color de TEXTO en muchas reglas (7:1 sobre superficie).
+     Los botones sólidos usan --h-btn (5:1 con texto blanco); ver abajo. */
+  --color-primary: #A9B3EE;
+  --color-primary-dark: #8C97E0;
+  --h-btn: #5D69BE;
+  --h-btn-hover: #4E5AAE;
+  --ritual-red: #EF6F86;
+  --hero-gradient: linear-gradient(135deg, rgba(240, 141, 176, 0.14) 0%, rgba(127, 139, 214, 0.10) 100%);
+  --glass-bg: rgba(25, 26, 43, 0.9);
+  --glass-border: rgba(243, 238, 243, 0.08);
+  --theme-color: #191A2B;
+  --h-warn-bg: #3A2E26;
+  --h-warn-text: #F6D3B0;
+  --risk-mod: #E8A45C;
+  --risk-low: #4FB596;
+  --viz-1: #A9B3EE;
+  --viz-2: #F08DB0;
+  --viz-3: #E8A45C;
+  --viz-4: #6CC3D0;
+  --viz-5: #4FB596;
+  /* Cabeceras con blobs en oscuro (hero, modal): fondo y halos de noche. */
+  --hero-dark-a: #2A2D4B;
+  --hero-dark-b: #2C2742;
+  --blob-dark-pink-a: var(--h-pink);
+  --blob-dark-pink-b: #B8547A;
+  --blob-dark-indigo: #8C97E0;
+  --shadow-neo-xs: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-neo-sm: 0 4px 14px rgba(0, 0, 0, 0.25);
+  --shadow-neo-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-neo-lg: 0 14px 34px rgba(0, 0, 0, 0.35);
+}

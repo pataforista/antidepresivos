@@ -1,0 +1,73 @@
+/* src/styles/humano-alias.css — Capa de alias para el sistema visual "humano"
+   Mapea los tokens propios de antidepresivos hacia los tokens comunes de humano-tokens.css.
+   Especificación: docs/PLAN_ESTETICA_HUMANO.md §3 */
+
+:root,
+[data-theme="light"] {
+  /* Primario: índigo. Se conservan los componentes h/s/l porque varias reglas usan
+     hsla(var(--color-primary-h) …) para halos y anillos. #3D4A8F ≈ hsl(230 40% 40%). */
+  --color-primary-h: 230;
+  --color-primary-s: 40%;
+  --color-primary-l: 40%;
+
+  --color-primary-container: var(--accent-container);
+  --color-on-primary-container: var(--h-indigo-deep);
+
+  /* Superficies */
+  --color-bg: var(--bg-app);
+  --color-surface: var(--bg-surface);
+  --color-surface-raised: var(--bg-elevated);
+  --color-surface-container-lowest: var(--bg-surface);
+  --color-surface-container-low: var(--bg-app);
+  --color-surface-container: var(--bg-hover);
+  --color-surface-container-high: var(--border-subtle);
+  --color-surface-translucent: var(--glass-bg);
+  --color-border: var(--glass-border);
+  --color-border-strong: var(--border-subtle);
+  --color-border-hard: var(--border-subtle);
+  --color-stroke: var(--border-subtle);
+
+  /* Texto */
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-muted);
+
+  /* Semántica de estado */
+  --color-danger: var(--h-raspberry);
+  --color-success: var(--h-mint);
+  --color-warning: var(--h-amber);
+
+  /* Sombras y formas */
+  --shadow-sm: var(--shadow-neo-sm);
+  --shadow-md: var(--shadow-neo-md);
+  --shadow-lg: var(--shadow-neo-lg);
+  --shadow-xl: var(--shadow-neo-xl);
+  --shadow-premium: var(--shadow-neo-md);
+  --shadow-glass: var(--shadow-neo-sm);
+  --shadow-dock: 0 -8px 24px rgba(46, 56, 112, 0.06), var(--shadow-neo-md);
+  --shadow-glow: 0 0 14px -2px color-mix(in srgb, var(--h-indigo) 28%, transparent);
+
+  --radius-sm: 12px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 22px;
+  --radius-2xl: 28px;
+
+  /* Tipografía */
+  --font-headers: var(--font-display);
+  --font-body: var(--font-base);
+  --font-sans: var(--font-base);
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Transición sin rebote brusco */
+  --transition-spring: 240ms cubic-bezier(.2, 0, 0, 1);
+}
+
+[data-theme="dark"] {
+  --color-primary-h: 231;
+  --color-primary-s: 67%;
+  --color-primary-l: 80%;
+  --color-danger: var(--ritual-red);
+  --color-on-primary-container: var(--accent);
+  --shadow-dock: 0 -8px 24px rgba(0, 0, 0, 0.25), var(--shadow-neo-md);
+}
