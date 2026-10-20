@@ -10,7 +10,7 @@
   --color-primary-s: 40%;
   --color-primary-l: 40%;
 
-  --color-primary-container: var(--h-indigo-soft);
+  --color-primary-container: var(--accent-container);
   --color-on-primary-container: var(--h-indigo-deep);
 
   /* Superficies */
@@ -57,6 +57,7 @@
   --font-headers: var(--font-display);
   --font-body: var(--font-base);
   --font-sans: var(--font-base);
+  --font-mono: "JetBrains Mono", monospace;
 
   /* Transición sin rebote brusco */
   --transition-spring: 240ms cubic-bezier(.2, 0, 0, 1);

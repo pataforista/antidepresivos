@@ -101,8 +101,10 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
   <link rel="apple-touch-icon" href="./assets/icons/icon-192.png">
 
-  <!-- Fonts: Montserrat (Neo Bauhaus headers) + DM Sans (Naive body) -->
+  <!-- Fonts: Poppins (display/headers) + Inter (body) + JetBrains Mono (code) -->
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin-wght-normal.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/poppins-latin-600-normal.woff2" crossorigin />
   <link rel="stylesheet" href="/assets/fonts/fonts.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
@@ -152,10 +154,10 @@
     <div id="appShell" class="shell">
       <!-- Splash de carga estático: se reemplaza cuando arranca la app (mejora la percepción de velocidad) -->
       <div id="appSplash" role="status" aria-live="polite" style="display:flex; min-height:100vh; flex-direction:column; align-items:center; justify-content:center; gap:16px; text-align:center; padding:24px;">
-        <div aria-hidden="true" style="width:64px; height:64px; border-radius:18px; background:#336699; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Montserrat',sans-serif; font-weight:800; font-size:2rem; box-shadow:4px 6px 0 rgba(44,36,32,0.18);">A</div>
-        <p style="font-family:'Montserrat',sans-serif; font-weight:700; color:#336699; font-size:1.25rem; margin:0;">Cargando Antidepresivos…</p>
+        <div aria-hidden="true" style="width:64px; height:64px; border-radius:18px; background:var(--color-primary, #3D4A8F); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-weight:600; font-size:2rem; box-shadow:var(--shadow-md, 0 8px 24px rgba(46,56,112,0.09));">A</div>
+        <p style="font-family:'Poppins',sans-serif; font-weight:600; color:var(--color-primary, #3D4A8F); font-size:1.25rem; margin:0;">Cargando Antidepresivos…</p>
         <noscript>
-          <p style="font-family:'DM Sans',sans-serif; color:#5C4A3E; max-width:520px; margin:0;">Esta aplicación necesita JavaScript para funcionar. Activa JavaScript en tu navegador para usar el comparador clínico.</p>
+          <p style="font-family:'Inter',sans-serif; color:var(--color-text-muted, #66687F); max-width:520px; margin:0;">Esta aplicación necesita JavaScript para funcionar. Activa JavaScript en tu navegador para usar el comparador clínico.</p>
         </noscript>
       </div>
     </div>
@@ -163,8 +165,8 @@
 
   <!-- Contenido rastreable para buscadores y sin JavaScript -->
   <noscript>
-    <main style="max-width:760px; margin:0 auto; padding:32px 20px; font-family:'DM Sans',sans-serif; color:#2C2420; line-height:1.6;">
-      <h1 style="font-family:'Montserrat',sans-serif;">Antidepresivos — Comparador Clínico de Psicofármacos</h1>
+    <main style="max-width:760px; margin:0 auto; padding:32px 20px; font-family:'Inter',sans-serif; color:#2C2420; line-height:1.6;">
+      <h1 style="font-family:'Poppins',sans-serif;">Antidepresivos — Comparador Clínico de Psicofármacos</h1>
       <p>Herramienta de soporte clínico para profesionales de la salud mental: comparador interactivo de antidepresivos, perfiles de riesgo (QT, sedación, peso), guías de switching basadas en Maudsley, NICE, APA y CANMAT, interacciones farmacológicas y monografías detalladas.</p>
       <h2>Funcionalidades principales</h2>
       <ul>
