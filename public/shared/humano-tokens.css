@@ -1,7 +1,7 @@
 /* humano-tokens v1.1.0 — fuente: antipsicoticos-v3
    Tokens del sistema visual "humano" (paleta, superficies por tema, tipografía,
    forma, sombra y espaciado). Especificación: docs/PLAN_UNIFICACION_ESTETICA.md §3.
-   Se carga después de neobrutalism.css y antes de humano.css. Cambiar un token =
+   Se carga después de variables.css y antes de layout.css. Cambiar un token =
    PR aquí primero, subir la versión, luego copiar a las otras apps (§8). */
 
 :root {

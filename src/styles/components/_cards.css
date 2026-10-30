@@ -27,7 +27,7 @@
 
 .card__title {
     font-family: var(--font-headers);
-    font-weight: 800;
+    font-weight: 600;
     font-size: 1.4rem;
     color: var(--color-text-main);
     letter-spacing: -0.01em;

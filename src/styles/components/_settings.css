@@ -41,7 +41,7 @@
     gap: 6px;
     padding: 10px 16px;
     border-radius: var(--radius-lg, 12px);
-    border: 2px solid var(--color-border-strong);
+    border: 1px solid var(--border-subtle);
     background: var(--color-surface);
     color: var(--color-text-main);
     font-family: var(--font-body);
@@ -91,7 +91,7 @@
     height: 28px;
     border-radius: 14px;
     background: var(--color-surface-container-high, #ccc);
-    border: 2px solid var(--color-border-strong);
+    border: 1px solid var(--border-subtle);
     transition: background 0.22s, border-color 0.22s;
     flex-shrink: 0;
 }
