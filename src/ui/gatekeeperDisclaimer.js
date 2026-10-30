@@ -12,9 +12,9 @@ export function mountLegalModal() {
   modal.style.zIndex = "3000";
   modal.innerHTML = `
     <div class="gatekeeper__card" style="position:relative; padding:0; overflow:hidden;">
-      <div class="gatekeeper__card-header" style="background:var(--color-stroke); color:var(--color-bg); padding:10px 16px; font-family:var(--font-headers); font-weight:900; font-size:0.75rem; display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid var(--color-stroke);">
-        <span>⚖️ AVISO LEGAL</span>
-        <button type="button" class="btn btn--circle btn--ghost legalModalClose" aria-label="Cerrar aviso legal" style="width:24px; height:24px; font-size:0.75rem; border:none; box-shadow:none; color:var(--color-bg); background:none; margin:0; padding:0; min-width:auto; cursor:pointer;">✕</button>
+      <div class="gatekeeper__card-header">
+        <span>⚖ AVISO LEGAL</span>
+        <button type="button" class="btn btn--circle btn--ghost legalModalClose" aria-label="Cerrar aviso legal" style="width:24px; height:24px; font-size:0.75rem; border:none; box-shadow:none; color:var(--text-main); background:none; margin:0; padding:0; min-width:auto; cursor:pointer;">✕</button>
       </div>
       <div class="gatekeeper__card-body" style="padding:20px;">
         <h2 class="h2" style="margin-top:0; font-size:1.5rem;">Aviso Legal</h2>
@@ -56,8 +56,8 @@ export function mountDisclaimerGate({ rootEl, onAllow }) {
     rootEl.innerHTML = `
       <div class="gatekeeper">
         <div class="gatekeeper__card" style="padding:0; overflow:hidden;">
-          <div class="gatekeeper__card-header" style="background:var(--color-stroke); color:var(--color-bg); padding:10px 16px; font-family:var(--font-headers); font-weight:900; font-size:0.75rem; border-bottom:3px solid var(--color-stroke);">
-            <span>⚠️ AVISO DE SOPORTE CLÍNICO</span>
+          <div class="gatekeeper__card-header">
+            <span>⚠ AVISO DE SOPORTE CLÍNICO</span>
           </div>
           <div class="gatekeeper__card-body" style="padding:20px;">
             <h2 class="h2" style="margin-top:0; font-size:1.5rem;">Aviso y limitaciones de uso</h2>

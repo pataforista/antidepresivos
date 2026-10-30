@@ -7,14 +7,14 @@ import { i18n } from "../core/i18n.js";
 function aecColor(val) {
     if (!val) return "";
     const v = String(val).toLowerCase();
-    if (v.includes("alto") || v === "3") return "color:var(--color-danger); font-weight:800;";
+    if (v.includes("alto") || v === "3") return "color:var(--color-danger); font-weight:600;";
     if (v.includes("moderado") || v.includes("medio") || v === "2") return "color:var(--color-warning); font-weight:700;";
     return "";
 }
 
 function sedacionGeriatrico(nivel) {
     const n = parseInt(nivel, 10);
-    if (n >= 2) return { label: i18n.t("high_fall_risk"), style: "color:var(--color-danger); font-weight:800;" };
+    if (n >= 2) return { label: i18n.t("high_fall_risk"), style: "color:var(--color-danger); font-weight:600;" };
     if (n === 1) return { label: i18n.t("mild_monitor"), style: "color:var(--color-warning); font-weight:700;" };
     if (n === 0) return { label: i18n.t("none"), style: "color:var(--color-success); font-weight:600;" };
     return { label: "N/D", style: "" };
@@ -78,7 +78,7 @@ export function renderAjuste(view) {
         if (!filtered.length) {
             results.innerHTML = `
                 <div style="text-align:center; padding:var(--space-8); color:var(--color-text-muted);">
-                    <div style="font-size:3rem; opacity:0.3; margin-bottom:var(--space-4);">🔍</div>
+                    <div style="font-size:3rem; opacity:0.3; margin-bottom:var(--space-4);">⌕</div>
                     <p style="font-weight:600;">Sin resultados para "<em>${escapeHtml(query)}</em>"</p>
                 </div>`;
             return;

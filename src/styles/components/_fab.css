@@ -1,31 +1,34 @@
 /* src/styles/components/_fab.css */
 /* ============================================================
-   M3 FAB (Floating Action — comparar)
+   M3 FAB (humano: primary with halo, no hard border)
    ============================================================ */
 .m3-fab {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
     padding: 16px 20px;
-    background: var(--color-primary-container);
-    color: var(--color-on-primary-container);
+    background: var(--color-primary);
+    color: var(--color-on-primary);
     border: none;
-    border-radius: 16px;
+    border-radius: 20px;
     font-family: var(--font-headers);
-    font-weight: 800;
+    font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all var(--transition-spring);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-neo-md);
     white-space: nowrap;
+}
+
+[data-theme="dark"] .m3-fab {
+    background: var(--h-btn);
+    color: #FFFFFF;
 }
 
 @media (hover: hover) {
     .m3-fab:hover:not(:disabled) {
-        box-shadow: var(--shadow-lg);
+        box-shadow: var(--shadow-neo-lg), 0 0 14px -2px color-mix(in srgb, var(--h-indigo) 28%, transparent);
         transform: translateY(-2px);
-        background: var(--color-primary);
-        color: var(--color-on-primary);
     }
 }
 

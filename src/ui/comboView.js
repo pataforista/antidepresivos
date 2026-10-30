@@ -15,7 +15,7 @@ export function renderCombo(view) {
         <div class="animate-fade-in">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
                 <div>
-                    <h2 class="h2" style="margin:0">${i18n.t("combo_title")} 🚀</h2>
+                    <h2 class="h2" style="margin:0">${i18n.t("combo_title")}</h2>
                     <p class="text-sm text-muted">${i18n.t("combo_subtitle")}</p>
                 </div>
                 <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
@@ -91,7 +91,7 @@ function renderResult(id1, id2, view, synergies, dataset) {
     if (String(id1) === String(id2)) {
         container.innerHTML = `
             <div class="animate-fade-in card" style="text-align:center; padding: 32px; background: var(--color-surface-raised); border-radius: var(--radius-2xl);">
-                <div style="font-size: 2rem; margin-bottom: 12px;">↩️</div>
+                <div style="font-size: 2rem; margin-bottom: 12px;">↶</div>
                 <p class="text-sm" style="max-width: 400px; margin: 0 auto; color: var(--color-text-muted);">
                     ${i18n.getLocale() === 'en' ? 'Select two different drugs to evaluate a combination.' : 'Selecciona dos fármacos distintos para evaluar una combinación.'}
                 </p>
@@ -115,9 +115,9 @@ function renderResult(id1, id2, view, synergies, dataset) {
             <div class="animate-fade-in">
                 <div class="card ${found.type === 'danger' ? 'alert--danger' : 'card--tonal'}" style="margin-bottom: 24px; padding: 24px; border-radius: var(--radius-2xl);">
                     <div style="display:flex; align-items:center; gap:16px; margin-bottom: 16px;">
-                        <div style="font-size: 2.5rem;">${found.type === 'danger' ? '⚠️' : '✨'}</div>
+                        <div style="font-size: 2.5rem;">${found.type === 'danger' ? '⚠' : '✦'}</div>
                         <div>
-                            <h3 style="margin:0; font-family:var(--font-headers); font-weight:800; font-size: 1.5rem;">${escapeHtml(found.name)}</h3>
+                            <h3 style="margin:0; font-family:var(--font-headers); font-weight:600; font-size: 1.5rem;">${escapeHtml(found.name)}</h3>
                             <p style="margin:0; font-size: 0.9rem; opacity: 0.8;">${escapeHtml(found.description)}</p>
                         </div>
                     </div>

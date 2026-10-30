@@ -1,15 +1,18 @@
 /* src/styles/components/_home-hero.css */
 /* ============================================================
-   Home Welcome Hero
+   Home Welcome Hero (humano: hero gradient, 28px radius)
    ============================================================ */
 .home-hero {
     margin-bottom: var(--space-6);
+    background: var(--hero-gradient);
+    border-radius: 28px;
+    padding: var(--space-6);
 }
 
 .home-hero__greeting {
-    font-family: var(--font-headers);
+    font-family: var(--font-display);
     font-size: 1.6rem;
-    font-weight: 800;
+    font-weight: 600;
     color: var(--color-text-main);
     letter-spacing: -0.03em;
     margin-bottom: var(--space-1);

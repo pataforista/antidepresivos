@@ -41,7 +41,7 @@ export function mountInfoModal() {
             display: inline-flex; align-items: center; gap: 8px;
             background: #FFDD00; color: #111;
             padding: 12px 24px; border-radius: 10px;
-            font-weight: 800; font-size: 0.9rem;
+            font-weight: 600; font-size: 0.9rem;
             text-decoration: none; font-family: var(--font-headers);
             transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
             box-shadow: 0 4px 12px rgba(255,221,0,0.35);
@@ -67,10 +67,10 @@ export function mountInfoModal() {
 
         <!-- Branding -->
         <div style="margin-bottom:24px; text-align:center;">
-          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-primary); font-weight:800; margin-bottom:8px;">
+          <div style="font-size:0.75rem; letter-spacing:normal; color:var(--color-primary); font-weight:600; margin-bottom:8px;">
             Guía Clínica
           </div>
-          <div style="font-size:1.75rem; font-weight:800; color:var(--color-text-main); font-family:var(--font-headers);">
+          <div style="font-size:1.75rem; font-weight:600; color:var(--color-text-main); font-family:var(--font-headers);">
             Antidepresivos
           </div>
           <div class="text-muted text-sm" style="margin-top:4px; font-weight:600">
@@ -82,10 +82,10 @@ export function mountInfoModal() {
 
         <!-- Créditos principales -->
         <div style="background:linear-gradient(135deg, var(--color-primary-container) 0%, hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.06) 100%); padding:20px; border-radius:var(--radius-lg); margin-bottom:24px; border-left:4px solid var(--color-primary);">
-          <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-primary); font-weight:800; margin-bottom:12px;">
+          <div style="font-size:0.65rem; letter-spacing:normal; color:var(--color-primary); font-weight:600; margin-bottom:12px;">
             ✓ Desarrollado por
           </div>
-          <div style="font-weight:800; font-size:1.5rem; margin-bottom:8px; color:var(--color-text-main);">
+          <div style="font-weight:600; font-size:1.5rem; margin-bottom:8px; color:var(--color-text-main);">
             Dr. César Celada
           </div>
           <div style="font-size:0.9rem; color:var(--color-text-muted); margin-bottom:16px; line-height:1.6;">
@@ -103,7 +103,7 @@ export function mountInfoModal() {
         <!-- Acerca de los datos -->
         <details class="detail-section" style="margin-bottom:24px; border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden;">
           <summary style="padding:12px 16px; background:var(--color-surface-raised); font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-            <span>📚 Acerca de los datos y fuentes</span>
+            <span>≡ Acerca de los datos y fuentes</span>
             <span style="font-size:0.8rem; opacity:0.5;">▼</span>
           </summary>
           <div style="padding:16px; font-size:0.85rem; line-height:1.6; color:var(--color-text-muted);">
@@ -121,7 +121,7 @@ export function mountInfoModal() {
 
         <!-- Aviso y limitaciones de uso -->
         <div class="alert alert--warning" style="font-size:0.85rem; border-radius:var(--radius-md); line-height:1.5; margin-bottom: 24px; text-align: left;">
-          <strong>⚠️ Aviso y limitaciones de uso</strong><br><br>
+          <strong>⚠ Aviso y limitaciones de uso</strong><br><br>
           Esta aplicación está dirigida exclusivamente a profesionales de salud mental como apoyo clínico. No sustituye el juicio clínico, la valoración presencial, las guías oficiales ni la ficha técnica vigente de cada medicamento.<br><br>
           Las dosis, equivalencias (CPZ), estrategias de switching y contenido farmacológico son aproximaciones educativas para consulta rápida. Deben verificarse y personalizarse en cada paciente según comorbilidades, interacciones, edad, estado clínico y normativas locales.<br><br>
           Esta herramienta no está diseñada para automedicación ni para decisiones terapéuticas sin supervisión profesional.
@@ -129,7 +129,7 @@ export function mountInfoModal() {
 
         <!-- Apoyo / Buy Me a Coffee -->
         <div style="background:var(--color-surface-raised); padding:20px; border-radius:var(--radius-lg); text-align:center; border:2px dashed var(--color-border);">
-          <div style="font-size:0.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--color-text-dim); font-weight:800; margin-bottom:12px;">
+          <div style="font-size:0.65rem; letter-spacing:normal; color:var(--color-text-dim); font-weight:600; margin-bottom:12px;">
             ☕ Apoya el proyecto
           </div>
           <p style="font-size:0.9rem; color:var(--color-text-muted); line-height:1.6; margin:0 0 16px;">

@@ -442,7 +442,6 @@ html, body {
     transition: color var(--transition-fast);
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
-    outline: none;
     min-width: 58px;
     cursor: pointer;
     background: none;

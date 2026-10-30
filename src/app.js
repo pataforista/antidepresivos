@@ -13,10 +13,10 @@ import { renderGuias } from "./ui/guiasView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations, initScrollHideHeader, initRippleEffect, haptic, withViewTransition } from "./ui/visuals.js";
 import { escapeHtml } from "./core/utils.js";
-import { drugEmoji, isNotableRisk, isHighRisk, sedationLabel, sedationVariant } from "./core/drugNormalization.js";
+import { isNotableRisk, isHighRisk, sedationLabel, sedationVariant } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
 import { i18n } from "./core/i18n.js";
-import { mountSettingsPanel, applySettingToDOM } from "./ui/settingsPanel.js";
+import { mountSettingsPanel, applySettingToDOM, applyUiSetting } from "./ui/settingsPanel.js";
 
 /* ============================================================
    Event Tracking (Analytics)
@@ -116,7 +116,12 @@ async function main() {
 
         // Apply persisted UI settings on first mount
         const uiState = store.getState().ui;
-        applySettingToDOM("theme",      uiState.theme      ?? "light");
+        const bootTheme = document.documentElement.getAttribute("data-theme");
+        const initialTheme = (bootTheme === "dark" || bootTheme === "light") ? bootTheme : (uiState.theme ?? "light");
+        if (uiState.theme !== initialTheme) {
+          store.updatePath("ui.theme", initialTheme);
+        }
+        applySettingToDOM("theme",      initialTheme);
         applySettingToDOM("fontSize",   uiState.fontSize   ?? "normal");
         applySettingToDOM("animations", uiState.animations !== false);
         applySettingToDOM("compact",    uiState.compact    ?? false);
@@ -160,7 +165,7 @@ async function main() {
         store.subscribe("state:path:ui", async ({ prev, next }) => {
           // Sync theme button icon (se busca en cada evento: el shell puede re-montarse)
           const btnTheme = document.getElementById("btnThemeToggle");
-          if (btnTheme) btnTheme.innerHTML = next.theme === "dark" ? "☀️" : "🌙";
+          if (btnTheme) btnTheme.innerHTML = next.theme === "dark" ? "☀" : "☾";
 
           // Apply non-locale settings immediately to DOM
           if (prev.theme      !== next.theme)      applySettingToDOM("theme",      next.theme);
@@ -204,7 +209,7 @@ async function main() {
 
         // Welcome toast
         setTimeout(() => {
-          showToast(initialLocale === 'en' ? "Welcome to Antidepressants! 🧠✨" : "¡Bienvenido al asistente de Antidepresivos! 🧠✨", "info");
+          showToast(initialLocale === 'en' ? "Welcome to Antidepressants!" : "¡Bienvenido al asistente de Antidepresivos!", "info");
         }, 1200);
       },
     });
@@ -216,7 +221,7 @@ async function main() {
       : (initialLocale === "en" ? "Could not load data. Please reload the page." : "No se pudieron cargar los datos. Por favor, recarga la página.");
     root.innerHTML = `
       <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:24px; padding:40px; text-align:center;">
-        <div style="font-size:3rem;">${isOffline ? "📡" : "⚠️"}</div>
+        <div style="font-size:3rem;">${isOffline ? "⊘" : "⚠"}</div>
         <p style="font-family:var(--font-headers); font-weight:700; color:var(--color-danger); font-size:1.25rem; max-width:400px;">${escapeHtml(msg)}</p>
         <button id="btnRetryLoad" type="button" style="padding:12px 28px; border-radius:999px; background:var(--color-primary); color:white; border:none; cursor:pointer; font-weight:700; font-size:1rem;">
           ${initialLocale === "en" ? "Retry" : "Reintentar"}
@@ -238,8 +243,7 @@ function attachGlobalListeners() {
     btnTheme.addEventListener("click", () => {
       const current = store.getState().ui.theme || "light";
       const next = current === "light" ? "dark" : "light";
-      store.updatePath("ui.theme", next);
-      applySettingToDOM("theme", next);
+      applyUiSetting("theme", next);
     });
   }
 
@@ -318,7 +322,7 @@ function mountShell(root) {
             ${i18n.t("clear_compare")}
           </button>
           <button id="btnThemeToggle" type="button" aria-label="${i18n.t("aria_theme_toggle")}" class="btn btn--circle btn--ghost" style="width: 44px; height: 44px; font-size: 1.25rem;">
-            ${theme === 'dark' ? '☀️' : '🌙'}
+            ${theme === 'dark' ? '☀' : '☾'}
           </button>
           <div id="compareCount" class="chip chip--active text-xs" aria-label="${i18n.t("aria_compare_count")}" role="status" style="display:none;"></div>
         </div>
@@ -454,19 +458,19 @@ function addRecentItem(id, name, cls) {
    ============================================================ */
 function getTaskFilters() {
   return [
-    { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "😴",
+    { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "S",
       test: d => parseInt(d.nivel_sedacion) <= 1 },
-    { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "❤️",
+    { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "♥",
       test: d => /bajo|leve|mínima|minima|nula|low|mild|none/i.test(d.perfil_disfuncion_sexual || "") },
-    { id: "low_qt",         label: i18n.t("filter_qt"),    icon: "💓",
+    { id: "low_qt",         label: i18n.t("filter_qt"),    icon: "♥",
       test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_prolongacion_qt || "") },
-    { id: "low_weight",     label: i18n.t("filter_weight"), icon: "⚖️",
+    { id: "low_weight",     label: i18n.t("filter_weight"), icon: "W",
       test: d => /neutro|bajo|pérdida|perdida|neutral|low|loss/i.test(d.perfil_impacto_peso || "") },
-    { id: "low_withdrawal", label: i18n.t("filter_withdrawal"),  icon: "🔄",
+    { id: "low_withdrawal", label: i18n.t("filter_withdrawal"),  icon: "↺",
       test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_sindrome_abstinencia || "") },
-    { id: "isrs",           label: "ISRS",            icon: "💊",
+    { id: "isrs",           label: "ISRS",            icon: "•",
       test: d => /isrs/i.test(d.clase_terapeutica || "") },
-    { id: "dual",           label: "Dual (IRSN)",     icon: "🔁",
+    { id: "dual",           label: "Dual (IRSN)",     icon: "⇄",
       test: d => /dual|irsn|snri/i.test(d.clase_terapeutica || d.mecanismo_principal || "") },
   ];
 }
@@ -485,7 +489,7 @@ function getClinicalChips(d) {
 
   // ATC code
   if (d.codigo_atc) {
-    chips.push({ label: `ATC: ${d.codigo_atc} 🔬`, variant: "primary" });
+    chips.push({ label: `ATC: ${d.codigo_atc}`, variant: "primary" });
   }
 
   // Sedation level (label localizado según idioma activo)
@@ -498,12 +502,12 @@ function getClinicalChips(d) {
 
   // QT risk — only flag if notable
   if (isNotableRisk(d.riesgo_prolongacion_qt)) {
-    chips.push({ label: en ? "QT Risk ↑ 💓" : "Riesgo QT ↑ 💓", variant: isHighRisk(d.riesgo_prolongacion_qt) ? "danger" : "warning" });
+    chips.push({ label: en ? "QT Risk ↑" : "Riesgo QT ↑", variant: isHighRisk(d.riesgo_prolongacion_qt) ? "danger" : "warning" });
   }
 
   // Sexual dysfunction — only flag if notable
   if (isNotableRisk(d.perfil_disfuncion_sexual)) {
-    chips.push({ label: en ? "Sexual Impact ↑ ❤️" : "Impacto Sexual ↑ ❤️", variant: isHighRisk(d.perfil_disfuncion_sexual) ? "danger" : "warning" });
+    chips.push({ label: en ? "Sexual Impact ↑" : "Impacto Sexual ↑", variant: isHighRisk(d.perfil_disfuncion_sexual) ? "danger" : "warning" });
   }
 
   return chips;
@@ -543,9 +547,9 @@ function renderSmartTip() {
   const tip = glossary[Math.floor(Math.random() * glossary.length)];
   return `
     <div class="smart-tip animate-on-scroll" style="margin-top:var(--space-8); padding:var(--space-6); border-radius:var(--radius-xl); background:var(--color-surface-raised); border:1px solid var(--color-border); display:flex; gap:var(--space-4); align-items:center;">
-      <div style="font-size:2rem;">💡</div>
+      <div style="font-size:2rem;">☀</div>
       <div>
-        <div style="font-family:var(--font-headers); font-weight:800; font-size:0.75rem; color:var(--color-primary); letter-spacing:0.1em; margin-bottom:4px; text-transform:uppercase;">${i18n.t("smart_tip_title")}</div>
+        <div style="font-family:var(--font-headers); font-weight:600; font-size:0.75rem; color:var(--color-primary); letter-spacing:normal; margin-bottom:4px;">${i18n.t("smart_tip_title")}</div>
         <div style="font-weight:700; font-size:1rem; margin-bottom:2px;">${escapeHtml(tip.term)}</div>
         <div class="text-xs text-muted" style="line-height:1.4;">${escapeHtml(tip.definition)}</div>
       </div>
@@ -629,7 +633,7 @@ function renderList(view) {
 
       <!-- Hero search protagonista -->
       <div class="search-hero brutalist-container" role="search">
-        <span class="search-hero__icon-left" aria-hidden="true">🔍</span>
+        <span class="search-hero__icon-left" aria-hidden="true">⌕</span>
         <input type="search" id="inputSearch" class="search-hero__input brutalist-input smooth-type"
           placeholder=" "
           aria-label="${i18n.t("search_placeholder")}"
@@ -651,7 +655,7 @@ function renderList(view) {
       <div class="list-header">
         <span class="list-header__count">${items.length} ${items.length !== 1 ? i18n.t("drug_count_plural") : i18n.t("drug_count_singular")}</span>
         <button id="btnGoCompare" type="button" class="m3-fab" ${compareIds.length === 0 ? "disabled" : ""}>
-          ⚖️ ${compareIds.length ? `${i18n.t("btn_compare")} (${compareIds.length})` : i18n.t("btn_compare")}
+          ⚖ ${compareIds.length ? `${i18n.t("btn_compare")} (${compareIds.length})` : i18n.t("btn_compare")}
         </button>
       </div>
 
@@ -659,8 +663,8 @@ function renderList(view) {
       <div class="grid-cards">
         ${items.map((d, i) => renderDrugCard(d, selected, i)).join("") || `
           <div id="emptyState" class="empty-state" style="grid-column:1/-1; text-align:center; padding:var(--space-8) var(--space-5);">
-            <span class="empty-state__icon" aria-hidden="true">🔍</span>
-            <p style="font-family:var(--font-headers); font-weight:800; font-size:1.15rem; color:var(--color-text-main); margin-bottom:var(--space-3);">${i18n.t("no_results")}</p>
+            <span class="empty-state__icon" aria-hidden="true">⌕</span>
+            <p style="font-family:var(--font-headers); font-weight:600; font-size:1.15rem; color:var(--color-text-main); margin-bottom:var(--space-3);">${i18n.t("no_results")}</p>
             <p class="text-muted" style="font-size:0.9rem; margin-bottom:var(--space-5); max-width:280px; margin-left:auto; margin-right:auto; line-height:1.5;">${i18n.getLocale() === 'en' ? 'Try a different name or clear active filters.' : 'Prueba otro nombre o elimina los filtros activos.'}</p>
             <button id="btnClearEmptySearch" type="button" class="btn btn--outline" style="font-size:0.8rem; padding:8px 20px; text-transform:none; letter-spacing:0;">${i18n.getLocale() === 'en' ? 'Clear filters' : 'Limpiar filtros'}</button>
           </div>
@@ -702,7 +706,6 @@ function renderDrugCard(d, selected, index = 0) {
   const name = d.nombre_generico ?? id;
   const cls = d.clase_terapeutica ?? "";
   const isOn = selected.has(id);
-  const emoji = drugEmoji(cls);
   // Stagger cap at 480ms so the last card doesn't wait forever
   const delay = Math.min(index * 38, 480);
 
@@ -710,7 +713,6 @@ function renderDrugCard(d, selected, index = 0) {
     <div class="card card--hoverable card--spotlight card-drug--enter ${isOn ? "card--in-compare" : ""}"
          style="animation-delay:${delay}ms">
       <div class="card-drug__header">
-        <div class="card-drug__emoji" aria-hidden="true">${emoji}</div>
         <a href="/farmaco/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
         <button type="button"
           class="card-drug__compare-btn btn btn--circle chkCompareBtn ${isOn ? "active" : ""}"
@@ -772,7 +774,7 @@ function attachFilterListeners(view) {
         if (set.size === 2) {
           showToast(i18n.t("toast_compare_ready"), 'success');
         } else {
-          showToast(`✨ ${i18n.t("toast_drug_added")}`, 'success');
+          showToast(`${i18n.t("toast_drug_added")}`, 'success');
         }
       }
 
@@ -781,7 +783,7 @@ function attachFilterListeners(view) {
       if (go) {
         const newIds = [...set];
         go.disabled = newIds.length === 0;
-        go.textContent = newIds.length ? `⚖️ ${i18n.t("btn_compare")} (${newIds.length})` : `⚖️ ${i18n.t("btn_compare")}`;
+        go.textContent = newIds.length ? `⚖ ${i18n.t("btn_compare")} (${newIds.length})` : `⚖ ${i18n.t("btn_compare")}`;
       }
     });
   });
@@ -932,7 +934,7 @@ function renderCompare(view) {
                   <th style="padding:var(--space-4) var(--space-5); color:var(--color-primary); background:var(--color-bg); font-family:var(--font-headers); font-size:0.75rem; letter-spacing:0.1em; border-bottom:2px solid var(--color-border);" scope="col">${i18n.t("compare_col_trait")}</th>
                   ${rows.map((d, i) => {
     const color = colors[i % colors.length];
-    return `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:800; border-bottom:2px solid ${color}; min-width:180px; color:${color}">${escapeHtml(d.nombre_generico)}</th>`
+    return `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:600; border-bottom:2px solid ${color}; min-width:180px; color:${color}">${escapeHtml(d.nombre_generico)}</th>`
   }).join("")}
                 </tr>
               </thead>
@@ -946,7 +948,7 @@ function renderCompare(view) {
     const val = tr.key === "nivel_sedacion" ? sedationLabel(raw) : raw;
     const s = String(raw).toLowerCase();
     const isHigh = tr.highlight && (s.includes("alto") || s === "3" || s === "2");
-    const textStyle = isHigh ? 'color:var(--color-danger); font-weight:800;' : 'font-weight:500;';
+    const textStyle = isHigh ? 'color:var(--color-danger); font-weight:600;' : 'font-weight:500;';
     return `<td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border); font-size:0.95rem; ${textStyle}">${escapeHtml(String(val))}</td>`;
   }).join("")}
                   </tr>
@@ -1088,19 +1090,19 @@ function renderRadarChart(data, colors) {
 
 function mountDock() {
   const navItems = [
-    { id: "list",      label: i18n.t("nav_home"),    icon: "🏠",  hash: "/",      isRoute: true },
-    { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖️",  hash: "/comparador",   isRoute: true },
-    { id: "switching", label: i18n.t("btn_switching"), icon: "🔄",  hash: "/switching", isRoute: true },
-    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "🩺",  hash: "/ajuste",    isRoute: true },
-    { id: "combo",     label: i18n.t("btn_combo"), icon: "🚀",  hash: "/combinaciones",     isRoute: true },
+    { id: "list",      label: i18n.t("nav_home"),    icon: "⌂",  hash: "/",      isRoute: true },
+    { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖",  hash: "/comparador",   isRoute: true },
+    { id: "switching", label: i18n.t("btn_switching"), icon: "⇄",  hash: "/switching", isRoute: true },
+    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "℞",  hash: "/ajuste",    isRoute: true },
+    { id: "combo",     label: i18n.t("btn_combo"), icon: "+",  hash: "/combinaciones",     isRoute: true },
     { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "/interacciones",  isRoute: true },
-    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "🎮",  hash: "/quiz",      isRoute: true },
-    { id: "guias",     label: i18n.t("btn_guias"), icon: "📖",  hash: "/guias",     isRoute: true },
+    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "?",  hash: "/quiz",      isRoute: true },
+    { id: "guias",     label: i18n.t("btn_guias"), icon: "≡",  hash: "/guias",     isRoute: true },
   ];
   const actionItems = [
-    { id: "legal",    label: i18n.t("nav_legal"),    icon: "📜", hash: "#", isRoute: false, action: "legal"    },
-    { id: "info",     label: i18n.t("nav_credits"), icon: "💡", hash: "#", isRoute: false, action: "info"     },
-    { id: "settings", label: i18n.t("btn_settings"), icon: "⚙️", hash: "#", isRoute: false, action: "settings" },
+    { id: "legal",    label: i18n.t("nav_legal"),    icon: "§", hash: "#", isRoute: false, action: "legal"    },
+    { id: "info",     label: i18n.t("nav_credits"), icon: "i", hash: "#", isRoute: false, action: "info"     },
+    { id: "settings", label: i18n.t("btn_settings"), icon: "⚙", hash: "#", isRoute: false, action: "settings" },
   ];
 
   let navBar = document.getElementById("floating-dock");
@@ -1183,11 +1185,11 @@ function showToast(message, type = 'info', duration = 3500) {
     container.firstElementChild.remove();
   }
 
-  const icons = { info: 'ℹ️', success: '✅', warning: '⚠️', error: '❌', motivational: '🚀' };
+  const icons = { info: 'ℹ', success: '✓', warning: '⚠', error: '✕', motivational: '→' };
 
   const toast = document.createElement("div");
   toast.className = `toast toast--${type}`;
-  toast.innerHTML = `<span class="toast__icon">${icons[type] || '✨'}</span> <span class="toast__text">${escapeHtml(message)}</span>`;
+  toast.innerHTML = `<span class="toast__icon">${icons[type] || '•'}</span> <span class="toast__text">${escapeHtml(message)}</span>`;
   toast.style.pointerEvents = "auto";
   container.appendChild(toast);
 

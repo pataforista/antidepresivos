@@ -2,7 +2,7 @@ import { store } from "../core/store.js";
 import { selectItemById } from "../core/selectors.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
-import { riskVariant, sedationLabel, sedationVariant, drugEmoji } from "../core/drugNormalization.js";
+import { riskVariant, sedationLabel, sedationVariant } from "../core/drugNormalization.js";
 import { ensurePdfFooter } from "./pdfFooter.js";
 
 export function renderDetail(view, id) {
@@ -32,8 +32,8 @@ export function renderDetail(view, id) {
       <header class="monograph__header glass-effect" style="border-radius:var(--radius-xl); padding:var(--space-6);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-5); flex-wrap:wrap;">
           <div style="flex:1; min-width:200px;">
-            ${hasBBW ? `<div class="clinical-chip clinical-chip--danger" style="display:inline-flex; margin-bottom:var(--space-3); font-size:0.7rem;">⚠️ ${i18n.t("bbw_label")}</div>` : ""}
-            <h1 class="h1" style="margin:0; letter-spacing:-0.03em;"><span class="card-drug__emoji" aria-hidden="true" style="animation: emojiFloat 2s ease-in-out infinite; display: inline-block;">${drugEmoji(item.clase_terapeutica)}</span> ${escapeHtml(item.nombre_generico)}</h1>
+            ${hasBBW ? `<div class="clinical-chip clinical-chip--danger" style="display:inline-flex; margin-bottom:var(--space-3); font-size:0.7rem;">⚠ ${i18n.t("bbw_label")}</div>` : ""}
+            <h1 class="h1" style="margin:0; letter-spacing:-0.03em;">${escapeHtml(item.nombre_generico)}</h1>
             <div style="font-size:1rem; font-weight:600; font-family:var(--font-headers); color:var(--color-text-muted); margin-top:var(--space-2);">${escapeHtml(item.clase_terapeutica)}</div>
             <div style="display:flex; gap:var(--space-2); margin-top:var(--space-3); flex-wrap:wrap; align-items:center;">
               <span class="chip chip--active" style="font-size:0.75rem; font-weight:700;">${escapeHtml(item.codigo_atc)}</span>
@@ -42,10 +42,10 @@ export function renderDetail(view, id) {
           </div>
           <div style="display:flex; gap:var(--space-2); align-self:flex-start; flex-shrink:0;">
             <button id="btnMonoPDF" class="btn btn--outline btn--circle" title="${i18n.t("aria_download_pdf")}" aria-label="${i18n.t("aria_download_pdf")}" style="width: 44px; height: 44px;">
-              📄
+              ↓
             </button>
             <button id="btnMonoCompare" class="m3-fab">
-              ⚖️ ${i18n.t("btn_compare")}
+              ⚖ ${i18n.t("btn_compare")}
             </button>
           </div>
         </div>
@@ -169,7 +169,7 @@ function renderTabResumen(item) {
 
       ${item.utilidad_sintomatica_clave ? `
       <div class="alert alert--info">
-         <div style="font-size:1.4rem">💡</div>
+         <div style="font-size:1.4rem">☀</div>
          <div>
            <strong style="display:block; margin-bottom:var(--space-1)">${i18n.t("clinical_pearl")}</strong>
            <span class="text-body">${escapeHtml(item.utilidad_sintomatica_clave)}</span>
@@ -195,13 +195,13 @@ function renderTabResumen(item) {
         <div class="detail-section__body">
           <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:var(--space-5);">
             <div>
-              <div class="text-xs" style="font-weight:800; color:var(--color-primary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:var(--space-2)">FDA</div>
+              <div class="text-xs" style="font-weight:600; color:var(--color-primary); letter-spacing:normal; margin-bottom:var(--space-2)">FDA</div>
               <ul class="list-disc" style="padding-left:18px; margin:0;">
                 ${fdaInds.map(ind => `<li class="text-body">${escapeHtml(ind.nombre)}</li>`).join("") || "<li class='text-muted'>N/D</li>"}
               </ul>
             </div>
             <div>
-              <div class="text-xs" style="font-weight:800; color:var(--color-secondary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:var(--space-2)">EMA</div>
+              <div class="text-xs" style="font-weight:600; color:var(--accent); letter-spacing:normal; margin-bottom:var(--space-2)">EMA</div>
               <ul class="list-disc" style="padding-left:18px; margin:0;">
                 ${emaInds.map(ind => `<li class="text-body">${escapeHtml(ind.nombre)}</li>`).join("") || "<li class='text-muted'>N/D</li>"}
               </ul>
@@ -228,7 +228,7 @@ function renderTabResumen(item) {
       ${item.evidence && item.evidence.perlas_clinicas ? `
       <div class="evidence-container animate-fade-in">
         <div style="display:flex; align-items:center; gap:var(--space-2); margin-bottom:var(--space-4);">
-          <span style="font-size:1.2rem;">📚</span>
+          <span style="font-size:1.2rem;">≡</span>
           <h3 class="h4" style="margin:0;">${i18n.t("evidence_guides")}</h3>
         </div>
         ${item.evidence.perlas_clinicas.map(ev => `
@@ -327,7 +327,7 @@ function renderTabSeguridad(item) {
 
         ${hasBBW ? `
         <div class="alert alert--danger">
-           <div style="font-size:1.4rem">⚠️</div>
+           <div style="font-size:1.4rem">⚠</div>
            <div>
              <strong style="display:block; margin-bottom:var(--space-1)">Black Box Warning (FDA)</strong>
              <span class="text-body">Este fármaco tiene advertencias de seguridad importantes que requieren vigilancia clínica estrecha.</span>
@@ -383,7 +383,7 @@ function renderTabSeguridad(item) {
         ${interacciones.length ? `
         <details class="detail-section">
           <summary class="detail-section__summary">
-            <span style="color:var(--color-danger);">⚠️ ${i18n.t("contraindicated_interactions")}</span>
+            <span style="color:var(--color-danger);">⚠ ${i18n.t("contraindicated_interactions")}</span>
             <span class="detail-section__chevron">▼</span>
           </summary>
           <div class="detail-section__body">
@@ -472,7 +472,7 @@ function renderTabSwitching(item) {
 
             <div id="switchingDetails" style="margin-top:var(--space-6);">
                <div class="alert alert--info">
-                  <div style="font-size:1.2rem">💊</div>
+                  <div style="font-size:1.2rem">•</div>
                   <div class="text-sm">
                     Seleccione un fármaco destino para ver el protocolo de titulación sugerido.
                   </div>
@@ -653,7 +653,7 @@ function infoBox(label, val) {
 function infoBoxClean(label, val) {
    return `
       <div style="padding:var(--space-2) 0">
-        <div class="text-xs text-muted" style="text-transform:uppercase; font-weight:800; letter-spacing:0.05em; margin-bottom:4px">${escapeHtml(label)}</div>
+        <div class="text-xs text-muted" style="letter-spacing:normal; font-weight:600; margin-bottom:4px">${escapeHtml(label)}</div>
         <div style="font-weight:700; font-size:1.15rem; color:var(--color-primary-dark)">${escapeHtml(val)}</div>
       </div>
     `;
@@ -672,7 +672,7 @@ function rowRisk(label, val, forceHigh = false) {
    // val puede llegar como número (nivel_sedacion normalizado): convertir siempre
    const s = String(val ?? "").toLowerCase();
    const isHigh = forceHigh || s.includes("alto") || s === "3" || s === "2";
-   const style = isHigh ? "color:var(--color-danger); font-weight:800" : "font-weight:600";
+   const style = isHigh ? "color:var(--color-danger); font-weight:600" : "font-weight:600";
    return `
       <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--color-border); padding-bottom:var(--space-2);">
          <span class="text-sm" style="font-weight:600">${escapeHtml(label)}</span>

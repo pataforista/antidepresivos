@@ -20,7 +20,7 @@ const getModes = () => ({
   residente: {
     id: "residente",
     label: i18n.t("quiz_mode_residente"),
-    icon: "🩺",
+    icon: "℞",
     desc: i18n.t("quiz_mode_residente_desc"),
     color: "#00e5ff",
     templateIds: ["clase", "mecanismo", "sedacion", "peso", "sexual", "utilidad"],
@@ -29,7 +29,7 @@ const getModes = () => ({
   especialista: {
     id: "especialista",
     label: i18n.t("quiz_mode_especialista"),
-    icon: "🧬",
+    icon: "✦",
     desc: i18n.t("quiz_mode_especialista_desc"),
     color: "#c084fc",
     templateIds: ["clase", "mecanismo", "sedacion", "peso", "sexual", "utilidad", "enzima", "interacciones", "abstinencia", "qt"],
@@ -38,7 +38,7 @@ const getModes = () => ({
   clinico: {
     id: "clinico",
     label: i18n.t("quiz_mode_clinico"),
-    icon: "🏥",
+    icon: "⊕",
     desc: i18n.t("quiz_mode_clinico_desc"),
     color: "#ff6eb4",
     templateIds: ["utilidad_inversa", "clase", "mecanismo", "sexual", "peso", "interacciones"],
@@ -75,7 +75,7 @@ const TEMPLATES = [
   {
     id: "clase",
     category: i18n.getLocale() === 'en' ? "Classification" : "Clasificación",
-    icon: "🏷️",
+    icon: "◈",
     difficulty: ["residente", "especialista", "clinico"],
     ask: () => i18n.t("quiz_question_class"),
     correct: (d) => d.clase_terapeutica,
@@ -86,7 +86,7 @@ const TEMPLATES = [
   {
     id: "mecanismo",
     category: i18n.getLocale() === 'en' ? "Mechanism" : "Mecanismo de Acción",
-    icon: "⚙️",
+    icon: "⚙",
     difficulty: ["residente", "especialista", "clinico"],
     ask: () => i18n.t("quiz_question_mech"),
     correct: (d) => d.mecanismo_principal,
@@ -97,7 +97,7 @@ const TEMPLATES = [
   {
     id: "sedacion",
     category: i18n.getLocale() === 'en' ? "Sedation" : "Perfil de Sedación",
-    icon: "😴",
+    icon: "S",
     difficulty: ["residente", "especialista"],
     ask: () => i18n.t("quiz_question_sedation"),
     correct: (d) => String(d.nivel_sedacion ?? ""),
@@ -108,7 +108,7 @@ const TEMPLATES = [
   {
     id: "peso",
     category: i18n.getLocale() === 'en' ? "Weight" : "Impacto en Peso",
-    icon: "⚖️",
+    icon: "W",
     difficulty: ["residente", "especialista"],
     ask: () => i18n.t("quiz_question_weight"),
     correct: (d) => d.perfil_impacto_peso,
@@ -119,7 +119,7 @@ const TEMPLATES = [
   {
     id: "sexual",
     category: i18n.getLocale() === 'en' ? "Sexual dysfunction" : "Disfunción Sexual",
-    icon: "💊",
+    icon: "♥",
     difficulty: ["residente", "especialista", "clinico"],
     ask: () => i18n.t("quiz_question_sexual"),
     correct: (d) => d.perfil_disfuncion_sexual,
@@ -130,7 +130,7 @@ const TEMPLATES = [
   {
     id: "utilidad",
     category: i18n.getLocale() === 'en' ? "Clinical Utility" : "Utilidad Clínica",
-    icon: "🎯",
+    icon: "◎",
     difficulty: ["residente", "especialista", "clinico"],
     ask: () => i18n.t("quiz_question_utility"),
     correct: (d) => d.utilidad_sintomatica_clave,
@@ -152,7 +152,7 @@ const TEMPLATES = [
   {
     id: "interacciones",
     category: i18n.getLocale() === 'en' ? "Interactions" : "Interacciones Peligrosas",
-    icon: "⚠️",
+    icon: "⚠",
     difficulty: ["especialista", "clinico"],
     ask: () => i18n.t("quiz_question_interact"),
     correct: (d) => d.interacciones_contraindicadas,
@@ -174,7 +174,7 @@ const TEMPLATES = [
   {
     id: "qt",
     category: i18n.getLocale() === 'en' ? "QT Risk" : "Riesgo QT",
-    icon: "💓",
+    icon: "♥",
     difficulty: ["especialista"],
     ask: () => i18n.t("quiz_question_qt"),
     correct: (d) => d.riesgo_prolongacion_qt,
@@ -186,7 +186,7 @@ const TEMPLATES = [
   {
     id: "utilidad_inversa",
     category: i18n.getLocale() === 'en' ? "Clinical Round" : "Ronda Clínica",
-    icon: "🏥",
+    icon: "⊕",
     difficulty: ["clinico"],
     // ask() and correct() are set dynamically in buildClinicalQuestion
     ask: (d, ctx) => ctx?.question ?? (i18n.getLocale() === 'en' ? `Which drug would you choose for <b>${escapeHtml(d.utilidad_sintomatica_clave)}</b>?` : `¿Qué fármaco elegirías para <b>${escapeHtml(d.utilidad_sintomatica_clave)}</b>?`),
@@ -210,11 +210,22 @@ function shuffle(arr) {
 
 function starsFor(score, max) {
   const pct = score / max;
-  if (pct >= 0.9) return { stars: "★★★★★", label: i18n.t("quiz_excellent"), emoji: "🏆" };
-  if (pct >= 0.7) return { stars: "★★★★☆", label: i18n.t("quiz_very_good"), emoji: "🎓" };
-  if (pct >= 0.5) return { stars: "★★★☆☆", label: i18n.t("quiz_good"), emoji: "📚" };
-  if (pct >= 0.3) return { stars: "★★☆☆☆", label: i18n.t("quiz_study_more"), emoji: "📖" };
-  return { stars: "★☆☆☆☆", label: i18n.t("quiz_at_study"), emoji: "😅" };
+  if (pct >= 0.9) return { stars: "★★★★★", label: i18n.t("quiz_excellent"), icon: "trophy" };
+  if (pct >= 0.7) return { stars: "★★★★☆", label: i18n.t("quiz_very_good"), icon: "academic" };
+  if (pct >= 0.5) return { stars: "★★★☆☆", label: i18n.t("quiz_good"), icon: "book" };
+  if (pct >= 0.3) return { stars: "★★☆☆☆", label: i18n.t("quiz_study_more"), icon: "study" };
+  return { stars: "★☆☆☆☆", label: i18n.t("quiz_at_study"), icon: "study-harder" };
+}
+
+function resultIconSVG(iconName) {
+  const icons = {
+    trophy: '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>',
+    academic: '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',
+    book: '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>',
+    study: '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.25278V12.0001M12 21.9999C7.58172 21.9999 4 18.4182 4 13.9999C4 9.58165 7.58172 5.99993 12 5.99993C16.4183 5.99993 20 9.58165 20 13.9999C20 18.4182 16.4183 21.9999 12 21.9999Z"/><path d="M12 12L12 18"/></svg>',
+    'study-harder': '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>'
+  };
+  return icons[iconName] || icons.book;
 }
 
 /* ── Construcción de preguntas anti-ambigüedad ───────────────── */
@@ -533,7 +544,7 @@ function attachOptionListeners(view, q) {
         pearlCard.classList.remove("quiz-hidden");
         pearlCard.innerHTML = `
           <div class="quiz-pearl-header">
-            <span class="quiz-pearl-icon">💎</span>
+            <span class="quiz-pearl-icon">◆</span>
             <span class="quiz-pearl-label">${i18n.t("clinical_pearl")}</span>
           </div>
           <p class="quiz-pearl-text">${escapeHtml(q.pearl)}</p>
@@ -560,7 +571,7 @@ function attachOptionListeners(view, q) {
 function renderResults(view) {
   Q.finished = true;
   const maxScore = Q.total * 10;
-  const { stars, label, emoji } = starsFor(Q.score, maxScore);
+  const { stars, label, icon } = starsFor(Q.score, maxScore);
   const correctCount = Q.total - Q.wrong.length;
   const allDrugs = store.getState().data?.dataset?.farmacos ?? [];
   const MODES = getModes();
@@ -573,7 +584,7 @@ function renderResults(view) {
   // Review section for wrong answers
   const reviewHTML = Q.wrong.length ? `
     <div class="quiz-review-section">
-      <h3 class="quiz-review-title">📋 ${i18n.t("quiz_review_title").replace("{count}", Q.wrong.length)}</h3>
+      <h3 class="quiz-review-title">▤ ${i18n.t("quiz_review_title").replace("{count}", Q.wrong.length)}</h3>
       <div class="quiz-review-list">
         ${Q.wrong.map(w => `
           <div class="quiz-review-item">
@@ -587,7 +598,7 @@ function renderResults(view) {
               <span class="quiz-review-correct-label">${i18n.t("quiz_correct_label")}</span>
               <span class="quiz-review-correct">${escapeHtml(w.correct)}</span>
             </div>
-            ${w.pearl ? `<div class="quiz-review-pearl">💎 ${escapeHtml(w.pearl).slice(0, 150)}…</div>` : ""}
+            ${w.pearl ? `<div class="quiz-review-pearl">◆ ${escapeHtml(w.pearl).slice(0, 150)}…</div>` : ""}
           </div>
         `).join("")}
       </div>
@@ -602,7 +613,7 @@ function renderResults(view) {
     <div class="quiz-view animate-fade-in">
       <div class="quiz-scanlines" aria-hidden="true"></div>
       <div class="quiz-container">
-        <div class="quiz-result-emoji" aria-hidden="true">${emoji}</div>
+        <div class="quiz-result-icon" aria-hidden="true">${resultIconSVG(icon)}</div>
         <h2 class="quiz-results-title">${i18n.t("quiz_results")}</h2>
         <div class="quiz-results-card">
           <div class="quiz-results-stars">${stars}</div>
@@ -631,15 +642,15 @@ function renderResults(view) {
 
         ${guruUnlocked ? `
           <div id="guruCertificate" style="display:none; padding:40px; background:white; color:#111; font-family:'Outfit',sans-serif; border:10px double #4f46e5; text-align:center; position:relative;">
-            <div style="font-size:1.5rem; letter-spacing:4px; color:#4f46e5; font-weight:800; margin-bottom:20px;">${i18n.getLocale() === 'en' ? 'EXPERT CERTIFICATE' : 'CERTIFICADO DE EXPERTO'}</div>
-            <div style="font-size:0.9rem; text-transform:uppercase; margin-bottom:10px;">${i18n.getLocale() === 'en' ? 'The Antidepressants Guide certifies:' : 'La Guía Antidepresivos certifica a:'}</div>
-            <div style="font-size:2.5rem; font-weight:900; color:#111; border-bottom:2px solid #ddd; display:inline-block; padding:0 40px 5px; margin-bottom:24px;">${i18n.getLocale() === 'en' ? 'PSYCHOPHARMACOLOGY GURU' : 'GURU DE LA PSICOFARMACOLOGÍA'}</div>
+            <div style="font-size:1.5rem; letter-spacing:4px; color:#4f46e5; font-weight:600; margin-bottom:20px;">${i18n.getLocale() === 'en' ? 'EXPERT CERTIFICATE' : 'CERTIFICADO DE EXPERTO'}</div>
+            <div style="font-size:0.9rem; letter-spacing:normal; margin-bottom:10px;">${i18n.getLocale() === 'en' ? 'The Antidepressants Guide certifies:' : 'La Guía Antidepresivos certifica a:'}</div>
+            <div style="font-size:2.5rem; font-weight:600; color:#111; border-bottom:2px solid #ddd; display:inline-block; padding:0 40px 5px; margin-bottom:24px;">${i18n.getLocale() === 'en' ? 'PSYCHOPHARMACOLOGY GURU' : 'GURU DE LA PSICOFARMACOLOGÍA'}</div>
             <div style="font-size:1rem; line-height:1.6; max-width:500px; margin:0 auto 30px;">
               ${i18n.getLocale() === 'en' ? `For achieving a score of <b>${Q.score} Points</b> in the professional PharmaQuiz level, demonstrating exceptional knowledge in clinical antidepressants mechanism and safety.` : `Por haber alcanzado un puntaje de <b>${Q.score} Puntos</b> en el modo PhamaQuiz de nivel profesional, demostrando un conocimiento excepcional en clases, mecanismos y seguridad clínica de antidepresivos.`}
             </div>
             <div style="display:flex; justify-content:space-between; align-items:flex-end; padding:0 40px;">
               <div style="text-align:left;">
-                <div style="font-weight:800; font-size:1.1rem;">${i18n.getLocale() === 'en' ? 'Professional Edition' : 'Edición Profesional'}</div>
+                <div style="font-weight:600; font-size:1.1rem;">${i18n.getLocale() === 'en' ? 'Professional Edition' : 'Edición Profesional'}</div>
                 <div style="font-size:0.8rem; color:#666;">${i18n.getLocale() === 'en' ? 'Smart Clinical Support' : 'Soporte Clínico Inteligente'}</div>
               </div>
               <div style="text-align:right; font-family:monospace; font-size:0.7rem; color:#999;">
@@ -648,7 +659,7 @@ function renderResults(view) {
             </div>
           </div>
           <div class="alert alert--success" style="margin-bottom:24px; text-align:center;">
-            <div style="font-size:1.5rem; margin-bottom:8px;">🏆 ${i18n.getLocale() === 'en' ? 'GURU LEVEL REACHED!' : '¡NIVEL GURU ALCANZADO!'} 🏆</div>
+            <div style="font-size:1.5rem; margin-bottom:8px;">★ ${i18n.getLocale() === 'en' ? 'GURU LEVEL REACHED!' : '¡NIVEL GURU ALCANZADO!'} ★</div>
             <p class="text-sm">${i18n.t("quiz_guru_unlocked")}</p>
             <button id="btnDownloadCert" class="btn btn--primary" style="margin-top:12px; background:var(--quiz-neon-purp); border:none; box-shadow:var(--quiz-glow-md);">
               ${i18n.t("quiz_download_cert")}
