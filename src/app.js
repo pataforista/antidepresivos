@@ -165,7 +165,7 @@ async function main() {
         store.subscribe("state:path:ui", async ({ prev, next }) => {
           // Sync theme button icon (se busca en cada evento: el shell puede re-montarse)
           const btnTheme = document.getElementById("btnThemeToggle");
-          if (btnTheme) btnTheme.innerHTML = next.theme === "dark" ? "☀️" : "🌙";
+          if (btnTheme) btnTheme.innerHTML = next.theme === "dark" ? "☀" : "☾";
 
           // Apply non-locale settings immediately to DOM
           if (prev.theme      !== next.theme)      applySettingToDOM("theme",      next.theme);
@@ -209,7 +209,7 @@ async function main() {
 
         // Welcome toast
         setTimeout(() => {
-          showToast(initialLocale === 'en' ? "Welcome to Antidepressants! 🧠✨" : "¡Bienvenido al asistente de Antidepresivos! 🧠✨", "info");
+          showToast(initialLocale === 'en' ? "Welcome to Antidepressants!" : "¡Bienvenido al asistente de Antidepresivos!", "info");
         }, 1200);
       },
     });
@@ -221,7 +221,7 @@ async function main() {
       : (initialLocale === "en" ? "Could not load data. Please reload the page." : "No se pudieron cargar los datos. Por favor, recarga la página.");
     root.innerHTML = `
       <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:24px; padding:40px; text-align:center;">
-        <div style="font-size:3rem;">${isOffline ? "📡" : "⚠️"}</div>
+        <div style="font-size:3rem;">${isOffline ? "⊘" : "⚠"}</div>
         <p style="font-family:var(--font-headers); font-weight:700; color:var(--color-danger); font-size:1.25rem; max-width:400px;">${escapeHtml(msg)}</p>
         <button id="btnRetryLoad" type="button" style="padding:12px 28px; border-radius:999px; background:var(--color-primary); color:white; border:none; cursor:pointer; font-weight:700; font-size:1rem;">
           ${initialLocale === "en" ? "Retry" : "Reintentar"}
@@ -322,7 +322,7 @@ function mountShell(root) {
             ${i18n.t("clear_compare")}
           </button>
           <button id="btnThemeToggle" type="button" aria-label="${i18n.t("aria_theme_toggle")}" class="btn btn--circle btn--ghost" style="width: 44px; height: 44px; font-size: 1.25rem;">
-            ${theme === 'dark' ? '☀️' : '🌙'}
+            ${theme === 'dark' ? '☀' : '☾'}
           </button>
           <div id="compareCount" class="chip chip--active text-xs" aria-label="${i18n.t("aria_compare_count")}" role="status" style="display:none;"></div>
         </div>
@@ -547,7 +547,7 @@ function renderSmartTip() {
   const tip = glossary[Math.floor(Math.random() * glossary.length)];
   return `
     <div class="smart-tip animate-on-scroll" style="margin-top:var(--space-8); padding:var(--space-6); border-radius:var(--radius-xl); background:var(--color-surface-raised); border:1px solid var(--color-border); display:flex; gap:var(--space-4); align-items:center;">
-      <div style="font-size:2rem;">💡</div>
+      <div style="font-size:2rem;">☀</div>
       <div>
         <div style="font-family:var(--font-headers); font-weight:800; font-size:0.75rem; color:var(--color-primary); letter-spacing:0.1em; margin-bottom:4px; text-transform:uppercase;">${i18n.t("smart_tip_title")}</div>
         <div style="font-weight:700; font-size:1rem; margin-bottom:2px;">${escapeHtml(tip.term)}</div>
@@ -633,7 +633,7 @@ function renderList(view) {
 
       <!-- Hero search protagonista -->
       <div class="search-hero brutalist-container" role="search">
-        <span class="search-hero__icon-left" aria-hidden="true">🔍</span>
+        <span class="search-hero__icon-left" aria-hidden="true">⌕</span>
         <input type="search" id="inputSearch" class="search-hero__input brutalist-input smooth-type"
           placeholder=" "
           aria-label="${i18n.t("search_placeholder")}"
@@ -655,7 +655,7 @@ function renderList(view) {
       <div class="list-header">
         <span class="list-header__count">${items.length} ${items.length !== 1 ? i18n.t("drug_count_plural") : i18n.t("drug_count_singular")}</span>
         <button id="btnGoCompare" type="button" class="m3-fab" ${compareIds.length === 0 ? "disabled" : ""}>
-          ⚖️ ${compareIds.length ? `${i18n.t("btn_compare")} (${compareIds.length})` : i18n.t("btn_compare")}
+          ⚖ ${compareIds.length ? `${i18n.t("btn_compare")} (${compareIds.length})` : i18n.t("btn_compare")}
         </button>
       </div>
 
@@ -663,7 +663,7 @@ function renderList(view) {
       <div class="grid-cards">
         ${items.map((d, i) => renderDrugCard(d, selected, i)).join("") || `
           <div id="emptyState" class="empty-state" style="grid-column:1/-1; text-align:center; padding:var(--space-8) var(--space-5);">
-            <span class="empty-state__icon" aria-hidden="true">🔍</span>
+            <span class="empty-state__icon" aria-hidden="true">⌕</span>
             <p style="font-family:var(--font-headers); font-weight:800; font-size:1.15rem; color:var(--color-text-main); margin-bottom:var(--space-3);">${i18n.t("no_results")}</p>
             <p class="text-muted" style="font-size:0.9rem; margin-bottom:var(--space-5); max-width:280px; margin-left:auto; margin-right:auto; line-height:1.5;">${i18n.getLocale() === 'en' ? 'Try a different name or clear active filters.' : 'Prueba otro nombre o elimina los filtros activos.'}</p>
             <button id="btnClearEmptySearch" type="button" class="btn btn--outline" style="font-size:0.8rem; padding:8px 20px; text-transform:none; letter-spacing:0;">${i18n.getLocale() === 'en' ? 'Clear filters' : 'Limpiar filtros'}</button>
@@ -774,7 +774,7 @@ function attachFilterListeners(view) {
         if (set.size === 2) {
           showToast(i18n.t("toast_compare_ready"), 'success');
         } else {
-          showToast(`✨ ${i18n.t("toast_drug_added")}`, 'success');
+          showToast(`${i18n.t("toast_drug_added")}`, 'success');
         }
       }
 
@@ -783,7 +783,7 @@ function attachFilterListeners(view) {
       if (go) {
         const newIds = [...set];
         go.disabled = newIds.length === 0;
-        go.textContent = newIds.length ? `⚖️ ${i18n.t("btn_compare")} (${newIds.length})` : `⚖️ ${i18n.t("btn_compare")}`;
+        go.textContent = newIds.length ? `⚖ ${i18n.t("btn_compare")} (${newIds.length})` : `⚖ ${i18n.t("btn_compare")}`;
       }
     });
   });
@@ -1185,11 +1185,11 @@ function showToast(message, type = 'info', duration = 3500) {
     container.firstElementChild.remove();
   }
 
-  const icons = { info: 'ℹ️', success: '✅', warning: '⚠️', error: '❌', motivational: '🚀' };
+  const icons = { info: 'ℹ', success: '✓', warning: '⚠', error: '✕', motivational: '→' };
 
   const toast = document.createElement("div");
   toast.className = `toast toast--${type}`;
-  toast.innerHTML = `<span class="toast__icon">${icons[type] || '✨'}</span> <span class="toast__text">${escapeHtml(message)}</span>`;
+  toast.innerHTML = `<span class="toast__icon">${icons[type] || '•'}</span> <span class="toast__text">${escapeHtml(message)}</span>`;
   toast.style.pointerEvents = "auto";
   container.appendChild(toast);
 
