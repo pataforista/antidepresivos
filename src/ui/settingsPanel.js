@@ -53,8 +53,8 @@ export function mountSettingsPanel() {
       <section class="settings-section">
         <div class="settings-section__label">${t("settings_theme")}</div>
         <div class="settings-row">
-          ${optionBtn("theme", "light", `☀️&nbsp;${t("settings_theme_light")}`, theme === "light")}
-          ${optionBtn("theme", "dark",  `🌙&nbsp;${t("settings_theme_dark")}`,  theme === "dark")}
+          ${optionBtn("theme", "light", `☀&nbsp;${t("settings_theme_light")}`, theme === "light")}
+          ${optionBtn("theme", "dark",  `☾&nbsp;${t("settings_theme_dark")}`,  theme === "dark")}
         </div>
       </section>
 
@@ -81,7 +81,7 @@ export function mountSettingsPanel() {
         <button type="button" id="btnResetSettings"
           class="btn btn--outline"
           style="width:100%; color:var(--color-danger); border-color:var(--color-danger); font-weight:700;">
-          🔄 ${t("settings_reset")}
+          ↺ ${t("settings_reset")}
         </button>
       </section>
 

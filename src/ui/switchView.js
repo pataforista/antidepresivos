@@ -43,7 +43,7 @@ export function renderSwitching(view) {
                 <div id="switchPlanContainer" style="margin-top: 30px; display:none;">
                     <div style="display:flex; justify-content:flex-end; margin-bottom: 20px;">
                         <button id="btnSwitchPDF" class="btn btn--outline" style="display:flex; align-items:center; gap:8px;">
-                            <span>📄 ${i18n.t("download_plan_pdf")}</span>
+                            <span>↓ ${i18n.t("download_plan_pdf")}</span>
                         </button>
                     </div>
                     <div id="strategyHeader" class="alert alert--info" style="margin-bottom: 20px; display:none; border-radius: var(--radius-xl);">
@@ -70,7 +70,7 @@ export function renderSwitching(view) {
                 </div>
 
                 <div id="switchEmpty" style="text-align:center; padding: 60px; color: var(--color-text-muted);">
-                    <div style="font-size:3rem; margin-bottom:var(--space-4); opacity:0.3">🔄</div>
+                    <div style="font-size:3rem; margin-bottom:var(--space-4); opacity:0.3">⇄</div>
                     <p style="font-weight:600">${i18n.t("switch_empty_prompt")}</p>
                 </div>
             </div>
@@ -190,10 +190,10 @@ function updatePlan(fromId, toId, view) {
     if (srcEl) {
         const en = i18n.getLocale() === 'en';
         if (entry) {
-            srcEl.textContent = en ? '📚 Curated pair (clinical guidelines)' : '📚 Par curado (guías clínicas)';
+            srcEl.textContent = en ? 'Curated pair (clinical guidelines)' : 'Par curado (guías clínicas)';
             srcEl.className = 'clinical-chip clinical-chip--success';
         } else {
-            srcEl.textContent = en ? '⚠️ Generic protocol — verify against guidelines' : '⚠️ Protocolo genérico — verificar en guías';
+            srcEl.textContent = en ? 'Generic protocol — verify against guidelines' : 'Protocolo genérico — verificar en guías';
             srcEl.className = 'clinical-chip clinical-chip--warning';
         }
         srcEl.style.display = 'inline-block';

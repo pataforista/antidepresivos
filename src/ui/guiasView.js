@@ -38,7 +38,7 @@ export function renderGuias(view) {
     return `
       <details class="detail-section" style="margin-bottom:var(--space-4);">
         <summary class="detail-section__summary">
-          <span style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.3rem;">${c.icon || "📋"}</span>${escapeHtml(label)}</span>
+          <span style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.3rem;">${c.icon || "≡"}</span>${escapeHtml(label)}</span>
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body">${blocks}</div>
@@ -49,7 +49,7 @@ export function renderGuias(view) {
     <div class="animate-fade-in">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
         <div>
-          <h2 class="h2" style="margin:0">${t("Guías Clínicas", "Clinical Guidelines")} 📖</h2>
+          <h2 class="h2" style="margin:0">${t("Guías Clínicas", "Clinical Guidelines")}</h2>
           <p class="text-sm text-muted" style="margin-top:var(--space-2);">${t("Orientaciones de primera línea por trastorno (NICE · APA · CANMAT · ACOG).", "First-line orientations by disorder (NICE · APA · CANMAT · ACOG).")}</p>
         </div>
         <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
@@ -59,7 +59,7 @@ export function renderGuias(view) {
 
       ${note ? `
       <div class="alert alert--danger" style="margin-top:var(--space-8);">
-        <div class="text-xs" style="line-height:1.6;"><strong>⚠️ ${t("Aviso", "Notice")}:</strong> ${escapeHtml(note)}</div>
+        <div class="text-xs" style="line-height:1.6;"><strong>⚠ ${t("Aviso", "Notice")}:</strong> ${escapeHtml(note)}</div>
       </div>` : ""}
     </div>
   `;

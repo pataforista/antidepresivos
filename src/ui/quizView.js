@@ -20,7 +20,7 @@ const getModes = () => ({
   residente: {
     id: "residente",
     label: i18n.t("quiz_mode_residente"),
-    icon: "🩺",
+    icon: "℞",
     desc: i18n.t("quiz_mode_residente_desc"),
     color: "#00e5ff",
     templateIds: ["clase", "mecanismo", "sedacion", "peso", "sexual", "utilidad"],
@@ -29,7 +29,7 @@ const getModes = () => ({
   especialista: {
     id: "especialista",
     label: i18n.t("quiz_mode_especialista"),
-    icon: "🧬",
+    icon: "✦",
     desc: i18n.t("quiz_mode_especialista_desc"),
     color: "#c084fc",
     templateIds: ["clase", "mecanismo", "sedacion", "peso", "sexual", "utilidad", "enzima", "interacciones", "abstinencia", "qt"],
@@ -38,7 +38,7 @@ const getModes = () => ({
   clinico: {
     id: "clinico",
     label: i18n.t("quiz_mode_clinico"),
-    icon: "🏥",
+    icon: "⊕",
     desc: i18n.t("quiz_mode_clinico_desc"),
     color: "#ff6eb4",
     templateIds: ["utilidad_inversa", "clase", "mecanismo", "sexual", "peso", "interacciones"],
@@ -75,7 +75,7 @@ const TEMPLATES = [
   {
     id: "clase",
     category: i18n.getLocale() === 'en' ? "Classification" : "Clasificación",
-    icon: "🏷️",
+    icon: "◈",
     difficulty: ["residente", "especialista", "clinico"],
     ask: () => i18n.t("quiz_question_class"),
     correct: (d) => d.clase_terapeutica,
@@ -86,7 +86,7 @@ const TEMPLATES = [
   {
     id: "mecanismo",
     category: i18n.getLocale() === 'en' ? "Mechanism" : "Mecanismo de Acción",
-    icon: "⚙️",
+    icon: "⚙",
     difficulty: ["residente", "especialista", "clinico"],
     ask: () => i18n.t("quiz_question_mech"),
     correct: (d) => d.mecanismo_principal,
@@ -97,7 +97,7 @@ const TEMPLATES = [
   {
     id: "sedacion",
     category: i18n.getLocale() === 'en' ? "Sedation" : "Perfil de Sedación",
-    icon: "😴",
+    icon: "S",
     difficulty: ["residente", "especialista"],
     ask: () => i18n.t("quiz_question_sedation"),
     correct: (d) => String(d.nivel_sedacion ?? ""),
@@ -108,7 +108,7 @@ const TEMPLATES = [
   {
     id: "peso",
     category: i18n.getLocale() === 'en' ? "Weight" : "Impacto en Peso",
-    icon: "⚖️",
+    icon: "W",
     difficulty: ["residente", "especialista"],
     ask: () => i18n.t("quiz_question_weight"),
     correct: (d) => d.perfil_impacto_peso,
@@ -119,7 +119,7 @@ const TEMPLATES = [
   {
     id: "sexual",
     category: i18n.getLocale() === 'en' ? "Sexual dysfunction" : "Disfunción Sexual",
-    icon: "💊",
+    icon: "♥",
     difficulty: ["residente", "especialista", "clinico"],
     ask: () => i18n.t("quiz_question_sexual"),
     correct: (d) => d.perfil_disfuncion_sexual,
@@ -130,7 +130,7 @@ const TEMPLATES = [
   {
     id: "utilidad",
     category: i18n.getLocale() === 'en' ? "Clinical Utility" : "Utilidad Clínica",
-    icon: "🎯",
+    icon: "◎",
     difficulty: ["residente", "especialista", "clinico"],
     ask: () => i18n.t("quiz_question_utility"),
     correct: (d) => d.utilidad_sintomatica_clave,
@@ -152,7 +152,7 @@ const TEMPLATES = [
   {
     id: "interacciones",
     category: i18n.getLocale() === 'en' ? "Interactions" : "Interacciones Peligrosas",
-    icon: "⚠️",
+    icon: "⚠",
     difficulty: ["especialista", "clinico"],
     ask: () => i18n.t("quiz_question_interact"),
     correct: (d) => d.interacciones_contraindicadas,
@@ -174,7 +174,7 @@ const TEMPLATES = [
   {
     id: "qt",
     category: i18n.getLocale() === 'en' ? "QT Risk" : "Riesgo QT",
-    icon: "💓",
+    icon: "♥",
     difficulty: ["especialista"],
     ask: () => i18n.t("quiz_question_qt"),
     correct: (d) => d.riesgo_prolongacion_qt,
@@ -186,7 +186,7 @@ const TEMPLATES = [
   {
     id: "utilidad_inversa",
     category: i18n.getLocale() === 'en' ? "Clinical Round" : "Ronda Clínica",
-    icon: "🏥",
+    icon: "⊕",
     difficulty: ["clinico"],
     // ask() and correct() are set dynamically in buildClinicalQuestion
     ask: (d, ctx) => ctx?.question ?? (i18n.getLocale() === 'en' ? `Which drug would you choose for <b>${escapeHtml(d.utilidad_sintomatica_clave)}</b>?` : `¿Qué fármaco elegirías para <b>${escapeHtml(d.utilidad_sintomatica_clave)}</b>?`),
@@ -544,7 +544,7 @@ function attachOptionListeners(view, q) {
         pearlCard.classList.remove("quiz-hidden");
         pearlCard.innerHTML = `
           <div class="quiz-pearl-header">
-            <span class="quiz-pearl-icon">💎</span>
+            <span class="quiz-pearl-icon">◆</span>
             <span class="quiz-pearl-label">${i18n.t("clinical_pearl")}</span>
           </div>
           <p class="quiz-pearl-text">${escapeHtml(q.pearl)}</p>
@@ -584,7 +584,7 @@ function renderResults(view) {
   // Review section for wrong answers
   const reviewHTML = Q.wrong.length ? `
     <div class="quiz-review-section">
-      <h3 class="quiz-review-title">📋 ${i18n.t("quiz_review_title").replace("{count}", Q.wrong.length)}</h3>
+      <h3 class="quiz-review-title">▤ ${i18n.t("quiz_review_title").replace("{count}", Q.wrong.length)}</h3>
       <div class="quiz-review-list">
         ${Q.wrong.map(w => `
           <div class="quiz-review-item">
@@ -598,7 +598,7 @@ function renderResults(view) {
               <span class="quiz-review-correct-label">${i18n.t("quiz_correct_label")}</span>
               <span class="quiz-review-correct">${escapeHtml(w.correct)}</span>
             </div>
-            ${w.pearl ? `<div class="quiz-review-pearl">💎 ${escapeHtml(w.pearl).slice(0, 150)}…</div>` : ""}
+            ${w.pearl ? `<div class="quiz-review-pearl">◆ ${escapeHtml(w.pearl).slice(0, 150)}…</div>` : ""}
           </div>
         `).join("")}
       </div>
@@ -659,7 +659,7 @@ function renderResults(view) {
             </div>
           </div>
           <div class="alert alert--success" style="margin-bottom:24px; text-align:center;">
-            <div style="font-size:1.5rem; margin-bottom:8px;">🏆 ${i18n.getLocale() === 'en' ? 'GURU LEVEL REACHED!' : '¡NIVEL GURU ALCANZADO!'} 🏆</div>
+            <div style="font-size:1.5rem; margin-bottom:8px;">★ ${i18n.getLocale() === 'en' ? 'GURU LEVEL REACHED!' : '¡NIVEL GURU ALCANZADO!'} ★</div>
             <p class="text-sm">${i18n.t("quiz_guru_unlocked")}</p>
             <button id="btnDownloadCert" class="btn btn--primary" style="margin-top:12px; background:var(--quiz-neon-purp); border:none; box-shadow:var(--quiz-glow-md);">
               ${i18n.t("quiz_download_cert")}

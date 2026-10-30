@@ -103,7 +103,7 @@ export function mountInfoModal() {
         <!-- Acerca de los datos -->
         <details class="detail-section" style="margin-bottom:24px; border:1px solid var(--color-border); border-radius:var(--radius-md); overflow:hidden;">
           <summary style="padding:12px 16px; background:var(--color-surface-raised); font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-            <span>📚 Acerca de los datos y fuentes</span>
+            <span>≡ Acerca de los datos y fuentes</span>
             <span style="font-size:0.8rem; opacity:0.5;">▼</span>
           </summary>
           <div style="padding:16px; font-size:0.85rem; line-height:1.6; color:var(--color-text-muted);">
@@ -121,7 +121,7 @@ export function mountInfoModal() {
 
         <!-- Aviso y limitaciones de uso -->
         <div class="alert alert--warning" style="font-size:0.85rem; border-radius:var(--radius-md); line-height:1.5; margin-bottom: 24px; text-align: left;">
-          <strong>⚠️ Aviso y limitaciones de uso</strong><br><br>
+          <strong>⚠ Aviso y limitaciones de uso</strong><br><br>
           Esta aplicación está dirigida exclusivamente a profesionales de salud mental como apoyo clínico. No sustituye el juicio clínico, la valoración presencial, las guías oficiales ni la ficha técnica vigente de cada medicamento.<br><br>
           Las dosis, equivalencias (CPZ), estrategias de switching y contenido farmacológico son aproximaciones educativas para consulta rápida. Deben verificarse y personalizarse en cada paciente según comorbilidades, interacciones, edad, estado clínico y normativas locales.<br><br>
           Esta herramienta no está diseñada para automedicación ni para decisiones terapéuticas sin supervisión profesional.

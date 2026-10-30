@@ -78,7 +78,7 @@ export function renderAjuste(view) {
         if (!filtered.length) {
             results.innerHTML = `
                 <div style="text-align:center; padding:var(--space-8); color:var(--color-text-muted);">
-                    <div style="font-size:3rem; opacity:0.3; margin-bottom:var(--space-4);">🔍</div>
+                    <div style="font-size:3rem; opacity:0.3; margin-bottom:var(--space-4);">⌕</div>
                     <p style="font-weight:600;">Sin resultados para "<em>${escapeHtml(query)}</em>"</p>
                 </div>`;
             return;
