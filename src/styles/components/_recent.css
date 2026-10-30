@@ -9,10 +9,10 @@
 .recents-section__title {
     font-family: var(--font-headers);
     font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text-dim);
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--text-muted);
     margin-bottom: var(--space-2);
 }
 

@@ -11,8 +11,8 @@
 }
 
 .card-drug__name {
-    font-family: var(--font-headers);
-    font-weight: 800;
+    font-family: var(--font-display);
+    font-weight: 600;
     font-size: 1.15rem;
     color: var(--color-text-main);
     text-decoration: none;

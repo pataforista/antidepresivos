@@ -1,21 +1,21 @@
 /* src/styles/components/_scrollbar.css */
 /* Grid Layouts moved to layout.css */
 
-/* Scrollbar refine */
+/* Scrollbar refine (humano: bg-hover / border-subtle) */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--color-bg);
+    background: var(--bg-hover);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-border);
+    background: var(--border-subtle);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-text-dim);
+    background: var(--text-muted);
 }

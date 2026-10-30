@@ -1,16 +1,17 @@
-/* --- Cards (Neo Bauhaus: hard 2px border, physical offset shadow on hover) --- */
+/* --- Cards (humano: 1px border, 20px radius, neo shadow) --- */
 .glass-effect {
     background: var(--color-surface);
-    border: 2px solid var(--color-border-strong);
-    box-shadow: var(--shadow-glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-neo-sm);
 }
 
 .card {
     background: var(--color-surface);
-    border: 2px solid var(--color-border-strong);
-    border-radius: var(--radius-lg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
     padding: var(--space-5);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-neo-sm);
     transition: transform var(--transition-spring), box-shadow var(--transition-spring), border-color var(--transition-fast);
     position: relative;
     overflow: hidden;
@@ -18,8 +19,8 @@
 
 @media (hover: hover) {
     .card--hoverable:hover {
-        transform: translateY(-4px) translateX(-2px);
-        box-shadow: 5px 8px 0px var(--color-border-hard);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-neo-md);
         border-color: var(--color-primary);
     }
 }
@@ -55,7 +56,7 @@
    M3 Cards — Tonal & Filled variants
    ============================================================ */
 .card--tonal {
-    background: var(--color-primary-container);
+    background: var(--bg-elevated);
     border-color: transparent;
     box-shadow: none;
 }

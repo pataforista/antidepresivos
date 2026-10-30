@@ -22,10 +22,10 @@
 
 .settings-section__label {
     font-family: var(--font-headers);
-    font-weight: 800;
+    font-weight: 600;
     font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: normal;
+    text-transform: none;
     color: var(--color-text-muted);
 }
 

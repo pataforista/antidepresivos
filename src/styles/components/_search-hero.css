@@ -1,6 +1,6 @@
 /* src/styles/components/_search-hero.css */
 /* ============================================================
-   Hero Search Bar (M3 Search — protagonista)
+   Hero Search Bar (humano: white, 1px border, neo shadow, focus ring)
    ============================================================ */
 .search-hero {
     position: relative;
@@ -10,29 +10,40 @@
 .search-hero__input {
     width: 100%;
     padding: 18px 52px 18px 52px;
-    border: 1.5px solid var(--color-border);
-    border-radius: var(--radius-xl);
+    border: 1px solid transparent;
+    border-radius: 28px;
     font-size: 1rem;
     font-family: var(--font-body);
     font-weight: 500;
-    background: var(--color-surface);
+    background: #FFFFFF;
     color: var(--color-text-main);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-neo-sm);
     transition: all var(--transition-normal);
     outline: none;
     -webkit-appearance: none;
     appearance: none;
 }
 
+[data-theme="dark"] .search-hero__input {
+    background: var(--bg-elevated);
+    color: var(--color-text-main);
+}
+
 .search-hero__input::placeholder {
-    color: var(--color-text-dim);
+    color: var(--text-muted);
     font-weight: 400;
 }
 
 .search-hero__input:focus {
     border-color: var(--color-primary);
-    box-shadow: var(--shadow-md), 0 0 0 3px hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.12);
-    background: var(--color-surface);
+    box-shadow: var(--shadow-neo-sm), 0 0 0 4px color-mix(in srgb, var(--h-indigo) 12%, transparent);
+    background: #FFFFFF;
+}
+
+[data-theme="dark"] .search-hero__input:focus {
+    background: var(--bg-elevated);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-neo-sm), 0 0 0 4px color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .search-hero__icon-left {
@@ -50,12 +61,12 @@
     right: 18px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--color-text-dim);
+    color: var(--text-muted);
     font-size: 0.8rem;
     pointer-events: none;
-    background: var(--color-surface-container);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
     padding: 2px 6px;
     font-family: var(--font-body);
     display: flex;

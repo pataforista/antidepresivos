@@ -1,13 +1,13 @@
-/* --- Clinical Elements --- */
+/* --- Clinical Elements (humano: pill 999px, no uppercase) --- */
 .chip {
     padding: 7px 13px;
-    border-radius: var(--radius-sm);
+    border-radius: 999px;
     font-family: var(--font-headers);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 600;
     background: var(--color-surface-raised);
     color: var(--color-text-muted);
-    border: 2px solid var(--color-border-strong);
+    border: 1px solid var(--border-subtle);
     transition: all var(--transition-normal);
     display: inline-flex;
     align-items: center;
@@ -15,25 +15,25 @@
     gap: 5px;
     min-width: 32px;
     height: 32px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
+    letter-spacing: normal;
+    text-transform: none;
 }
 
 .chip--active {
-    background: var(--color-primary);
-    color: white;
-    border-color: var(--color-primary-dark);
-    box-shadow: 2px 3px 0px var(--color-primary-dark);
-    font-weight: 800;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    box-shadow: none;
+    font-weight: 600;
 }
 
 .badge {
     padding: 6px 12px;
-    border-radius: var(--radius-sm);
+    border-radius: 999px;
     font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
     display: inline-block;
 }
 
@@ -128,26 +128,26 @@
     align-items: center;
     gap: 4px;
     padding: 3px 10px;
-    border-radius: var(--radius-full);
+    border-radius: 999px;
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 600;
     font-family: var(--font-body);
-    letter-spacing: 0.02em;
+    letter-spacing: normal;
     white-space: nowrap;
 }
 
 .clinical-chip--success {
-    background: var(--color-success-container);
+    background: color-mix(in srgb, var(--h-mint) 14%, transparent);
     color: #065f46;
 }
 
 .clinical-chip--warning {
-    background: var(--color-warning-container);
+    background: color-mix(in srgb, var(--h-amber) 14%, transparent);
     color: #92400e;
 }
 
 .clinical-chip--danger {
-    background: var(--color-danger-container);
+    background: color-mix(in srgb, var(--h-raspberry) 14%, transparent);
     color: #991b1b;
 }
 
@@ -157,6 +157,6 @@
 }
 
 .clinical-chip--primary {
-    background: var(--color-primary-container);
-    color: var(--color-on-primary-container);
+    background: color-mix(in srgb, var(--h-indigo) 14%, transparent);
+    color: var(--h-indigo-deep);
 }
