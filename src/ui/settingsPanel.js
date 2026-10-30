@@ -135,6 +135,13 @@ export function mountSettingsPanel() {
    ============================================================ */
 export function applyUiSetting(key, value) {
   store.updatePath(`ui.${key}`, value);
+  if (key === "theme") {
+    try {
+      localStorage.setItem("theme", value);
+    } catch (err) {
+      console.warn("[settings] No se pudo guardar theme en localStorage:", err);
+    }
+  }
   applySettingToDOM(key, value);
 }
 
@@ -144,8 +151,11 @@ export function applySettingToDOM(key, value) {
   switch (key) {
     case "theme": {
       html.setAttribute("data-theme", value);
+      const themeColor = value === "dark" ? "#191A2B" : "#FBF1EC";
       const meta = document.getElementById("meta-theme-color");
-      if (meta) meta.setAttribute("content", value === "dark" ? "#1A1610" : "#F9F7F2");
+      if (meta) meta.setAttribute("content", themeColor);
+      const metaLight = document.getElementById("meta-theme-color-light");
+      if (metaLight && value === "dark") metaLight.setAttribute("content", themeColor);
       break;
     }
     case "fontSize": {

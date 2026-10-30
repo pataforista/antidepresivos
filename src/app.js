@@ -16,7 +16,7 @@ import { escapeHtml } from "./core/utils.js";
 import { drugEmoji, isNotableRisk, isHighRisk, sedationLabel, sedationVariant } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
 import { i18n } from "./core/i18n.js";
-import { mountSettingsPanel, applySettingToDOM } from "./ui/settingsPanel.js";
+import { mountSettingsPanel, applySettingToDOM, applyUiSetting } from "./ui/settingsPanel.js";
 
 /* ============================================================
    Event Tracking (Analytics)
@@ -116,7 +116,12 @@ async function main() {
 
         // Apply persisted UI settings on first mount
         const uiState = store.getState().ui;
-        applySettingToDOM("theme",      uiState.theme      ?? "light");
+        const bootTheme = document.documentElement.getAttribute("data-theme");
+        const initialTheme = (bootTheme === "dark" || bootTheme === "light") ? bootTheme : (uiState.theme ?? "light");
+        if (uiState.theme !== initialTheme) {
+          store.updatePath("ui.theme", initialTheme);
+        }
+        applySettingToDOM("theme",      initialTheme);
         applySettingToDOM("fontSize",   uiState.fontSize   ?? "normal");
         applySettingToDOM("animations", uiState.animations !== false);
         applySettingToDOM("compact",    uiState.compact    ?? false);
@@ -238,8 +243,7 @@ function attachGlobalListeners() {
     btnTheme.addEventListener("click", () => {
       const current = store.getState().ui.theme || "light";
       const next = current === "light" ? "dark" : "light";
-      store.updatePath("ui.theme", next);
-      applySettingToDOM("theme", next);
+      applyUiSetting("theme", next);
     });
   }
 
