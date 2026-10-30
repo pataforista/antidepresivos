@@ -153,9 +153,9 @@ html, body {
 
 .evidence-source {
   font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
   color: var(--color-text-muted);
   display: flex;
   justify-content: space-between;
