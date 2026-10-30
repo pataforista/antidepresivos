@@ -13,7 +13,7 @@ import { renderGuias } from "./ui/guiasView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations, initScrollHideHeader, initRippleEffect, haptic, withViewTransition } from "./ui/visuals.js";
 import { escapeHtml } from "./core/utils.js";
-import { drugEmoji, isNotableRisk, isHighRisk, sedationLabel, sedationVariant } from "./core/drugNormalization.js";
+import { isNotableRisk, isHighRisk, sedationLabel, sedationVariant } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
 import { i18n } from "./core/i18n.js";
 import { mountSettingsPanel, applySettingToDOM, applyUiSetting } from "./ui/settingsPanel.js";
@@ -458,19 +458,19 @@ function addRecentItem(id, name, cls) {
    ============================================================ */
 function getTaskFilters() {
   return [
-    { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "😴",
+    { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "S",
       test: d => parseInt(d.nivel_sedacion) <= 1 },
-    { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "❤️",
+    { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "♥",
       test: d => /bajo|leve|mínima|minima|nula|low|mild|none/i.test(d.perfil_disfuncion_sexual || "") },
-    { id: "low_qt",         label: i18n.t("filter_qt"),    icon: "💓",
+    { id: "low_qt",         label: i18n.t("filter_qt"),    icon: "♥",
       test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_prolongacion_qt || "") },
-    { id: "low_weight",     label: i18n.t("filter_weight"), icon: "⚖️",
+    { id: "low_weight",     label: i18n.t("filter_weight"), icon: "W",
       test: d => /neutro|bajo|pérdida|perdida|neutral|low|loss/i.test(d.perfil_impacto_peso || "") },
-    { id: "low_withdrawal", label: i18n.t("filter_withdrawal"),  icon: "🔄",
+    { id: "low_withdrawal", label: i18n.t("filter_withdrawal"),  icon: "↺",
       test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_sindrome_abstinencia || "") },
-    { id: "isrs",           label: "ISRS",            icon: "💊",
+    { id: "isrs",           label: "ISRS",            icon: "•",
       test: d => /isrs/i.test(d.clase_terapeutica || "") },
-    { id: "dual",           label: "Dual (IRSN)",     icon: "🔁",
+    { id: "dual",           label: "Dual (IRSN)",     icon: "⇄",
       test: d => /dual|irsn|snri/i.test(d.clase_terapeutica || d.mecanismo_principal || "") },
   ];
 }
@@ -489,7 +489,7 @@ function getClinicalChips(d) {
 
   // ATC code
   if (d.codigo_atc) {
-    chips.push({ label: `ATC: ${d.codigo_atc} 🔬`, variant: "primary" });
+    chips.push({ label: `ATC: ${d.codigo_atc}`, variant: "primary" });
   }
 
   // Sedation level (label localizado según idioma activo)
@@ -502,12 +502,12 @@ function getClinicalChips(d) {
 
   // QT risk — only flag if notable
   if (isNotableRisk(d.riesgo_prolongacion_qt)) {
-    chips.push({ label: en ? "QT Risk ↑ 💓" : "Riesgo QT ↑ 💓", variant: isHighRisk(d.riesgo_prolongacion_qt) ? "danger" : "warning" });
+    chips.push({ label: en ? "QT Risk ↑" : "Riesgo QT ↑", variant: isHighRisk(d.riesgo_prolongacion_qt) ? "danger" : "warning" });
   }
 
   // Sexual dysfunction — only flag if notable
   if (isNotableRisk(d.perfil_disfuncion_sexual)) {
-    chips.push({ label: en ? "Sexual Impact ↑ ❤️" : "Impacto Sexual ↑ ❤️", variant: isHighRisk(d.perfil_disfuncion_sexual) ? "danger" : "warning" });
+    chips.push({ label: en ? "Sexual Impact ↑" : "Impacto Sexual ↑", variant: isHighRisk(d.perfil_disfuncion_sexual) ? "danger" : "warning" });
   }
 
   return chips;
@@ -706,7 +706,6 @@ function renderDrugCard(d, selected, index = 0) {
   const name = d.nombre_generico ?? id;
   const cls = d.clase_terapeutica ?? "";
   const isOn = selected.has(id);
-  const emoji = drugEmoji(cls);
   // Stagger cap at 480ms so the last card doesn't wait forever
   const delay = Math.min(index * 38, 480);
 
@@ -714,7 +713,6 @@ function renderDrugCard(d, selected, index = 0) {
     <div class="card card--hoverable card--spotlight card-drug--enter ${isOn ? "card--in-compare" : ""}"
          style="animation-delay:${delay}ms">
       <div class="card-drug__header">
-        <div class="card-drug__emoji" aria-hidden="true">${emoji}</div>
         <a href="/farmaco/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
         <button type="button"
           class="card-drug__compare-btn btn btn--circle chkCompareBtn ${isOn ? "active" : ""}"
@@ -1092,19 +1090,19 @@ function renderRadarChart(data, colors) {
 
 function mountDock() {
   const navItems = [
-    { id: "list",      label: i18n.t("nav_home"),    icon: "🏠",  hash: "/",      isRoute: true },
-    { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖️",  hash: "/comparador",   isRoute: true },
-    { id: "switching", label: i18n.t("btn_switching"), icon: "🔄",  hash: "/switching", isRoute: true },
-    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "🩺",  hash: "/ajuste",    isRoute: true },
-    { id: "combo",     label: i18n.t("btn_combo"), icon: "🚀",  hash: "/combinaciones",     isRoute: true },
+    { id: "list",      label: i18n.t("nav_home"),    icon: "⌂",  hash: "/",      isRoute: true },
+    { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖",  hash: "/comparador",   isRoute: true },
+    { id: "switching", label: i18n.t("btn_switching"), icon: "⇄",  hash: "/switching", isRoute: true },
+    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "℞",  hash: "/ajuste",    isRoute: true },
+    { id: "combo",     label: i18n.t("btn_combo"), icon: "+",  hash: "/combinaciones",     isRoute: true },
     { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "/interacciones",  isRoute: true },
-    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "🎮",  hash: "/quiz",      isRoute: true },
-    { id: "guias",     label: i18n.t("btn_guias"), icon: "📖",  hash: "/guias",     isRoute: true },
+    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "?",  hash: "/quiz",      isRoute: true },
+    { id: "guias",     label: i18n.t("btn_guias"), icon: "≡",  hash: "/guias",     isRoute: true },
   ];
   const actionItems = [
-    { id: "legal",    label: i18n.t("nav_legal"),    icon: "📜", hash: "#", isRoute: false, action: "legal"    },
-    { id: "info",     label: i18n.t("nav_credits"), icon: "💡", hash: "#", isRoute: false, action: "info"     },
-    { id: "settings", label: i18n.t("btn_settings"), icon: "⚙️", hash: "#", isRoute: false, action: "settings" },
+    { id: "legal",    label: i18n.t("nav_legal"),    icon: "§", hash: "#", isRoute: false, action: "legal"    },
+    { id: "info",     label: i18n.t("nav_credits"), icon: "i", hash: "#", isRoute: false, action: "info"     },
+    { id: "settings", label: i18n.t("btn_settings"), icon: "⚙", hash: "#", isRoute: false, action: "settings" },
   ];
 
   let navBar = document.getElementById("floating-dock");
