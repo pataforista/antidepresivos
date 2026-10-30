@@ -210,11 +210,22 @@ function shuffle(arr) {
 
 function starsFor(score, max) {
   const pct = score / max;
-  if (pct >= 0.9) return { stars: "★★★★★", label: i18n.t("quiz_excellent"), emoji: "🏆" };
-  if (pct >= 0.7) return { stars: "★★★★☆", label: i18n.t("quiz_very_good"), emoji: "🎓" };
-  if (pct >= 0.5) return { stars: "★★★☆☆", label: i18n.t("quiz_good"), emoji: "📚" };
-  if (pct >= 0.3) return { stars: "★★☆☆☆", label: i18n.t("quiz_study_more"), emoji: "📖" };
-  return { stars: "★☆☆☆☆", label: i18n.t("quiz_at_study"), emoji: "😅" };
+  if (pct >= 0.9) return { stars: "★★★★★", label: i18n.t("quiz_excellent"), icon: "trophy" };
+  if (pct >= 0.7) return { stars: "★★★★☆", label: i18n.t("quiz_very_good"), icon: "academic" };
+  if (pct >= 0.5) return { stars: "★★★☆☆", label: i18n.t("quiz_good"), icon: "book" };
+  if (pct >= 0.3) return { stars: "★★☆☆☆", label: i18n.t("quiz_study_more"), icon: "study" };
+  return { stars: "★☆☆☆☆", label: i18n.t("quiz_at_study"), icon: "study-harder" };
+}
+
+function resultIconSVG(iconName) {
+  const icons = {
+    trophy: '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>',
+    academic: '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',
+    book: '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>',
+    study: '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.25278V12.0001M12 21.9999C7.58172 21.9999 4 18.4182 4 13.9999C4 9.58165 7.58172 5.99993 12 5.99993C16.4183 5.99993 20 9.58165 20 13.9999C20 18.4182 16.4183 21.9999 12 21.9999Z"/><path d="M12 12L12 18"/></svg>',
+    'study-harder': '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>'
+  };
+  return icons[iconName] || icons.book;
 }
 
 /* ── Construcción de preguntas anti-ambigüedad ───────────────── */
@@ -560,7 +571,7 @@ function attachOptionListeners(view, q) {
 function renderResults(view) {
   Q.finished = true;
   const maxScore = Q.total * 10;
-  const { stars, label, emoji } = starsFor(Q.score, maxScore);
+  const { stars, label, icon } = starsFor(Q.score, maxScore);
   const correctCount = Q.total - Q.wrong.length;
   const allDrugs = store.getState().data?.dataset?.farmacos ?? [];
   const MODES = getModes();
@@ -602,7 +613,7 @@ function renderResults(view) {
     <div class="quiz-view animate-fade-in">
       <div class="quiz-scanlines" aria-hidden="true"></div>
       <div class="quiz-container">
-        <div class="quiz-result-emoji" aria-hidden="true">${emoji}</div>
+        <div class="quiz-result-icon" aria-hidden="true">${resultIconSVG(icon)}</div>
         <h2 class="quiz-results-title">${i18n.t("quiz_results")}</h2>
         <div class="quiz-results-card">
           <div class="quiz-results-stars">${stars}</div>
