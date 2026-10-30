@@ -28,7 +28,7 @@ export function renderGuias(view) {
       const recs = g.recs?.[lang] ?? g.recs?.es ?? [];
       return `
         <div style="margin-top:var(--space-4);">
-          <div class="text-xs" style="font-weight:800; color:var(--color-primary); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:var(--space-2);">${escapeHtml(g.org)}</div>
+          <div class="text-xs" style="font-weight:600; color:var(--color-primary); letter-spacing:normal; margin-bottom:var(--space-2);">${escapeHtml(g.org)}</div>
           <ul class="list-disc text-sm" style="padding-left:20px; line-height:1.6; margin:0;">
             ${recs.map(r => `<li>${escapeHtml(r)}</li>`).join("")}
           </ul>

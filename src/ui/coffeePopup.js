@@ -111,7 +111,7 @@ function injectStyles() {
       color: #111;
       padding: 10px 18px;
       border-radius: 10px;
-      font-weight: 800;
+      font-weight: 600;
       font-size: 0.85rem;
       text-decoration: none;
       margin-top: 14px;
@@ -141,7 +141,7 @@ function showCoffeePopup() {
   el.setAttribute("aria-label", "Apoyar el proyecto");
   el.innerHTML = `
     <button id="bmacCloseBtn" type="button" aria-label="Cerrar">✕</button>
-    <p style="font-size:0.72rem; font-weight:800; color:var(--color-primary); text-transform:uppercase; letter-spacing:0.08em; margin:0 0 6px;">¿Te está siendo útil?</p>
+    <p style="font-size:0.72rem; font-weight:600; color:var(--color-primary); letter-spacing:normal; margin:0 0 6px;">¿Te está siendo útil?</p>
     <p style="font-size:0.82rem; line-height:1.55; color:var(--color-text-main); margin:0;">
       Esta guía clínica se mantiene actualizada de forma independiente. Si te ayuda en tu práctica, considera apoyar su desarrollo.
     </p>

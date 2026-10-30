@@ -117,7 +117,7 @@ function renderResult(id1, id2, view, synergies, dataset) {
                     <div style="display:flex; align-items:center; gap:16px; margin-bottom: 16px;">
                         <div style="font-size: 2.5rem;">${found.type === 'danger' ? '⚠' : '✦'}</div>
                         <div>
-                            <h3 style="margin:0; font-family:var(--font-headers); font-weight:800; font-size: 1.5rem;">${escapeHtml(found.name)}</h3>
+                            <h3 style="margin:0; font-family:var(--font-headers); font-weight:600; font-size: 1.5rem;">${escapeHtml(found.name)}</h3>
                             <p style="margin:0; font-size: 0.9rem; opacity: 0.8;">${escapeHtml(found.description)}</p>
                         </div>
                     </div>

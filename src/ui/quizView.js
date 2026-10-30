@@ -642,15 +642,15 @@ function renderResults(view) {
 
         ${guruUnlocked ? `
           <div id="guruCertificate" style="display:none; padding:40px; background:white; color:#111; font-family:'Outfit',sans-serif; border:10px double #4f46e5; text-align:center; position:relative;">
-            <div style="font-size:1.5rem; letter-spacing:4px; color:#4f46e5; font-weight:800; margin-bottom:20px;">${i18n.getLocale() === 'en' ? 'EXPERT CERTIFICATE' : 'CERTIFICADO DE EXPERTO'}</div>
-            <div style="font-size:0.9rem; text-transform:uppercase; margin-bottom:10px;">${i18n.getLocale() === 'en' ? 'The Antidepressants Guide certifies:' : 'La Guía Antidepresivos certifica a:'}</div>
-            <div style="font-size:2.5rem; font-weight:900; color:#111; border-bottom:2px solid #ddd; display:inline-block; padding:0 40px 5px; margin-bottom:24px;">${i18n.getLocale() === 'en' ? 'PSYCHOPHARMACOLOGY GURU' : 'GURU DE LA PSICOFARMACOLOGÍA'}</div>
+            <div style="font-size:1.5rem; letter-spacing:4px; color:#4f46e5; font-weight:600; margin-bottom:20px;">${i18n.getLocale() === 'en' ? 'EXPERT CERTIFICATE' : 'CERTIFICADO DE EXPERTO'}</div>
+            <div style="font-size:0.9rem; letter-spacing:normal; margin-bottom:10px;">${i18n.getLocale() === 'en' ? 'The Antidepressants Guide certifies:' : 'La Guía Antidepresivos certifica a:'}</div>
+            <div style="font-size:2.5rem; font-weight:600; color:#111; border-bottom:2px solid #ddd; display:inline-block; padding:0 40px 5px; margin-bottom:24px;">${i18n.getLocale() === 'en' ? 'PSYCHOPHARMACOLOGY GURU' : 'GURU DE LA PSICOFARMACOLOGÍA'}</div>
             <div style="font-size:1rem; line-height:1.6; max-width:500px; margin:0 auto 30px;">
               ${i18n.getLocale() === 'en' ? `For achieving a score of <b>${Q.score} Points</b> in the professional PharmaQuiz level, demonstrating exceptional knowledge in clinical antidepressants mechanism and safety.` : `Por haber alcanzado un puntaje de <b>${Q.score} Puntos</b> en el modo PhamaQuiz de nivel profesional, demostrando un conocimiento excepcional en clases, mecanismos y seguridad clínica de antidepresivos.`}
             </div>
             <div style="display:flex; justify-content:space-between; align-items:flex-end; padding:0 40px;">
               <div style="text-align:left;">
-                <div style="font-weight:800; font-size:1.1rem;">${i18n.getLocale() === 'en' ? 'Professional Edition' : 'Edición Profesional'}</div>
+                <div style="font-weight:600; font-size:1.1rem;">${i18n.getLocale() === 'en' ? 'Professional Edition' : 'Edición Profesional'}</div>
                 <div style="font-size:0.8rem; color:#666;">${i18n.getLocale() === 'en' ? 'Smart Clinical Support' : 'Soporte Clínico Inteligente'}</div>
               </div>
               <div style="text-align:right; font-family:monospace; font-size:0.7rem; color:#999;">

@@ -80,7 +80,7 @@ export function renderInteract(view) {
 
             <!-- Leyenda -->
             <div style="display:flex; gap:var(--space-4); flex-wrap:wrap; margin-bottom:var(--space-6); align-items:center; padding:var(--space-4); background:var(--color-surface-raised); border-radius:var(--radius-md);">
-                <span class="text-xs" style="font-weight:800; color:var(--color-text-muted); letter-spacing:0.08em;">INTENSIDAD:</span>
+                <span class="text-xs" style="font-weight:600; color:var(--color-text-muted); letter-spacing:normal;">INTENSIDAD:</span>
                 <span class="badge badge--red"    style="font-size:0.65rem;">POTENTE — inhibe significativamente el metabolismo</span>
                 <span class="badge badge--yellow" style="font-size:0.65rem;">MODERADO — monitorizar</span>
                 <span class="badge badge--gray"   style="font-size:0.65rem;">DÉBIL — riesgo bajo en monoterapia</span>

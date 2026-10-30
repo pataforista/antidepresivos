@@ -195,13 +195,13 @@ function renderTabResumen(item) {
         <div class="detail-section__body">
           <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:var(--space-5);">
             <div>
-              <div class="text-xs" style="font-weight:800; color:var(--color-primary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:var(--space-2)">FDA</div>
+              <div class="text-xs" style="font-weight:600; color:var(--color-primary); letter-spacing:normal; margin-bottom:var(--space-2)">FDA</div>
               <ul class="list-disc" style="padding-left:18px; margin:0;">
                 ${fdaInds.map(ind => `<li class="text-body">${escapeHtml(ind.nombre)}</li>`).join("") || "<li class='text-muted'>N/D</li>"}
               </ul>
             </div>
             <div>
-              <div class="text-xs" style="font-weight:800; color:var(--color-secondary); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:var(--space-2)">EMA</div>
+              <div class="text-xs" style="font-weight:600; color:var(--accent); letter-spacing:normal; margin-bottom:var(--space-2)">EMA</div>
               <ul class="list-disc" style="padding-left:18px; margin:0;">
                 ${emaInds.map(ind => `<li class="text-body">${escapeHtml(ind.nombre)}</li>`).join("") || "<li class='text-muted'>N/D</li>"}
               </ul>
@@ -653,7 +653,7 @@ function infoBox(label, val) {
 function infoBoxClean(label, val) {
    return `
       <div style="padding:var(--space-2) 0">
-        <div class="text-xs text-muted" style="text-transform:uppercase; font-weight:800; letter-spacing:0.05em; margin-bottom:4px">${escapeHtml(label)}</div>
+        <div class="text-xs text-muted" style="letter-spacing:normal; font-weight:600; margin-bottom:4px">${escapeHtml(label)}</div>
         <div style="font-weight:700; font-size:1.15rem; color:var(--color-primary-dark)">${escapeHtml(val)}</div>
       </div>
     `;
@@ -672,7 +672,7 @@ function rowRisk(label, val, forceHigh = false) {
    // val puede llegar como número (nivel_sedacion normalizado): convertir siempre
    const s = String(val ?? "").toLowerCase();
    const isHigh = forceHigh || s.includes("alto") || s === "3" || s === "2";
-   const style = isHigh ? "color:var(--color-danger); font-weight:800" : "font-weight:600";
+   const style = isHigh ? "color:var(--color-danger); font-weight:600" : "font-weight:600";
    return `
       <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--color-border); padding-bottom:var(--space-2);">
          <span class="text-sm" style="font-weight:600">${escapeHtml(label)}</span>

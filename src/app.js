@@ -549,7 +549,7 @@ function renderSmartTip() {
     <div class="smart-tip animate-on-scroll" style="margin-top:var(--space-8); padding:var(--space-6); border-radius:var(--radius-xl); background:var(--color-surface-raised); border:1px solid var(--color-border); display:flex; gap:var(--space-4); align-items:center;">
       <div style="font-size:2rem;">☀</div>
       <div>
-        <div style="font-family:var(--font-headers); font-weight:800; font-size:0.75rem; color:var(--color-primary); letter-spacing:0.1em; margin-bottom:4px; text-transform:uppercase;">${i18n.t("smart_tip_title")}</div>
+        <div style="font-family:var(--font-headers); font-weight:600; font-size:0.75rem; color:var(--color-primary); letter-spacing:normal; margin-bottom:4px;">${i18n.t("smart_tip_title")}</div>
         <div style="font-weight:700; font-size:1rem; margin-bottom:2px;">${escapeHtml(tip.term)}</div>
         <div class="text-xs text-muted" style="line-height:1.4;">${escapeHtml(tip.definition)}</div>
       </div>
@@ -664,7 +664,7 @@ function renderList(view) {
         ${items.map((d, i) => renderDrugCard(d, selected, i)).join("") || `
           <div id="emptyState" class="empty-state" style="grid-column:1/-1; text-align:center; padding:var(--space-8) var(--space-5);">
             <span class="empty-state__icon" aria-hidden="true">⌕</span>
-            <p style="font-family:var(--font-headers); font-weight:800; font-size:1.15rem; color:var(--color-text-main); margin-bottom:var(--space-3);">${i18n.t("no_results")}</p>
+            <p style="font-family:var(--font-headers); font-weight:600; font-size:1.15rem; color:var(--color-text-main); margin-bottom:var(--space-3);">${i18n.t("no_results")}</p>
             <p class="text-muted" style="font-size:0.9rem; margin-bottom:var(--space-5); max-width:280px; margin-left:auto; margin-right:auto; line-height:1.5;">${i18n.getLocale() === 'en' ? 'Try a different name or clear active filters.' : 'Prueba otro nombre o elimina los filtros activos.'}</p>
             <button id="btnClearEmptySearch" type="button" class="btn btn--outline" style="font-size:0.8rem; padding:8px 20px; text-transform:none; letter-spacing:0;">${i18n.getLocale() === 'en' ? 'Clear filters' : 'Limpiar filtros'}</button>
           </div>
@@ -934,7 +934,7 @@ function renderCompare(view) {
                   <th style="padding:var(--space-4) var(--space-5); color:var(--color-primary); background:var(--color-bg); font-family:var(--font-headers); font-size:0.75rem; letter-spacing:0.1em; border-bottom:2px solid var(--color-border);" scope="col">${i18n.t("compare_col_trait")}</th>
                   ${rows.map((d, i) => {
     const color = colors[i % colors.length];
-    return `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:800; border-bottom:2px solid ${color}; min-width:180px; color:${color}">${escapeHtml(d.nombre_generico)}</th>`
+    return `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:600; border-bottom:2px solid ${color}; min-width:180px; color:${color}">${escapeHtml(d.nombre_generico)}</th>`
   }).join("")}
                 </tr>
               </thead>
@@ -948,7 +948,7 @@ function renderCompare(view) {
     const val = tr.key === "nivel_sedacion" ? sedationLabel(raw) : raw;
     const s = String(raw).toLowerCase();
     const isHigh = tr.highlight && (s.includes("alto") || s === "3" || s === "2");
-    const textStyle = isHigh ? 'color:var(--color-danger); font-weight:800;' : 'font-weight:500;';
+    const textStyle = isHigh ? 'color:var(--color-danger); font-weight:600;' : 'font-weight:500;';
     return `<td style="padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--color-border); font-size:0.95rem; ${textStyle}">${escapeHtml(String(val))}</td>`;
   }).join("")}
                   </tr>
