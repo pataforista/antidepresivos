@@ -65,7 +65,7 @@
 .bottom-sheet__title {
     margin: 0;
     font-size: 1.1rem;
-    font-weight: 800;
+    font-weight: 600;
     font-family: var(--font-headers);
     color: var(--color-primary);
 }

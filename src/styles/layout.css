@@ -533,7 +533,7 @@ html, body {
     color: var(--color-on-primary);
     border-radius: var(--radius-full);
     font-size: 9px;
-    font-weight: 800;
+    font-weight: 600;
     min-width: 16px;
     height: 16px;
     display: flex;
