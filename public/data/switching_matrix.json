@@ -16,12 +16,13 @@
   {
     "from": "fluoxetina",
     "to": "sertralina",
-    "strategy": "direct_switch",
+    "strategy": "fluoxetine_switch",
     "taper_days": 0,
-    "washout_days": 3,
+    "washout_days": 7,
     "notes": [
-      "Fluoxetina tiene vida media larga",
-      "Washout recomendado antes de iniciar dosis plenas"
+      "Fluoxetina y su metabolito norfluoxetina tienen vida media prolongada (~7-15 días)",
+      "Esperar intervalo libre de 7 días tras suspender e iniciar sertralina a dosis baja (25-50 mg)",
+      "Vigilar toxicidad serotoninérgica e interacciones metabólicas (inhibición prolongada de CYP2D6)"
     ],
     "contraindications": [
       "IMAO"

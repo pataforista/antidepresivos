@@ -3,13 +3,18 @@ import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
 import { ensurePdfFooter } from "./pdfFooter.js";
+import { computeSwitchProtocol, isNonSwitchable } from "../lib/switchingLogic.js";
 
 export function renderSwitching(view) {
     const state = store.getState();
     const dataset = state.data?.dataset?.farmacos ?? [];
 
-    // Sort alphabetically for the dropdowns
-    const farmacos = [...dataset].sort((a, b) => a.nombre_generico.localeCompare(b.nombre_generico));
+    // Excluir potenciadores y esquemas agudos del selector de switching (C-3)
+    const farmacos = [...dataset]
+        .filter(f => !isNonSwitchable(f))
+        .sort((a, b) => a.nombre_generico.localeCompare(b.nombre_generico));
+
+    const isEn = i18n.getLocale() === 'en';
 
     view.innerHTML = `
         <div class="animate-fade-in">
@@ -18,7 +23,7 @@ export function renderSwitching(view) {
                 <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
             </div>
 
-            <p class="text-muted" style="margin-bottom: var(--space-8);">
+            <p class="text-muted" style="margin-bottom: var(--space-6);">
                 ${i18n.t("switching_intro")}
             </p>
 
@@ -39,6 +44,12 @@ export function renderSwitching(view) {
                         </select>
                     </div>
                 </div>
+
+                <p class="text-xs text-muted" style="margin-top: 14px; margin-bottom: 0; line-height: 1.5;">
+                    ${isEn
+                        ? "ℹ️ Augmenting agents (Lithium, Atypical Antipsychotics, T3, Stimulants) and acute/infusion therapies (Ketamine, Esketamine, Brexanolone, Zuranolone) are excluded from the switching calculator as they are adjunctive treatments or require independent specialized protocols."
+                        : "ℹ️ Los agentes de potenciación (Litio, Antipsicóticos atípicos, T3, Estimulantes) y tratamientos de acción rápida/infusión (Ketamina, Esketamina, Brexanolona, Zuranolona) están excluidos del calculador de switching al tratarse de coadyuvantes o requerir esquemas especializados independientes."}
+                </p>
                 
                 <div id="switchPlanContainer" style="margin-top: 30px; display:none;">
                     <div style="display:flex; justify-content:flex-end; margin-bottom: 20px;">
@@ -80,7 +91,7 @@ export function renderSwitching(view) {
                     ${i18n.t("switching_warning")}
                 </div>
             </div>
-        </div >
+        </div>
         `;
 
     const fromSel = view.querySelector('#switchFrom');
@@ -131,104 +142,55 @@ function updatePlan(fromId, toId, view) {
     if (!fromDrug || !toDrug) return;
 
     const matrix = state.data?.switchingMatrix || [];
-    const entry = matrix.find(m =>
-        m.from.toLowerCase() === fromDrug.nombre_generico.toLowerCase() &&
-        m.to.toLowerCase() === toDrug.nombre_generico.toLowerCase()
-    );
+    const locale = i18n.getLocale() || 'es';
+    const isEn = locale === 'en';
 
-    let strategy, desc, notes, entryData;
-
-    if (entry) {
-        strategy = entry.strategy.replace("_", " ").toUpperCase();
-        desc = i18n.t("protocol_desc_days").replace("{days}", entry.taper_days);
-        notes = entry.notes;
-        entryData = entry;
-    } else {
-        // Fallback clinical logic
-        strategy = i18n.t("standard_cross_taper");
-        desc = i18n.t("standard_taper_desc");
-        notes = i18n.getLocale() === 'en' ? 
-            ["Monitor for discontinuation symptoms.", "Titrate new drug based on clinical tolerance.", "Risk of persistent PD interaction."] :
-            ["Vigilar síntomas de discontinuación.", "Titular el nuevo fármaco según tolerancia clínica.", "Riesgo de interacción farmacodinámica persistente."];
-        
-        entryData = { taper_days: 14, washout_days: 0, strategy: "cross_taper" };
-
-        const isMAOI = (d) => d?.clase_terapeutica?.toLowerCase().includes('imao') || d?.clase_terapeutica?.toLowerCase().includes('maoi');
-        const isFluoxetine = (d) => d?.nombre_generico?.toLowerCase().includes('fluoxetina') || d?.nombre_generico?.toLowerCase().includes('fluoxetine');
-
-        if (isMAOI(fromDrug) || isMAOI(toDrug)) {
-            strategy = i18n.t("washout_strict");
-            desc = i18n.t("washout_desc");
-            notes.unshift(i18n.t("washout_golden_rule"));
-            entryData = { taper_days: 0, washout_days: 14, strategy: "washout" };
-
-            // Fluoxetina → IMAO requiere 5 semanas (35 días) de lavado por la vida
-            // media prolongada de la norfluoxetina; los 14 días estándar NO bastan.
-            if (isFluoxetine(fromDrug) && isMAOI(toDrug)) {
-                desc = i18n.getLocale() === 'en'
-                    ? "Requires a drug-free period of 5 weeks (35 days)."
-                    : "Requiere un periodo libre de fármaco de 5 semanas (35 días).";
-                notes.unshift(i18n.getLocale() === 'en'
-                    ? "Fluoxetine → MAOI: a 5-week (35-day) washout is MANDATORY due to the long half-life of norfluoxetine. The standard 14 days are NOT sufficient."
-                    : "Fluoxetina → IMAO: el lavado obligatorio es de 5 semanas (35 días) por la vida media prolongada de la norfluoxetina. Los 14 días estándar NO son suficientes.");
-                entryData = { taper_days: 0, washout_days: 35, strategy: "washout" };
-            }
-        } else if (isFluoxetine(fromDrug)) {
-            strategy = i18n.t("fluoxetine_switch_title");
-            desc = i18n.t("fluoxetine_switch_desc");
-            notes.unshift(i18n.t("fluoxetine_switch_note"));
-            entryData = { taper_days: 5, washout_days: 3, strategy: "fluoxetine_switch" };
-        }
-    }
+    const protocol = computeSwitchProtocol(fromDrug, toDrug, matrix, locale);
+    if (!protocol) return;
 
     const header = view.querySelector('#strategyHeader');
-    if (header) header.style.display = 'block';
+    if (header) {
+        header.style.display = 'block';
+        header.className = protocol.isHighRisk ? 'alert alert--danger' : 'alert alert--info';
+        header.style.borderRadius = 'var(--radius-xl)';
+    }
 
-    // Señaliza el origen del plan: par curado en la matriz de switching
-    // (basado en guías) frente a protocolo genérico calculado por reglas.
     const srcEl = view.querySelector('#strategySource');
     if (srcEl) {
-        const en = i18n.getLocale() === 'en';
-        if (entry) {
-            srcEl.textContent = en ? 'Curated pair (clinical guidelines)' : 'Par curado (guías clínicas)';
+        if (protocol.source === 'matrix') {
+            srcEl.textContent = isEn ? 'Par curado (guías clínicas)' : 'Par curado (guías clínicas)';
+            if (isEn) srcEl.textContent = 'Curated pair (clinical guidelines)';
             srcEl.className = 'clinical-chip clinical-chip--success';
+        } else if (protocol.source === 'clinical_restriction') {
+            srcEl.textContent = isEn ? 'Clinical restriction' : 'Restricción clínica';
+            srcEl.className = 'clinical-chip clinical-chip--danger';
         } else {
-            srcEl.textContent = en ? 'Generic protocol — verify against guidelines' : 'Protocolo genérico — verificar en guías';
-            srcEl.className = 'clinical-chip clinical-chip--warning';
+            srcEl.textContent = isEn ? 'Evidence-based protocol (guidelines)' : 'Protocolo basado en evidencia (guías)';
+            srcEl.className = protocol.isHighRisk ? 'clinical-chip clinical-chip--danger' : 'clinical-chip clinical-chip--warning';
         }
         srcEl.style.display = 'inline-block';
         srcEl.style.marginBottom = '10px';
     }
 
+    const strategyTitle = protocol.strategy.replace(/_/g, ' ').toUpperCase();
+    view.querySelector('#strategyTitle').textContent = strategyTitle;
+    view.querySelector('#strategyDesc').textContent = protocol.desc;
+
     const rationaleEl = view.querySelector('#strategyRationale');
-    let rationale;
-
-    const isSSRI = (d) => d?.clase_terapeutica?.toLowerCase().includes('isrs') || d?.clase_terapeutica?.toLowerCase().includes('ssri');
-    const isSNRI = (d) => d?.clase_terapeutica?.toLowerCase().includes('irsn') || d?.clase_terapeutica?.toLowerCase().includes('snri');
-    const isMAOI = (d) => d?.clase_terapeutica?.toLowerCase().includes('imao') || d?.clase_terapeutica?.toLowerCase().includes('maoi');
-
-    if (isMAOI(fromDrug) || isMAOI(toDrug)) {
-        rationale = i18n.getLocale() === 'en' ? 
-            "MAOIs require a strict washout to prevent serotonin syndrome or hypertensive crisis due to irreversible enzyme inhibition." :
-            "Los IMAO requieren un lavado estricto para prevenir el síndrome serotoninérgico o crisis hipertensivas debido a la inhibición enzimática irreversible.";
-    } else if (isSSRI(fromDrug) && isSNRI(toDrug)) {
-        rationale = i18n.getLocale() === 'en' ?
-            "Switching from SSRI to SNRI usually allows cross-tapering as they share mechanisms, but monitor for cumulative serotonergic effects." :
-            "El cambio de ISRS a IRSN suele permitir una reducción cruzada ya que comparten mecanismos, pero vigile efectos serotoninérgicos acumulativos.";
-    } else {
-        rationale = i18n.getLocale() === 'en' ?
-            "A standard cross-taper minimizes withdrawal symptoms while allowing the new medication to reach therapeutic levels." :
-            "Una reducción cruzada estándar minimiza los síntomas de abstinencia mientras permite que el nuevo medicamento alcance niveles terapéuticos.";
-    }
-
-    view.querySelector('#strategyTitle').textContent = strategy;
-    view.querySelector('#strategyDesc').textContent = desc;
-    if (rationaleEl) rationaleEl.textContent = rationale;
+    if (rationaleEl) rationaleEl.textContent = protocol.rationale;
 
     const list = view.querySelector('#notesList');
-    list.innerHTML = notes.map(n => `<li>${escapeHtml(n)}</li>`).join('');
+    if (list) {
+        list.innerHTML = (protocol.notes || []).map(n => `<li>${escapeHtml(n)}</li>`).join('');
+    }
 
-    renderSwitchChart(entryData, fromDrug.nombre_generico, toDrug.nombre_generico);
+    const timeline = view.querySelector('#visualTimeline');
+    if (protocol.strategy === 'not_applicable') {
+        if (timeline) timeline.style.display = 'none';
+    } else {
+        if (timeline) timeline.style.display = 'block';
+        renderSwitchChart(protocol, fromDrug.nombre_generico, toDrug.nombre_generico);
+    }
 }
 
 function renderSwitchChart(entry, fromName, toName) {
@@ -313,7 +275,7 @@ function renderSwitchChart(entry, fromName, toName) {
             plugins: {
                 legend: {
                     position: 'top',
-                    labels: { font: { family: 'Montserrat', weight: 'bold' } }
+                    labels: { font: { family: 'Poppins', weight: '600' } }
                 }
             }
         }
