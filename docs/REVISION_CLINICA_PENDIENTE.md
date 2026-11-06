@@ -263,7 +263,11 @@ Estructuralmente está completa: 45/45 fármacos en ambos idiomas, sin campos va
 - [x] **Ampliar matriz curada de switching** (`switching_matrix.json`) con los 8 pares clínicos validados y tests exhaustivos (14 pares totales). (Implementado: C-6).
 - [x] **Fallback CYP para fármacos sin tablas puente** en monografía (`detailView.js`) y asignación de nomenclatura en dataset ES/EN para los 11 fármacos. (Implementado: C-8).
 - [x] **Depurar lenguaje y alertas de sinergias** (`synergies.json`) con criterios de toxicidad de Hunter y tiempos de lavado de Vortioxetina y Moclobemida. (Implementado: C-14).
-- [ ] **Regenerar el JSON desde los CSV canónicos**, o declarar el JSON como SSOT. Requiere C-5, C-7 y C-9.
+- [x] **Declarar formalmente el JSON como SSOT** en `docs/GOVERNANCE.md` (§2.1) y archivar CSVs como insumo histórico. (Implementado: C-9).
+- [x] **Sustituir fuentes informales de perlas clínicas** por fichas técnicas oficiales (FDA/AEMPS) y Maudsley 14th Ed. (Implementado: C-10).
+- [x] **Actualizar vigencia y versiones de guías clínicas** en `guias_clinicas.json` (CANMAT 2023, NICE CG31 actualización 2027, etc.). (Implementado: C-11).
+- [x] **Normalizar catálogo de peso y pediatría** en dataset ES/EN al catálogo cerrado de 3 valores y sertralina pediátrica confirmada. (Implementado: C-12).
+- [x] **Estandarizar campos farmacocinéticos** de vías no orales, ketamina oral y metabolitos no aplicables. (Implementado: C-13).
 
 ## Fuera de alcance de esta auditoría
 

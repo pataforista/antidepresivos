@@ -7,7 +7,10 @@
     {
       "id": "depresion",
       "icon": "🌧️",
-      "label": { "es": "Depresión Mayor", "en": "Major Depression" },
+      "label": {
+        "es": "Depresión Mayor",
+        "en": "Major Depression"
+      },
       "guidelines": [
         {
           "org": "NICE NG222 (2022)",
@@ -25,17 +28,17 @@
           }
         },
         {
-          "org": "CANMAT (2016)",
+          "org": "CANMAT (2023 Update)",
           "recs": {
             "es": [
-              "Primera línea: ISRS, IRSN, bupropión, mirtazapina, vortioxetina y agomelatina.",
-              "Elegir según perfil de efectos adversos, comorbilidad, interacciones y preferencia.",
-              "Evaluar respuesta a las 2–4 semanas; optimizar dosis antes de cambiar."
+              "Primera línea: ISRS, IRSN, bupropión, mirtazapina y vortioxetina (recomendaciones actualizadas 2023).",
+              "Elegir según perfil de efectos adversos, comorbilidad clínica, interacciones y preferencia del paciente.",
+              "Evaluar respuesta a las 2–4 semanas; optimizar dosis o considerar estrategia de cambio/potenciación antes de 6 semanas."
             ],
             "en": [
-              "First-line: SSRIs, SNRIs, bupropion, mirtazapine, vortioxetine and agomelatine.",
-              "Choose by adverse-effect profile, comorbidity, interactions and preference.",
-              "Assess response at 2–4 weeks; optimize dose before switching."
+              "First-line: SSRIs, SNRIs, bupropion, mirtazapine, and vortioxetine (2023 updated recommendations).",
+              "Select according to adverse-effect profile, clinical comorbidity, drug interactions, and patient preference.",
+              "Assess response at 2–4 weeks; optimize dose or consider switch/adjunct strategy before 6 weeks."
             ]
           }
         },
@@ -57,10 +60,13 @@
     {
       "id": "tag",
       "icon": "😰",
-      "label": { "es": "Ansiedad Generalizada (TAG)", "en": "Generalized Anxiety (GAD)" },
+      "label": {
+        "es": "Ansiedad Generalizada (TAG)",
+        "en": "Generalized Anxiety (GAD)"
+      },
       "guidelines": [
         {
-          "org": "NICE CG113",
+          "org": "NICE CG113 (2011, revisada 2020)",
           "recs": {
             "es": [
               "Primera línea farmacológica: un ISRS (sertralina como opción coste-efectiva inicial).",
@@ -94,10 +100,13 @@
     {
       "id": "panico",
       "icon": "💥",
-      "label": { "es": "Trastorno de Pánico", "en": "Panic Disorder" },
+      "label": {
+        "es": "Trastorno de Pánico",
+        "en": "Panic Disorder"
+      },
       "guidelines": [
         {
-          "org": "NICE / APA",
+          "org": "NICE CG113 (2011) / APA (2009)",
           "recs": {
             "es": [
               "Primera línea: ISRS; IRSN como alternativa.",
@@ -116,10 +125,13 @@
     {
       "id": "toc",
       "icon": "🔁",
-      "label": { "es": "TOC", "en": "OCD" },
+      "label": {
+        "es": "TOC",
+        "en": "OCD"
+      },
       "guidelines": [
         {
-          "org": "NICE CG31 / APA",
+          "org": "NICE CG31 (2005; actualización completa en curso, finalización prevista 2027) / APA (2007)",
           "recs": {
             "es": [
               "Primera línea: ISRS, a menudo a dosis más altas que en depresión.",
@@ -138,10 +150,13 @@
     {
       "id": "ansiedad_social",
       "icon": "🫥",
-      "label": { "es": "Ansiedad Social", "en": "Social Anxiety" },
+      "label": {
+        "es": "Ansiedad Social",
+        "en": "Social Anxiety"
+      },
       "guidelines": [
         {
-          "org": "NICE CG159",
+          "org": "NICE CG159 (2013)",
           "recs": {
             "es": [
               "TCC individual es el tratamiento de primera elección.",
@@ -160,10 +175,13 @@
     {
       "id": "perinatal",
       "icon": "🤰",
-      "label": { "es": "Depresión Perinatal / Posparto", "en": "Perinatal / Postpartum Depression" },
+      "label": {
+        "es": "Depresión Perinatal / Posparto",
+        "en": "Perinatal / Postpartum Depression"
+      },
       "guidelines": [
         {
-          "org": "ACOG / NICE",
+          "org": "ACOG CPG No. 4 (2023) / NICE CG192 (2014, rev.)",
           "recs": {
             "es": [
               "Ponderar el riesgo de la depresión materna NO tratada frente a la exposición al fármaco.",
@@ -182,10 +200,13 @@
     {
       "id": "trd",
       "icon": "🧱",
-      "label": { "es": "Depresión Resistente (TRD)", "en": "Treatment-Resistant Depression (TRD)" },
+      "label": {
+        "es": "Depresión Resistente (TRD)",
+        "en": "Treatment-Resistant Depression (TRD)"
+      },
       "guidelines": [
         {
-          "org": "CANMAT / APA",
+          "org": "CANMAT (2023 Update) / APA (2010)",
           "recs": {
             "es": [
               "Antes de etiquetar como resistente: confirmar adherencia, dosis y duración adecuadas del ensayo.",

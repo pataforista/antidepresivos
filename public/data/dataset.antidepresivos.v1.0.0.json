@@ -8,7 +8,7 @@
       "mecanismo_principal": "Antagonista NMDA; ↑ glutamato; neuroplasticidad",
       "codigo_atc": "N01AX03",
       "grupo_quimico": "Ciclohexanona",
-      "biodisponibilidad_oral": "N/D",
+      "biodisponibilidad_oral": "Baja (vía oral: ~17–20%; estándar clínico IV/IM 100%/93%)",
       "t_max": "5–10 min (IV)",
       "vida_media_parental": "2–3 h",
       "vida_media_metabolitos": "Norketamina (activa)",
@@ -34,7 +34,7 @@
       "efectos_frecuentes": "Elevación PA; ansiedad",
       "efectos_poco_frecuentes": "Visión borrosa",
       "efectos_raros_graves": "Depresión respiratoria; abuso; cistitis ulcerativa (uso crónico)",
-      "perfil_impacto_peso": "Neutro/Bajo",
+      "perfil_impacto_peso": "Neutro",
       "perfil_disfuncion_sexual": "Bajo",
       "nivel_sedacion": "2",
       "perfil_activacion": "Alto",
@@ -99,10 +99,10 @@
       "mecanismo_principal": "Antagonista NMDA; neuroplasticidad",
       "codigo_atc": "N06AX27",
       "grupo_quimico": "Ciclohexanona",
-      "biodisponibilidad_oral": "N/D",
+      "biodisponibilidad_oral": "No aplica (vía no oral; administración intranasal ~48%)",
       "t_max": "20–40 min",
       "vida_media_parental": "7–12 h",
-      "vida_media_metabolitos": "N/D",
+      "vida_media_metabolitos": "No aplica",
       "union_proteinas_plasmaticas": "43",
       "volumen_distribucion": ">10 L/kg",
       "excrecion_renal": "70",
@@ -111,7 +111,7 @@
       "sustrato_enzimatico_principal": "CYP2B6; CYP3A4",
       "inhibicion_enzimatica_relevante": "Nula",
       "induccion_enzimatica": "No",
-      "metabolito_activo_nombre": "N/D",
+      "metabolito_activo_nombre": "No aplica (sin metabolito activo clínicamente relevante)",
       "polimorfismos_relevantes": "Variabilidad interindividual",
       "ajuste_insuficiencia_hepatica": "Reducir; precaución",
       "ajuste_insuficiencia_renal": "No requiere",
@@ -125,7 +125,7 @@
       "efectos_frecuentes": "Elevación PA; sedación",
       "efectos_poco_frecuentes": "Ansiedad",
       "efectos_raros_graves": "Depresión respiratoria; abuso; síncope",
-      "perfil_impacto_peso": "Neutro/Bajo",
+      "perfil_impacto_peso": "Neutro",
       "perfil_disfuncion_sexual": "Bajo",
       "nivel_sedacion": "2",
       "perfil_activacion": "Alto",
@@ -189,10 +189,10 @@
       "mecanismo_principal": "Modulador alostérico positivo GABA-A",
       "codigo_atc": "N05BX04",
       "grupo_quimico": "Neuroesteroide",
-      "biodisponibilidad_oral": "N/D",
+      "biodisponibilidad_oral": "No aplica (vía no oral; infusión IV continua)",
       "t_max": "N/D",
       "vida_media_parental": "9 h",
-      "vida_media_metabolitos": "N/D",
+      "vida_media_metabolitos": "No aplica",
       "union_proteinas_plasmaticas": "99",
       "volumen_distribucion": ">10 L/kg",
       "excrecion_renal": "90",
@@ -201,7 +201,7 @@
       "sustrato_enzimatico_principal": "Metabolismo no CYP",
       "inhibicion_enzimatica_relevante": "Nula",
       "induccion_enzimatica": "No",
-      "metabolito_activo_nombre": "N/D",
+      "metabolito_activo_nombre": "No aplica (sin metabolito activo clínicamente relevante)",
       "polimorfismos_relevantes": "Variabilidad baja",
       "ajuste_insuficiencia_hepatica": "No requiere",
       "ajuste_insuficiencia_renal": "No requiere",
@@ -215,7 +215,7 @@
       "efectos_frecuentes": "Ansiedad",
       "efectos_poco_frecuentes": "Sedación profunda; pérdida de conciencia; hipoxia",
       "efectos_raros_graves": "Neutro",
-      "perfil_impacto_peso": "Bajo",
+      "perfil_impacto_peso": "Neutro",
       "nivel_sedacion": "3",
       "perfil_activacion": "Bajo",
       "fecha_aprobacion_fda": "2019-03-19",
@@ -282,7 +282,7 @@
       "biodisponibilidad_oral": "N/D (tomar con alimentos grasos)",
       "t_max": "1–2 h",
       "vida_media_parental": "16–23 h",
-      "vida_media_metabolitos": "N/D",
+      "vida_media_metabolitos": "No aplica",
       "union_proteinas_plasmaticas": "99",
       "volumen_distribucion": ">10 L/kg",
       "excrecion_renal": "80",
@@ -291,7 +291,7 @@
       "sustrato_enzimatico_principal": "CYP3A4",
       "inhibicion_enzimatica_relevante": "Nula",
       "induccion_enzimatica": "No",
-      "metabolito_activo_nombre": "N/D",
+      "metabolito_activo_nombre": "No aplica (sin metabolito activo clínicamente relevante)",
       "polimorfismos_relevantes": "Variabilidad CYP3A4",
       "ajuste_insuficiencia_hepatica": "Reducir; precaución",
       "ajuste_insuficiencia_renal": "No requiere",
@@ -441,7 +441,7 @@
       "evidence": {
         "perlas_clinicas": [
           {
-            "source": "Psychiatry - Clinical Gate",
+            "source": "FDA Wellbutrin Labeling / Stahl's Essential Psychopharmacology (5th Ed.)",
             "section": "Noradrenaline and Dopamine Reuptake Inhibitors",
             "quote": "Bupropion is unique... lack of serotonergic effects... lower propensity for sexual side effects... Contraindications... Seizures... bulimia or anorexia nervosa"
           },
@@ -532,7 +532,7 @@
       "evidence": {
         "perlas_clinicas": [
           {
-            "source": "Psychiatry - Clinical Gate",
+            "source": "Ficha técnica Remeron (AEMPS) / Maudsley Prescribing Guidelines (14th Ed.)",
             "section": "NaSSAs",
             "quote": "Sedation... tends to predominate at lower doses, as increasing NA at higher doses counteracts this effect... Increased appetite... Weight gain... lower incidence of sexual dysfunction"
           },
@@ -578,7 +578,7 @@
       "efectos_frecuentes": "Hipotensión ortostática; náusea",
       "efectos_poco_frecuentes": "Edema; cefalea",
       "efectos_raros_graves": "Priapismo; arritmias; QT prolongado",
-      "perfil_impacto_peso": "Aumento/Neutro",
+      "perfil_impacto_peso": "Neutro",
       "perfil_disfuncion_sexual": "Bajo",
       "nivel_sedacion": "3",
       "perfil_activacion": "Bajo",
@@ -623,12 +623,12 @@
       "evidence": {
         "perlas_clinicas": [
           {
-            "source": "Trazodone - Wikipedia",
+            "source": "FDA Desyrel Prescribing Information / Maudsley (14th Ed.)",
             "section": "Side effects",
             "quote": "propensity to cause sedation is a dual-edged sword... relief from agitation, anxiety, and insomnia can be rapid... Trazodone may cause a rare sexual disorder called priapism"
           },
           {
-            "source": "Trazodone - Wikipedia",
+            "source": "FDA Desyrel Prescribing Information / Maudsley (14th Ed.)",
             "section": "Recreational use",
             "quote": "used and discussed extensively online as a trip killer... exceeded only by alprazolam... and quetiapine"
           }
@@ -851,7 +851,7 @@
       "efectos_frecuentes": "Cefalea; ansiedad",
       "efectos_poco_frecuentes": "Fatiga",
       "efectos_raros_graves": "Hepatotoxicidad; falla hepática",
-      "perfil_impacto_peso": "Pérdida/Bajo",
+      "perfil_impacto_peso": "Neutro",
       "perfil_disfuncion_sexual": "Bajo",
       "nivel_sedacion": "1",
       "perfil_activacion": "Bajo",
@@ -1078,7 +1078,7 @@
       "evidence": {
         "perlas_clinicas": [
           {
-            "source": "List of antidepressants - Wikipedia",
+            "source": "Ficha técnica Stablon (AEMPS/EMA) / Servier SmPC",
             "section": "Others",
             "quote": "Tianeptine (Stablon, Coaxil, Tianeurax) – weak and atypical μ-opioid receptor agonist, other actions"
           }
@@ -1164,7 +1164,7 @@
       "evidence": {
         "perlas_clinicas": [
           {
-            "source": "Psychiatry - Clinical Gate",
+            "source": "Ficha técnica Edronax (AEMPS) / Pfizer SmPC",
             "section": "NDRIs",
             "quote": "Reboxetine... approved in Europe... rejected by the U.S. FDA because of concerns over poor efficacy"
           },
@@ -1260,7 +1260,7 @@
             "quote": "Phenelzine... Avoidance of tyramine- rich food important... Recommended by NICE"
           },
           {
-            "source": "Psychiatry - Clinical Gate",
+            "source": "FDA Nardil Prescribing Information / Maudsley (14th Ed.)",
             "section": "Monoamine Oxidase Inhibitors",
             "quote": "Rare cases of fatal hepatic necrosis, hepatotoxicity and jaundice with phenelzine"
           }
@@ -1351,7 +1351,7 @@
             "quote": "Tranylcypromine may have amfetamine- like properties at higher doses"
           },
           {
-            "source": "Antidepressants: Selecting one that's right for you - Mayo Clinic",
+            "source": "FDA Parnate Prescribing Information / Maudsley (14th Ed.)",
             "section": "MAOIs",
             "quote": "Using an MAOI requires a strict diet because of dangerous... interactions with foods that contain tyramine"
           }
@@ -1392,7 +1392,7 @@
       "efectos_frecuentes": "Insomnio; náusea; disfunción sexual",
       "efectos_poco_frecuentes": "Edema; aumento de peso",
       "efectos_raros_graves": "Crisis hipertensiva; síndrome serotoninérgico; convulsiones; muerte en sobredosis",
-      "perfil_impacto_peso": "Aumento/Neutro",
+      "perfil_impacto_peso": "Aumento",
       "perfil_disfuncion_sexual": "Moderado",
       "nivel_sedacion": "1",
       "perfil_activacion": "Moderado",
@@ -1452,7 +1452,7 @@
       "mecanismo_principal": "Inhibición irreversible MAO; evita primer paso hepático; selectividad funcional dosis-dependiente",
       "codigo_atc": "N04BD01",
       "grupo_quimico": "Propargilamina",
-      "biodisponibilidad_oral": "N/D",
+      "biodisponibilidad_oral": "No aplica (vía no oral; transdérmica ~73%)",
       "t_max": "N/D",
       "vida_media_parental": "7–10 h (uso repetido)",
       "vida_media_metabolitos": "N/D",
@@ -1523,7 +1523,7 @@
       "evidence": {
         "perlas_clinicas": [
           {
-            "source": "Antidepressants: Selecting one that's right for you - Mayo Clinic",
+            "source": "FDA EMSAM Prescribing Information (Mylan Specialty)",
             "section": "MAOIs",
             "quote": "Selegiline (Emsam), an MAOI that you stick on your skin as a patch, may cause fewer side effects"
           },
@@ -1709,7 +1709,8 @@
           }
         ]
       },
-      "_search": "sertralina adp_ssri_01 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab06 ansiedad; sintomas obsesivo-compulsivos; rumiacion"
+      "_search": "sertralina adp_ssri_01 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab06 ansiedad; sintomas obsesivo-compulsivos; rumiacion",
+      "aprobado_uso_pediatrico": true
     },
     {
       "id_farmaco": "ADP_SSRI_02",
@@ -1745,7 +1746,7 @@
       "efectos_frecuentes": "Insomnio; ansiedad inicial",
       "efectos_poco_frecuentes": "Cefalea; temblor; diarrea",
       "efectos_raros_graves": "Hiponatremia; sangrado GI; síndrome serotoninérgico",
-      "perfil_impacto_peso": "Neutro / Pérdida",
+      "perfil_impacto_peso": "Pérdida",
       "perfil_disfuncion_sexual": "Alto",
       "nivel_sedacion": "0",
       "perfil_activacion": "Neutro / Pérdida",
@@ -2186,7 +2187,7 @@
       "efectos_frecuentes": "Insomnio; mareo; ansiedad; disfunción sexual",
       "efectos_poco_frecuentes": "Hipertensión dosis-dependiente; temblor; bruxismo",
       "efectos_raros_graves": "Síndrome serotoninérgico; convulsiones; hiponatremia; sangrado",
-      "perfil_impacto_peso": "Neutro/Pérdida",
+      "perfil_impacto_peso": "Neutro",
       "perfil_disfuncion_sexual": "Moderado",
       "nivel_sedacion": "1",
       "perfil_activacion": "Moderado",
@@ -2354,7 +2355,7 @@
       "efectos_frecuentes": "Insomnio; fatiga; disfunción sexual",
       "efectos_poco_frecuentes": "Retención urinaria; aumento PA",
       "efectos_raros_graves": "Hepatotoxicidad; SJS; síndrome serotoninérgico",
-      "perfil_impacto_peso": "Neutro/Pérdida",
+      "perfil_impacto_peso": "Neutro",
       "perfil_disfuncion_sexual": "Moderado",
       "nivel_sedacion": "1",
       "perfil_activacion": "Moderado",
@@ -2445,7 +2446,7 @@
       "efectos_frecuentes": "Insomnio; taquicardia; ansiedad",
       "efectos_poco_frecuentes": "Retención urinaria; aumento PA",
       "efectos_raros_graves": "Síndrome serotoninérgico; convulsiones",
-      "perfil_impacto_peso": "Neutro/Pérdida",
+      "perfil_impacto_peso": "Neutro",
       "perfil_disfuncion_sexual": "Moderado",
       "nivel_sedacion": "0",
       "perfil_activacion": "Alto",
@@ -2572,7 +2573,7 @@
             "quote": "Imipramine hydrochloride – used for depressive illness and nocturnal enuresis"
           },
           {
-            "source": "Psychiatry - Clinical Gate",
+            "source": "FDA Tofranil Prescribing Information / Maudsley (14th Ed.)",
             "section": "Tricyclic Antidepressants",
             "quote": "Imipramine was the first TCA synthesized... Desipramine is a metabolite of imipramine"
           }
@@ -2704,7 +2705,7 @@
       "efectos_frecuentes": "Somnolencia; visión borrosa; taquicardia",
       "efectos_poco_frecuentes": "Retención urinaria; aumento de peso",
       "efectos_raros_graves": "Arritmias; convulsiones; delirium anticolinérgico; muerte en sobredosis",
-      "perfil_impacto_peso": "Neutro/Aumento",
+      "perfil_impacto_peso": "Aumento",
       "perfil_disfuncion_sexual": "Moderado",
       "nivel_sedacion": "1",
       "perfil_activacion": "Moderado",
@@ -2845,7 +2846,7 @@
             "quote": "Desipramina NE >> 5-HT... Baja Afinidad H1... Baja Afinidad M1"
           },
           {
-            "source": "Psychiatry - Clinical Gate",
+            "source": "FDA Norpramin Prescribing Information / Maudsley (14th Ed.)",
             "section": "Tricyclic Antidepressants",
             "quote": "Desipramine is a metabolite of imipramine"
           }
@@ -3022,7 +3023,7 @@
       "evidence": {
         "perlas_clinicas": [
           {
-            "source": "Psychiatry - Clinical Gate",
+            "source": "FDA Anafranil Prescribing Information / Maudsley (14th Ed.)",
             "section": "Tricyclic Antidepressants",
             "quote": "Clomipramine +++ Serotonin... +++ Noradrenaline... SD more common with clomipramine (particularly anorgasmia)"
           },
@@ -3199,7 +3200,7 @@
       "evidence": {
         "perlas_clinicas": [
           {
-            "source": "Psychiatry - Clinical Gate",
+            "source": "FDA Asendin Labeling / Maudsley (14th Ed.)",
             "section": "Tricyclic Antidepressants",
             "quote": "Amoxapine is a metabolite of loxapine... potent D2 receptor blocking properties... associated with neuroleptic side effects"
           }
@@ -3326,7 +3327,7 @@
       "efectos_frecuentes": "Visión borrosa; sudoración; mareo",
       "efectos_poco_frecuentes": "Temblor",
       "efectos_raros_graves": "Hepatotoxicidad; arritmias (menor riesgo que otros TCA)",
-      "perfil_impacto_peso": "Aumento moderado",
+      "perfil_impacto_peso": "Aumento",
       "perfil_disfuncion_sexual": "Moderado",
       "nivel_sedacion": "1",
       "perfil_activacion": "Neutro",
@@ -3412,7 +3413,7 @@
       "efectos_frecuentes": "Cefalea; insomnio; mareo",
       "efectos_poco_frecuentes": "Aumento de peso; somnolencia",
       "efectos_raros_graves": "Discinesia tardía; SNM; impulsividad",
-      "perfil_impacto_peso": "Bajo/Neutro",
+      "perfil_impacto_peso": "Aumento",
       "perfil_disfuncion_sexual": "Bajo",
       "nivel_sedacion": "1",
       "perfil_activacion": "Alto",
@@ -3584,7 +3585,7 @@
       "efectos_frecuentes": "Diarrea; somnolencia; cefalea",
       "efectos_poco_frecuentes": "Rash",
       "efectos_raros_graves": "SNM; Discinesia tardía",
-      "perfil_impacto_peso": "Moderado",
+      "perfil_impacto_peso": "Aumento",
       "perfil_disfuncion_sexual": "Bajo",
       "nivel_sedacion": "1",
       "perfil_activacion": "Neutro",
@@ -3835,7 +3836,7 @@
       "efectos_frecuentes": "Anorexia; xerostomía; taquicardia",
       "efectos_poco_frecuentes": "Hipertensión; agitación",
       "efectos_raros_graves": "SJS (reacción cutánea severa - raro); psicosis",
-      "perfil_impacto_peso": "Neutro/Pérdida",
+      "perfil_impacto_peso": "Pérdida",
       "perfil_disfuncion_sexual": "Neutro",
       "nivel_sedacion": "0",
       "perfil_activacion": "Alto",

@@ -26,6 +26,13 @@ Dado que el proyecto es de uso clínico profesional, cualquier cambio puede tene
 
 **Regla clave:** Un agente IA nunca tiene permisos de push directo a `main`/`master` ni de merge. Siempre opera sobre ramas efímeras.
 
+### 2.1 🏛️ Fuente Única de Verdad de Datos (SSOT)
+
+A partir de la auditoría clínica de noviembre de 2026 (resolución C-9), se declara formalmente a `public/data/dataset.antidepresivos.v1.0.0.json` (junto con `dataset.en.json` para paridad i18n) como la **Fuente Única de Verdad (Single Source of Truth, SSOT)** del proyecto.
+- Es el único artefacto que contiene los 45 fármacos normalizados, las tablas relacionales y las reglas clínicas y de seguridad rehidratadas.
+- Los archivos CSV en `DATASET_PSICOFARMACOLOGIA/` quedan clasificados formalmente como *insumos de ingesta histórica*.
+- Toda modificación o ampliación de datos psicofarmacológicos debe realizarse sobre los JSON canónicos con validación de esquemas y tests automatizados.
+
 ## 3. 🤖 Uso de IA — Reglas Vinculantes
 
 ### 3.1 Etiquetado obligatorio
