@@ -244,15 +244,15 @@ Estructuralmente está completa: 45/45 fármacos en ambos idiomas, sin campos va
 | C-3 | **Corregido** | Excluir potenciadores (`ADP_AUG_*`) y fármacos agudos/infusión (`ADP_RAPID_*`) del calculador de switching; mostrar aviso clínico explicativo. | FDA labeling, CANMAT | @human | 2026-11-05 |
 | C-4 | **Corregido** | Fluoxetina -> no IMAO: intervalo de 7 días sin fármaco y dosis inicial baja del nuevo antidepresivo (norfluoxetina t1/2 + CYP2D6). | BC Guidelines, SPS | @human | 2026-11-05 |
 | C-5 | **Corregido** | Citalopram (Alto), Escitalopram (Moderado), Venlafaxina (Bajo), Litio (Moderado). | Estudio FAERS 2024, Alertas MHRA/NHS | @human | 2026-11-05 |
-| C-6 | *Pendiente* | Pendiente definir próximos 5–10 pares prioritarios de switching curado. | - | - | - |
+| C-6 | **Corregido** | 8 pares prioritarios curados: Venlafaxina ↔ Sertralina, Paroxetina → Venlafaxina, Sertralina → Bupropión, Sertralina ↔ Escitalopram, Citalopram → Sertralina, Sertralina → Mirtazapina, Escitalopram → Duloxetina, Venlafaxina → Duloxetina. | NHS Glasgow & Clyde, Psychiatrienet, Carlat Report | @human | 2026-11-05 |
 | C-7 | **Corregido** | Mianserina: dosis máx 120 mg/día (200 mg histórica descartada). Levomilnacipran: 40–120 mg/día (máx 120 mg/día) ratificado. | Ficha técnica Lantanon, Vademecum, FDA Fetzima | @human | 2026-11-05 |
-| C-8 | *Pendiente* | | | | |
+| C-8 | **Corregido** | Implementado fallback en detailView.js hacia sustrato_enzimatico_principal; asignada nomenclatura clínica a los 11 fármacos sin tablas puente. | CPIC 2020, Fichas técnicas, Literatura TCA | @human | 2026-11-05 |
 | C-9 | *Pendiente* | | | | |
 | C-10 | *Pendiente* | | | | |
 | C-11 | *Pendiente* | | | | |
 | C-12 | *Pendiente* | | | | |
 | C-13 | *Pendiente* | | | | |
-| C-14 | *Pendiente* | | | | |
+| C-14 | **Corregido** | Modificado lenguaje de sinergias ("Eficacia demostrada...", "aumento sinérgico...") y actualizada alerta serotoninérgica con Vortioxetina (21 d) y Moclobemida (24 h). | Stahl's 2013, Hunter Criteria, FDA Trintellix | @human | 2026-11-05 |
 | C-15 | *Pendiente* | | | | |
 
 ## Cambios técnicos implementados y pendientes
@@ -260,6 +260,9 @@ Estructuralmente está completa: 45/45 fármacos en ambos idiomas, sin campos va
 - [x] **Extraer la lógica de switching de `switchView.js` a una función pura modular** (`src/lib/switchingLogic.js`) e importarla en `tests/switchingMatrix.test.js`, verificando el código real. (Implementado: C-1, C-2, C-4).
 - [x] **Filtrar el selector de switching** para agentes potenciadores (`ADP_AUG_*`) y fármacos agudos/infusión (`ADP_RAPID_*`), desplegando aviso clínico explicativo. (Implementado: C-3).
 - [x] **Actualizar campos clínicos de QT y dosis** en `public/data/dataset.antidepresivos.v1.0.0.json` y `dataset.en.json` (Litio QT a Moderado, Mianserina máx 120 mg/día). (Implementado: C-5, C-7).
+- [x] **Ampliar matriz curada de switching** (`switching_matrix.json`) con los 8 pares clínicos validados y tests exhaustivos (14 pares totales). (Implementado: C-6).
+- [x] **Fallback CYP para fármacos sin tablas puente** en monografía (`detailView.js`) y asignación de nomenclatura en dataset ES/EN para los 11 fármacos. (Implementado: C-8).
+- [x] **Depurar lenguaje y alertas de sinergias** (`synergies.json`) con criterios de toxicidad de Hunter y tiempos de lavado de Vortioxetina y Moclobemida. (Implementado: C-14).
 - [ ] **Regenerar el JSON desde los CSV canónicos**, o declarar el JSON como SSOT. Requiere C-5, C-7 y C-9.
 
 ## Fuera de alcance de esta auditoría

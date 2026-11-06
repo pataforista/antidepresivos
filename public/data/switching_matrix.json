@@ -67,5 +67,136 @@
     "contraindications": [
       "IMAO"
     ]
+  },
+  {
+    "from": "venlafaxina",
+    "to": "sertralina",
+    "strategy": "cross_taper",
+    "taper_days": 14,
+    "washout_days": 0,
+    "notes": [
+      "Venlafaxina tiene vida media corta y alto riesgo de síntomas de discontinuación (retirada).",
+      "Cross-taper cauto de 14–21 días según tolerancia clínica.",
+      "Reducir venlafaxina gradualmente mientras se titula sertralina a dosis terapéutica (iniciar a 25–50 mg/día)."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "paroxetina",
+    "to": "venlafaxina",
+    "strategy": "cross_taper",
+    "taper_days": 14,
+    "washout_days": 0,
+    "notes": [
+      "Tanto paroxetina como venlafaxina presentan elevado riesgo de síndrome de discontinuación.",
+      "Cross-taper gradual en al menos 14 días (puede requerir reducción más lenta según tolerancia).",
+      "Vigilar presión arterial y síntomas colinérgicos o de retirada al descender paroxetina."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "sertralina",
+    "to": "bupropión",
+    "strategy": "cross_taper",
+    "taper_days": 7,
+    "washout_days": 0,
+    "notes": [
+      "Cross-taper conservador en 7–14 días: reducir sertralina (ej. a 25 mg/día) e iniciar bupropión 150 mg/día.",
+      "En dosis bajas de sertralina (≤25 mg) puede considerarse cambio directo al día siguiente.",
+      "Vigilar activación o insomnio y descartar antecedentes de convulsiones o TCA."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "sertralina",
+    "to": "escitalopram",
+    "strategy": "direct_switch",
+    "taper_days": 0,
+    "washout_days": 0,
+    "notes": [
+      "Cambio directo al día siguiente a dosis equivalente (ej. 50 mg sertralina ≈ 10 mg escitalopram).",
+      "En pacientes sensibles a efectos adversos o con dosis altas, puede usarse un cross-taper breve de 7 días."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "escitalopram",
+    "to": "sertralina",
+    "strategy": "direct_switch",
+    "taper_days": 0,
+    "washout_days": 0,
+    "notes": [
+      "Cambio directo al día siguiente a dosis equivalente con monitorización.",
+      "Opción de cross-taper breve de 7 días si se busca minimizar síntomas de discontinuación."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "citalopram",
+    "to": "sertralina",
+    "strategy": "direct_switch",
+    "taper_days": 0,
+    "washout_days": 0,
+    "notes": [
+      "Cambio directo al día siguiente a dosis equivalente (ej. 20 mg citalopram ≈ 50 mg sertralina) con monitorización.",
+      "Considerar cross-taper cauteloso (CTC) si el paciente recibe dosis altas o presenta intolerancia previa."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "sertralina",
+    "to": "mirtazapina",
+    "strategy": "cross_taper",
+    "taper_days": 7,
+    "washout_days": 0,
+    "notes": [
+      "Cross-taper breve o cambio directo introduciendo mirtazapina 15 mg nocturna mientras se reduce sertralina.",
+      "Aprovecha el beneficio sedante y promotor del sueño inmediato de mirtazapina.",
+      "Vigilar somnolencia diurna y aumento de apetito/peso."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "escitalopram",
+    "to": "duloxetina",
+    "strategy": "cross_taper",
+    "taper_days": 10,
+    "washout_days": 0,
+    "notes": [
+      "Transición frecuente de ISRS a IRSN; cross-taper estándar en 7–14 días.",
+      "Iniciar duloxetina a 30 mg/día y titular a 60 mg/día mientras se reduce gradualmente escitalopram.",
+      "Monitorizar náuseas iniciales y cifras de tensión arterial."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "venlafaxina",
+    "to": "duloxetina",
+    "strategy": "cross_taper",
+    "taper_days": 10,
+    "washout_days": 0,
+    "notes": [
+      "Cross-taper de IRSN a IRSN en 7–14 días.",
+      "Reducir venlafaxina con cautela para minimizar síntomas de discontinuación mientras se introduce duloxetina a 30 mg/día."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
   }
 ]

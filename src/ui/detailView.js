@@ -435,9 +435,9 @@ function renderTabFarmaco(item) {
          </summary>
          <div class="detail-section__body">
            <div style="display:grid; gap:var(--space-3)">
-             ${rowDetail(i18n.t("substrate_of"), enzimas.filter(e => e.rol === "sustrato").map(e => e.nombre).join(", ") || "N/D")}
-             ${rowDetail(i18n.t("inhibits"), enzimas.filter(e => e.rol === "inhibidor").map(e => e.nombre).join(", ") || "N/D")}
-             ${rowDetail(i18n.t("induces"), enzimas.filter(e => e.rol === "inductor").map(e => e.nombre).join(", ") || "N/D")}
+             ${rowDetail(i18n.t("substrate_of"), enzimas.filter(e => e.rol === "sustrato").map(e => e.nombre).join(", ") || item.sustrato_enzimatico_principal || "N/D")}
+             ${rowDetail(i18n.t("inhibits"), enzimas.filter(e => e.rol === "inhibidor").map(e => e.nombre).join(", ") || item.inhibidor_enzimatico_principal || "-")}
+             ${rowDetail(i18n.t("induces"), enzimas.filter(e => e.rol === "inductor").map(e => e.nombre).join(", ") || item.inductor_enzimatico_principal || "-")}
              ${rowDetail(i18n.t("active_metabolite"), item.metabolito_activo_nombre || "N/D")}
            </div>
          </div>

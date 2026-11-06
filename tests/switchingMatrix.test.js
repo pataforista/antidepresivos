@@ -33,6 +33,10 @@ describe('Switching Logic & Matrix - Reglas Clínicas Validadas', () => {
   const fenelzina = { id_farmaco: 'ADP_MAOI_01', nombre_generico: 'Fenelzina', clase_terapeutica: 'IMAO irreversible' };
   const tranilcipromina = { id_farmaco: 'ADP_MAOI_02', nombre_generico: 'Tranilcipromina', clase_terapeutica: 'IMAO irreversible' };
   const moclobemida = { id_farmaco: 'ADP_MAOI_05', nombre_generico: 'Moclobemida', clase_terapeutica: 'IMAO reversible (RIMA)' };
+  const bupropion = { id_farmaco: 'ADP_NDRI_01', nombre_generico: 'Bupropión', clase_terapeutica: 'IRND' };
+  const mirtazapina = { id_farmaco: 'ADP_NASSA_01', nombre_generico: 'Mirtazapina', clase_terapeutica: 'NaSSA' };
+  const duloxetina = { id_farmaco: 'ADP_SNRI_02', nombre_generico: 'Duloxetina', clase_terapeutica: 'Dual IRSN' };
+  const citalopram = { id_farmaco: 'ADP_SSRI_04', nombre_generico: 'Citalopram', clase_terapeutica: 'ISRS' };
 
   // Potenciadores y acción rápida
   const litio = { id_farmaco: 'ADP_AUG_04', nombre_generico: 'Litio (Carbonato)', clase_terapeutica: 'Estatibilizador del ánimo / Potenciador' };
@@ -177,6 +181,65 @@ describe('Switching Logic & Matrix - Reglas Clínicas Validadas', () => {
 
     test('Escitalopram → Venlafaxina se recupera de la matriz curada', () => {
       const protocol = computeSwitchProtocol(escitalopram, venlafaxina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(10);
+    });
+
+    test('Venlafaxina → Sertralina: cross-taper 14 días (alto riesgo de discontinuación)', () => {
+      const protocol = computeSwitchProtocol(venlafaxina, sertralina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(14);
+      expect(protocol.washout_days).toBe(0);
+    });
+
+    test('Paroxetina → Venlafaxina: cross-taper gradual 14 días', () => {
+      const protocol = computeSwitchProtocol(paroxetina, venlafaxina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(14);
+    });
+
+    test('Sertralina → Bupropión: cross-taper 7 días', () => {
+      const protocol = computeSwitchProtocol(sertralina, bupropion, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(7);
+    });
+
+    test('Sertralina → Escitalopram: direct switch al día siguiente', () => {
+      const protocol = computeSwitchProtocol(sertralina, escitalopram, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('direct_switch');
+      expect(protocol.taper_days).toBe(0);
+      expect(protocol.washout_days).toBe(0);
+    });
+
+    test('Citalopram → Sertralina: direct switch al día siguiente', () => {
+      const protocol = computeSwitchProtocol(citalopram, sertralina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('direct_switch');
+      expect(protocol.taper_days).toBe(0);
+      expect(protocol.washout_days).toBe(0);
+    });
+
+    test('Sertralina → Mirtazapina: cross-taper 7 días', () => {
+      const protocol = computeSwitchProtocol(sertralina, mirtazapina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(7);
+    });
+
+    test('Escitalopram → Duloxetina: cross-taper 10 días', () => {
+      const protocol = computeSwitchProtocol(escitalopram, duloxetina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(10);
+    });
+
+    test('Venlafaxina → Duloxetina: cross-taper 10 días', () => {
+      const protocol = computeSwitchProtocol(venlafaxina, duloxetina, switchingMatrix);
       expect(protocol.source).toBe('matrix');
       expect(protocol.strategy).toBe('cross_taper');
       expect(protocol.taper_days).toBe(10);
