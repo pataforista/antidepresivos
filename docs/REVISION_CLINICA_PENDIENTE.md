@@ -247,13 +247,13 @@ Estructuralmente está completa: 45/45 fármacos en ambos idiomas, sin campos va
 | C-6 | **Corregido** | 8 pares prioritarios curados: Venlafaxina ↔ Sertralina, Paroxetina → Venlafaxina, Sertralina → Bupropión, Sertralina ↔ Escitalopram, Citalopram → Sertralina, Sertralina → Mirtazapina, Escitalopram → Duloxetina, Venlafaxina → Duloxetina. | NHS Glasgow & Clyde, Psychiatrienet, Carlat Report | @human | 2026-11-05 |
 | C-7 | **Corregido** | Mianserina: dosis máx 120 mg/día (200 mg histórica descartada). Levomilnacipran: 40–120 mg/día (máx 120 mg/día) ratificado. | Ficha técnica Lantanon, Vademecum, FDA Fetzima | @human | 2026-11-05 |
 | C-8 | **Corregido** | Implementado fallback en detailView.js hacia sustrato_enzimatico_principal; asignada nomenclatura clínica a los 11 fármacos sin tablas puente. | CPIC 2020, Fichas técnicas, Literatura TCA | @human | 2026-11-05 |
-| C-9 | *Pendiente* | | | | |
-| C-10 | *Pendiente* | | | | |
-| C-11 | *Pendiente* | | | | |
-| C-12 | *Pendiente* | | | | |
-| C-13 | *Pendiente* | | | | |
+| C-9 | **Corregido** | Declarado public/data/dataset.antidepresivos.v1.0.0.json como Fuente Única de Verdad (SSOT) en GOVERNANCE.md (§2.1). CSVs archivados como insumos históricos. | GOVERNANCE.md §2.1, Decisión arquitectónica | @human | 2026-11-05 |
+| C-10 | **Corregido** | Sustituidas 12 fuentes informales de perlas por Fichas Técnicas oficiales (FDA/AEMPS/EMA), Maudsley 14th Ed. y Stahl's 5th Ed. | Fichas técnicas FDA/AEMPS, Maudsley 14th, Stahl 5th | @human | 2026-11-05 |
+| C-11 | **Corregido** | CANMAT actualizada a 2023 Update (Can J Psychiatry 2024); NICE CG113 (2011, rev. 2020); NICE CG31 (2005; actualización completa en curso prevista 2027); NICE CG159 (2013); ACOG CPG 4 (2023). | CANMAT 2023, NICE Surveillance, ACOG 2023 | @human | 2026-11-05 |
+| C-12 | **Corregido** | Normalizados perfiles de peso al catálogo cerrado [Pérdida, Neutro, Aumento] en los 45 fármacos (Trazodona a Neutro). Sertralina pediatría: Sí (aprobado TOC ≥ 6 años). | FDA Zoloft Labeling, Literatura ponderal 2025 | @human | 2026-11-05 |
+| C-13 | **Corregido** | Estandarizada farmacocinética: Ketamina (Baja oral ~17–20%; estándar IV/IM 100%/93%); Brexanolona, Esketamina y Selegilina parche (No aplica vía no oral); metabolitos vacíos (No aplica sin metabolito activo). | Fichas técnicas Ketalar, Spravato, Zulresso, EMSAM | @human | 2026-11-05 |
 | C-14 | **Corregido** | Modificado lenguaje de sinergias ("Eficacia demostrada...", "aumento sinérgico...") y actualizada alerta serotoninérgica con Vortioxetina (21 d) y Moclobemida (24 h). | Stahl's 2013, Hunter Criteria, FDA Trintellix | @human | 2026-11-05 |
-| C-15 | *Pendiente* | | | | |
+| C-15 | **Corregido** | Correcciones semánticas y de paridad aplicadas: Citalopram embarazo (retirado texto QT desplazado en ES/EN); Bupropión embarazo EN (retirado "Avoid in ED patients"); Mirtazapina perla EN (corregido combinación a IRSN/Venlafaxina); Ketamina perla EN (corregido "recreational use"); locales.json (Strict Washout y Gradual cross-titration). | ACOG 2023, Stahl 5th, SmPC Swissmedic | @human | 2026-11-05 |
 
 ## Cambios técnicos implementados y pendientes
 
@@ -268,6 +268,7 @@ Estructuralmente está completa: 45/45 fármacos en ambos idiomas, sin campos va
 - [x] **Actualizar vigencia y versiones de guías clínicas** en `guias_clinicas.json` (CANMAT 2023, NICE CG31 actualización 2027, etc.). (Implementado: C-11).
 - [x] **Normalizar catálogo de peso y pediatría** en dataset ES/EN al catálogo cerrado de 3 valores y sertralina pediátrica confirmada. (Implementado: C-12).
 - [x] **Estandarizar campos farmacocinéticos** de vías no orales, ketamina oral y metabolitos no aplicables. (Implementado: C-13).
+- [x] **Revisión semántica y paridad cualitativa ES/EN** en monografías, embarazo, perlas y diccionario UI (`locales.json`). (Implementado: C-15).
 
 ## Fuera de alcance de esta auditoría
 

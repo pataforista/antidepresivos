@@ -1940,7 +1940,7 @@
       "indicaciones_aprobadas_ema": "Enfermedad depresiva; Trastorno de pánico",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; Citalopram dose-dependent QT risk | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Ansiedad generalizada",
       "utilidad_sintomatica_clave": "Ansiedad; rumiación",
       "riesgo_sindrome_abstinencia": "Bajo",

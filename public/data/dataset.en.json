@@ -75,7 +75,7 @@
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 2,
       "_search": "ketamine adp_rapid_01 rapid-acting antidepressant (off-label) NMDA antagonist; ↑ glutamate; neuroplasticity N01AX03 rapid antidepressant response; suicidal crisis treatment-resistant depression; acute suicidal ideation",
-      "perlas_clinicas": "NMDA antagonist with rapid (hours) and robust antidepressant effect in treatment-resistant and bipolar depression. IV use is the off-label gold standard. Requires cardiovascular monitoring (BP/ECG) and dissociation surveillance. Risk of cystitis and dependence in chronic/recreation use.",
+      "perlas_clinicas": "NMDA antagonist with rapid (hours) and robust antidepressant effect in treatment-resistant and bipolar depression. IV use is the off-label gold standard. Requires cardiovascular monitoring (BP/ECG) and dissociation surveillance. Risk of cystitis and dependence in chronic/recreational use.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -410,7 +410,7 @@
       "indicaciones_aprobadas_ema": "MDD; Panic Disorder",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; Citalopram dose-dependent QT risk | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Generalized Anxiety Disorder",
       "utilidad_sintomatica_clave": "Anxiety; rumination",
       "riesgo_sindrome_abstinencia": "Low",
@@ -1268,7 +1268,7 @@
       "indicaciones_aprobadas_ema": "MDD; Smoking Cessation",
       "restricciones_ue": "Yes",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA/EMA: individualize; Avoid in ED patients",
+      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize",
       "indicaciones_off_label": "ADHD; Sexual dysfunction induced by SSRIs",
       "utilidad_sintomatica_clave": "Apathy; fatigue; anhedonia; weight gain concerns",
       "riesgo_sindrome_abstinencia": "Low",
@@ -1388,7 +1388,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 0,
       "_search": "mirtazapine adp_atyp_02 antidepressant nassa alpha-2 antagonist N06AX11 insomnia; anorexia; underweight patients",
-      "perlas_clinicas": "Noradrenergic and specific serotonergic antidepressant (NaSSA). Paradoxically, it is more sedating at lower doses (7.5–15mg) than at higher doses (30–45mg) due to increased noradrenergic firing. Promotes sleep and weight gain. Safe in combination with SSRIs (California Rocket Fuel).",
+      "perlas_clinicas": "Noradrenergic and specific serotonergic antidepressant (NaSSA). Paradoxically, it is more sedating at lower doses (7.5–15mg) than at higher doses (30–45mg) due to increased noradrenergic firing. Promotes sleep and weight gain. Frequently combined with SNRIs (Venlafaxine) in treatment-resistant depression (California Rocket Fuel).",
       "evidence": {
         "perlas_clinicas": [
           {
