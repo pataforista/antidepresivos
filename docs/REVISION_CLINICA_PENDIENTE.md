@@ -239,29 +239,28 @@ Estructuralmente está completa: 45/45 fármacos en ambos idiomas, sin campos va
 
 | ID | Decisión (aprobar / corregir / excluir) | Valor correcto | Fuente (documento, edición, sección) | Revisor | Fecha |
 | --- | --- | --- | --- | --- | --- |
-| C-1 | | | | | |
-| C-2 | | | | | |
-| C-3 | | | | | |
-| C-4 | | | | | |
-| C-5 | | | | | |
-| C-6 | | | | | |
-| C-7 | | | | | |
-| C-8 | | | | | |
-| C-9 | | | | | |
-| C-10 | | | | | |
-| C-11 | | | | | |
-| C-12 | | | | | |
-| C-13 | | | | | |
-| C-14 | | | | | |
-| C-15 | | | | | |
+| C-1 | **Corregido** | Moclobemida -> Serotoninérgico: 24 h. Inverso: 14 días (35 d desde fluoxetina). Selegilina parche: 14 d. Texto RIMA: inhibición reversible. | NHS SPS 2023, PsychDB, AMBOSS | @human | 2026-11-05 |
+| C-2 | **Corregido** | Vortioxetina -> IMAO: 21 días (vida media ~66 h). Clomipramina y Bupropión -> IMAO: 14 días. | FDA Trintellix labeling, FDA Bupropion XL, BC Guidelines | @human | 2026-11-05 |
+| C-3 | **Corregido** | Excluir potenciadores (`ADP_AUG_*`) y fármacos agudos/infusión (`ADP_RAPID_*`) del calculador de switching; mostrar aviso clínico explicativo. | FDA labeling, CANMAT | @human | 2026-11-05 |
+| C-4 | **Corregido** | Fluoxetina -> no IMAO: intervalo de 7 días sin fármaco y dosis inicial baja del nuevo antidepresivo (norfluoxetina t1/2 + CYP2D6). | BC Guidelines, SPS | @human | 2026-11-05 |
+| C-5 | **Corregido** | Citalopram (Alto), Escitalopram (Moderado), Venlafaxina (Bajo), Litio (Moderado). | Estudio FAERS 2024, Alertas MHRA/NHS | @human | 2026-11-05 |
+| C-6 | *Pendiente* | Pendiente definir próximos 5–10 pares prioritarios de switching curado. | - | - | - |
+| C-7 | **Corregido** | Mianserina: dosis máx 120 mg/día (200 mg histórica descartada). Levomilnacipran: 40–120 mg/día (máx 120 mg/día) ratificado. | Ficha técnica Lantanon, Vademecum, FDA Fetzima | @human | 2026-11-05 |
+| C-8 | *Pendiente* | | | | |
+| C-9 | *Pendiente* | | | | |
+| C-10 | *Pendiente* | | | | |
+| C-11 | *Pendiente* | | | | |
+| C-12 | *Pendiente* | | | | |
+| C-13 | *Pendiente* | | | | |
+| C-14 | *Pendiente* | | | | |
+| C-15 | *Pendiente* | | | | |
 
-## Cambios técnicos que dependen de esta revisión
+## Cambios técnicos implementados y pendientes
 
-Estos cambios no se pueden hacer sin las respuestas de arriba y quedan bloqueados:
-
-- **Extraer la lógica de switching de `switchView.js` a una función pura** e importarla en `tests/switchingMatrix.test.js`, para que el test verifique el código real y no una copia. Requiere C-1, C-2 y C-4.
-- **Regenerar el JSON desde los CSV canónicos**, o declarar el JSON como fuente. Requiere C-5, C-7 y C-9.
-- **Filtrar el selector de switching.** Requiere C-3.
+- [x] **Extraer la lógica de switching de `switchView.js` a una función pura modular** (`src/lib/switchingLogic.js`) e importarla en `tests/switchingMatrix.test.js`, verificando el código real. (Implementado: C-1, C-2, C-4).
+- [x] **Filtrar el selector de switching** para agentes potenciadores (`ADP_AUG_*`) y fármacos agudos/infusión (`ADP_RAPID_*`), desplegando aviso clínico explicativo. (Implementado: C-3).
+- [x] **Actualizar campos clínicos de QT y dosis** en `public/data/dataset.antidepresivos.v1.0.0.json` y `dataset.en.json` (Litio QT a Moderado, Mianserina máx 120 mg/día). (Implementado: C-5, C-7).
+- [ ] **Regenerar el JSON desde los CSV canónicos**, o declarar el JSON como SSOT. Requiere C-5, C-7 y C-9.
 
 ## Fuera de alcance de esta auditoría
 
