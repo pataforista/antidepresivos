@@ -1,1 +1,82 @@
-[]
+{
+  "version": "1.0.0",
+  "last_updated": "2026-11-06",
+  "scope": "Catálogo psicofarmacológico clínico para tratamiento del Trastorno Depresivo Mayor (TDM) y patologías afectivas/ansiosas comórbidas.",
+  "scope_en": "Clinical psychopharmacology dataset for the treatment of Major Depressive Disorder (MDD) and comorbid affective/anxiety disorders.",
+  "total_molecules": 45,
+  "inclusion_criteria": [
+    {
+      "id": "INC-01",
+      "category": "Antidepresivos Monoterápicos Aprobados",
+      "category_en": "Approved Monotherapeutic Antidepressants",
+      "count": 31,
+      "description_es": "Fármacos con indicación autorizada por agencias reguladoras de referencia (FDA, EMA, AEMPS, Health Canada) para el tratamiento de episodios depresivos mayores, trastornos de ansiedad o trastorno obsesivo-compulsivo.",
+      "description_en": "Drugs with authorized regulatory approval (FDA, EMA, AEMPS, Health Canada) for major depressive episodes, anxiety disorders, or obsessive-compulsive disorder.",
+      "classes_included": [
+        "ISRS (Inhibidores Selectivos de la Recaptura de Serotonina): 6 moléculas",
+        "IRSN (Inhibidores de la Recaptura de Serotonina y Noradrenalina): 4 moléculas",
+        "NaSSA (Antidepresivos Noradrenérgicos y Serotoninérgicos Específicos): 1 molécula (Mirtazapina)",
+        "IRND (Inhibidor de la Recaptura de Noradrenalina y Dopamina): 1 molécula (Bupropión)",
+        "Antidepresivos Multimodales y Atípicos: 4 moléculas (Vortioxetina, Vilazodona, Trazodona, Agomelatina)",
+        "Tricíclicos y Tetracíclicos (ATC): 11 moléculas clásicas",
+        "IMAO irreversibles y RIMA: 4 moléculas (Fenelzina, Tranilcipromina, Isocarboxazida, Moclobemida)"
+      ]
+    },
+    {
+      "id": "INC-02",
+      "category": "Potenciadores de Primera y Segunda Línea",
+      "category_en": "First- and Second-Line Augmentation Agents",
+      "count": 7,
+      "description_es": "Psicofármacos no clasificados como antidepresivos puros pero recomendados formalmente con Nivel de Evidencia 1 o 2 en guías clínicas internacionales (CANMAT 2023, APA, NICE NG222, Maudsley 14.ª Ed.) como estrategia coadyuvante en depresión unipolar resistente (TRD).",
+      "description_en": "Psychotropic agents not classified as pure antidepressants but formally recommended with Level 1 or 2 evidence in international clinical guidelines (CANMAT 2023, APA, NICE NG222, Maudsley 14th Ed.) as augmentation strategies in unipolar treatment-resistant depression (TRD).",
+      "molecules": [
+        "Litio (Carbonato) - Nivel 1 CANMAT",
+        "Aripiprazol (Agonista parcial D2) - Nivel 1 CANMAT",
+        "Quetiapina (Antipsicótico atípico) - Nivel 1 CANMAT",
+        "Brexpiprazol (Agonista parcial D2) - Nivel 1 CANMAT",
+        "Liotironina T3 (Hormona tiroidea) - Nivel 2 CANMAT / STAR*D",
+        "Modafinilo (Promotor de la vigilia / coadyuvante)",
+        "Lisdexanfetamina (Psicoestimulante coadyuvante en anhedonia/fatiga)"
+      ]
+    },
+    {
+      "id": "INC-03",
+      "category": "Fármacos de Acción Rápida y Neuroesteroides",
+      "category_en": "Rapid-Acting Agents and Neuroactive Steroids",
+      "count": 7,
+      "description_es": "Moduladores glutamatérgicos, neuroesteroides con acción moduladora alostérica positiva en receptores GABA-A y formulaciones transdérmicas específicas para depresión resistente o depresión posparto con esquemas clínicos independientes.",
+      "description_en": "Glutamatergic modulators, neuroactive steroids acting as positive allosteric modulators at GABA-A receptors, and transdermal formulations indicated for treatment-resistant or postpartum depression with independent clinical protocols.",
+      "molecules": [
+        "Ketamina (Clorhidrato IV)",
+        "Esketamina (Clorhidrato intranasal)",
+        "Brexanolona (Análogo endógeno de alopregnanolona IV para depresión posparto)",
+        "Zuranolona (Neuroesteroide sintético oral para depresión posparto)",
+        "Selegilina (Parche transdérmico)",
+        "Amoxapina (TCA con bloqueo D2)",
+        "Dosulepina (ATC)"
+      ]
+    }
+  ],
+  "exclusion_criteria": [
+    {
+      "id": "EXC-01",
+      "reason_es": "Antipsicóticos convencionales / típicos de 1ª generación (haloperidol, clorpromazina, levomepromazina) por su perfil de efectos extrapiramidales y ausencia de indicación en depresión unipolar.",
+      "reason_en": "First-generation typical antipsychotics (haloperidol, chlorpromazine) due to extrapyramidal risk and lack of unipolar depression indication."
+    },
+    {
+      "id": "EXC-02",
+      "reason_es": "Benzodiacepinas y sedantes hipnóticos agonistas Z (diazepam, lorazepam, zolpidem, zopiclona); aunque se usen como sintomáticos del insomnio/ansiedad, carecen de acción antidepresiva intrínseca y conllevan potencial de dependencia.",
+      "reason_en": "Benzodiazepines and Z-drugs (diazepam, lorazepam, zolpidem); despite symptomatic use for insomnia/anxiety, they lack intrinsic antidepressant efficacy and carry dependence liability."
+    },
+    {
+      "id": "EXC-03",
+      "reason_es": "Estabilizadores del ánimo sin recomendación sistemática de primer orden en depresión unipolar (ácido valproico, carbamazepina, oxcarbazepina), reservados primariamente para trastorno bipolar.",
+      "reason_en": "Mood stabilizers without first-line recommendation in unipolar depression (valproate, carbamazepine), indicated primarily for bipolar disorder."
+    },
+    {
+      "id": "EXC-04",
+      "reason_es": "Fármacos retirados internacionalmente por toxicidad grave o letal (ej. Nefazodona por fallo hepático fulminante; retirado en Europa y otros mercados).",
+      "reason_en": "Molecules withdrawn internationally due to severe/fatal toxicity (e.g. Nefazodone due to fulminant hepatic failure)."
+    }
+  ]
+}

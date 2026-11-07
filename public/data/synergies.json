@@ -112,5 +112,176 @@
     "sources": [
       "Stahl, S. M. (2013). Stahl's Essential Psychopharmacology."
     ]
+  },
+  {
+    "id": "ssri_snri_lithium",
+    "name": "Potenciación con Litio ⚡",
+    "drugs": [
+      "Fluoxetina",
+      "Sertralina",
+      "Escitalopram",
+      "Citalopram",
+      "Paroxetina",
+      "Fluvoxamina",
+      "Venlafaxina",
+      "Desvenlafaxina",
+      "Duloxetina",
+      "Milnacipran",
+      "Litio (Carbonato)"
+    ],
+    "require": [
+      "Litio (Carbonato)"
+    ],
+    "drug_classes": [
+      "isrs",
+      "irsn",
+      "potenciador"
+    ],
+    "type": "synergy",
+    "description": "Estrategia de potenciación con Nivel de Evidencia 1 (CANMAT 2023, Maudsley) para depresión mayor resistente al tratamiento.",
+    "mechanism": "Aumenta la neurotransmisión serotoninérgica presináptica, modula la señalización intracelular del inositol y la glucógeno sintasa quinasa-3 (GSK-3beta), facilitando la plasticidad neuronal y revertiendo la resistencia a antidepresivos.",
+    "clinical_benefits": [
+      "Evidencia sólida de Nivel 1 en prevención de recaídas y remisión en depresión unipolar resistente.",
+      "Efecto antisuicida intrínseco demostrado en trastornos del estado de ánimo.",
+      "Respuesta sinérgica observada habitualmente entre las semanas 2 y 4 de alcanzar niveles terapéuticos."
+    ],
+    "warnings": [
+      "Litemia diana terapéutica en depresión unipolar: 0.6 – 0.8 mEq/L (rango más estrecho que en manía aguda bipolar).",
+      "Monitorización obligatoria: función renal (creatinina, filtrado glomerular), TSH tiroidea, electrolitos y litemia periódica a las 12 h post-dosis.",
+      "Vigilar signos precoces de toxicidad: temblor fino acentuado, diarrea, ataxia, visión borrosa."
+    ],
+    "sources": [
+      "CANMAT Clinical Guidelines for Depression (2023 Update).",
+      "Bauer M et al. World Federation of Societies of Biological Psychiatry (WFSBP) Guidelines.",
+      "The Maudsley Prescribing Guidelines in Psychiatry (14th Ed.)."
+    ]
+  },
+  {
+    "id": "ssri_snri_aripiprazole",
+    "name": "Potenciación con Aripiprazol 🎯",
+    "drugs": [
+      "Fluoxetina",
+      "Sertralina",
+      "Escitalopram",
+      "Citalopram",
+      "Paroxetina",
+      "Fluvoxamina",
+      "Venlafaxina",
+      "Desvenlafaxina",
+      "Duloxetina",
+      "Milnacipran",
+      "Aripiprazol"
+    ],
+    "require": [
+      "Aripiprazol"
+    ],
+    "drug_classes": [
+      "isrs",
+      "irsn",
+      "potenciador"
+    ],
+    "type": "synergy",
+    "description": "Potenciación con antipsicótico atípico con Nivel de Evidencia 1 y aprobación FDA para depresión resistente.",
+    "mechanism": "Agonismo parcial en receptores dopaminérgicos D2 y serotoninérgicos 5-HT1A, con antagonismo 5-HT2A. A dosis bajas optimiza el tono dopaminérgico mesocortical sin inducir bloqueo dopaminérgico hipoactivo.",
+    "clinical_benefits": [
+      "Rápido inicio de acción adyuvante (mejoría clínica observable frecuentemente en las semanas 1–2).",
+      "Mejora los síntomas refractarios de anhedonia y enlentecimiento psicomotor.",
+      "Aprobado formalmente por FDA como terapia adyuvante en trastorno depresivo mayor."
+    ],
+    "warnings": [
+      "Dosis baja recomendada: 2 – 5 mg/día (máximo 10 mg/día en depresión unipolar; dosis mayores no aumentan eficacia y elevan efectos adversos).",
+      "Efecto adverso frecuente: ACATISIA (15–25% de pacientes; inquietud motora y desasosiego interior que requiere monitorización cercana y posible ajuste de dosis).",
+      "Leve riesgo de ganancia ponderal y disquinesia tardía con uso prolongado."
+    ],
+    "sources": [
+      "CANMAT Clinical Guidelines for Depression (2023 Update).",
+      "FDA Abilify (aripiprazole) Adjunct Labeling.",
+      "The Maudsley Prescribing Guidelines (14th Ed.)."
+    ]
+  },
+  {
+    "id": "ssri_snri_quetiapine",
+    "name": "Potenciación con Quetiapina XR 🌙",
+    "drugs": [
+      "Fluoxetina",
+      "Sertralina",
+      "Escitalopram",
+      "Citalopram",
+      "Paroxetina",
+      "Fluvoxamina",
+      "Venlafaxina",
+      "Desvenlafaxina",
+      "Duloxetina",
+      "Milnacipran",
+      "Quetiapina"
+    ],
+    "require": [
+      "Quetiapina"
+    ],
+    "drug_classes": [
+      "isrs",
+      "irsn",
+      "potenciador"
+    ],
+    "type": "synergy",
+    "description": "Potenciación con Nivel de Evidencia 1 en depresión resistente y ansiedad/insomnio comórbidos graves.",
+    "mechanism": "El metabolito activo norquetiapina actúa como inhibidor potente del transportador de noradrenalina (NET) y agonista parcial 5-HT1A, mientras que la quetiapina bloquea 5-HT2A, H1 y alfa-1 adrenérgicos.",
+    "clinical_benefits": [
+      "Eficacia de Nivel 1 en depresión mayor unipolar (dosis de 150–300 mg/día XR nocturna).",
+      "Efecto ansiolítico e hipnótico rápido, útil en pacientes con insomnio severo o agitación ansiosa.",
+      "Aprobación regulatoria como tratamiento adyuvante en depresión mayor resistente."
+    ],
+    "warnings": [
+      "Efectos metabólicos: ganancia de peso, elevación de triglicéridos y resistencia a la insulina (control basal y periódico de glucemia/lípidos).",
+      "Sedación diurna e hipotensión ortostática al inicio.",
+      "Prolongación moderada del intervalo QTc (precaución con citalopram o escitalopram a dosis altas)."
+    ],
+    "sources": [
+      "CANMAT Clinical Guidelines for Depression (2023 Update).",
+      "NICE NG222 (2022).",
+      "Ficha Técnica Seroquel XR (AEMPS/EMA/FDA)."
+    ]
+  },
+  {
+    "id": "ssri_liothyronine_t3",
+    "name": "Potenciación con Liotironina (T3) 🧪",
+    "drugs": [
+      "Fluoxetina",
+      "Sertralina",
+      "Escitalopram",
+      "Citalopram",
+      "Paroxetina",
+      "Fluvoxamina",
+      "Venlafaxina",
+      "Desvenlafaxina",
+      "Duloxetina",
+      "Liotironina (T3)"
+    ],
+    "require": [
+      "Liotironina (T3)"
+    ],
+    "drug_classes": [
+      "isrs",
+      "irsn",
+      "potenciador"
+    ],
+    "type": "adjunct",
+    "description": "Estrategia hormonal coadyuvante con Nivel de Evidencia 2 en depresión resistente, validada en el ensayo STAR*D.",
+    "mechanism": "La triyodotironina exógena (T3) incrementa la transcripción de genes neuronales, aumenta la densidad y sensibilidad de receptores 5-HT1A y 5-HT2 corticales, y acelera el recambio monoaminérgico central.",
+    "clinical_benefits": [
+      "Tasa de remisión clínica de ~25% en pacientes resistentes al tratamiento en el nivel 3 de STAR*D.",
+      "Mejor tolerancia ponderal y metabólica en comparación con antipsicóticos atípicos o litio.",
+      "Útil en cuadros depresivos con fatiga intensa, lentitud psicomotora o hipotiroidismo subclínico comórbido."
+    ],
+    "warnings": [
+      "Dosis de potenciación: 25 – 50 µg/día en toma única matutina (iniciar a 25 µg/d).",
+      "Nivel de evidencia 2 (respaldo moderado frente al Nivel 1 de Litio o Aripiprazol).",
+      "Precaución cardiovascular: descartar arritmias o cardiopatía isquémica previa; vigilar taquicardia y riesgo de pérdida de densidad mineral ósea en tratamientos muy prolongados."
+    ],
+    "sources": [
+      "CANMAT Clinical Guidelines for Depression (2023 Update - Nivel 2).",
+      "STAR*D Trial (Nierenberg AA et al., Am J Psychiatry 2006).",
+      "The Maudsley Prescribing Guidelines (14th Ed.)."
+    ]
   }
 ]

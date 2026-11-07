@@ -37,6 +37,8 @@ describe('Switching Logic & Matrix - Reglas Clínicas Validadas', () => {
   const mirtazapina = { id_farmaco: 'ADP_NASSA_01', nombre_generico: 'Mirtazapina', clase_terapeutica: 'NaSSA' };
   const duloxetina = { id_farmaco: 'ADP_SNRI_02', nombre_generico: 'Duloxetina', clase_terapeutica: 'Dual IRSN' };
   const citalopram = { id_farmaco: 'ADP_SSRI_04', nombre_generico: 'Citalopram', clase_terapeutica: 'ISRS' };
+  const agomelatina = { id_farmaco: 'ADP_ATYP_06', nombre_generico: 'Agomelatina', clase_terapeutica: 'Antidepresivo atípico' };
+  const amitriptilina = { id_farmaco: 'ADP_TCA_02', nombre_generico: 'Amitriptilina', clase_terapeutica: 'Tricíclico (TCA)' };
 
   // Potenciadores y acción rápida
   const litio = { id_farmaco: 'ADP_AUG_04', nombre_generico: 'Litio (Carbonato)', clase_terapeutica: 'Estatibilizador del ánimo / Potenciador' };
@@ -243,6 +245,57 @@ describe('Switching Logic & Matrix - Reglas Clínicas Validadas', () => {
       expect(protocol.source).toBe('matrix');
       expect(protocol.strategy).toBe('cross_taper');
       expect(protocol.taper_days).toBe(10);
+    });
+
+    test('Sertralina ↔ Vortioxetina: cross-taper cauto curado', () => {
+      const p1 = computeSwitchProtocol(sertralina, vortioxetina, switchingMatrix);
+      expect(p1.source).toBe('matrix');
+      expect(p1.strategy).toBe('cross_taper');
+      expect(p1.taper_days).toBe(10);
+
+      const p2 = computeSwitchProtocol(vortioxetina, sertralina, switchingMatrix);
+      expect(p2.source).toBe('matrix');
+      expect(p2.strategy).toBe('cross_taper');
+      expect(p2.taper_days).toBe(7);
+    });
+
+    test('Escitalopram → Vortioxetina: cross-taper 7 días / direct switch equivalente', () => {
+      const protocol = computeSwitchProtocol(escitalopram, vortioxetina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(7);
+    });
+
+    test('Venlafaxina → Vortioxetina: cross-taper gradual 14 días por riesgo de abstinencia', () => {
+      const protocol = computeSwitchProtocol(venlafaxina, vortioxetina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(14);
+      expect(protocol.notes.some(n => n.includes('discontinuación') || n.includes('abstinencia'))).toBe(true);
+    });
+
+    test('Sertralina → Agomelatina: direct switch con monitorización obligatoria de transaminasas', () => {
+      const protocol = computeSwitchProtocol(sertralina, agomelatina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('direct_switch');
+      expect(protocol.taper_days).toBe(0);
+      expect(protocol.washout_days).toBe(0);
+      expect(protocol.notes.some(n => n.includes('transaminasas'))).toBe(true);
+    });
+
+    test('Mirtazapina → Vortioxetina: cross-taper 10 días', () => {
+      const protocol = computeSwitchProtocol(mirtazapina, vortioxetina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(10);
+    });
+
+    test('Amitriptilina → Sertralina: cross-taper cauto 14 días con alerta de inhibición CYP2D6', () => {
+      const protocol = computeSwitchProtocol(amitriptilina, sertralina, switchingMatrix);
+      expect(protocol.source).toBe('matrix');
+      expect(protocol.strategy).toBe('cross_taper');
+      expect(protocol.taper_days).toBe(14);
+      expect(protocol.notes.some(n => n.includes('CYP2D6'))).toBe(true);
     });
   });
 });

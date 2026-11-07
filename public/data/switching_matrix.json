@@ -198,5 +198,106 @@
     "contraindications": [
       "IMAO"
     ]
+  },
+  {
+    "from": "sertralina",
+    "to": "vortioxetina",
+    "strategy": "cross_taper",
+    "taper_days": 10,
+    "washout_days": 0,
+    "notes": [
+      "Transición de ISRS a antidepresivo multimodal; las duraciones son orientativas y deben individualizarse según tolerabilidad.",
+      "En dosis bajas de sertralina (<= 50 mg/día) es posible el cambio directo; con dosis >= 100 mg/día realizar cross-taper cauto en 7–14 días (NHS Greater Glasgow & Clyde).",
+      "Monitorizar náuseas iniciales y molestias gastrointestinales por el solapamiento de agonismo 5-HT3."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "vortioxetina",
+    "to": "sertralina",
+    "strategy": "cross_taper",
+    "taper_days": 7,
+    "washout_days": 0,
+    "notes": [
+      "Transición de multimodal a ISRS; cross-taper en 7–10 días o cambio directo a dosis equivalente.",
+      "Vortioxetina tiene una semivida de eliminación prolongada (~66 horas), lo que reduce el riesgo de síntomas de discontinuación abruptos."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "escitalopram",
+    "to": "vortioxetina",
+    "strategy": "cross_taper",
+    "taper_days": 7,
+    "washout_days": 0,
+    "notes": [
+      "Cambio directo posible al día siguiente o cross-taper breve en 7 días a dosis equivalente (10 mg escitalopram ≈ 10 mg vortioxetina; Carlat Report, NHS SPS).",
+      "Monitorizar tolerabilidad gastrointestinal durante los primeros 7–10 días."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "venlafaxina",
+    "to": "vortioxetina",
+    "strategy": "cross_taper",
+    "taper_days": 14,
+    "washout_days": 0,
+    "notes": [
+      "Transición de IRSN a Multimodal. Requiere cross-taper gradual y prolongado en 14–21 días debido al alto riesgo de discontinuación de la venlafaxina (Maudsley 14th Ed.).",
+      "Iniciar vortioxetina a 5–10 mg mientras se reduce lentamente la venlafaxina hasta dosis mínima antes de suspenderla."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "sertralina",
+    "to": "agomelatina",
+    "strategy": "direct_switch",
+    "taper_days": 0,
+    "washout_days": 0,
+    "notes": [
+      "Cambio directo al día siguiente; riesgo de síndrome serotoninérgico muy bajo por el mecanismo agonista melatoninérgico MT1/MT2 y antagonista 5-HT2C sin acción SERT.",
+      "Iniciar agomelatina 25 mg en toma nocturna.",
+      "⚠️ Monitorización obligatoria de función hepática (transaminasas) basal y en las semanas 3, 6, 12 y 24 tras el inicio (Ficha Técnica AEMPS/EMA)."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "mirtazapina",
+    "to": "vortioxetina",
+    "strategy": "cross_taper",
+    "taper_days": 10,
+    "washout_days": 0,
+    "notes": [
+      "Transición de NaSSA a Multimodal; cross-taper en 7–14 días (reducir mirtazapina al 50% durante 7 días e introducir vortioxetina a 5–10 mg; Psychiatrienet 2024).",
+      "Reducir mirtazapina de forma gradual para prevenir insomnio de rebote o reactivación ansiosa."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
+  },
+  {
+    "from": "amitriptilina",
+    "to": "sertralina",
+    "strategy": "cross_taper",
+    "taper_days": 14,
+    "washout_days": 0,
+    "notes": [
+      "Transición de Tricíclico a ISRS; cross-taper cauto en 14 días para prevenir rebote colinérgico por retirada brusca de amitriptilina.",
+      "⚠️ ALERTA CYP2D6: Sertralina ejerce una inhibición leve a moderada de CYP2D6 que puede elevar transitoriamente los niveles plasmáticos de amitriptilina y potenciar efectos anticolinérgicos o cardiotóxicos residuales.",
+      "Monitorizar síntomas anticolinérgicos, sedación y presión arterial/ECG si se solapan a dosis medias-altas."
+    ],
+    "contraindications": [
+      "IMAO"
+    ]
   }
 ]

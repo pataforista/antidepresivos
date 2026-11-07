@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "id": "GLOS-01",
+    "term_es": "Criterios de Hunter",
+    "term_en": "Hunter Serotonin Toxicity Criteria",
+    "category": "Seguridad / Toxicidad",
+    "category_en": "Safety / Toxicity",
+    "definition_es": "Reglas diagnósticas clínicas de referencia para el síndrome serotoninérgico. Requiere exposición confirmada a un agente serotoninérgico más al menos una de las siguientes condiciones: clonus espontáneo; clonus inducible acompañado de agitación o diaforesis; clonus ocular con agitación o diaforesis; temblor e hiperreflexia; o hipertonía con temperatura corporal >38 °C y clonus ocular o inducible.",
+    "definition_en": "Standard clinical decision rules for diagnosing serotonin toxicity. Requires exposure to a serotonergic agent plus at least one of the following: spontaneous clonus; inducible clonus with agitation or diaphoresis; ocular clonus with agitation or diaphoresis; tremor and hyperreflexia; or hypertonia with body temperature >38 °C and ocular or inducible clonus.",
+    "clinical_pearl_es": "El clonus (espontáneo, inducible u ocular) es el hallazgo físico más sensible y específico para distinguir el síndrome serotoninérgico del síndrome neuroléptico maligno (SNM).",
+    "clinical_pearl_en": "Clonus (spontaneous, inducible, or ocular) is the single most sensitive and specific clinical sign distinguishing serotonin toxicity from neuroleptic malignant syndrome (NMS).",
+    "sources": [
+      "Dunkley EJC et al. The Hunter Serotonin Toxicity Criteria. QJM. 2003;96(9):635-642.",
+      "Boyer EW, Shannon M. The Serotonin Syndrome. N Engl J Med. 2005;352(11):1112-1120."
+    ]
+  },
+  {
+    "id": "GLOS-02",
+    "term_es": "Lavado Estricto (Washout)",
+    "term_en": "Strict Washout Period",
+    "category": "Farmacocinética / Switching",
+    "category_en": "Pharmacokinetics / Switching",
+    "definition_es": "Período de interrupción farmacológica absoluta entre la suspensión de un antidepresivo y el inicio de otro, necesario para permitir el aclaramiento plasmático (mínimo 5 semividas de eliminación) o la resíntesis de sistemas enzimáticos inhibidos irreversiblemente.",
+    "definition_en": "Mandatory drug-free interval between discontinuing an antidepressant and starting another, required to ensure plasma clearance (at least 5 elimination half-lives) or resynthesis of irreversibly inhibited enzyme systems.",
+    "clinical_pearl_es": "Para IMAO irreversibles (fenelzina, tranilcipromina), el estándar absoluto de lavado es de 14 días. Para selegilina transdérmica se recomienda al menos 7 días (1 semana). En transiciones desde fluoxetina hacia un IMAO, el lavado se extiende a 35 días (5 semanas) por la norfluoxetina. Las duraciones reales deben individualizarse según tolerabilidad.",
+    "clinical_pearl_en": "For irreversible MAOIs (phenelzine, tranylcypromine), the mandatory standard washout is 14 days. For transdermal selegiline, at least 7 days (1 week) is recommended. When switching from fluoxetine to an MAOI, washout extends to 35 days (5 weeks) due to norfluoxetine. Real-world durations should be individualized per patient tolerance.",
+    "sources": [
+      "The Maudsley Prescribing Guidelines in Psychiatry (14th Ed.).",
+      "NHS SPS (Specialist Pharmacy Service). Switching antidepressants."
+    ]
+  },
+  {
+    "id": "GLOS-03",
+    "term_es": "Titulación Cruzada (Cross-tapering)",
+    "term_en": "Cross-titration / Cross-tapering",
+    "category": "Switching / Estrategias",
+    "category_en": "Switching / Strategies",
+    "definition_es": "Estrategia de cambio consistente en reducir gradualmente y de forma controlada la dosis del antidepresivo saliente mientras se introduce simultáneamente y se titula al alza el nuevo fármaco diana.",
+    "definition_en": "Switching strategy where the outgoing antidepressant dose is gradually tapered down while simultaneously introducing and upward-titrating the incoming antidepressant.",
+    "clinical_pearl_es": "Es la estrategia de preferencia para la mayoría de cambios entre ISRS e IRSN. Su duración típica oscila entre 2 y 4 semanas, y debe modularse según la tolerabilidad individual y la vida media de los fármacos involucrados.",
+    "clinical_pearl_en": "Preferred strategy for most transitions between SSRIs and SNRIs. Typical duration ranges from 2 to 4 weeks and must be tailored according to patient tolerance and half-life of both agents.",
+    "sources": [
+      "NHS Specialist Pharmacy Service (SPS) 2023.",
+      "CANMAT Clinical Guidelines for Depression (2023 Update)."
+    ]
+  },
+  {
+    "id": "GLOS-04",
+    "term_es": "RIMA (Inhibidor Reversible de MAO-A)",
+    "term_en": "RIMA (Reversible Inhibitor of Monoamine Oxidase A)",
+    "category": "Mecanismo de Acción",
+    "category_en": "Mechanism of Action",
+    "definition_es": "Subclase de inhibidores enzimáticos (ej. moclobemida) que se unen reversiblemente a la isoenzima monoamino oxidasa A, permitiendo su desplazamiento competitivo por concentraciones elevadas de aminas presoras exógenas como la tiramina dietética.",
+    "definition_en": "Subclass of MAO inhibitors (e.g. moclobemide) that bind reversibly to the MAO-A isoenzyme, allowing competitive displacement by dietary tyramine and minimizing the 'cheese effect' hypertensive risk.",
+    "clinical_pearl_es": "Presenta un perfil de seguridad significativamente superior a los IMAO clásicos irreversibles: la actividad enzimática MAO-A se recupera en aproximadamente 24 horas tras la suspensión, por lo que su período de lavado previo a introducir un serotoninérgico es de solo 24 h.",
+    "clinical_pearl_en": "Possesses a superior safety profile compared to classic irreversible MAOIs: MAO-A enzymatic activity fully recovers within ~24 hours post-cessation, requiring only a 24-hour washout before introducing a serotonergic drug.",
+    "sources": [
+      "Stahl's Essential Psychopharmacology (5th Ed.).",
+      "NHS SPS: How to switch from moclobemide to other antidepressants."
+    ]
+  },
+  {
+    "id": "GLOS-05",
+    "term_es": "Prolongación del Intervalo QTc",
+    "term_en": "QTc Interval Prolongation",
+    "category": "Seguridad Cardiovascular",
+    "category_en": "Cardiovascular Safety",
+    "definition_es": "Alargamiento de la repolarización ventricular cardíaca medido en el ECG y corregido por frecuencia cardíaca. La fórmula de Fridericia (QTcF = QT / RR^(1/3)) es preferible a la de Bazett para evitar sobrediagnóstico en taquicardia o subdiagnóstico en bradicardia.",
+    "definition_en": "Delayed cardiac ventricular repolarization measured on ECG and rate-corrected. Fridericia's formula (QTcF = QT / RR^(1/3)) is preferred over Bazett's to avoid rate-dependent overestimation during tachycardia or underestimation in bradycardia.",
+    "clinical_pearl_es": "Umbrales de alarma clínica: QTc > 500 ms o incremento delta > 60 ms respecto al ECG basal. Citalopram (riesgo Alto, dosis máx 20 mg en >60 años) y Escitalopram (Moderado) son los ISRS con mayor afinidad por canales hERG; Sertralina y Paroxetina presentan menor riesgo.",
+    "clinical_pearl_en": "Clinical threshold alerts: absolute QTc > 500 ms or delta increase > 60 ms from baseline ECG. Citalopram (High risk, max 20 mg in adults >60) and Escitalopram (Moderate) exhibit highest hERG potassium channel affinity among SSRIs; Sertraline and Paroxetine carry lower risk.",
+    "sources": [
+      "American Heart Association / American College of Cardiology Scientific Statement on Drug-Induced QTc Prolongation.",
+      "CredibleMeds (AZCERT) QTDrugs List."
+    ]
+  },
+  {
+    "id": "GLOS-06",
+    "term_es": "Carga Anticolinérgica (AEC / ARS)",
+    "term_en": "Anticholinergic Burden (AEC / ARS)",
+    "category": "Seguridad Geriátrica",
+    "category_en": "Geriatric Safety",
+    "definition_es": "Efecto acumulativo resultante de la administración concomitante de uno o varios fármacos con propiedades antagonistas muscarínicas. Se cuantifica mediante escalas validadas como Anticholinergic Effect on Cognition (AEC) o Anticholinergic Risk Scale (ARS), con puntuación de 0 a 3 por fármaco.",
+    "definition_en": "Cumulative impact of administering one or multiple medications with antimuscarinic properties. Quantified via validated scales like the Anticholinergic Effect on Cognition (AEC) or Anticholinergic Risk Scale (ARS), scoring 0 to 3 per compound.",
+    "clinical_pearl_es": "Una puntuación total acumulada mayor o igual a 3 puntos se asocia fuertemente a deterioro cognitivo acelerado, cuadros confusionales/delírium, caídas y fracturas en adultos mayores, justificando una revisión y depuración terapéutica.",
+    "clinical_pearl_en": "A cumulative score >= 3 is strongly associated with cognitive decline, delirium episodes, falls, and hip fractures in elderly patients, mandating systematic medication review and deprescribing.",
+    "sources": [
+      "Bishara D et al. Anticholinergic Effect on Cognition (AEC) scale. Int J Geriatr Psychiatry.",
+      "Maudsley Prescribing Guidelines: Anticholinergic burden."
+    ]
+  },
+  {
+    "id": "GLOS-07",
+    "term_es": "Síndrome de Discontinuación de Antidepresivos",
+    "term_en": "Antidepressant Discontinuation Syndrome",
+    "category": "Seguridad / Discontinuación",
+    "category_en": "Safety / Discontinuation",
+    "definition_es": "Conjunto de síntomas físicos y psicológicos que emergen típicamente dentro de los primeros 1 a 4 días tras la reducción brusca o supresión de un antidepresivo mantenido durante al menos 4 a 6 semanas. Responde al mnemónico FINISH.",
+    "definition_en": "Cluster of physical and somatic symptoms emerging typically within 1 to 4 days following abrupt cessation or rapid reduction of an antidepressant taken for >= 4-6 weeks. Characterized by the FINISH mnemonic.",
+    "clinical_pearl_es": "Mnemónico FINISH: Flu-like symptoms (síntomas pseudogripales), Insomnia (insomnio), Nausea (náuseas), Imbalance (inestabilidad/mareo), Sensory disturbances (parestesias/'descargas eléctricas'), Hyperarousal (ansiedad/irritabilidad). Máximo riesgo en paroxetina y venlafaxina por su semivida corta.",
+    "clinical_pearl_en": "FINISH mnemonic: Flu-like symptoms, Insomnia, Nausea, Imbalance, Sensory disturbances ('electric shock' sensations), Hyperarousal (irritability/anxiety). Highest incidence with short half-life agents like paroxetine and venlafaxine.",
+    "sources": [
+      "Haddad PM, Anderson IM. Recognising and managing antidepressant discontinuation symptoms. Adv Psychiatr Treat. 2007.",
+      "NICE NG222: Medicines discontinuation."
+    ]
+  }
+]
