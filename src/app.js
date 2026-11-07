@@ -1177,6 +1177,11 @@ function dismissToast(toast) {
 
 const MAX_VISIBLE_TOASTS = 3;
 
+if (typeof window !== 'undefined') {
+  window.showToast = showToast;
+  window.showUndoToast = showUndoToast;
+}
+
 function showToast(message, type = 'info', duration = 3500) {
   const container = getToastContainer();
 

@@ -685,6 +685,12 @@ function renderResults(view) {
 
   // Certificate download logic
   view.querySelector("#btnDownloadCert")?.addEventListener("click", () => {
+    if (typeof html2pdf !== 'function') {
+      if (typeof window !== 'undefined' && window.showToast) {
+        window.showToast(i18n.getLocale() === 'en' ? 'PDF export module is not ready or offline.' : 'El módulo de exportación PDF no está disponible sin conexión.', 'warning');
+      }
+      return;
+    }
     const cert = view.querySelector("#guruCertificate");
     cert.style.display = "block";
     

@@ -54,7 +54,7 @@ export function renderCombo(view) {
                     <strong>Nota para el clínico:</strong> Las sinergias presentadas se basan en mecanismos farmacodinámicos conocidos (ej. Stahl, CANMAT). Evalúe siempre la tolerancia individual y el riesgo de efectos adversos acumulativos.
                 </div>
             </div>
-        </div >
+        </div>
     `;
 
     const primSel = view.querySelector('#comboPrimary');

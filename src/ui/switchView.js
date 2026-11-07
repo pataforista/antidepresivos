@@ -102,6 +102,12 @@ export function renderSwitching(view) {
 
     // PDF Export listener
     view.querySelector('#btnSwitchPDF')?.addEventListener('click', () => {
+        if (typeof html2pdf !== 'function') {
+            if (typeof window !== 'undefined' && window.showToast) {
+                window.showToast(isEn ? 'PDF export module is not ready or offline.' : 'El módulo de exportación PDF no está disponible sin conexión.', 'warning');
+            }
+            return;
+        }
         const fromName = fromSel.options[fromSel.selectedIndex]?.text || "DrugA";
         const toName = toSel.options[toSel.selectedIndex]?.text || "DrugB";
         const element = view.querySelector('#switchPlanContainer');
