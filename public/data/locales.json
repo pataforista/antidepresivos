@@ -229,7 +229,10 @@
         "drug_count_singular": "fármaco",
         "drug_count_plural": "fármacos",
         "loading_app": "Cargando Antidepresivos...",
-        "bbw_label": "ADVERTENCIA EN CAJA NEGRA"
+        "bbw_label": "ADVERTENCIA EN CAJA NEGRA",
+        "btn_glosario": "Glosario",
+        "glosario_title": "Glosario Clínico & Metodología",
+        "glosario_subtitle": "Definiciones psicofarmacológicas estándar, criterios diagnósticos y marco metodológico."
     },
     "en": {
         "app_title": "Antidepressants",
@@ -461,6 +464,9 @@
         "drug_count_singular": "drug",
         "drug_count_plural": "drugs",
         "loading_app": "Loading Antidepressants...",
-        "bbw_label": "BLACK BOX WARNING"
+        "bbw_label": "BLACK BOX WARNING",
+        "btn_glosario": "Glossary",
+        "glosario_title": "Clinical Glossary & Methodology",
+        "glosario_subtitle": "Standard psychopharmacological definitions, diagnostic criteria, and dataset methodology."
     }
 }

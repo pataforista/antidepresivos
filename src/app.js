@@ -10,6 +10,7 @@ import { renderInteract } from "./ui/interactView.js";
 import { renderQuiz } from "./ui/quizView.js";
 import { renderCombo } from "./ui/comboView.js";
 import { renderGuias } from "./ui/guiasView.js";
+import { renderGlosario } from "./ui/glosarioView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations, initScrollHideHeader, initRippleEffect, haptic, withViewTransition } from "./ui/visuals.js";
 import { escapeHtml } from "./core/utils.js";
@@ -424,6 +425,7 @@ function renderRoute(route) {
     else if (route.name === "quiz") renderQuiz(view);
     else if (route.name === "combo") renderCombo(view);
     else if (route.name === "guias") renderGuias(view);
+    else if (route.name === "glosario") renderGlosario(view);
     else view.innerHTML = "<p>Ruta no reconocida.</p>";
   };
 
@@ -1098,6 +1100,7 @@ function mountDock() {
     { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "/interacciones",  isRoute: true },
     { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "?",  hash: "/quiz",      isRoute: true },
     { id: "guias",     label: i18n.t("btn_guias"), icon: "≡",  hash: "/guias",     isRoute: true },
+    { id: "glosario",  label: i18n.t("btn_glosario"), icon: "📖", hash: "/glosario",  isRoute: true },
   ];
   const actionItems = [
     { id: "legal",    label: i18n.t("nav_legal"),    icon: "§", hash: "#", isRoute: false, action: "legal"    },

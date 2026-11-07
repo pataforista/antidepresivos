@@ -34,6 +34,7 @@ export function createRouter(store, opts = {}) {
     quiz: "/quiz",
     combo: "/combinaciones",
     guias: "/guias",
+    glosario: "/glosario",
   };
   const HEAD_TO_NAME = {
     comparador: "compare",
@@ -43,6 +44,7 @@ export function createRouter(store, opts = {}) {
     quiz: "quiz",
     combinaciones: "combo",
     guias: "guias",
+    glosario: "glosario",
   };
 
   let started = false;
@@ -214,7 +216,7 @@ export function createRouter(store, opts = {}) {
       };
     }
 
-    if (["list", "switching", "ajuste", "interact", "quiz", "combo", "guias"].includes(route.name)) {
+    if (["list", "switching", "ajuste", "interact", "quiz", "combo", "guias", "glosario"].includes(route.name)) {
       return { ...route, params: {}, query: route.query ?? {} };
     }
 
@@ -257,6 +259,7 @@ export function createRouter(store, opts = {}) {
       quiz: "quiz",
       combo: "combo",
       guias: "guias",
+      glosario: "glosario",
     };
     return legacy[head] ?? "list";
   }

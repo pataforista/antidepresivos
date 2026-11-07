@@ -116,6 +116,11 @@ export function mountInfoModal() {
               <li><b>WFSBP</b> (World Federation of Societies of Biological Psychiatry) Guidelines.</li>
             </ul>
             <p style="font-style:italic; font-size:0.8rem;">Base de datos actualizada con las últimas guías clínicas internacionales.</p>
+            <div style="margin-top:14px;">
+              <a href="/glosario" id="btnModalToGlossary" class="btn btn--outline text-xs" style="width:100%; text-align:center; font-weight:700; display:block;">
+                📖 Consultar Glosario Clínico y Criterios Metodológicos →
+              </a>
+            </div>
           </div>
         </details>
 
