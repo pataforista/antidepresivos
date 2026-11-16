@@ -14,6 +14,7 @@ import { renderGlosario } from "./ui/glosarioView.js";
 import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations, initScrollHideHeader, initRippleEffect, haptic, withViewTransition } from "./ui/visuals.js";
 import { escapeHtml } from "./core/utils.js";
+import { getIcon } from "./ui/icons.js";
 import { isNotableRisk, isHighRisk, sedationLabel, sedationVariant } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
 import { i18n } from "./core/i18n.js";
@@ -339,20 +340,20 @@ function mountShell(root) {
 
       <!-- Floating Support Button -->
       <a href="https://buymeacoffee.com/herramente" target="_blank" rel="noopener noreferrer" class="bmac-floating-btn" title="${i18n.t("aria_support_project")}" aria-label="${i18n.t("aria_support_project")}">
-        <span aria-hidden="true">☕</span>
+        <span aria-hidden="true">${getIcon("heart")}</span>
       </a>
 
       <style>
         .bmac-floating-btn {
           position: fixed; bottom: calc(var(--dock-height, 82px) + 16px); left: 20px; z-index: 900;
-          width: 50px; height: 50px; background: #FFDD00;
+          width: 50px; height: 50px; background: var(--bg-surface); color: var(--accent);
           border-radius: 50%; display: flex; align-items: center; justify-content: center;
-          text-decoration: none; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-          transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
-          border: 2px solid rgba(0,0,0,0.08);
+          text-decoration: none; font-size: 1.5rem; box-shadow: var(--shadow-neo-md);
+          transition: transform 0.2s ease, box-shadow 0.2s;
+          border: 1px solid var(--border-subtle);
         }
-        .bmac-floating-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        .bmac-floating-btn:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+        .bmac-floating-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-neo-lg); }
+        .bmac-floating-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
         /* Se retira al hacer scroll hacia abajo (misma lógica que el header)
            para no tapar el contenido de las tarjetas. */
         .bmac-floating-btn--hidden { transform: translateX(-140%); pointer-events: none; }
@@ -634,15 +635,14 @@ function renderList(view) {
       ${heroHTML}
 
       <!-- Hero search protagonista -->
-      <div class="search-hero brutalist-container" role="search">
-        <span class="search-hero__icon-left" aria-hidden="true">⌕</span>
-        <input type="search" id="inputSearch" class="search-hero__input brutalist-input smooth-type"
-          placeholder=" "
+      <div class="search-hero" role="search">
+        <span class="search-hero__icon-left" aria-hidden="true">${getIcon("search")}</span>
+        <input type="search" id="inputSearch" class="search-hero__input smooth-type"
+          placeholder="${i18n.t("search_placeholder")}"
           aria-label="${i18n.t("search_placeholder")}"
           enterkeyhint="search"
           value="${escapeHtml(state.filters.q || "")}"
           autocomplete="off" autocorrect="off" spellcheck="false" />
-        <label class="brutalist-label" for="inputSearch">${i18n.t("search_placeholder")}</label>
       </div>
 
       <!-- Task chips (filtros por tarea clínica) -->
@@ -1092,20 +1092,20 @@ function renderRadarChart(data, colors) {
 
 function mountDock() {
   const navItems = [
-    { id: "list",      label: i18n.t("nav_home"),    icon: "⌂",  hash: "/",      isRoute: true },
-    { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖",  hash: "/comparador",   isRoute: true },
-    { id: "switching", label: i18n.t("btn_switching"), icon: "⇄",  hash: "/switching", isRoute: true },
-    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "℞",  hash: "/ajuste",    isRoute: true },
-    { id: "combo",     label: i18n.t("btn_combo"), icon: "+",  hash: "/combinaciones",     isRoute: true },
-    { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "/interacciones",  isRoute: true },
-    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "?",  hash: "/quiz",      isRoute: true },
-    { id: "guias",     label: i18n.t("btn_guias"), icon: "≡",  hash: "/guias",     isRoute: true },
-    { id: "glosario",  label: i18n.t("btn_glosario"), icon: "📖", hash: "/glosario",  isRoute: true },
+    { id: "list",      label: i18n.t("nav_home"),    icon: getIcon("home"),     hash: "/",      isRoute: true },
+    { id: "compare",   label: i18n.t("btn_compare"), icon: getIcon("compare"),  hash: "/comparador",   isRoute: true },
+    { id: "switching", label: i18n.t("btn_switching"), icon: getIcon("switch"), hash: "/switching", isRoute: true },
+    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: getIcon("rx"),        hash: "/ajuste",    isRoute: true },
+    { id: "combo",     label: i18n.t("btn_combo"), icon: getIcon("plus"),       hash: "/combinaciones",     isRoute: true },
+    { id: "interact",  label: i18n.t("btn_interact"), icon: getIcon("interact"), hash: "/interacciones",  isRoute: true },
+    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: getIcon("quiz"),    hash: "/quiz",      isRoute: true },
+    { id: "guias",     label: i18n.t("btn_guias"), icon: getIcon("list"),       hash: "/guias",     isRoute: true },
+    { id: "glosario",  label: i18n.t("btn_glosario"), icon: getIcon("book"),    hash: "/glosario",  isRoute: true },
   ];
   const actionItems = [
-    { id: "legal",    label: i18n.t("nav_legal"),    icon: "§", hash: "#", isRoute: false, action: "legal"    },
-    { id: "info",     label: i18n.t("nav_credits"), icon: "i", hash: "#", isRoute: false, action: "info"     },
-    { id: "settings", label: i18n.t("btn_settings"), icon: "⚙", hash: "#", isRoute: false, action: "settings" },
+    { id: "legal",    label: i18n.t("nav_legal"),    icon: getIcon("legal"),    hash: "#", isRoute: false, action: "legal"    },
+    { id: "info",     label: i18n.t("nav_credits"), icon: getIcon("info"),      hash: "#", isRoute: false, action: "info"     },
+    { id: "settings", label: i18n.t("btn_settings"), icon: getIcon("settings"), hash: "#", isRoute: false, action: "settings" },
   ];
 
   let navBar = document.getElementById("floating-dock");

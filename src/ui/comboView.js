@@ -2,6 +2,7 @@
 import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
+import { getIcon } from "./icons.js";
 
 export function renderCombo(view) {
     const state = store.getState();
@@ -44,7 +45,7 @@ export function renderCombo(view) {
                 </div>
 
                 <div id="comboEmpty" style="text-align:center; padding: 60px; color: var(--color-text-muted);">
-                    <div style="font-size:4rem; margin-bottom:var(--space-4); opacity:0.2">🧪</div>
+                    <div style="font-size:4rem; margin-bottom:var(--space-4); opacity:0.2">${getIcon("flask")}</div>
                     <p style="font-weight:600; max-width: 300px; margin: 0 auto;">${i18n.t("combo_empty_state")}</p>
                 </div>
             </div>
@@ -153,7 +154,7 @@ function renderResult(id1, id2, view, synergies, dataset) {
     } else {
         container.innerHTML = `
             <div class="animate-fade-in card" style="text-align:center; padding: 40px; background: var(--color-surface-raised); border-radius: var(--radius-2xl);">
-                <div style="font-size: 2.5rem; margin-bottom: 16px;">❔</div>
+                <div style="font-size: 2.5rem; margin-bottom: 16px;">${getIcon("help")}</div>
                 <p class="text-sm" style="max-width: 400px; margin: 0 auto; color: var(--color-text-muted);">
                     ${i18n.t("combo_not_found")}
                 </p>

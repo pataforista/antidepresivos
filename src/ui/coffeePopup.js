@@ -149,7 +149,7 @@ function showCoffeePopup() {
        href="${BMAC_URL}"
        target="_blank"
        rel="noopener noreferrer">
-      ☕ Invitar un café
+      Invitar un café
     </a>
   `;
   document.body.appendChild(el);

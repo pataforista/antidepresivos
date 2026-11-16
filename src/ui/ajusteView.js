@@ -2,6 +2,7 @@
 import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
+import { getIcon } from "./icons.js";
 
 /* ── Helpers de riesgo geriátrico ────────────────────────────────── */
 function aecColor(val) {
@@ -39,7 +40,7 @@ export function renderAjuste(view) {
 
             <!-- Nota clínica geriátrica -->
             <div class="alert alert--info" style="margin-bottom:var(--space-6);">
-                <div style="font-size:1.3rem;">👴</div>
+                <div style="font-size:1.3rem;">${getIcon("elderly")}</div>
                 <div class="text-xs" style="line-height:1.7;">
                     <strong>${i18n.t("geriatric_note_title")}</strong> ${i18n.t("geriatric_note_text")}
                 </div>

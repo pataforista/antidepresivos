@@ -506,6 +506,21 @@ html, body {
     transition: transform var(--transition-spring);
 }
 
+/* Íconos de trazo (A5): heredan el color del texto, claro y oscuro funcionan solos. */
+.ui-ico {
+    width: 1.1em;
+    height: 1.1em;
+    flex: none;
+    display: inline-block;
+    vertical-align: -0.2em;
+}
+
+.dock-nav-item__icon .ui-ico {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
 .dock-nav-item.active .dock-nav-item__icon {
     transform: scale(1.05);
 }

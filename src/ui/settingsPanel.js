@@ -45,8 +45,8 @@ export function mountSettingsPanel() {
       <section class="settings-section">
         <div class="settings-section__label">${t("settings_language")}</div>
         <div class="settings-row">
-          ${optionBtn("locale", "es", "🇪🇸&nbsp;Español", locale === "es")}
-          ${optionBtn("locale", "en", "🇬🇧&nbsp;English", locale === "en")}
+          ${optionBtn("locale", "es", "Español", locale === "es")}
+          ${optionBtn("locale", "en", "English", locale === "en")}
         </div>
       </section>
 

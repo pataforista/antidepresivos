@@ -7,6 +7,7 @@
 import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
+import { getIcon } from "./icons.js";
 
 /* ── Estado del juego ──────────────────────────────────────── */
 let Q = {
@@ -141,7 +142,7 @@ const TEMPLATES = [
   {
     id: "enzima",
     category: i18n.getLocale() === 'en' ? "Metabolism" : "Metabolismo Enzimático",
-    icon: "🧪",
+    icon: getIcon("flask"),
     difficulty: ["especialista"],
     ask: () => i18n.t("quiz_question_enzime"),
     correct: (d) => d.sustrato_enzimatico_principal,
@@ -163,7 +164,7 @@ const TEMPLATES = [
   {
     id: "abstinencia",
     category: i18n.getLocale() === 'en' ? "Withdrawal" : "Síndrome de Abstinencia",
-    icon: "🔴",
+    icon: getIcon("warning"),
     difficulty: ["especialista"],
     ask: () => i18n.t("quiz_question_withdrawal"),
     correct: (d) => d.riesgo_sindrome_abstinencia,
@@ -415,7 +416,7 @@ function renderQuestion(view) {
   if (!q) { renderResults(view); return; }
 
   const pct = Math.round((Q.idx / Q.total) * 100);
-  const streakDisplay = Q.streak > 1 ? `🔥×${Q.streak}` : "✦";
+  const streakDisplay = Q.streak > 1 ? `${getIcon("streak")}×${Q.streak}` : "✦";
   const streakClass = Q.streak >= 3 ? "quiz-streak--hot" : "";
   const MODES = getModes();
   const modeConfig = MODES[Q.mode];
@@ -448,7 +449,7 @@ function renderQuestion(view) {
       <div class="quiz-container">
         <div class="quiz-hud">
           <div class="quiz-hud-left">
-            <span class="quiz-score-badge">⭐ ${Q.score} ${i18n.t("quiz_score")}</span>
+            <span class="quiz-score-badge">${Q.score} ${i18n.t("quiz_score")}</span>
           </div>
           <div class="quiz-hud-center">
             <span class="quiz-progress-text">${Q.idx + 1} / ${Q.total}</span>
@@ -535,7 +536,7 @@ function attachOptionListeners(view, q) {
         const bonus = isCorrect ? 10 + Math.max(0, Q.streak - 1) * 5 : 0;
         feedback.className = `quiz-feedback quiz-feedback--${isCorrect ? "ok" : "ko"}`;
         feedback.innerHTML = isCorrect
-          ? `<span class="quiz-feedback-icon">✓</span> ${i18n.t("quiz_correct")} <b>+${bonus} ${i18n.t("quiz_score")}</b>${Q.streak > 2 ? ` <span class="quiz-combo">🔥 ${i18n.t("quiz_combo")} ×${Q.streak}</span>` : ""}`
+          ? `<span class="quiz-feedback-icon">✓</span> ${i18n.t("quiz_correct")} <b>+${bonus} ${i18n.t("quiz_score")}</b>${Q.streak > 2 ? ` <span class="quiz-combo">${i18n.t("quiz_combo")} ×${Q.streak}</span>` : ""}`
           : `<span class="quiz-feedback-icon">✗</span> ${i18n.t("quiz_era")} <b>${escapeHtml(q.tmpl.label(q.correct))}</b>`;
       }
 
@@ -632,7 +633,7 @@ function renderResults(view) {
               <span class="quiz-results-stat-label">${i18n.t("quiz_incorrect_stat")}</span>
             </div>
             <div class="quiz-results-stat">
-              <span class="quiz-results-stat-val" style="color:var(--quiz-neon-purp)">🔥×${Q.maxStreak}</span>
+              <span class="quiz-results-stat-val" style="color:var(--quiz-neon-purp)">×${Q.maxStreak}</span>
               <span class="quiz-results-stat-label">${i18n.t("quiz_streak_stat")}</span>
             </div>
           </div>

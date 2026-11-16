@@ -2,6 +2,7 @@
 import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
+import { getIcon } from "./icons.js";
 
 export function renderGlosario(view) {
   const state = store.getState();
@@ -28,10 +29,10 @@ export function renderGlosario(view) {
       <!-- Navigation Tabs -->
       <div style="display:flex; gap:var(--space-2); margin-bottom:var(--space-6); border-bottom:1px solid var(--color-border); padding-bottom:var(--space-2);">
         <button id="tabBtnTerms" class="btn btn--primary text-xs" style="font-weight:600; padding:8px 16px;">
-          📖 ${t("Glosario de Términos", "Glossary Terms")} (${glossary.length})
+          ${getIcon("book")} ${t("Glosario de Términos", "Glossary Terms")} (${glossary.length})
         </button>
         <button id="tabBtnCriteria" class="btn btn--outline text-xs" style="font-weight:600; padding:8px 16px;">
-          📋 ${t("Criterios Metodológicos", "Methodology Criteria")}
+          ${getIcon("list")} ${t("Criterios Metodológicos", "Methodology Criteria")}
         </button>
       </div>
 
@@ -116,7 +117,7 @@ function renderCriteriaSection(criteria, isEn, t) {
       <!-- Inclusion Criteria -->
       <div>
         <h3 class="h4" style="margin-bottom:var(--space-4); display:flex; align-items:center; gap:8px;">
-          <span>✅</span> ${t("Criterios de Inclusión (45 moléculas)", "Inclusion Criteria (45 molecules)")}
+          <span>${getIcon("check")}</span> ${t("Criterios de Inclusión (45 moléculas)", "Inclusion Criteria (45 molecules)")}
         </h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:var(--space-4);">
           ${inc.map(item => `
@@ -147,7 +148,7 @@ function renderCriteriaSection(criteria, isEn, t) {
       <!-- Exclusion Criteria -->
       <div>
         <h3 class="h4" style="margin-bottom:var(--space-4); display:flex; align-items:center; gap:8px;">
-          <span>🚫</span> ${t("Criterios de Exclusión Deliberada", "Deliberate Exclusion Criteria")}
+          <span>${getIcon("block")}</span> ${t("Criterios de Exclusión Deliberada", "Deliberate Exclusion Criteria")}
         </h3>
         <div style="display:flex; flex-direction:column; gap:var(--space-3);">
           ${exc.map(item => `
@@ -249,7 +250,7 @@ function setupTermsInteractions(view, glossary, isEn, t) {
           ${pearl ? `
             <div class="card card--tonal" style="padding:var(--space-4); margin-bottom:var(--space-4); border-radius:var(--radius-lg); background:hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.08);">
               <div style="font-size:0.75rem; font-weight:700; color:var(--color-primary); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
-                <span>💡</span> ${t("Perla Clínica", "Clinical Pearl")}
+                <span>${getIcon("tip")}</span> ${t("Perla Clínica", "Clinical Pearl")}
               </div>
               <div class="text-sm" style="line-height:1.5; font-weight:500;">
                 ${escapeHtml(pearl)}

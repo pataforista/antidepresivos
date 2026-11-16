@@ -47,8 +47,8 @@ export function renderSwitching(view) {
 
                 <p class="text-xs text-muted" style="margin-top: 14px; margin-bottom: 0; line-height: 1.5;">
                     ${isEn
-                        ? "ℹ️ Augmenting agents (Lithium, Atypical Antipsychotics, T3, Stimulants) and acute/infusion therapies (Ketamine, Esketamine, Brexanolone, Zuranolone) are excluded from the switching calculator as they are adjunctive treatments or require independent specialized protocols."
-                        : "ℹ️ Los agentes de potenciación (Litio, Antipsicóticos atípicos, T3, Estimulantes) y tratamientos de acción rápida/infusión (Ketamina, Esketamina, Brexanolona, Zuranolona) están excluidos del calculador de switching al tratarse de coadyuvantes o requerir esquemas especializados independientes."}
+                        ? "Augmenting agents (Lithium, Atypical Antipsychotics, T3, Stimulants) and acute/infusion therapies (Ketamine, Esketamine, Brexanolone, Zuranolone) are excluded from the switching calculator as they are adjunctive treatments or require independent specialized protocols."
+                        : "Los agentes de potenciación (Litio, Antipsicóticos atípicos, T3, Estimulantes) y tratamientos de acción rápida/infusión (Ketamina, Esketamina, Brexanolona, Zuranolona) están excluidos del calculador de switching al tratarse de coadyuvantes o requerir esquemas especializados independientes."}
                 </p>
                 
                 <div id="switchPlanContainer" style="margin-top: 30px; display:none;">

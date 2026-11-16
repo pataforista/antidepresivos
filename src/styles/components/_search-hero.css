@@ -54,6 +54,12 @@
     color: var(--color-text-muted);
     font-size: 1.1rem;
     pointer-events: none;
+    display: flex;
+}
+
+.search-hero__icon-left .ui-ico {
+    width: 20px;
+    height: 20px;
 }
 
 .search-hero__icon-right {

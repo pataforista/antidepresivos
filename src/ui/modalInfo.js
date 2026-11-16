@@ -1,4 +1,4 @@
-
+import { getIcon } from "./icons.js";
 
 export function mountInfoModal() {
   // Check if modal container exists, if not create it
@@ -118,7 +118,7 @@ export function mountInfoModal() {
             <p style="font-style:italic; font-size:0.8rem;">Base de datos actualizada con las últimas guías clínicas internacionales.</p>
             <div style="margin-top:14px;">
               <a href="/glosario" id="btnModalToGlossary" class="btn btn--outline text-xs" style="width:100%; text-align:center; font-weight:700; display:block;">
-                📖 Consultar Glosario Clínico y Criterios Metodológicos →
+                ${getIcon("book")} Consultar Glosario Clínico y Criterios Metodológicos →
               </a>
             </div>
           </div>
@@ -135,7 +135,7 @@ export function mountInfoModal() {
         <!-- Apoyo / Buy Me a Coffee -->
         <div style="background:var(--color-surface-raised); padding:20px; border-radius:var(--radius-lg); text-align:center; border:2px dashed var(--color-border);">
           <div style="font-size:0.65rem; letter-spacing:normal; color:var(--color-text-dim); font-weight:600; margin-bottom:12px;">
-            ☕ Apoya el proyecto
+            Apoya el proyecto
           </div>
           <p style="font-size:0.9rem; color:var(--color-text-muted); line-height:1.6; margin:0 0 16px;">
             Este es un proyecto <strong>sin fines de lucro</strong> que se mantiene de forma independiente. Si esta herramienta es útil en tu práctica clínica, considera hacer una pequeña donación para apoyar su desarrollo y mejoras continuas.
@@ -144,7 +144,7 @@ export function mountInfoModal() {
              target="_blank"
              rel="noopener noreferrer"
              class="bmac-modal-link">
-            ☕ Invitar un café
+            Invitar un café
           </a>
         </div>
 
