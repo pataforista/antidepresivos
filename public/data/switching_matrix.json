@@ -265,7 +265,7 @@
     "notes": [
       "Cambio directo al día siguiente; riesgo de síndrome serotoninérgico muy bajo por el mecanismo agonista melatoninérgico MT1/MT2 y antagonista 5-HT2C sin acción SERT.",
       "Iniciar agomelatina 25 mg en toma nocturna.",
-      "⚠️ Monitorización obligatoria de función hepática (transaminasas) basal y en las semanas 3, 6, 12 y 24 tras el inicio (Ficha Técnica AEMPS/EMA)."
+      "Atención: Monitorización obligatoria de función hepática (transaminasas) basal y en las semanas 3, 6, 12 y 24 tras el inicio (Ficha Técnica AEMPS/EMA)."
     ],
     "contraindications": [
       "IMAO"
@@ -293,7 +293,7 @@
     "washout_days": 0,
     "notes": [
       "Transición de Tricíclico a ISRS; cross-taper cauto en 14 días para prevenir rebote colinérgico por retirada brusca de amitriptilina.",
-      "⚠️ ALERTA CYP2D6: Sertralina ejerce una inhibición leve a moderada de CYP2D6 que puede elevar transitoriamente los niveles plasmáticos de amitriptilina y potenciar efectos anticolinérgicos o cardiotóxicos residuales.",
+      "Atención: ALERTA CYP2D6: Sertralina ejerce una inhibición leve a moderada de CYP2D6 que puede elevar transitoriamente los niveles plasmáticos de amitriptilina y potenciar efectos anticolinérgicos o cardiotóxicos residuales.",
       "Monitorizar síntomas anticolinérgicos, sedación y presión arterial/ECG si se solapan a dosis medias-altas."
     ],
     "contraindications": [

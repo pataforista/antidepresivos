@@ -137,7 +137,7 @@
       "indicaciones_aprobadas_ema": "MDD; OCD; Panic Disorder; Social Anxiety Disorder; PTSD",
       "restricciones_ue": "Yes",
       "aprobado_uso_pediatrico": true,
-      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Generalized Anxiety Disorder; Postpartum Depression",
       "utilidad_sintomatica_clave": "Anxiety; obsessive-compulsive symptoms; rumination",
       "riesgo_sindrome_abstinencia": "Moderate",
@@ -165,7 +165,7 @@
       "riesgo_prolongacion_qt_ord": 0,
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 1,
-      "perlas_clinicas": "Naphthalenamine derivative SSRI. Unique SSRI with mild dopamine reuptake inhibition at high doses (sigma-1 binding), which may provide a mild activating profile. Considered the SSRI of choice in post-MI patients (SADHEART study).\n\n⚠️ AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
+      "perlas_clinicas": "Naphthalenamine derivative SSRI. Unique SSRI with mild dopamine reuptake inhibition at high doses (sigma-1 binding), which may provide a mild activating profile. Considered the SSRI of choice in post-MI patients (SADHEART study).\n\nAtención: AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -228,7 +228,7 @@
       "indicaciones_aprobadas_ema": "MDD; OCD; Bulimia Nervosa",
       "restricciones_ue": "Yes",
       "aprobado_uso_pediatrico": true,
-      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Anxiety disorders; Postpartum Depression",
       "utilidad_sintomatica_clave": "Anhedonia; apathy; obsessive-compulsive symptoms",
       "riesgo_sindrome_abstinencia": "Low",
@@ -256,7 +256,7 @@
       "riesgo_prolongacion_qt_ord": 0,
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 2,
-      "perlas_clinicas": "The SSRI with the longest half-life (norfluoxetine up to 15 days), which reduces the risk of withdrawal syndrome upon discontinuation. It has an activating profile due to 5-HT2C antagonism. Requires the longest washout period (5 weeks) before starting an MAOI.\n\n⚠️ AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
+      "perlas_clinicas": "The SSRI with the longest half-life (norfluoxetine up to 15 days), which reduces the risk of withdrawal syndrome upon discontinuation. It has an activating profile due to 5-HT2C antagonism. Requires the longest washout period (5 weeks) before starting an MAOI.\n\nAtención: AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -319,7 +319,7 @@
       "indicaciones_aprobadas_ema": "MDD; GAD; OCD; PTSD; Panic Disorder; Social Anxiety Disorder",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Generalized Anxiety Disorder",
       "utilidad_sintomatica_clave": "Somatic anxiety; insomnia with anxiety",
       "riesgo_sindrome_abstinencia": "High",
@@ -410,7 +410,7 @@
       "indicaciones_aprobadas_ema": "MDD; Panic Disorder",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize; ACOG: individualize | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Generalized Anxiety Disorder",
       "utilidad_sintomatica_clave": "Anxiety; rumination",
       "riesgo_sindrome_abstinencia": "Low",
@@ -438,7 +438,7 @@
       "riesgo_prolongacion_qt_ord": 2,
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 0,
-      "perlas_clinicas": "Highly selective SSRI. Its use is conditioned by the dose-dependence of QTc interval prolongation. It is recommended not to exceed 40 mg (20 mg in the elderly). It is a racemic mixture, where S-citalopram is the active enantiomer.\n\n⚠️ AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
+      "perlas_clinicas": "Highly selective SSRI. Its use is conditioned by the dose-dependence of QTc interval prolongation. It is recommended not to exceed 40 mg (20 mg in the elderly). It is a racemic mixture, where S-citalopram is the active enantiomer.\n\nAtención: AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -501,7 +501,7 @@
       "indicaciones_aprobadas_ema": "MDD; GAD; OCD; Panic Disorder; Social Anxiety Disorder",
       "restricciones_ue": "Yes",
       "aprobado_uso_pediatrico": true,
-      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Panic Disorder",
       "utilidad_sintomatica_clave": "Anxiety; rumination",
       "riesgo_sindrome_abstinencia": "Low",
@@ -529,7 +529,7 @@
       "riesgo_prolongacion_qt_ord": 1,
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 0,
-      "perlas_clinicas": "Pure S-enantiomer of citalopram. It is the SSRI with the highest selectivity for the serotonin transporter (SERT), which minimizes interactions and side effects. In the Cipriani meta-analysis (2018), it was positioned as one of the ADs with the best balance between efficacy and acceptability.\n\n⚠️ AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
+      "perlas_clinicas": "Pure S-enantiomer of citalopram. It is the SSRI with the highest selectivity for the serotonin transporter (SERT), which minimizes interactions and side effects. In the Cipriani meta-analysis (2018), it was positioned as one of the ADs with the best balance between efficacy and acceptability.\n\nAtención: AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -592,7 +592,7 @@
       "indicaciones_aprobadas_ema": "MDD; OCD",
       "restricciones_ue": "Yes",
       "aprobado_uso_pediatrico": true,
-      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA: limited data; EMA: individualize | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Depression",
       "utilidad_sintomatica_clave": "Obsessive-compulsive symptoms; anxiety",
       "riesgo_sindrome_abstinencia": "Low",
@@ -621,7 +621,7 @@
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 0,
       "_search": "fluvoxamine adp_ssri_06 antidepressant ssri selective serotonin reuptake inhibitor N06AB08 obsessive-compulsive symptoms; anxiety",
-      "perlas_clinicas": "\n\n⚠️ AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia."
+      "perlas_clinicas": "\n\nAtención: AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia."
     },
     {
       "id_farmaco": "ADP_SNRI_01",
@@ -669,7 +669,7 @@
       "indicaciones_aprobadas_ema": "MDD; GAD; Social Anxiety Disorder; Panic Disorder",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA/EMA: individualize; ACOG: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA/EMA: individualize; ACOG: individualize | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Neuropathic pain; hot flashes",
       "utilidad_sintomatica_clave": "Depression with anxiety and comorbid pain",
       "riesgo_sindrome_abstinencia": "Moderate",
@@ -697,7 +697,7 @@
       "riesgo_prolongacion_qt_ord": 0,
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 1,
-      "perlas_clinicas": "Dual inhibitor (SNRI). At low doses (<150mg) it acts primarily as an SSRI; norepinephrine reuptake inhibition becomes clinically significant at higher doses. Known for an intense discontinuation syndrome ('brain zaps') due to its short half-life.\n\n⚠️ AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
+      "perlas_clinicas": "Dual inhibitor (SNRI). At low doses (<150mg) it acts primarily as an SSRI; norepinephrine reuptake inhibition becomes clinically significant at higher doses. Known for an intense discontinuation syndrome ('brain zaps') due to its short half-life.\n\nAtención: AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -760,7 +760,7 @@
       "indicaciones_aprobadas_ema": "No approved for MDD (licensed outside EU)",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA/EMA: individualize; ACOG: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA/EMA: individualize; ACOG: individualize | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Anxiety; hot flashes",
       "utilidad_sintomatica_clave": "Depression with fatigue/anergy",
       "riesgo_sindrome_abstinencia": "Moderate",
@@ -789,7 +789,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 1,
       "_search": "desvenlafaxine adp_snri_02 antidepressant dual (snri) serotonin and norepinephrine reuptake inhibitor N06AX23 depression with fatigue/anergy",
-      "perlas_clinicas": "\n\n⚠️ AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia."
+      "perlas_clinicas": "\n\nAtención: AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia."
     },
     {
       "id_farmaco": "ADP_SNRI_03",
@@ -837,7 +837,7 @@
       "indicaciones_aprobadas_ema": "MDD; GAD; Diabetic Neuropathy; Stress Urinary Incontinence",
       "restricciones_ue": "Yes",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA/EMA: individualize; ACOG: individualize | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA/EMA: individualize; ACOG: individualize | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "Non-diabetic chronic pain",
       "utilidad_sintomatica_clave": "Depression with somatic pain",
       "riesgo_sindrome_abstinencia": "Moderate",
@@ -865,7 +865,7 @@
       "riesgo_prolongacion_qt_ord": 0,
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 1,
-      "perlas_clinicas": "Dual inhibitor (SNRI) with approved indication in diabetic neuropathic pain and fibromyalgia. Unlike venlafaxine, its dual action is significant from the initial doses (60mg). Requires caution in liver disease and in smokers (tobacco induces its metabolism via CYP1A2).\n\n⚠️ AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
+      "perlas_clinicas": "Dual inhibitor (SNRI) with approved indication in diabetic neuropathic pain and fibromyalgia. Unlike venlafaxine, its dual action is significant from the initial doses (60mg). Requires caution in liver disease and in smokers (tobacco induces its metabolism via CYP1A2).\n\nAtención: AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -928,7 +928,7 @@
       "indicaciones_aprobadas_ema": "N/A",
       "restricciones_ue": "Not licensed in the UK/EU for depression",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA/EMA: individualize; ACOG: balance relapse-risk | 🤰 Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
+      "riesgo_embarazo_multifuente": "FDA/EMA: individualize; ACOG: balance relapse-risk | Pregnancy (Goyal et al., 2023): Risk of exposure must be carefully weighed against the severe impact of untreated maternal depression (low birth weight, preterm birth). Individualize therapy.",
       "indicaciones_off_label": "ADHD (select points)",
       "utilidad_sintomatica_clave": "Depression with apathy and low energy",
       "riesgo_sindrome_abstinencia": "Moderate",
@@ -957,7 +957,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 2,
       "_search": "levomilnacipran adp_snri_04 antidepressant dual (snri) serotonin and norepinephrine reuptake inhibitor (NET>SERT) N06AX28 depression with apathy and low energy",
-      "perlas_clinicas": "\n\n⚠️ AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia."
+      "perlas_clinicas": "\n\nAtención: AGS Beers 2023 Criteria: Use with caution in older adults; exacerbated risk of SIADH and hyponatremia."
     },
     {
       "id_farmaco": "ADP_RAPID_02",
@@ -1838,7 +1838,7 @@
       "riesgo_sindrome_abstinencia_ord": 2,
       "perfil_activacion_ord": 0,
       "_search": "amitriptyline adp_tca_02 antidepressant tca tricyclic SERT and NET inhibition N06AA09 melancholic depression; chronic neuropathic pain; insomnia",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nGold standard tertiary amine TCA for efficacy in severe/melancholic depression. Significant anticholinergic and antihistaminic burden. Widely used at low doses for chronic pain and migraine prophylaxis. Lethal in overdose (sodium channel blockade).",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nGold standard tertiary amine TCA for efficacy in severe/melancholic depression. Significant anticholinergic and antihistaminic burden. Widely used at low doses for chronic pain and migraine prophylaxis. Lethal in overdose (sodium channel blockade).",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -1929,7 +1929,7 @@
       "riesgo_sindrome_abstinencia_ord": 2,
       "perfil_activacion_ord": 0,
       "_search": "clomipramine adp_tca_06 antidepressant tca tricyclic Potent SERT inhibition N06AA04 refractory ocd; severe depression",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nThe only TCA with potency for SERT inhibition comparable to SSRIs. Gold standard for refractory OCD. Higher risk of seizures (dose-dependent, >250mg) than other TCAs. Tertiary amine.",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nThe only TCA with potency for SERT inhibition comparable to SSRIs. Gold standard for refractory OCD. Higher risk of seizures (dose-dependent, >250mg) than other TCAs. Tertiary amine.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2015,7 +2015,7 @@
       "riesgo_sindrome_abstinencia_ord": 2,
       "perfil_activacion_ord": 1,
       "_search": "nortriptyline adp_tca_03 antidepressant tca tricyclic Potent NET inhibition N06AA10 geriatric depression; depression with apathy",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nSecondary amine TCA (metabolite of amitriptyline). Generally better tolerated in the elderly due to lower orthostatic hypotension and anticholinergic burden compared to tertiary amines. Therapeutic window occurs between 50–150 ng/mL levels.",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nSecondary amine TCA (metabolite of amitriptyline). Generally better tolerated in the elderly due to lower orthostatic hypotension and anticholinergic burden compared to tertiary amines. Therapeutic window occurs between 50–150 ng/mL levels.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2101,7 +2101,7 @@
       "riesgo_sindrome_abstinencia_ord": 2,
       "perfil_activacion_ord": 0,
       "_search": "imipramine adp_tca_01 antidepressant tca tricyclic Inhibition of SERT and NET N06AA02 refractory depression; childhood enuresis",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nThe first antidepressant ever discovered (1950s). Tertiary amine. Historically the benchmark for comparing newer antidepressants. Frequent orthostatic hypotension.",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nThe first antidepressant ever discovered (1950s). Tertiary amine. Historically the benchmark for comparing newer antidepressants. Frequent orthostatic hypotension.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2187,7 +2187,7 @@
       "riesgo_sindrome_abstinencia_ord": 2,
       "perfil_activacion_ord": 0,
       "_search": "dosulepin adp_tca_09 antidepressant tca tricyclic Inhibition of SERT and NET N06AA16 depression with severe insomnia",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nTertiary amine TCA similar to amitriptyline but associated with even higher cardiotoxicity in overdose. Use has declined or been restricted in many countries (e.g. UK). Avoid in patients at high suicide risk.",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nTertiary amine TCA similar to amitriptyline but associated with even higher cardiotoxicity in overdose. Use has declined or been restricted in many countries (e.g. UK). Avoid in patients at high suicide risk.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2273,7 +2273,7 @@
       "riesgo_sindrome_abstinencia_ord": 2,
       "perfil_activacion_ord": 1,
       "_search": "lofepramine adp_tca_10 antidepressant tca tricyclic Potent NET inhibition N06AA07 TCA with lower cardiotoxicity profile",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nA TCA that is highly lipophilic and behaves like a prodrug for desipramine. It is significantly less cardiotoxic than amitriptyline or imipramine. However, it is uniquely associated with hepatotoxicity risk.",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nA TCA that is highly lipophilic and behaves like a prodrug for desipramine. It is significantly less cardiotoxic than amitriptyline or imipramine. However, it is uniquely associated with hepatotoxicity risk.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -3062,7 +3062,7 @@
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 0,
       "_search": "maprotiline adp_tca_07 tetracyclic antidepressant potent selective norepinephrine reuptake inhibitor (net) n06aa21 depression with severe anergia requiring nighttime sedation neuropathic pain",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nTetracyclic with TCA-like effects but very marked NET selectivity. Risk of seizures significantly higher than other antidepressants, especially at doses >200 mg or with rapid titration.",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nTetracyclic with TCA-like effects but very marked NET selectivity. Risk of seizures significantly higher than other antidepressants, especially at doses >200 mg or with rapid titration.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -3148,7 +3148,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 0,
       "_search": "amoxapine adp_tca_08 tricyclic antidepressant with antipsychotic effect net/sert reuptake inhibition + d2 antagonism (via 7-hydroxyamoxapine) n06aa17 major depression with psychotic features or severe agitation psychotic depression (historical use)",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nThe only classic antidepressant with relevant D2 antagonist activity (via the 7-OH metabolite). Useful in psychotic depression, but carries a risk of extrapyramidal symptoms and tardive dyskinesia. Structurally related to loxapine.",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic profile, sedation, and orthostatic hypotension risk.\n\nThe only classic antidepressant with relevant D2 antagonist activity (via the 7-OH metabolite). Useful in psychotic depression, but carries a risk of extrapyramidal symptoms and tardive dyskinesia. Structurally related to loxapine.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -3234,7 +3234,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 2,
       "_search": "desipramine adp_tca_04 antidepressant (tca) reuptake inhibition net>>sert; m1/h1/α1 antagonism (less sedation) n06aa01 depression with retardation/fatigue (if activation tolerated) adhd (select); neuropathic pain (select)",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic effect, sedation, and orthostatic hypotension risk.\n\nSecondary amine (metabolite of imipramine). Potent selective norepinephrine reuptake inhibitor (NET). Lower anticholinergic burden than tertiary TCAs, but monitor cardiac risk.",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic effect, sedation, and orthostatic hypotension risk.\n\nSecondary amine (metabolite of imipramine). Potent selective norepinephrine reuptake inhibitor (NET). Lower anticholinergic burden than tertiary TCAs, but monitor cardiac risk.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -3325,7 +3325,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 0,
       "_search": "doxepin adp_tca_05 antidepressant (tca) reuptake inhibition sert/net; h1/m1/α1 antagonism (highly sedating) n06aa12 severe comorbid insomnia; anxious depression with insomnia insomnia (low doses); pruritus (select)",
-      "perlas_clinicas": "⚠️ AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic effect, sedation, and orthostatic hypotension risk.\n\nTCA with extremely high H1 affinity, used at low doses for insomnia (Silenor) and topically for pruritus. Prominent sedative effect. Cardiac risk in overdose.",
+      "perlas_clinicas": "Atención: AGS Beers 2023 Criteria: AVOID in older adults due to potent anticholinergic effect, sedation, and orthostatic hypotension risk.\n\nTCA with extremely high H1 affinity, used at low doses for insomnia (Silenor) and topically for pruritus. Prominent sedative effect. Cardiac risk in overdose.",
       "evidence": {
         "perlas_clinicas": [
           {

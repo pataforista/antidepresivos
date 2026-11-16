@@ -1666,7 +1666,7 @@
       "autorizado_ema": true,
       "indicaciones_aprobadas_ema": "Enfermedad depresiva; Trastorno obsesivo-compulsivo (TOC); Trastorno de pánico; Trastorno de ansiedad social; Trastorno de estrés postraumático (TEPT)",
       "restricciones_ue": "Sí",
-      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Ansiedad generalizada; depresión posparto",
       "utilidad_sintomatica_clave": "Ansiedad; síntomas obsesivo-compulsivos; rumiación",
       "riesgo_sindrome_abstinencia": "Moderado",
@@ -1694,7 +1694,7 @@
       "riesgo_prolongacion_qt_ord": 0,
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 1,
-      "perlas_clinicas": "Inhibidor selectivo de la recaptura de serotonina (ISRS) derivado de la naftilamina. Único ISRS con inhibición leve de la recaptura de dopamina a dosis altas (unión sigma-1), lo que puede aportar un perfil activador leve. Considerado el ISRS de elección en pacientes post-infarto (estudio SADHEART).\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+      "perlas_clinicas": "Inhibidor selectivo de la recaptura de serotonina (ISRS) derivado de la naftilamina. Único ISRS con inhibición leve de la recaptura de dopamina a dosis altas (unión sigma-1), lo que puede aportar un perfil activador leve. Considerado el ISRS de elección en pacientes post-infarto (estudio SADHEART).\n\nAtención: Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -1758,7 +1758,7 @@
       "indicaciones_aprobadas_ema": "Depresión mayor; Bulimia nerviosa; Trastorno obsesivo-compulsivo (TOC)",
       "restricciones_ue": "Sí",
       "aprobado_uso_pediatrico": true,
-      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Trastornos de ansiedad; depresión posparto",
       "utilidad_sintomatica_clave": "Anhedonia; apatía; síntomas obsesivo-compulsivos",
       "riesgo_sindrome_abstinencia": "Bajo",
@@ -1786,7 +1786,7 @@
       "riesgo_prolongacion_qt_ord": 0,
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 2,
-      "perlas_clinicas": "El ISRS con mayor vida media (norfluoxetina hasta 15 días), lo que reduce el riesgo de síndrome por discontinuación brusca. Posee un perfil activador por antagonismo 5-HT2C. Requiere el lavado más prolongado (5 semanas) para el cambio a un IMAO debido a su acumulación.\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+      "perlas_clinicas": "El ISRS con mayor vida media (norfluoxetina hasta 15 días), lo que reduce el riesgo de síndrome por discontinuación brusca. Posee un perfil activador por antagonismo 5-HT2C. Requiere el lavado más prolongado (5 semanas) para el cambio a un IMAO debido a su acumulación.\n\nAtención: Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -1849,7 +1849,7 @@
       "indicaciones_aprobadas_ema": "Depresión mayor; Trastorno de ansiedad social; Trastorno por estrés postraumático (TEPT); Trastorno de ansiedad generalizada; Trastorno obsesivo-compulsivo; Trastorno de pánico",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Ansiedad generalizada",
       "utilidad_sintomatica_clave": "Ansiedad somática; insomnio con ansiedad",
       "riesgo_sindrome_abstinencia": "Alto",
@@ -1940,7 +1940,7 @@
       "indicaciones_aprobadas_ema": "Enfermedad depresiva; Trastorno de pánico",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar; ACOG: individualizar | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Ansiedad generalizada",
       "utilidad_sintomatica_clave": "Ansiedad; rumiación",
       "riesgo_sindrome_abstinencia": "Bajo",
@@ -1968,7 +1968,7 @@
       "riesgo_prolongacion_qt_ord": 2,
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 0,
-      "perlas_clinicas": "ISRS con alta selectividad. Su uso está condicionado por la dosis-dependencia de la prolongación del intervalo QTc. Se recomienda no exceder los 40mg (20mg en ancianos). Es una mezcla racémica, donde el S-citalopram es el enantiómero activo.\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+      "perlas_clinicas": "ISRS con alta selectividad. Su uso está condicionado por la dosis-dependencia de la prolongación del intervalo QTc. Se recomienda no exceder los 40mg (20mg en ancianos). Es una mezcla racémica, donde el S-citalopram es el enantiómero activo.\n\nAtención: Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2031,7 +2031,7 @@
       "indicaciones_aprobadas_ema": "Enfermedad depresiva; Trastorno de ansiedad generalizada; Trastorno obsesivo-compulsivo; Trastorno de pánico; Trastorno de ansiedad social",
       "restricciones_ue": "Sí",
       "aprobado_uso_pediatrico": true,
-      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Trastorno de pánico",
       "utilidad_sintomatica_clave": "Ansiedad; rumiación",
       "riesgo_sindrome_abstinencia": "Bajo",
@@ -2059,7 +2059,7 @@
       "riesgo_prolongacion_qt_ord": 1,
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 0,
-      "perlas_clinicas": "Enantiómero S puro del citalopram. Es el ISRS con mayor selectividad por el transportador de serotonina (SERT), lo que minimiza interacciones y efectos secundarios. En el metaanálisis de Cipriani (2018), se posicionó como uno de los antidepresivos con mejor balance entre eficacia y aceptabilidad.\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+      "perlas_clinicas": "Enantiómero S puro del citalopram. Es el ISRS con mayor selectividad por el transportador de serotonina (SERT), lo que minimiza interacciones y efectos secundarios. En el metaanálisis de Cipriani (2018), se posicionó como uno de los antidepresivos con mejor balance entre eficacia y aceptabilidad.\n\nAtención: Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2122,7 +2122,7 @@
       "indicaciones_aprobadas_ema": "Enfermedad depresiva; Trastorno obsesivo-compulsivo",
       "restricciones_ue": "Sí",
       "aprobado_uso_pediatrico": true,
-      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA: datos limitados; EMA: individualizar | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Depresión",
       "utilidad_sintomatica_clave": "Síntomas obsesivo-compulsivos; ansiedad",
       "riesgo_sindrome_abstinencia": "Bajo",
@@ -2151,7 +2151,7 @@
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 0,
       "_search": "fluvoxamina adp_ssri_06 antidepresivo isrs inhibicion selectiva de la recaptura de serotonina n06ab08 sintomas obsesivo-compulsivos; ansiedad",
-      "perlas_clinicas": "\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia."
+      "perlas_clinicas": "\n\nAtención: Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia."
     },
     {
       "id_farmaco": "ADP_SNRI_01",
@@ -2199,7 +2199,7 @@
       "indicaciones_aprobadas_ema": "Trastorno depresivo mayor; trastorno de ansiedad generalizada; trastorno de ansiedad social",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: individualizar | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Dolor neuropático; bochornos",
       "utilidad_sintomatica_clave": "Depresión con ansiedad y dolor comórbido",
       "riesgo_sindrome_abstinencia": "Moderado",
@@ -2227,7 +2227,7 @@
       "riesgo_prolongacion_qt_ord": 0,
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 1,
-      "perlas_clinicas": "Inhibidor dual (SNRI). A dosis bajas (<150mg) actúa principalmente como un ISRS; la inhibición de la recaptura de noradrenalina se vuelve clínicamente significativa a dosis más altas. Conocido por un síndrome de discontinuación intenso ('chispazos eléctricos') debido a su vida media corta.\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+      "perlas_clinicas": "Inhibidor dual (SNRI). A dosis bajas (<150mg) actúa principalmente como un ISRS; la inhibición de la recaptura de noradrenalina se vuelve clínicamente significativa a dosis más altas. Conocido por un síndrome de discontinuación intenso ('chispazos eléctricos') debido a su vida media corta.\n\nAtención: Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2290,7 +2290,7 @@
       "indicaciones_aprobadas_ema": "No aprobada por EMA/UK para depresión (autorizada fuera de UE)",
       "restricciones_ue": "No",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: individualizar | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Ansiedad; bochornos",
       "utilidad_sintomatica_clave": "Depresión con fatiga/anergia",
       "riesgo_sindrome_abstinencia": "Moderado",
@@ -2319,7 +2319,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 1,
       "_search": "desvenlafaxina adp_snri_02 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (isrn/snri) n06ax23 depresion con fatiga/anergia",
-      "perlas_clinicas": "\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia."
+      "perlas_clinicas": "\n\nAtención: Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia."
     },
     {
       "id_farmaco": "ADP_SNRI_03",
@@ -2367,7 +2367,7 @@
       "indicaciones_aprobadas_ema": "Trastorno depresivo mayor; Trastorno de ansiedad generalizada; Neuropatía diabética; Incontinencia urinaria de esfuerzo",
       "restricciones_ue": "Sí",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: individualizar | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: individualizar | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "Dolor crónico no diabético",
       "utilidad_sintomatica_clave": "Depresión con dolor somático",
       "riesgo_sindrome_abstinencia": "Moderado",
@@ -2395,7 +2395,7 @@
       "riesgo_prolongacion_qt_ord": 0,
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 1,
-      "perlas_clinicas": "Inhibidor dual (SNRI) con indicación aprobada en dolor neuropático diabético y fibromialgia. A diferencia de venlafaxina, su acción dual es significativa desde las dosis iniciales (60mg). Requiere precaución en hepatopatía y en fumadores (el tabaco induce su metabolismo vía CYP1A2).\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
+      "perlas_clinicas": "Inhibidor dual (SNRI) con indicación aprobada en dolor neuropático diabético y fibromialgia. A diferencia de venlafaxina, su acción dual es significativa desde las dosis iniciales (60mg). Requiere precaución en hepatopatía y en fumadores (el tabaco induce su metabolismo vía CYP1A2).\n\nAtención: Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2458,7 +2458,7 @@
       "indicaciones_aprobadas_ema": "N/A",
       "restricciones_ue": "Not licensed in the UK/EU for depression",
       "aprobado_uso_pediatrico": false,
-      "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: balance recaída-riesgo | 🤰 Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
+      "riesgo_embarazo_multifuente": "FDA/EMA: individualizar; ACOG: balance recaída-riesgo | Embarazo (Goyal et al., 2023): Se debe ponderar el riesgo de exposición frente al impacto severo de la depresión materna no tratada (bajo peso al nacer, parto prematuro). Individualizar terapia.",
       "indicaciones_off_label": "TDAH (selecto)",
       "utilidad_sintomatica_clave": "Depresión con apatía y baja energía",
       "riesgo_sindrome_abstinencia": "Moderado",
@@ -2487,7 +2487,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 2,
       "_search": "levomilnacipran adp_snri_04 antidepresivo dual (snri) inhibidor de la recaptura de serotonina y noradrenalina (net>sert) n06ax28 depresion con apatia y baja energia",
-      "perlas_clinicas": "\n\n⚠️ Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia."
+      "perlas_clinicas": "\n\nAtención: Criterios AGS Beers 2023: Usar con precaución en adultos mayores; riesgo exacerbado de SIADH e hiponatremia."
     },
     {
       "id_farmaco": "ADP_TCA_01",
@@ -2564,7 +2564,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 0,
       "_search": "imipramina adp_tca_01 antidepresivo triciclico (tca) inhibicion recaptura sert/net; antagonismo m1/h1/α1 n06aa02 depresion con dolor; insomnio (si sedacion deseada) enuresis nocturna (historico); dolor neuropatico (selecto)",
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nEl TCA prototipo. Históricamente 'gold standard' en trastorno de pánico y depresión melancólica. También usado en enuresis nocturna. Fuerte carga anticolinérgica y riesgo de hipotensión ortostática. Metabolizado a desipramina.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nEl TCA prototipo. Históricamente 'gold standard' en trastorno de pánico y depresión melancólica. También usado en enuresis nocturna. Fuerte carga anticolinérgica y riesgo de hipotensión ortostática. Metabolizado a desipramina.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2654,7 +2654,7 @@
       "riesgo_prolongacion_qt_ord": 2,
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 0,
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA terciario muy sedante y con alta carga anticolinérgica. Uso común 'off-label' a dosis bajas para dolor neuropático, migraña e insomnio. Muy tóxico en sobredosis (arritmias). Metabolizado a nortriptilina. Es el fármaco de referencia histórica en depresión melancólica.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA terciario muy sedante y con alta carga anticolinérgica. Uso común 'off-label' a dosis bajas para dolor neuropático, migraña e insomnio. Muy tóxico en sobredosis (arritmias). Metabolizado a nortriptilina. Es el fármaco de referencia histórica en depresión melancólica.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2745,7 +2745,7 @@
       "riesgo_prolongacion_qt_ord": 2,
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 1,
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nAmina secundaria (metabolito de amitriptilina) con 'ventana terapéutica' definida (50-150 mcg/L). Menos sedante y ortostática que la amitriptilina; a menudo preferida en ancianos cuando se requiere un TCA. Potente inhibidor de la recaptura de noradrenalina.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nAmina secundaria (metabolito de amitriptilina) con 'ventana terapéutica' definida (50-150 mcg/L). Menos sedante y ortostática que la amitriptilina; a menudo preferida en ancianos cuando se requiere un TCA. Potente inhibidor de la recaptura de noradrenalina.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2837,7 +2837,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 2,
       "_search": "desipramina adp_tca_04 antidepresivo triciclico (tca) inhibicion recaptura net>>sert; antagonismo m1/h1/α1 (menor sedacion) n06aa01 depresion con enlentecimiento/fatiga (si tolera activacion) tdah (selecto); dolor neuropatico (selecto)",
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nAmina secundaria (metabolito de imipramina). Potente inhibidor selectivo de recaptación de norepinefrina (NET). Menor carga anticolinérgica que los TCA terciarios, pero vigilar riesgo cardíaco.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nAmina secundaria (metabolito de imipramina). Potente inhibidor selectivo de recaptación de norepinefrina (NET). Menor carga anticolinérgica que los TCA terciarios, pero vigilar riesgo cardíaco.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -2928,7 +2928,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 0,
       "_search": "doxepina adp_tca_05 antidepresivo triciclico (tca) inhibicion recaptura sert/net; antagonismo h1/m1/α1 (muy sedante) n06aa12 insomnio severo comorbido; depresion ansiosa con insomnio insomnio (dosis bajas); prurito (selecto)",
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA con afinidad H1 extremadamente alta, usado a dosis bajas para insomnio (Silenor) y dermatológicamente para prurito. Efecto sedante prominente. Riesgo cardíaco en sobredosis.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA con afinidad H1 extremadamente alta, usado a dosis bajas para insomnio (Silenor) y dermatológicamente para prurito. Efecto sedante prominente. Riesgo cardíaco en sobredosis.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -3019,7 +3019,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 0,
       "_search": "clomipramina adp_tca_06 antidepresivo triciclico (tca) inhibicion recaptura sert>>net; antagonismo m1/h1/α1 n06aa04 sintomas obsesivo-compulsivos graves; rumiacion intensa panico; depresion resistente (uso historico)",
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA con mayor potencia serotoninérgica; 'gold standard' para TOC (incluyendo niños). Alta incidencia de efectos adversos sexuales y anticolinérgicos. Riesgo de convulsiones y cardiotoxicidad en dosis altas.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA con mayor potencia serotoninérgica; 'gold standard' para TOC (incluyendo niños). Alta incidencia de efectos adversos sexuales y anticolinérgicos. Riesgo de convulsiones y cardiotoxicidad en dosis altas.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -3110,7 +3110,7 @@
       "riesgo_sindrome_abstinencia_ord": 0,
       "perfil_activacion_ord": 0,
       "_search": "maprotilina adp_tca_07 antidepresivo tetracíclico inhibidor potente y selectivo de la recaptura de noradrenalina (net) n06aa21 depresion con anergia severa dolor neuropatico",
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTetracíclico similar a los TCA en efectos, pero con selectividad NET muy marcada. Riesgo de convulsiones significativamente mayor que otros antidepresivos, especialmente en dosis >200mg o titulación rápida.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTetracíclico similar a los TCA en efectos, pero con selectividad NET muy marcada. Riesgo de convulsiones significativamente mayor que otros antidepresivos, especialmente en dosis >200mg o titulación rápida.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -3196,7 +3196,7 @@
       "riesgo_sindrome_abstinencia_ord": 1,
       "perfil_activacion_ord": 0,
       "_search": "amoxapina adp_tca_08 antidepresivo triciclico con efecto antipsicótico inhibición recaptura net/sert + antagonismo d2 (vía 7-hidroxiamoxapina) n06aa17 depresion con psicosis o agitacion",
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nÚnico antidepresivo clásico con actividad antagonista D2 relevante (vía metabolito 7-OH). Útil en depresión psicótica, pero conlleva riesgo de síntomas extrapiramidales y discinesia tardía. Estructuralmente relacionada con la loxapina.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nÚnico antidepresivo clásico con actividad antagonista D2 relevante (vía metabolito 7-OH). Útil en depresión psicótica, pero conlleva riesgo de síntomas extrapiramidales y discinesia tardía. Estructuralmente relacionada con la loxapina.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -3282,7 +3282,7 @@
       "riesgo_sindrome_abstinencia_ord": 2,
       "perfil_activacion_ord": 0,
       "_search": "dosulepina adp_tca_09 antidepresivo triciclico (tca) inhibicion de sert y net; antihistaminico/anticolinergico n06aa16 depresion con insomnio severo insomnio",
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA de amina terciaria similar a la amitriptilina pero con cardiotoxicidad aún mayor en sobredosis. Su uso ha disminuido o se ha restringido en muchos países (p. ej. Reino Unido). Evitar en pacientes con alto riesgo de suicidio.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA de amina terciaria similar a la amitriptilina pero con cardiotoxicidad aún mayor en sobredosis. Su uso ha disminuido o se ha restringido en muchos países (p. ej. Reino Unido). Evitar en pacientes con alto riesgo de suicidio.",
       "evidence": {
         "perlas_clinicas": [
           {
@@ -3368,7 +3368,7 @@
       "riesgo_sindrome_abstinencia_ord": 2,
       "perfil_activacion_ord": 1,
       "_search": "lofepramina adp_tca_10 antidepresivo triciclico (tca) inhibicion potente de net; inhibicion leve de sert n06aa07 tca con menor perfil de cardiotoxicidad no aplica",
-      "perlas_clinicas": "⚠️ Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA muy lipófilo que se comporta como profármaco de la desipramina. Es notablemente menos cardiotóxico que la amitriptilina o la imipramina. Sin embargo, se asocia de forma característica con riesgo de hepatotoxicidad.",
+      "perlas_clinicas": "Atención: Criterios AGS Beers 2023: EVITAR en adultos mayores por potente efecto anticolinérgico, sedación y riesgo de hipotensión ortostática.\n\nTCA muy lipófilo que se comporta como profármaco de la desipramina. Es notablemente menos cardiotóxico que la amitriptilina o la imipramina. Sin embargo, se asocia de forma característica con riesgo de hepatotoxicidad.",
       "evidence": {
         "perlas_clinicas": [
           {

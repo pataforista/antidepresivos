@@ -1,7 +1,7 @@
 [
   {
     "id": "california_rocket_fuel",
-    "name": "California Rocket Fuel 🚀",
+    "name": "California Rocket Fuel",
     "drugs": [
       "Mirtazapina",
       "Venlafaxina"
@@ -30,7 +30,7 @@
   },
   {
     "id": "welloft_heroic",
-    "name": "Welloft / Heroic Combo 🛡️",
+    "name": "Welloft / Heroic Combo",
     "drugs": [
       "Sertralina",
       "Bupropión"
@@ -58,7 +58,7 @@
   },
   {
     "id": "ssri_trazodone",
-    "name": "ISRS + Trazodona 🌙",
+    "name": "ISRS + Trazodona",
     "drugs": [
       "Fluoxetina",
       "Trazodona",
@@ -93,7 +93,7 @@
   },
   {
     "id": "ssri_maoi_warning",
-    "name": "SÍNDROME SEROTONINÉRGICO ☠️",
+    "name": "SÍNDROME SEROTONINÉRGICO",
     "drugs": [],
     "drug_classes": [
       "isrs",
@@ -107,7 +107,7 @@
     "clinical_benefits": [],
     "warnings": [
       "SÍNTOMAS CRÍTICOS: Hipertermia, clonus (espontáneo, inducible u ocular), temblor, agitación, diaforesis y rigidez muscular (criterios de Hunter).",
-      "⚠️ Períodos de lavado obligatorios: respetar los períodos de lavado antes de combinar o rotar a un fármaco serotoninérgico. Fluoxetina: 35 días (norfluoxetina de vida media larga). Vortioxetina: 21 días. Moclobemida (RIMA): 24 horas al cambiar desde moclobemida; la combinación con vortioxetina está contraindicada. IMAO irreversibles: 14 días desde el IMAO; 14 días hacia el IMAO desde la mayoría de antidepresivos."
+      "Atención: Períodos de lavado obligatorios: respetar los períodos de lavado antes de combinar o rotar a un fármaco serotoninérgico. Fluoxetina: 35 días (norfluoxetina de vida media larga). Vortioxetina: 21 días. Moclobemida (RIMA): 24 horas al cambiar desde moclobemida; la combinación con vortioxetina está contraindicada. IMAO irreversibles: 14 días desde el IMAO; 14 días hacia el IMAO desde la mayoría de antidepresivos."
     ],
     "sources": [
       "Stahl, S. M. (2013). Stahl's Essential Psychopharmacology."
@@ -115,7 +115,7 @@
   },
   {
     "id": "ssri_snri_lithium",
-    "name": "Potenciación con Litio ⚡",
+    "name": "Potenciación con Litio",
     "drugs": [
       "Fluoxetina",
       "Sertralina",
@@ -158,7 +158,7 @@
   },
   {
     "id": "ssri_snri_aripiprazole",
-    "name": "Potenciación con Aripiprazol 🎯",
+    "name": "Potenciación con Aripiprazol",
     "drugs": [
       "Fluoxetina",
       "Sertralina",
@@ -201,7 +201,7 @@
   },
   {
     "id": "ssri_snri_quetiapine",
-    "name": "Potenciación con Quetiapina XR 🌙",
+    "name": "Potenciación con Quetiapina XR",
     "drugs": [
       "Fluoxetina",
       "Sertralina",
@@ -244,7 +244,7 @@
   },
   {
     "id": "ssri_liothyronine_t3",
-    "name": "Potenciación con Liotironina (T3) 🧪",
+    "name": "Potenciación con Liotironina (T3)",
     "drugs": [
       "Fluoxetina",
       "Sertralina",
