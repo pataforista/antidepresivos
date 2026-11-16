@@ -3,16 +3,16 @@
   "release-type": "node",
   "bump-minor-pre-major": true,
   "changelog-sections": [
-    { "type": "clinical", "section": "🩺 Cambios Clínicos", "hidden": false },
-    { "type": "feat",     "section": "✨ Features",        "hidden": false },
-    { "type": "fix",      "section": "🐛 Bug Fixes",       "hidden": false },
-    { "type": "perf",     "section": "⚡ Performance",      "hidden": false },
-    { "type": "refactor", "section": "♻️ Refactors",        "hidden": false },
-    { "type": "docs",     "section": "📚 Documentation",   "hidden": false },
-    { "type": "test",     "section": "🧪 Tests",           "hidden": true  },
-    { "type": "ci",       "section": "🤖 CI/CD",           "hidden": true  },
-    { "type": "build",    "section": "🔧 Build",           "hidden": true  },
-    { "type": "chore",    "section": "🧹 Chores",          "hidden": true  }
+    { "type": "clinical", "section": "Cambios Clínicos", "hidden": false },
+    { "type": "feat",     "section": "Features",        "hidden": false },
+    { "type": "fix",      "section": "Bug Fixes",       "hidden": false },
+    { "type": "perf",     "section": "Performance",      "hidden": false },
+    { "type": "refactor", "section": "Refactors",        "hidden": false },
+    { "type": "docs",     "section": "Documentation",   "hidden": false },
+    { "type": "test",     "section": "Tests",           "hidden": true  },
+    { "type": "ci",       "section": "CI/CD",           "hidden": true  },
+    { "type": "build",    "section": "Build",           "hidden": true  },
+    { "type": "chore",    "section": "Chores",          "hidden": true  }
   ],
   "packages": {
     ".": {

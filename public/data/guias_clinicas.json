@@ -6,7 +6,6 @@
   "conditions": [
     {
       "id": "depresion",
-      "icon": "🌧️",
       "label": {
         "es": "Depresión Mayor",
         "en": "Major Depression"
@@ -59,7 +58,6 @@
     },
     {
       "id": "tag",
-      "icon": "😰",
       "label": {
         "es": "Ansiedad Generalizada (TAG)",
         "en": "Generalized Anxiety (GAD)"
@@ -99,7 +97,6 @@
     },
     {
       "id": "panico",
-      "icon": "💥",
       "label": {
         "es": "Trastorno de Pánico",
         "en": "Panic Disorder"
@@ -124,7 +121,6 @@
     },
     {
       "id": "toc",
-      "icon": "🔁",
       "label": {
         "es": "TOC",
         "en": "OCD"
@@ -149,7 +145,6 @@
     },
     {
       "id": "ansiedad_social",
-      "icon": "🫥",
       "label": {
         "es": "Ansiedad Social",
         "en": "Social Anxiety"
@@ -174,7 +169,6 @@
     },
     {
       "id": "perinatal",
-      "icon": "🤰",
       "label": {
         "es": "Depresión Perinatal / Posparto",
         "en": "Perinatal / Postpartum Depression"
@@ -199,7 +193,6 @@
     },
     {
       "id": "trd",
-      "icon": "🧱",
       "label": {
         "es": "Depresión Resistente (TRD)",
         "en": "Treatment-Resistant Depression (TRD)"

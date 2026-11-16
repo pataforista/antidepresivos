@@ -2,6 +2,7 @@
 import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
+import { getIcon } from "./icons.js";
 
 export function renderGuias(view) {
   const state = store.getState();
@@ -38,7 +39,7 @@ export function renderGuias(view) {
     return `
       <details class="detail-section" style="margin-bottom:var(--space-4);">
         <summary class="detail-section__summary">
-          <span style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.3rem;">${c.icon || "≡"}</span>${escapeHtml(label)}</span>
+          <span style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.3rem;">${getIcon("list")}</span>${escapeHtml(label)}</span>
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body">${blocks}</div>
