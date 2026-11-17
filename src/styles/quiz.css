@@ -252,7 +252,7 @@
   border-radius: 999px;
   padding: 0.35rem 0.9rem;
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--quiz-neon-yell);
   font-family: var(--font-headers);
   letter-spacing: 0.05em;
@@ -264,7 +264,7 @@
   border-radius: 999px;
   padding: 0.35rem 0.9rem;
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--quiz-neon-purp);
   font-family: var(--font-headers);
   letter-spacing: 0.05em;
@@ -345,7 +345,7 @@
 .quiz-drug-name {
   font-family: var(--font-headers);
   font-size: clamp(1.8rem, 6vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #fff;
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
   letter-spacing: 0.03em;
@@ -450,7 +450,7 @@
   justify-content: center;
   font-family: var(--font-headers);
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--quiz-neon-pink);
   letter-spacing: 0;
   transition: background 150ms, border-color 150ms;
@@ -522,7 +522,7 @@
 
 .quiz-feedback-icon {
   font-size: 1.2rem;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .quiz-combo {
@@ -594,7 +594,7 @@
 .quiz-results-pts {
   font-family: var(--font-headers);
   font-size: 4rem;
-  font-weight: 800;
+  font-weight: 700;
   color: #fff;
   text-shadow: 0 0 16px rgba(255,255,255,0.2);
   line-height: 1;
@@ -634,7 +634,7 @@
 .quiz-results-stat-val {
   font-family: var(--font-headers);
   font-size: 1.75rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--quiz-neon-cyan);
 }
 
@@ -771,7 +771,7 @@
 .quiz-clinical-need {
   font-family: var(--font-headers);
   font-size: clamp(1.1rem, 4vw, 1.5rem);
-  font-weight: 800;
+  font-weight: 700;
   color: #fff;
   margin: 0;
   line-height: 1.25;
@@ -857,7 +857,7 @@
 
 .quiz-review-drug {
   font-family: var(--font-headers);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1rem;
   color: #fff;
 }

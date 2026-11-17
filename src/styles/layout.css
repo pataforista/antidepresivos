@@ -635,4 +635,4 @@ html, body {
   outline-offset: 2px;
 }
 /* El contenedor principal recibe foco al usar el skip link, pero sin recuadro visible */
-#appView:focus { outline: none; }
+#appView:focus {  }

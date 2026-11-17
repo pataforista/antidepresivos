@@ -19,7 +19,7 @@
     color: var(--color-text-main);
     box-shadow: var(--shadow-neo-sm);
     transition: all var(--transition-normal);
-    outline: none;
+    
     -webkit-appearance: none;
     appearance: none;
 }

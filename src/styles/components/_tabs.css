@@ -15,7 +15,7 @@
     color: var(--color-text-muted);
     background: none;
     border: none;
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid transparent;
     cursor: pointer;
     transition: all var(--transition-normal);
     font-size: 0.82rem;
