@@ -1,7 +1,9 @@
-/* humano-tokens v1.1.0 — fuente: antipsicoticos-v3
+/* humano-tokens v2.0.0 — núcleo común, idéntico en las siete apps (verificado por hash).
    Tokens del sistema visual "humano" (paleta, superficies por tema, tipografía,
    forma, sombra y espaciado). Especificación: docs/PLAN_UNIFICACION_ESTETICA.md §3.
-   Se carga después de variables.css y antes de layout.css. Cambiar un token =
+   Desde v2.0.0 no contiene tokens propios de una app: esos van en humano-app.css.
+   Ver docs/PLAN_COHERENCIA_ECOSISTEMA.md, E2.
+   Se carga después de styles.css y antes de humano.css. Cambiar un token =
    PR aquí primero, subir la versión, luego copiar a las otras apps (§8). */
 
 :root {
@@ -70,12 +72,6 @@
   --risk-mod: #95540F;
   --risk-low: #2E7A62;
 
-  /* Series de datos (comparador, radar): identidad de cada fármaco, no riesgo. */
-  --viz-1: #4F5BB0;
-  --viz-2: #C9507A;
-  --viz-3: #B8732A;
-  --viz-4: #2B8796;
-  --viz-5: #3E9C7F;
 }
 
 .theme-light,
@@ -127,11 +123,6 @@
   --h-warn-text: #F6D3B0;
   --risk-mod: #E8A45C;
   --risk-low: #4FB596;
-  --viz-1: #A9B3EE;
-  --viz-2: #F08DB0;
-  --viz-3: #E8A45C;
-  --viz-4: #6CC3D0;
-  --viz-5: #4FB596;
   /* Cabeceras con blobs en oscuro (hero, modal): fondo y halos de noche. */
   --hero-dark-a: #2A2D4B;
   --hero-dark-b: #2C2742;

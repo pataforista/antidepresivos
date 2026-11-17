@@ -59,6 +59,13 @@
   --font-sans: var(--font-base);
   --font-mono: "JetBrains Mono", monospace;
 
+  /* Series de datos (comparador, radar): propias de antidepresivos (valores de la copia anterior). */
+  --viz-1: #4F5BB0;
+  --viz-2: #C9507A;
+  --viz-3: #B8732A;
+  --viz-4: #2B8796;
+  --viz-5: #3E9C7F;
+
   /* Transición sin rebote brusco */
   --transition-spring: 240ms cubic-bezier(.2, 0, 0, 1);
 }
@@ -70,4 +77,10 @@
   --color-danger: var(--ritual-red);
   --color-on-primary-container: var(--accent);
   --shadow-dock: 0 -8px 24px rgba(0, 0, 0, 0.25), var(--shadow-neo-md);
+
+  --viz-1: #A9B3EE;
+  --viz-2: #F08DB0;
+  --viz-3: #E8A45C;
+  --viz-4: #6CC3D0;
+  --viz-5: #4FB596;
 }
