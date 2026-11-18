@@ -1,0 +1,19 @@
+{
+  "_nota": "Lista única de herramientas del dominio (PLAN_COHERENCIA_ECOSISTEMA.md, E2/E5). Rutas según D1/D1.1. triagemovil queda fuera hasta decidir R4.",
+  "base": "https://herramientaspsiquiatria.com",
+  "apps": [
+    { "id": "antipsicoticos", "name": "Antipsicóticos", "path": "/antipsicoticos/", "task": "consultar", "desc": "Dosis, equivalencias CPZ, switching y LAI" },
+    { "id": "antidepresivos", "name": "Antidepresivos", "path": "/antidepresivos/", "task": "consultar", "desc": "Perfiles de riesgo, switching e interacciones" },
+    { "id": "laboratorios", "name": "Laboratorios", "path": "/laboratorios/", "task": "vigilar", "desc": "Registro de estudios y alertas de laboratorio" },
+    { "id": "clozapina", "name": "Clozapina: registro y seguimiento", "path": "/clozapina/", "task": "vigilar", "desc": "Hemograma, ANC y seguimiento de clozapina" },
+    { "id": "calculadora", "name": "Calculadora de riesgo MEED", "path": "/calculadora/", "task": "evaluar", "desc": "Triage de riesgo en trastornos alimentarios" },
+    { "id": "examen-mental", "name": "Diccionario de examen mental", "path": "/examen-mental/", "task": "aprender", "desc": "Semiología, casos OSCE y entrenamiento" },
+    { "id": "clases", "name": "Clases de psiquiatría", "path": "/clases/", "task": "aprender", "desc": "Material de clase, casos y guías de residencia" }
+  ],
+  "tareas": {
+    "consultar": "Consultar fármacos",
+    "vigilar": "Registrar y vigilar",
+    "evaluar": "Evaluar",
+    "aprender": "Aprender"
+  }
+}
