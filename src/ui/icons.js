@@ -5,6 +5,7 @@
 
 const PATHS = {
   search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
   home: '<path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/>',
   compare: '<path d="M12 4v16M5 20h14"/><path d="M5 8l-2 6a3 3 0 0 0 4 0zM19 8l-2 6a3 3 0 0 0 4 0z"/><path d="M5 8h14"/>',
   switch: '<path d="M4 8h13l-3-3M20 16H7l3 3"/>',

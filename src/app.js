@@ -15,6 +15,7 @@ import { mountInfoModal } from "./ui/modalInfo.js";
 import { initCardSpotlight, updateGooeyNav, initEntranceAnimations, initScrollHideHeader, initRippleEffect, haptic, withViewTransition } from "./ui/visuals.js";
 import { escapeHtml } from "./core/utils.js";
 import { getIcon } from "./ui/icons.js";
+import { mountBottomSheet } from "./ui/bottomSheet.js";
 import { isNotableRisk, isHighRisk, sedationLabel, sedationVariant } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
 import { i18n } from "./core/i18n.js";
@@ -1092,22 +1093,47 @@ function renderRadarChart(data, colors) {
 }
 
 function mountDock() {
+  // Barra inferior: máximo cinco destinos (Material 3). Los cuatro principales salen de lo que más se consulta
+  // en el tema (comparar, cambio de antidepresivo, interacciones); el resto va en «Más».
   const navItems = [
     { id: "list",      label: i18n.t("nav_home"),    icon: getIcon("home"),     hash: "/",      isRoute: true },
     { id: "compare",   label: i18n.t("btn_compare"), icon: getIcon("compare"),  hash: "/comparador",   isRoute: true },
     { id: "switching", label: i18n.t("btn_switching"), icon: getIcon("switch"), hash: "/switching", isRoute: true },
-    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: getIcon("rx"),        hash: "/ajuste",    isRoute: true },
-    { id: "combo",     label: i18n.t("btn_combo"), icon: getIcon("plus"),       hash: "/combinaciones",     isRoute: true },
     { id: "interact",  label: i18n.t("btn_interact"), icon: getIcon("interact"), hash: "/interacciones",  isRoute: true },
-    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: getIcon("quiz"),    hash: "/quiz",      isRoute: true },
-    { id: "guias",     label: i18n.t("btn_guias"), icon: getIcon("list"),       hash: "/guias",     isRoute: true },
-    { id: "glosario",  label: i18n.t("btn_glosario"), icon: getIcon("book"),    hash: "/glosario",  isRoute: true },
+  ];
+  const moreItems = [
+    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: getIcon("rx"),        hash: "/ajuste" },
+    { id: "combo",     label: i18n.t("btn_combo"), icon: getIcon("plus"),       hash: "/combinaciones" },
+    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: getIcon("quiz"),    hash: "/quiz" },
+    { id: "guias",     label: i18n.t("btn_guias"), icon: getIcon("list"),       hash: "/guias" },
+    { id: "glosario",  label: i18n.t("btn_glosario"), icon: getIcon("book"),    hash: "/glosario" },
+  ];
+  const sheetActions = [
+    { action: "legal",    label: i18n.t("nav_legal"),    icon: getIcon("legal") },
+    { action: "info",     label: i18n.t("nav_credits"), icon: getIcon("info") },
+    { action: "settings", label: i18n.t("btn_settings"), icon: getIcon("settings") },
   ];
   const actionItems = [
-    { id: "legal",    label: i18n.t("nav_legal"),    icon: getIcon("legal"),    hash: "#", isRoute: false, action: "legal"    },
-    { id: "info",     label: i18n.t("nav_credits"), icon: getIcon("info"),      hash: "#", isRoute: false, action: "info"     },
-    { id: "settings", label: i18n.t("btn_settings"), icon: getIcon("settings"), hash: "#", isRoute: false, action: "settings" },
+    { id: "more", label: "Más", icon: getIcon("menu"), hash: "#", isRoute: false, action: "more" },
   ];
+
+  function openMoreSheet() {
+    const rows = moreItems.map(i => `<a class="dock-more__row" href="${i.hash}" data-sheet-link>${i.icon}<span>${escapeHtml(i.label)}</span></a>`).join("")
+      + sheetActions.map(i => `<button type="button" class="dock-more__row" data-sheet-action="${i.action}">${i.icon}<span>${escapeHtml(i.label)}</span></button>`).join("");
+    const sheet = mountBottomSheet({ title: "Más herramientas", contentHTML: `<div class="dock-more">${rows}</div>` });
+    if (!sheet) return;
+    const content = document.querySelector("#bottom-sheet-container .bottom-sheet__content");
+    content?.addEventListener("click", (e) => {
+      const link = e.target.closest("[data-sheet-link]");
+      const act = e.target.closest("[data-sheet-action]");
+      if (link) { sheet.close(); return; }
+      if (act) {
+        sheet.close();
+        const a = act.dataset.sheetAction;
+        setTimeout(() => { if (a === "info") mountInfoModal(); else if (a === "legal") mountLegalModal(); else if (a === "settings") mountSettingsPanel(); }, 320);
+      }
+    });
+  }
 
   let navBar = document.getElementById("floating-dock");
   if (!navBar) {
@@ -1132,6 +1158,7 @@ function mountDock() {
       if (action === "info") mountInfoModal();
       else if (action === "legal") mountLegalModal();
       else if (action === "settings") mountSettingsPanel();
+      else if (action === "more") openMoreSheet();
     });
 
     document.body.appendChild(navBar);
