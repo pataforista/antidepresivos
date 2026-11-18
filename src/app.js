@@ -320,6 +320,7 @@ function mountShell(root) {
         </div>
 
         <div class="header__actions">
+          <div id="humano-shell-slot"></div>
           <button id="btnClearCompare" type="button" class="btn btn--ghost text-xs" aria-label="${i18n.t("aria_clear_compare")}" style="display:none;">
             ${i18n.t("clear_compare")}
           </button>

@@ -48,11 +48,20 @@
     return root;
   }
 
+  // Monta cuando exista el punto de montaje: la cabecera de algunas apps la pinta JavaScript.
   function mount(root) {
-    const slot = document.getElementById("humano-shell-slot");
-    if (slot) { slot.appendChild(root); return; }
-    const header = document.querySelector("header");
-    if (header) header.appendChild(root);
+    function find() {
+      return document.getElementById("humano-shell-slot") || document.querySelector("header");
+    }
+    function place(target) { target.appendChild(root); }
+    const now = find();
+    if (now) { place(now); return; }
+    const obs = new MutationObserver(function () {
+      const target = find();
+      if (target) { obs.disconnect(); place(target); }
+    });
+    obs.observe(document.documentElement, { childList: true, subtree: true });
+    setTimeout(function () { obs.disconnect(); }, 15000);
   }
 
   fetch(SRC + "apps.json", { cache: "force-cache" })

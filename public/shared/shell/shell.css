@@ -34,3 +34,8 @@
   .hs-toggle { padding: 0; width: 44px; justify-content: center; }
   .hs-toggle span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
+
+/* En móvil el panel ocupa el ancho de la ventana, para que nunca se corte. */
+@media (max-width: 480px) {
+  .hs-panel { position: fixed; left: var(--space-3, 12px); right: var(--space-3, 12px); top: 64px; width: auto; max-height: calc(100vh - 80px); }
+}
