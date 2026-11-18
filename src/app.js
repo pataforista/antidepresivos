@@ -313,7 +313,7 @@ function mountShell(root) {
 
   root.innerHTML = `
     <div id="appShell" class="shell">
-      <header class="header">
+      <header class="header" data-hs-header>
         <div class="header__brand">
           <div class="header__logo" title="${escapeHtml(title)}">A</div>
           <span class="header__title">${escapeHtml(title)}</span>
@@ -1112,6 +1112,7 @@ function mountDock() {
   let navBar = document.getElementById("floating-dock");
   if (!navBar) {
     navBar = document.createElement("nav");
+    navBar.setAttribute("data-hs-tabbar", "");
     navBar.id = "floating-dock";
     navBar.className = "floating-dock";
     navBar.setAttribute("aria-label", i18n.t("aria_main_nav"));
