@@ -275,3 +275,12 @@ Estructuralmente está completa: 45/45 fármacos en ambos idiomas, sin campos va
 - Exactitud farmacológica de los campos que coinciden entre CSV y JSON: no se comparó con fuentes externas.
 - `glosario_terminos.json`, `criterios_inclusion_exclusion.json`, `legal.legal001.json` y el banco de preguntas del quiz.
 - Contenido de `missing_pearls.json` más allá de comprobar que todas las entradas tienen evidencia y ningún `quality_flag`.
+
+## Registro de revisiones firmadas
+
+| Commit | Cambio | Revisor | Fecha | Alcance y limitaciones |
+| --- | --- | --- | --- | --- |
+| `69189bd` | `refactor(data)`: marcadores emoji sustituidos por texto en los datos clínicos («⚠️» → «Atención:», se quitó «🤰»). No cambia dosis, umbrales ni recomendaciones. | César Celada | 2026-11-19 | Revisado con limitaciones: la revisión puede contener errores. No sustituye la verificación con la ficha técnica vigente ni el juicio clínico de quien prescribe. |
+
+El commit se hizo antes de tener revisor y por eso no lleva el pie `Reviewer:`; no se reescribe el historial.
+Los commits `clinical:` futuros deben incluir `Reviewer:` según `commitlint.config.mjs`.
