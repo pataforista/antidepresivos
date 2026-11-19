@@ -648,3 +648,21 @@ html, body {
 }
 .dock-more__row:hover { background: var(--bg-hover); }
 .dock-more__row .ui-ico { width: 22px; height: 22px; }
+
+/* ── Cabecera única (docs/CABECERA_Y_NAVEGACION.md, igual que antipsicóticos) ──
+   Marca: cuadro índigo de 32 px con la inicial. Título sin letra de color.
+   Acciones a la derecha: herramientas, tema. Altura 60 px. */
+.header { min-height: 60px; }
+.header__title::first-letter { color: inherit; }
+[data-theme="dark"] .header__title::first-letter { color: inherit; }
+.header__logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: var(--h-btn, var(--h-indigo));
+    font-size: 16px;
+}
+.header__actions { gap: var(--space-2); }
+@media (max-width: 360px) {
+    .header__brand .header__title { display: none; }
+}
