@@ -116,7 +116,7 @@ function renderResult(id1, id2, view, synergies, dataset) {
             <div class="animate-fade-in">
                 <div class="card ${found.type === 'danger' ? 'alert--danger' : 'card--tonal'}" style="margin-bottom: 24px; padding: 24px; border-radius: var(--radius-2xl);">
                     <div style="display:flex; align-items:center; gap:16px; margin-bottom: 16px;">
-                        <div style="font-size: 2.5rem;">${found.type === 'danger' ? '⚠' : '✦'}</div>
+                        <div style="font-size: 2.5rem;">${getIcon(found.type === 'danger' ? 'warning' : 'check')}</div>
                         <div>
                             <h3 style="margin:0; font-family:var(--font-headers); font-weight:600; font-size: 1.5rem;">${escapeHtml(found.name)}</h3>
                             <p style="margin:0; font-size: 0.9rem; opacity: 0.8;">${escapeHtml(found.description)}</p>

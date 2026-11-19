@@ -4,6 +4,7 @@ import { escapeHtml } from "../core/utils.js";
 import { i18n } from "../core/i18n.js";
 import { riskVariant, sedationLabel, sedationVariant } from "../core/drugNormalization.js";
 import { ensurePdfFooter } from "./pdfFooter.js";
+import { getIcon } from "./icons.js";
 
 export function renderDetail(view, id) {
    const state = store.getState();
@@ -32,7 +33,7 @@ export function renderDetail(view, id) {
       <header class="monograph__header glass-effect" style="border-radius:var(--radius-xl); padding:var(--space-6);">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-5); flex-wrap:wrap;">
           <div style="flex:1; min-width:200px;">
-            ${hasBBW ? `<div class="clinical-chip clinical-chip--danger" style="display:inline-flex; margin-bottom:var(--space-3); font-size:0.7rem;">⚠ ${i18n.t("bbw_label")}</div>` : ""}
+            ${hasBBW ? `<div class="clinical-chip clinical-chip--danger" style="display:inline-flex; margin-bottom:var(--space-3); font-size:0.7rem; gap:4px; align-items:center;">${getIcon("warning")} ${i18n.t("bbw_label")}</div>` : ""}
             <h1 class="h1" style="margin:0; letter-spacing:-0.03em;">${escapeHtml(item.nombre_generico)}</h1>
             <div style="font-size:1rem; font-weight:600; font-family:var(--font-headers); color:var(--color-text-muted); margin-top:var(--space-2);">${escapeHtml(item.clase_terapeutica)}</div>
             <div style="display:flex; gap:var(--space-2); margin-top:var(--space-3); flex-wrap:wrap; align-items:center;">
@@ -45,7 +46,7 @@ export function renderDetail(view, id) {
               ↓
             </button>
             <button id="btnMonoCompare" class="m3-fab">
-              ⚖ ${i18n.t("btn_compare")}
+              ${getIcon("compare")} ${i18n.t("btn_compare")}
             </button>
           </div>
         </div>
@@ -175,7 +176,7 @@ function renderTabResumen(item) {
 
       ${item.utilidad_sintomatica_clave ? `
       <div class="alert alert--info">
-         <div style="font-size:1.4rem">☀</div>
+         <div style="font-size:1.4rem; color:var(--color-primary);" aria-hidden="true">${getIcon("tip")}</div>
          <div>
            <strong style="display:block; margin-bottom:var(--space-1)">${i18n.t("clinical_pearl")}</strong>
            <span class="text-body">${escapeHtml(item.utilidad_sintomatica_clave)}</span>
@@ -333,7 +334,7 @@ function renderTabSeguridad(item) {
 
         ${hasBBW ? `
         <div class="alert alert--danger">
-           <div style="font-size:1.4rem">⚠</div>
+           <div style="font-size:1.4rem; color:var(--color-danger);" aria-hidden="true">${getIcon("warning")}</div>
            <div>
              <strong style="display:block; margin-bottom:var(--space-1)">Black Box Warning (FDA)</strong>
              <span class="text-body">Este fármaco tiene advertencias de seguridad importantes que requieren vigilancia clínica estrecha.</span>
@@ -389,7 +390,7 @@ function renderTabSeguridad(item) {
         ${interacciones.length ? `
         <details class="detail-section">
           <summary class="detail-section__summary">
-            <span style="color:var(--color-danger);">⚠ ${i18n.t("contraindicated_interactions")}</span>
+            <span style="color:var(--color-danger); display:inline-flex; gap:4px; align-items:center;">${getIcon("warning")} ${i18n.t("contraindicated_interactions")}</span>
             <span class="detail-section__chevron">▼</span>
           </summary>
           <div class="detail-section__body">

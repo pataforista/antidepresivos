@@ -168,7 +168,7 @@ async function main() {
         store.subscribe("state:path:ui", async ({ prev, next }) => {
           // Sync theme button icon (se busca en cada evento: el shell puede re-montarse)
           const btnTheme = document.getElementById("btnThemeToggle");
-          if (btnTheme) btnTheme.innerHTML = next.theme === "dark" ? "☀" : "☾";
+          if (btnTheme) btnTheme.innerHTML = getIcon(next.theme === "dark" ? "sun" : "moon");
 
           // Apply non-locale settings immediately to DOM
           if (prev.theme      !== next.theme)      applySettingToDOM("theme",      next.theme);
@@ -224,7 +224,7 @@ async function main() {
       : (initialLocale === "en" ? "Could not load data. Please reload the page." : "No se pudieron cargar los datos. Por favor, recarga la página.");
     root.innerHTML = `
       <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; gap:24px; padding:40px; text-align:center;">
-        <div style="font-size:3rem;">${isOffline ? "⊘" : "⚠"}</div>
+        <div style="font-size:3rem;">${getIcon(isOffline ? "block" : "warning")}</div>
         <p style="font-family:var(--font-headers); font-weight:700; color:var(--color-danger); font-size:1.25rem; max-width:400px;">${escapeHtml(msg)}</p>
         <button id="btnRetryLoad" type="button" style="padding:12px 28px; border-radius:999px; background:var(--color-primary); color:white; border:none; cursor:pointer; font-weight:700; font-size:1rem;">
           ${initialLocale === "en" ? "Retry" : "Reintentar"}
@@ -326,7 +326,7 @@ function mountShell(root) {
             ${i18n.t("clear_compare")}
           </button>
           <button id="btnThemeToggle" type="button" aria-label="${i18n.t("aria_theme_toggle")}" class="btn btn--circle btn--ghost" style="width: 44px; height: 44px; font-size: 1.25rem;">
-            ${theme === 'dark' ? '☀' : '☾'}
+            ${getIcon(theme === 'dark' ? 'sun' : 'moon')}
           </button>
           <div id="compareCount" class="chip chip--active text-xs" aria-label="${i18n.t("aria_compare_count")}" role="status" style="display:none;"></div>
         </div>
@@ -465,9 +465,9 @@ function getTaskFilters() {
   return [
     { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "S",
       test: d => parseInt(d.nivel_sedacion) <= 1 },
-    { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "♥",
+    { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: getIcon("heart"),
       test: d => /bajo|leve|mínima|minima|nula|low|mild|none/i.test(d.perfil_disfuncion_sexual || "") },
-    { id: "low_qt",         label: i18n.t("filter_qt"),    icon: "♥",
+    { id: "low_qt",         label: i18n.t("filter_qt"),    icon: getIcon("heart"),
       test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_prolongacion_qt || "") },
     { id: "low_weight",     label: i18n.t("filter_weight"), icon: "W",
       test: d => /neutro|bajo|pérdida|perdida|neutral|low|loss/i.test(d.perfil_impacto_peso || "") },
@@ -552,7 +552,7 @@ function renderSmartTip() {
   const tip = glossary[Math.floor(Math.random() * glossary.length)];
   return `
     <div class="smart-tip animate-on-scroll" style="margin-top:var(--space-8); padding:var(--space-6); border-radius:var(--radius-xl); background:var(--color-surface-raised); border:1px solid var(--color-border); display:flex; gap:var(--space-4); align-items:center;">
-      <div style="font-size:2rem;">☀</div>
+      <div style="font-size:2rem; color:var(--color-primary);" aria-hidden="true">${getIcon("tip")}</div>
       <div>
         <div style="font-family:var(--font-headers); font-weight:600; font-size:0.75rem; color:var(--color-primary); letter-spacing:normal; margin-bottom:4px;">${i18n.t("smart_tip_title")}</div>
         <div style="font-weight:700; font-size:1rem; margin-bottom:2px;">${escapeHtml(tip.term)}</div>
@@ -659,7 +659,7 @@ function renderList(view) {
       <div class="list-header">
         <span class="list-header__count">${items.length} ${items.length !== 1 ? i18n.t("drug_count_plural") : i18n.t("drug_count_singular")}</span>
         <button id="btnGoCompare" type="button" class="m3-fab" ${compareIds.length === 0 ? "disabled" : ""}>
-          ⚖ ${compareIds.length ? `${i18n.t("btn_compare")} (${compareIds.length})` : i18n.t("btn_compare")}
+          ${getIcon("compare")} ${compareIds.length ? `${i18n.t("btn_compare")} (${compareIds.length})` : i18n.t("btn_compare")}
         </button>
       </div>
 
@@ -787,7 +787,7 @@ function attachFilterListeners(view) {
       if (go) {
         const newIds = [...set];
         go.disabled = newIds.length === 0;
-        go.textContent = newIds.length ? `⚖ ${i18n.t("btn_compare")} (${newIds.length})` : `⚖ ${i18n.t("btn_compare")}`;
+        go.innerHTML = `${getIcon("compare")} ${escapeHtml(newIds.length ? `${i18n.t("btn_compare")} (${newIds.length})` : i18n.t("btn_compare"))}`;
       }
     });
   });
@@ -1222,11 +1222,12 @@ function showToast(message, type = 'info', duration = 3500) {
     container.firstElementChild.remove();
   }
 
-  const icons = { info: 'ℹ', success: '✓', warning: '⚠', error: '✕', motivational: '→' };
+  const icons = { info: getIcon("info"), success: getIcon("check"), warning: getIcon("warning"), error: getIcon("block"), motivational: getIcon("tip") };
 
   const toast = document.createElement("div");
   toast.className = `toast toast--${type}`;
-  toast.innerHTML = `<span class="toast__icon">${icons[type] || '•'}</span> <span class="toast__text">${escapeHtml(message)}</span>`;
+  toast.setAttribute("role", type === "error" || type === "warning" ? "alert" : "status");
+  toast.innerHTML = `<span class="toast__icon" aria-hidden="true">${icons[type] || icons.info}</span> <span class="toast__text">${escapeHtml(message)}</span>`;
   toast.style.pointerEvents = "auto";
   container.appendChild(toast);
 

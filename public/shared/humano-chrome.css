@@ -12,7 +12,7 @@
   --font-sans: var(--font-base);
   --font-body: var(--font-base);
   --sans: var(--font-base);
-  --mono: var(--font-mono);
+  --mono: var(--font-mono, ui-monospace, "SF Mono", Menlo, Consolas, monospace);
 }
 
 /* 2. Cabecera común */
@@ -118,4 +118,46 @@
 /* 5. Movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   [data-hs-tabbar], [data-hs-header] * { transition: none !important; animation: none !important; }
+}
+
+/* ── Movimiento común (Material 3: estándar y desaceleración enfatizada) ──
+   Solo si la persona no pidió reducir movimiento. Duraciones cortas: la
+   animación acompaña la acción, no la retrasa. El fundido de <main> usa
+   solo opacidad: un transform crearía un bloque contenedor y movería los
+   elementos fijos (barras, botones flotantes) durante la animación. */
+:root {
+  --hs-dur-fast: 140ms;
+  --hs-dur: 220ms;
+  --hs-ease: cubic-bezier(0.2, 0, 0, 1);
+  --hs-ease-out: cubic-bezier(0.05, 0.7, 0.1, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-hs-header] button,
+  [data-hs-header] .btn,
+  [data-hs-header] a,
+  [data-hs-tabbar] > a,
+  [data-hs-tabbar] > button,
+  .hs-toggle,
+  .hs-link {
+    transition: background-color var(--hs-dur-fast) var(--hs-ease),
+                color var(--hs-dur-fast) var(--hs-ease),
+                border-color var(--hs-dur-fast) var(--hs-ease),
+                box-shadow var(--hs-dur) var(--hs-ease),
+                transform var(--hs-dur-fast) var(--hs-ease);
+  }
+  [data-hs-header] button:active,
+  [data-hs-tabbar] > a:active,
+  [data-hs-tabbar] > button:active,
+  .hs-toggle:active { transform: scale(0.96); }
+
+  .hs-panel:not([hidden]) { animation: hs-pop var(--hs-dur) var(--hs-ease-out); transform-origin: top right; }
+  main { animation: hs-fade 260ms var(--hs-ease-out) both; }
+}
+@keyframes hs-pop {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes hs-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

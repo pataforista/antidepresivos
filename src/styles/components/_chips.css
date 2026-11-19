@@ -38,23 +38,23 @@
 }
 
 .badge--red {
-    background: #fee2e2;
-    color: #991b1b;
+    background: color-mix(in srgb, var(--h-raspberry) 14%, transparent);
+    color: var(--chip-danger-text);
 }
 
 .badge--yellow {
-    background: #fef3c7;
-    color: #92400e;
+    background: color-mix(in srgb, var(--h-amber) 16%, transparent);
+    color: var(--chip-warning-text);
 }
 
 .badge--emerald {
-    background: #d1fae5;
-    color: #065f46;
+    background: color-mix(in srgb, var(--h-mint) 16%, transparent);
+    color: var(--chip-success-text);
 }
 
 .badge--gray {
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--color-surface-container);
+    color: var(--color-text-muted);
 }
 
 /* ============================================================
@@ -138,17 +138,17 @@
 
 .clinical-chip--success {
     background: color-mix(in srgb, var(--h-mint) 14%, transparent);
-    color: #065f46;
+    color: var(--chip-success-text);
 }
 
 .clinical-chip--warning {
     background: color-mix(in srgb, var(--h-amber) 14%, transparent);
-    color: #92400e;
+    color: var(--chip-warning-text);
 }
 
 .clinical-chip--danger {
     background: color-mix(in srgb, var(--h-raspberry) 14%, transparent);
-    color: #991b1b;
+    color: var(--chip-danger-text);
 }
 
 .clinical-chip--neutral {
@@ -158,5 +158,5 @@
 
 .clinical-chip--primary {
     background: color-mix(in srgb, var(--h-indigo) 14%, transparent);
-    color: var(--h-indigo-deep);
+    color: var(--chip-primary-text);
 }

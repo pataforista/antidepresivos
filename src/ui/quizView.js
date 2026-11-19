@@ -120,7 +120,7 @@ const TEMPLATES = [
   {
     id: "sexual",
     category: i18n.getLocale() === 'en' ? "Sexual dysfunction" : "Disfunción Sexual",
-    icon: "♥",
+    icon: getIcon("heart"),
     difficulty: ["residente", "especialista", "clinico"],
     ask: () => i18n.t("quiz_question_sexual"),
     correct: (d) => d.perfil_disfuncion_sexual,
@@ -153,7 +153,7 @@ const TEMPLATES = [
   {
     id: "interacciones",
     category: i18n.getLocale() === 'en' ? "Interactions" : "Interacciones Peligrosas",
-    icon: "⚠",
+    icon: getIcon("warning"),
     difficulty: ["especialista", "clinico"],
     ask: () => i18n.t("quiz_question_interact"),
     correct: (d) => d.interacciones_contraindicadas,
@@ -175,7 +175,7 @@ const TEMPLATES = [
   {
     id: "qt",
     category: i18n.getLocale() === 'en' ? "QT Risk" : "Riesgo QT",
-    icon: "♥",
+    icon: getIcon("heart"),
     difficulty: ["especialista"],
     ask: () => i18n.t("quiz_question_qt"),
     correct: (d) => d.riesgo_prolongacion_qt,

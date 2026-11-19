@@ -428,13 +428,18 @@ html, body {
     }
 }
 
+/* Etiquetas visibles también en móvil (Material 3: el destino lleva nombre). */
 @media (max-width: 480px) {
-    .dock-nav-item__label {
-        display: none;
-    }
     .dock-nav-item {
-        min-width: 44px;
-        padding: 6px 8px;
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 6px 2px;
+    }
+    .dock-nav-item__label {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 10.5px;
     }
 }
 

@@ -7,6 +7,7 @@
 import { store } from "../core/store.js";
 import { i18n } from "../core/i18n.js";
 import { mountBottomSheet } from "./bottomSheet.js";
+import { getIcon } from "./icons.js";
 
 export function mountSettingsPanel() {
   const ui = store.getState().ui ?? {};
@@ -53,8 +54,8 @@ export function mountSettingsPanel() {
       <section class="settings-section">
         <div class="settings-section__label">${t("settings_theme")}</div>
         <div class="settings-row">
-          ${optionBtn("theme", "light", `☀&nbsp;${t("settings_theme_light")}`, theme === "light")}
-          ${optionBtn("theme", "dark",  `☾&nbsp;${t("settings_theme_dark")}`,  theme === "dark")}
+          ${optionBtn("theme", "light", `${getIcon("sun")}&nbsp;${t("settings_theme_light")}`, theme === "light")}
+          ${optionBtn("theme", "dark",  `${getIcon("moon")}&nbsp;${t("settings_theme_dark")}`,  theme === "dark")}
         </div>
       </section>
 

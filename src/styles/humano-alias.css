@@ -84,3 +84,28 @@
   --viz-4: #6CC3D0;
   --viz-5: #4FB596;
 }
+
+
+/* Texto de estado sobre fichas tintadas (accesibilidad AA en ambos temas).
+   Capa de la app: el núcleo humano-tokens.css no se toca. */
+:root, [data-theme="light"] {
+  --chip-success-text: #065F46;
+  --chip-warning-text: var(--h-warn-text, #7A4310);
+  --chip-danger-text: #991B1B;
+  --chip-primary-text: var(--h-indigo-deep);
+}
+[data-theme="dark"] {
+  --chip-success-text: #8FE3C0;
+  --chip-warning-text: var(--h-warn-text, #F6D3B0);
+  --chip-danger-text: #FFB3C1;
+  --chip-primary-text: #C9CFF6;
+}
+
+/* Variables que se usaban sin definirse (aviso de instalación y layout). */
+:root {
+  --md-space-1: var(--space-1, 4px);
+  --md-space-2: var(--space-2, 8px);
+  --md-space-3: var(--space-3, 12px);
+  --md-space-4: var(--space-4, 16px);
+  --color-text: var(--text-main);
+}

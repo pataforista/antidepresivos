@@ -60,7 +60,7 @@ export function renderGuias(view) {
 
       ${note ? `
       <div class="alert alert--danger" style="margin-top:var(--space-8);">
-        <div class="text-xs" style="line-height:1.6;"><strong>⚠ ${t("Aviso", "Notice")}:</strong> ${escapeHtml(note)}</div>
+        <div class="text-xs" style="line-height:1.6;"><strong style="display:inline-flex; gap:4px; align-items:center;">${getIcon("warning")} ${t("Aviso", "Notice")}:</strong> ${escapeHtml(note)}</div>
       </div>` : ""}
     </div>
   `;
