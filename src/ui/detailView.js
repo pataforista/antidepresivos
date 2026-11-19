@@ -200,7 +200,7 @@ function renderTabResumen(item) {
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body">
-          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:var(--space-5);">
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap:var(--space-5);">
             <div>
               <div class="text-xs" style="font-weight:600; color:var(--color-primary); letter-spacing:normal; margin-bottom:var(--space-2)">FDA</div>
               <ul class="list-disc" style="padding-left:18px; margin:0;">
@@ -495,7 +495,7 @@ function renderTabSwitching(item) {
             <p class="text-xs text-muted" style="margin-top:var(--space-4)">* ${i18n.getLocale() === 'en' ? 'This chart is a schematic representation. Adjust based on clinical response.' : 'Este gráfico es una representación esquemática del protocolo. Ajuste según respuesta clínica.'}</p>
         </div>
 
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:var(--space-4);">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap:var(--space-4);">
             ${infoBox(i18n.t("half_life"), vidaMedia)}
             ${infoBox(i18n.t("withdrawal_risk"), item.riesgo_sindrome_abstinencia || "N/D")}
             ${infoBox(i18n.t("qt_risk"), item.riesgo_prolongacion_qt || "N/D")}

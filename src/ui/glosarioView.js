@@ -119,7 +119,7 @@ function renderCriteriaSection(criteria, isEn, t) {
         <h3 class="h4" style="margin-bottom:var(--space-4); display:flex; align-items:center; gap:8px;">
           <span>${getIcon("check")}</span> ${t("Criterios de Inclusión (45 moléculas)", "Inclusion Criteria (45 molecules)")}
         </h3>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:var(--space-4);">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap:var(--space-4);">
           ${inc.map(item => `
             <div class="card card--spotlight" style="padding:var(--space-5); display:flex; flex-direction:column; justify-content:space-between;">
               <div>

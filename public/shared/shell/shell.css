@@ -26,6 +26,8 @@
 }
 .hs-link:hover { background: var(--bg-hover); }
 .hs-link[aria-current="page"] { background: var(--accent-container); }
+/* Sobre el fondo del elemento actual el gris tenue no llega a 4.5:1: la descripción usa el texto principal. */
+.hs-link[aria-current="page"] .hs-link__desc { color: var(--text-main); }
 .hs-link__name { display: block; font: 600 15px/1.3 var(--font-base); }
 .hs-link__desc { display: block; font: 400 13px/1.35 var(--font-base); color: var(--text-muted); }
 
@@ -37,5 +39,6 @@
 
 /* En móvil el panel ocupa el ancho de la ventana, para que nunca se corte. */
 @media (max-width: 480px) {
-  .hs-panel { position: fixed; left: var(--space-3, 12px); right: var(--space-3, 12px); top: 64px; width: auto; max-height: calc(100vh - 80px); }
+  /* top, left, width y max-height los fija shell.js al abrir (compensa ancestros con backdrop-filter). */
+  .hs-panel { position: fixed; left: var(--space-3, 12px); top: 64px; width: calc(100vw - 24px); max-height: calc(100vh - 80px); }
 }

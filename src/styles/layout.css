@@ -266,13 +266,13 @@ html, body {
 /* ── Grid Layouts ─────────────────────────────────────────── */
 .grid-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
     gap: var(--space-4);
 }
 
 .grid-compare {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: var(--space-4);
     align-items: start;
 }
@@ -331,7 +331,7 @@ html, body {
     }
 
     .grid-cards {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
     }
 
     .grid-compare {

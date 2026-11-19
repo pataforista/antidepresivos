@@ -34,10 +34,29 @@
 
     const toggle = root.querySelector(".hs-toggle");
     const panel = root.querySelector(".hs-panel");
+    // En móvil el panel ocupa el ancho de la ventana. «position: fixed» se mide desde la
+    // ventana salvo que un ancestro tenga filter, transform o backdrop-filter (p. ej. una
+    // cabecera de vidrio): entonces se mide desde ese ancestro y el panel queda fuera de
+    // sitio. Se mide el origen real y se compensa, así funciona con cualquier cabecera.
+    function place() {
+      if (panel.hidden) return;
+      const narrow = window.matchMedia("(max-width: 480px)").matches;
+      ["top", "left", "width", "maxHeight"].forEach(function (k) { panel.style[k] = ""; });
+      if (!narrow) return;
+      panel.style.top = "0px"; panel.style.left = "0px";
+      const origin = panel.getBoundingClientRect();
+      const top = Math.round(toggle.getBoundingClientRect().bottom + 8);
+      panel.style.top = (top - origin.top) + "px";
+      panel.style.left = (12 - origin.left) + "px";
+      panel.style.width = (window.innerWidth - 24) + "px";
+      panel.style.maxHeight = Math.max(160, window.innerHeight - top - 12) + "px";
+    }
     function setOpen(open) {
       toggle.setAttribute("aria-expanded", String(open));
       panel.hidden = !open;
+      if (open) place();
     }
+    window.addEventListener("resize", place);
     toggle.addEventListener("click", function () { setOpen(panel.hidden); });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !panel.hidden) { setOpen(false); toggle.focus(); }

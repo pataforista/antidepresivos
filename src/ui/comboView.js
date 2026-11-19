@@ -23,7 +23,7 @@ export function renderCombo(view) {
             </div>
 
             <div class="card glass-effect" style="padding: var(--space-6); border-radius: var(--radius-2xl); margin-bottom: var(--space-8);">
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 20px;">
                     <div class="field-box" style="background: var(--color-bg); border-radius: var(--radius-xl);">
                         <label class="field-box__label">${i18n.t("combo_select_primary")}</label>
                         <select id="comboPrimary" class="btn btn--ghost" style="width:100%; text-align:left; padding: 8px 0; font-size: 1.1rem; border: none; box-shadow: none;">

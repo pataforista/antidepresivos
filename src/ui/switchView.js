@@ -28,7 +28,7 @@ export function renderSwitching(view) {
             </p>
 
             <div class="card glass-effect" style="padding: var(--space-6); margin-bottom: var(--space-8);">
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 20px;">
                     <div>
                         <label class="field-box__label">${i18n.t("current_drug")}</label>
                         <select id="switchFrom" class="btn btn--outline" style="width:100%; text-align:left; background: var(--color-surface); padding: 12px;">
