@@ -40,9 +40,9 @@
 }
 
 .clinical-summary-item__value--warning {
-    color: #b45309;
+    color: var(--color-warning);
 }
 
 .clinical-summary-item__value--success {
-    color: #047857;
+    color: var(--color-success);
 }

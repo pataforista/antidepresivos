@@ -1,27 +1,30 @@
 /* src/styles/layout.css */
 
 /* ── HTML/Body reset ──────────────────────────────────────── */
+/* El documento es quien desplaza (no <body>): así funcionan la cabecera sticky,
+   window.scrollTo al cambiar de vista, la restauración al volver atrás y, en iOS,
+   el repliegue de la barra de direcciones y el toque en la barra de estado.
+   overflow-x: clip recorta sin crear un contenedor de desplazamiento. */
 html, body {
-    height: 100%;
-    overflow-y: auto;
     background-color: var(--color-bg);
 }
 
 /* ── App Shell ────────────────────────────────────────────── */
 #app {
-    min-height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 .shell {
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    flex: 1;
     width: 100%;
     background: var(--color-bg);
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 /* ── Header (sistema humano: glass-bg, blur, 1px border) ───── */
@@ -237,8 +240,6 @@ html, body {
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-    /* Add bottom clearance for the floating dock + safe area (notch phones) */
-    padding-bottom: calc(var(--dock-height) + var(--space-6) + env(safe-area-inset-bottom));
 }
 
 /* ── Footer ───────────────────────────────────────────────── */
@@ -247,7 +248,7 @@ html, body {
     border-top: 1px solid var(--color-border);
     font-size: 0.8rem;
     color: var(--color-text-muted);
-    background: var(--color-surface);
+    background: transparent;
     text-align: center;
     /* Also give footer clearance so dock doesn't overlap it + safe area */
     padding-bottom: calc(var(--dock-height) + var(--space-3) + env(safe-area-inset-bottom));
@@ -255,6 +256,7 @@ html, body {
 
 .footer__inner {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     max-width: 1400px;
@@ -327,7 +329,6 @@ html, body {
 
     .main {
         padding: var(--space-4) var(--space-4);
-        padding-bottom: calc(var(--dock-height) + var(--space-4) + env(safe-area-inset-bottom));
     }
 
     .grid-cards {
@@ -369,7 +370,6 @@ html, body {
 
     .main {
         padding: var(--space-3) var(--space-3);
-        padding-bottom: calc(var(--dock-height) + var(--space-3) + env(safe-area-inset-bottom));
     }
 
     .detail-layout {
@@ -428,13 +428,31 @@ html, body {
     }
 }
 
-@media (max-width: 480px) {
-    .dock-nav-item__label {
+/* Móvil y tableta: solo destinos primarios + "Más". Etiquetas siempre visibles:
+   un icono suelto (℞, ⇄) no basta para reconocer el destino. */
+.floating-dock .dock-nav-item--more {
+    display: none;
+}
+
+@media (max-width: 1023px) {
+    .floating-dock .dock-nav-item--secondary {
         display: none;
     }
-    .dock-nav-item {
-        min-width: 44px;
-        padding: 6px 8px;
+    .floating-dock .dock-nav-item--more {
+        display: flex;
+    }
+}
+
+@media (max-width: 600px) {
+    .floating-dock .dock-nav-item {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 6px 2px;
+    }
+    .dock-nav-item__label {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
@@ -557,12 +575,15 @@ html, body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* Si el aviso es más alto que la pantalla (móvil pequeño, horizontal, texto grande),
+       el overlay desplaza; margin:auto en la tarjeta la centra cuando sí cabe. */
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding: var(--space-5);
 }
 
 .gatekeeper__card {
+    margin: auto;
     background: var(--color-surface);
     padding: var(--space-6);
     border-radius: 28px;
@@ -621,3 +642,137 @@ html, body {
 }
 /* El contenedor principal recibe foco al usar el skip link, pero sin recuadro visible */
 #appView:focus { outline: none; }
+/* ── Hoja "Más" (navegación secundaria en móvil/tableta) ───── */
+.more-sheet {
+    display: grid;
+    gap: var(--space-4);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.more-sheet__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-2);
+}
+
+.more-sheet__grid--secondary {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: var(--space-4);
+}
+
+.more-sheet__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 48px;
+    padding: var(--space-2) var(--space-3);
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-elevated);
+    color: var(--color-text-main);
+    font: 600 0.95rem/1.2 var(--font-body);
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.more-sheet__item.active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.more-sheet__item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+@media (hover: hover) {
+    .more-sheet__item:hover {
+        background: var(--bg-hover);
+    }
+}
+
+.more-sheet__icon {
+    width: 28px;
+    text-align: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.footer__support {
+    color: var(--color-text-muted);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.footer__support:hover {
+    color: var(--color-primary);
+}
+
+/* Avisos: centrados sobre el dock en móvil para no salirse de la pantalla */
+#toast-container {
+    position: fixed;
+    right: 20px;
+    bottom: calc(var(--dock-height) + 40px + env(safe-area-inset-bottom));
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+    max-width: calc(100vw - 40px);
+}
+
+@media (max-width: 600px) {
+    #toast-container {
+        left: 12px;
+        right: 12px;
+        max-width: none;
+        align-items: stretch;
+    }
+    #toast-container .toast {
+        max-width: none;
+    }
+}
+
+/* ── Tabla del comparador ─────────────────────────────────── */
+.compare-table th:not(:first-child) {
+    min-width: 180px;
+}
+
+/* En móvil, dos fármacos deben verse lado a lado sin desplazar: columnas más
+   estrechas y la columna de rasgos fija al desplazar en horizontal (3+ fármacos). */
+@media (max-width: 600px) {
+    .compare-table th,
+    .compare-table td {
+        padding: 10px 12px !important;
+        font-size: 0.85rem !important;
+        letter-spacing: normal !important;
+    }
+    .compare-table th:not(:first-child) {
+        min-width: 116px;
+    }
+    .compare-table tr > :first-child {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        width: 88px;
+        background: var(--color-surface) !important;
+        box-shadow: 1px 0 0 var(--color-border);
+    }
+}
+
+/* Cabecera en móviles estrechos: "Limpiar" + tema + contador no caben junto a la marca.
+   La comparación se vacía con la × de cada fármaco en el comparador. */
+.header__compare-link {
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+    #btnClearCompare {
+        display: none !important;
+    }
+}

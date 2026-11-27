@@ -20,7 +20,7 @@ export function renderSwitching(view) {
         <div class="animate-fade-in">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6); gap:var(--space-4); flex-wrap:wrap;">
                 <h2 class="h2" style="margin:0">${i18n.t("switching_plan")}</h2>
-                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
+                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("back_to_list")}</a>
             </div>
 
             <p class="text-muted" style="margin-bottom: var(--space-6);">
@@ -30,14 +30,14 @@ export function renderSwitching(view) {
             <div class="card glass-effect" style="padding: var(--space-6); margin-bottom: var(--space-8);">
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
                     <div>
-                        <label class="field-box__label">${i18n.t("current_drug")}</label>
+                        <label class="field-box__label" for="switchFrom">${i18n.t("current_drug")}</label>
                         <select id="switchFrom" class="btn btn--outline" style="width:100%; text-align:left; background: var(--color-surface); padding: 12px;">
                             <option value="">${i18n.t("select")}</option>
                             ${farmacos.map(f => `<option value="${f.id_farmaco}">${f.nombre_generico}</option>`).join('')}
                         </select>
                     </div>
                     <div>
-                        <label class="field-box__label">${i18n.t("new_drug")}</label>
+                        <label class="field-box__label" for="switchTo">${i18n.t("new_drug")}</label>
                         <select id="switchTo" class="btn btn--outline" style="width:100%; text-align:left; background: var(--color-surface); padding: 12px;">
                             <option value="">${i18n.t("select")}</option>
                             ${farmacos.map(f => `<option value="${f.id_farmaco}">${f.nombre_generico}</option>`).join('')}

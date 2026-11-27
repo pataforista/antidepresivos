@@ -27,7 +27,7 @@
 .alert--danger {
     background: color-mix(in srgb, var(--h-raspberry) 10%, transparent);
     border-color: var(--h-raspberry);
-    color: var(--h-raspberry);
+    color: var(--color-danger-text-on-tint);
 }
 
 .alert--warning {

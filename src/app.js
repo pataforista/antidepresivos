@@ -17,6 +17,7 @@ import { escapeHtml } from "./core/utils.js";
 import { isNotableRisk, isHighRisk, sedationLabel, sedationVariant } from "./core/drugNormalization.js";
 import { trackInteraction } from "./ui/coffeePopup.js";
 import { i18n } from "./core/i18n.js";
+import { mountBottomSheet } from "./ui/bottomSheet.js";
 import { mountSettingsPanel, applySettingToDOM, applyUiSetting } from "./ui/settingsPanel.js";
 
 /* ============================================================
@@ -154,8 +155,18 @@ async function main() {
 
 
         // Re-render cuando cambie la ruta (evento correcto del store)
-        store.subscribe("state:path:route", ({ next }) => {
+        // Posición de desplazamiento por URL: al navegar hacia delante se empieza
+        // arriba; con atrás/adelante se recupera donde estaba (p.ej. el listado).
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+        const scrollByPath = new Map();
+        store.subscribe("state:path:route", ({ prev, next }, meta = {}) => {
+          if (prev?.path) scrollByPath.set(prev.path, window.scrollY);
           renderRoute(next);
+          const samePage = prev?.path === next?.path;
+          if (!samePage) {
+            const y = meta.reason === "router:popstate" ? (scrollByPath.get(next.path) ?? 0) : 0;
+            requestAnimationFrame(() => window.scrollTo({ top: y, behavior: "auto" }));
+          }
           updateHeaderNav(next);
           setTimeout(initEntranceAnimations, 10);
           trackInteraction();
@@ -209,9 +220,15 @@ async function main() {
         attachGlobalListeners();
 
         // Welcome toast
-        setTimeout(() => {
-          showToast(initialLocale === 'en' ? "Welcome to Antidepressants!" : "¡Bienvenido al asistente de Antidepresivos!", "info");
-        }, 1200);
+        // Solo en la primera visita: repetido en cada carga tapaba contenido sin aportar.
+        let seenWelcome = false;
+        try { seenWelcome = localStorage.getItem("ui:welcomeSeen") === "1"; } catch { /* almacenamiento bloqueado */ }
+        if (!seenWelcome) {
+          setTimeout(() => {
+            showToast(initialLocale === 'en' ? "Welcome to Antidepressants!" : "¡Bienvenido al asistente de Antidepresivos!", "info");
+          }, 1200);
+          try { localStorage.setItem("ui:welcomeSeen", "1"); } catch { /* sin persistencia */ }
+        }
       },
     });
   } catch (e) {
@@ -293,6 +310,8 @@ function updateHeaderNav(route) {
       el.setAttribute("aria-current", "page");
     }
   });
+  const more = document.querySelector(".dock-nav-item--more");
+  if (more) more.classList.toggle("active", !!routeName && routeName !== "detail" && !DOCK_PRIMARY.has(routeName));
 }
 
 /* ============================================================
@@ -325,7 +344,7 @@ function mountShell(root) {
           <button id="btnThemeToggle" type="button" aria-label="${i18n.t("aria_theme_toggle")}" class="btn btn--circle btn--ghost" style="width: 44px; height: 44px; font-size: 1.25rem;">
             ${theme === 'dark' ? '☀' : '☾'}
           </button>
-          <div id="compareCount" class="chip chip--active text-xs" aria-label="${i18n.t("aria_compare_count")}" role="status" style="display:none;"></div>
+          <a href="/comparador" id="compareCount" class="chip chip--active text-xs header__compare-link" aria-label="${i18n.t("aria_compare_count")}" style="display:none;"></a>
         </div>
       </header>
 
@@ -334,35 +353,11 @@ function mountShell(root) {
       <footer class="footer">
         <div class="footer__inner">
           <span class="text-xs text-muted" style="font-weight:600">SOPORTE CLÍNICO · DR. CELADA</span>
+          <span aria-hidden="true">·</span>
+          <a href="https://buymeacoffee.com/herramente" target="_blank" rel="noopener noreferrer" class="footer__support text-xs">☕ ${i18n.t("aria_support_project")}</a>
         </div>
       </footer>
 
-      <!-- Floating Support Button -->
-      <a href="https://buymeacoffee.com/herramente" target="_blank" rel="noopener noreferrer" class="bmac-floating-btn" title="${i18n.t("aria_support_project")}" aria-label="${i18n.t("aria_support_project")}">
-        <span aria-hidden="true">☕</span>
-      </a>
-
-      <style>
-        .bmac-floating-btn {
-          position: fixed; bottom: calc(var(--dock-height, 82px) + 16px); left: 20px; z-index: 900;
-          width: 50px; height: 50px; background: #FFDD00;
-          border-radius: 50%; display: flex; align-items: center; justify-content: center;
-          text-decoration: none; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-          transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
-          border: 2px solid rgba(0,0,0,0.08);
-        }
-        .bmac-floating-btn:hover { transform: scale(1.1) rotate(-10deg); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        .bmac-floating-btn:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
-        /* Se retira al hacer scroll hacia abajo (misma lógica que el header)
-           para no tapar el contenido de las tarjetas. */
-        .bmac-floating-btn--hidden { transform: translateX(-140%); pointer-events: none; }
-        @media (max-width: 640px) {
-          .bmac-floating-btn { width: 42px; height: 42px; font-size: 1.2rem; left: 12px; }
-        }
-        @media (min-width: 1024px) {
-          .bmac-floating-btn { bottom: calc(var(--dock-height, 82px) + 20px); left: 30px; width: 60px; height: 60px; font-size: 1.8rem; }
-        }
-      </style>
     </div>
   `;
 }
@@ -373,7 +368,8 @@ function updateCompareCount() {
   // Header chip
   const el = document.getElementById("compareCount");
   if (el) {
-    el.textContent = ids.length;
+    el.innerHTML = `<span aria-hidden="true">⚖</span> ${ids.length}`;
+    el.setAttribute("href", ids.length ? `/comparador?ids=${encodeURIComponent(ids.join(","))}` : "/comparador");
     el.style.display = ids.length ? "inline-flex" : "none";
   }
 
@@ -404,8 +400,6 @@ function renderRoute(route) {
     view.innerHTML = "<p>Cargando…</p>";
     return;
   }
-
-  view.scrollTo({ top: 0, behavior: "auto" });
 
   const doRender = () => {
     if (route.name === "list") renderList(view);
@@ -460,13 +454,13 @@ function addRecentItem(id, name, cls) {
    ============================================================ */
 function getTaskFilters() {
   return [
-    { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "S",
+    { id: "low_sedation",   label: i18n.t("filter_sedation"),     icon: "",
       test: d => parseInt(d.nivel_sedacion) <= 1 },
-    { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "♥",
+    { id: "low_sexual",     label: i18n.t("filter_sexual"),    icon: "",
       test: d => /bajo|leve|mínima|minima|nula|low|mild|none/i.test(d.perfil_disfuncion_sexual || "") },
     { id: "low_qt",         label: i18n.t("filter_qt"),    icon: "♥",
       test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_prolongacion_qt || "") },
-    { id: "low_weight",     label: i18n.t("filter_weight"), icon: "W",
+    { id: "low_weight",     label: i18n.t("filter_weight"), icon: "",
       test: d => /neutro|bajo|pérdida|perdida|neutral|low|loss/i.test(d.perfil_impacto_peso || "") },
     { id: "low_withdrawal", label: i18n.t("filter_withdrawal"),  icon: "↺",
       test: d => /bajo|leve|mínimo|minimo|nulo|low|mild|none/i.test(d.riesgo_sindrome_abstinencia || "") },
@@ -598,7 +592,7 @@ function renderList(view) {
   const taskChipsHTML = getTaskFilters().map(t => {
     const isActive = activeTasks.includes(t.id);
     return `<button type="button" class="task-chip ${isActive ? "active" : ""} task-filter-btn" data-task="${escapeHtml(t.id)}">
-      <span class="task-chip__icon">${t.icon}</span>${escapeHtml(t.label)}
+      ${t.icon ? `<span class="task-chip__icon" aria-hidden="true">${t.icon}</span>` : ""}${escapeHtml(t.label)}
     </button>`;
   }).join("");
 
@@ -637,8 +631,7 @@ function renderList(view) {
       <div class="search-hero brutalist-container" role="search">
         <span class="search-hero__icon-left" aria-hidden="true">⌕</span>
         <input type="search" id="inputSearch" class="search-hero__input brutalist-input smooth-type"
-          placeholder=" "
-          aria-label="${i18n.t("search_placeholder")}"
+          placeholder="${i18n.t("search_placeholder")}"
           enterkeyhint="search"
           value="${escapeHtml(state.filters.q || "")}"
           autocomplete="off" autocorrect="off" spellcheck="false" />
@@ -703,6 +696,10 @@ function renderList(view) {
   }
 }
 
+function compareBtnInner(isOn) {
+  return `<span aria-hidden="true">${isOn ? "✓" : "+"}</span> ${isOn ? i18n.t("compare_short_on") : i18n.t("compare_short_add")}`;
+}
+
 function renderDrugCard(d, selected, index = 0) {
   const id = String(d.id_farmaco);
   const name = d.nombre_generico ?? id;
@@ -717,11 +714,11 @@ function renderDrugCard(d, selected, index = 0) {
       <div class="card-drug__header">
         <a href="/farmaco/${encodeURIComponent(id)}" class="card-drug__name">${escapeHtml(name)}</a>
         <button type="button"
-          class="card-drug__compare-btn btn btn--circle chkCompareBtn ${isOn ? "active" : ""}"
+          class="card-drug__compare-btn chkCompareBtn ${isOn ? "active" : ""}"
           data-id="${escapeHtml(id)}"
           title="${isOn ? i18n.t("aria_remove_from_compare") : i18n.t("aria_add_to_compare")}"
           aria-pressed="${isOn}">
-          ${isOn ? "✓" : "+"}
+          ${compareBtnInner(isOn)}
         </button>
       </div>
       <div class="card-drug__class">${escapeHtml(cls)}</div>
@@ -766,7 +763,8 @@ function attachFilterListeners(view) {
       // Update button and card visually immediately (optimistic UI)
       const isNowOn = set.has(id);
       btn.classList.toggle("active", isNowOn);
-      btn.textContent = isNowOn ? "✓" : "+";
+      btn.innerHTML = compareBtnInner(isNowOn);
+      btn.title = isNowOn ? i18n.t("aria_remove_from_compare") : i18n.t("aria_add_to_compare");
       btn.setAttribute("aria-pressed", String(isNowOn));
       btn.closest(".card")?.classList.toggle("card--in-compare", isNowOn);
 
@@ -907,7 +905,7 @@ function renderCompare(view) {
         
         <!-- Add Drug Dropdown -->
         <div style="position:relative;">
-            <select id="selCompareAdd" class="chip" style="cursor:pointer; padding-right:24px; appearance:none; -webkit-appearance:none; border:1px dashed var(--color-border); background:var(--color-bg);">
+            <select id="selCompareAdd" class="chip" aria-label="${i18n.getLocale() === 'en' ? 'Add drug to comparison' : 'Añadir fármaco a la comparación'}" style="cursor:pointer; padding-right:24px; appearance:none; -webkit-appearance:none; border:1px dashed var(--color-border); background:var(--color-bg);">
                 <option value="">${i18n.t("compare_add_drug")}</option>
                 ${availableDrugs.map(d => `<option value="${escapeHtml(d.id_farmaco)}">${escapeHtml(d.nombre_generico)}</option>`).join('')}
             </select>
@@ -936,7 +934,7 @@ function renderCompare(view) {
                   <th style="padding:var(--space-4) var(--space-5); color:var(--color-primary); background:var(--color-bg); font-family:var(--font-headers); font-size:0.75rem; letter-spacing:0.1em; border-bottom:2px solid var(--color-border);" scope="col">${i18n.t("compare_col_trait")}</th>
                   ${rows.map((d, i) => {
     const color = colors[i % colors.length];
-    return `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:600; border-bottom:2px solid ${color}; min-width:180px; color:${color}">${escapeHtml(d.nombre_generico)}</th>`
+    return `<th style="padding:var(--space-4) var(--space-5); background:var(--color-bg); font-family:var(--font-headers); font-weight:600; border-bottom:3px solid ${color}; color:var(--color-text-main)"><span aria-hidden="true" style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${color}; margin-right:6px;"></span>${escapeHtml(d.nombre_generico)}</th>`
   }).join("")}
                 </tr>
               </thead>
@@ -1090,23 +1088,72 @@ function renderRadarChart(data, colors) {
   `;
 }
 
-function mountDock() {
+// Navegación inferior.
+// En móvil y tableta (<1024px) solo caben los destinos primarios; el resto se
+// agrupa en una hoja inferior "Más". En escritorio se muestran todos en línea.
+const DOCK_PRIMARY = new Set(["list", "compare", "switching", "ajuste"]);
+
+function getDockItems() {
   const navItems = [
-    { id: "list",      label: i18n.t("nav_home"),    icon: "⌂",  hash: "/",      isRoute: true },
-    { id: "compare",   label: i18n.t("btn_compare"), icon: "⚖",  hash: "/comparador",   isRoute: true },
-    { id: "switching", label: i18n.t("btn_switching"), icon: "⇄",  hash: "/switching", isRoute: true },
-    { id: "ajuste",    label: i18n.t("btn_ajuste"), icon: "℞",  hash: "/ajuste",    isRoute: true },
-    { id: "combo",     label: i18n.t("btn_combo"), icon: "+",  hash: "/combinaciones",     isRoute: true },
-    { id: "interact",  label: i18n.t("btn_interact"), icon: "⚡",  hash: "/interacciones",  isRoute: true },
-    { id: "quiz",      label: i18n.t("btn_quiz"),     icon: "?",  hash: "/quiz",      isRoute: true },
-    { id: "guias",     label: i18n.t("btn_guias"), icon: "≡",  hash: "/guias",     isRoute: true },
-    { id: "glosario",  label: i18n.t("btn_glosario"), icon: "📖", hash: "/glosario",  isRoute: true },
+    { id: "list",      label: i18n.t("nav_home"),      icon: "⌂", hash: "/",              isRoute: true },
+    { id: "compare",   label: i18n.t("btn_compare"),   icon: "⚖", hash: "/comparador",    isRoute: true },
+    { id: "switching", label: i18n.t("btn_switching"), icon: "⇄", hash: "/switching",     isRoute: true },
+    { id: "ajuste",    label: i18n.t("btn_ajuste"),    icon: "℞", hash: "/ajuste",        isRoute: true },
+    { id: "interact",  label: i18n.t("btn_interact"),  icon: "⚡︎", hash: "/interacciones", isRoute: true },
+    { id: "combo",     label: i18n.t("btn_combo"),     icon: "+", hash: "/combinaciones", isRoute: true },
+    { id: "guias",     label: i18n.t("btn_guias"),     icon: "≡", hash: "/guias",         isRoute: true },
+    { id: "glosario",  label: i18n.t("btn_glosario"),  icon: "Aa", hash: "/glosario",     isRoute: true },
+    { id: "quiz",      label: i18n.t("btn_quiz"),      icon: "?", hash: "/quiz",          isRoute: true },
   ];
   const actionItems = [
-    { id: "legal",    label: i18n.t("nav_legal"),    icon: "§", hash: "#", isRoute: false, action: "legal"    },
-    { id: "info",     label: i18n.t("nav_credits"), icon: "i", hash: "#", isRoute: false, action: "info"     },
-    { id: "settings", label: i18n.t("btn_settings"), icon: "⚙", hash: "#", isRoute: false, action: "settings" },
+    { id: "settings", label: i18n.t("btn_settings"), icon: "⚙", action: "settings" },
+    { id: "legal",    label: i18n.t("nav_legal"),    icon: "§", action: "legal"    },
+    { id: "info",     label: i18n.t("nav_credits"),  icon: "i", action: "info"     },
   ];
+  return { navItems, actionItems };
+}
+
+function runDockAction(action) {
+  if (action === "info") mountInfoModal();
+  else if (action === "legal") mountLegalModal();
+  else if (action === "settings") mountSettingsPanel();
+  else if (action === "more") openMoreSheet();
+}
+
+function openMoreSheet() {
+  const { navItems, actionItems } = getDockItems();
+  const current = store.getState().route?.name;
+  const routeLinks = navItems.filter(i => !DOCK_PRIMARY.has(i.id)).map(i => `
+    <a href="${i.hash}" class="more-sheet__item${i.id === current ? " active" : ""}" data-id="${i.id}"${i.id === current ? ' aria-current="page"' : ""}>
+      <span class="more-sheet__icon" aria-hidden="true">${i.icon}</span>
+      <span>${escapeHtml(i.label)}</span>
+    </a>`).join("");
+  const actionBtns = actionItems.map(i => `
+    <button type="button" class="more-sheet__item more-sheet__item--action" data-action="${i.action}">
+      <span class="more-sheet__icon" aria-hidden="true">${i.icon}</span>
+      <span>${escapeHtml(i.label)}</span>
+    </button>`).join("");
+
+  const sheet = mountBottomSheet({
+    title: i18n.t("nav_more_title"),
+    contentHTML: `<nav class="more-sheet" aria-label="${escapeHtml(i18n.t("nav_more_title"))}">
+        <div class="more-sheet__grid">${routeLinks}</div>
+        <div class="more-sheet__grid more-sheet__grid--secondary">${actionBtns}</div>
+      </nav>`,
+  });
+  if (!sheet) return;
+  sheet.element.addEventListener("click", (e) => {
+    const link = e.target.closest(".more-sheet__item");
+    if (!link) return;
+    const action = link.dataset.action;
+    sheet.close();
+    if (action) runDockAction(action);
+    // Los enlaces los resuelve el interceptor global de navegación SPA.
+  });
+}
+
+function mountDock() {
+  const { navItems, actionItems } = getDockItems();
 
   let navBar = document.getElementById("floating-dock");
   if (!navBar) {
@@ -1115,46 +1162,40 @@ function mountDock() {
     navBar.className = "floating-dock";
     navBar.setAttribute("aria-label", i18n.t("aria_main_nav"));
 
-    // Haptic on any dock tap
     navBar.addEventListener("click", (e) => {
       const item = e.target.closest(".dock-nav-item");
       if (item) haptic('tap');
-    }, { passive: true });
-
-    // Event delegation for action buttons
-    navBar.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-action]");
       if (!btn) return;
       e.preventDefault();
-      const action = btn.dataset.action;
-      if (action === "info") mountInfoModal();
-      else if (action === "legal") mountLegalModal();
-      else if (action === "settings") mountSettingsPanel();
+      runDockAction(btn.dataset.action);
     });
 
     document.body.appendChild(navBar);
   }
 
-  function renderItem(item) {
+  function renderInner(item) {
     return `
-      <a href="${item.hash}"
-         class="dock-nav-item ${item.isRoute ? 'dock-link' : ''}"
-         data-id="${item.id}"
-         ${item.action ? `data-action="${item.action}"` : ""}
-         ${!item.isRoute ? 'role="button"' : ""}>
-        <span class="dock-nav-item__indicator">
+        <span class="dock-nav-item__indicator" aria-hidden="true">
           <span class="dock-nav-item__icon">${item.icon}</span>
           ${item.id === "compare" ? `<span class="dock-nav-item__badge" id="navCompareBadge" style="display:none"></span>` : ""}
         </span>
-        <span class="dock-nav-item__label">${item.label}</span>
-      </a>
-    `;
+        <span class="dock-nav-item__label">${escapeHtml(item.label)}</span>`;
   }
+  const tierClass = (id) => DOCK_PRIMARY.has(id) ? "" : " dock-nav-item--secondary";
+  const renderLink = (item) => `
+      <a href="${item.hash}" class="dock-nav-item dock-link${tierClass(item.id)}" data-id="${item.id}">${renderInner(item)}</a>`;
+  const renderAction = (item) => `
+      <button type="button" class="dock-nav-item dock-nav-item--secondary" data-id="${item.id}" data-action="${item.action}">${renderInner(item)}</button>`;
 
   navBar.innerHTML =
-    navItems.map(renderItem).join("") +
-    `<span class="dock-separator" aria-hidden="true"></span>` +
-    actionItems.map(renderItem).join("");
+    navItems.map(renderLink).join("") +
+    `<button type="button" class="dock-nav-item dock-nav-item--more" data-id="more" data-action="more" aria-haspopup="dialog">${renderInner({ id: "more", icon: "⋯", label: i18n.t("nav_more") })}</button>` +
+    `<span class="dock-separator dock-nav-item--secondary" aria-hidden="true"></span>` +
+    actionItems.map(renderAction).join("");
+  // El dock se re-monta (p.ej. al cambiar de idioma): resincroniza la insignia y el activo
+  updateCompareCount();
+  updateHeaderNav(store.getState().route);
 }
 
 
@@ -1166,7 +1207,8 @@ function getToastContainer() {
   return document.getElementById("toast-container") || (() => {
     const c = document.createElement("div");
     c.id = "toast-container";
-    c.style.cssText = "position:fixed; bottom:110px; right:20px; z-index:10000; display:flex; flex-direction:column; gap:10px; pointer-events:none; max-width:calc(100vw - 40px);";
+    c.setAttribute("role", "status");
+    c.setAttribute("aria-live", "polite");
     document.body.appendChild(c);
     return c;
   })();

@@ -94,9 +94,8 @@ export function initScrollHideHeader() {
     let lastScrollY = 0;
     let ticking = false;
 
-    // El scroll real ocurre en <body> (html/body llevan overflow-y:auto),
-    // cuyos eventos scroll NO llegan a window. Se escucha en document en
-    // fase de captura para cubrir cualquier contenedor de scroll.
+    // Se escucha en document en fase de captura para cubrir también
+    // contenedores internos con scroll propio.
     document.addEventListener('scroll', () => {
         if (ticking) return;
         ticking = true;
@@ -150,7 +149,12 @@ export function initRippleEffect() {
  */
 export function withViewTransition(fn) {
     if (document.startViewTransition) {
-        return document.startViewTransition(fn);
+        const t = document.startViewTransition(fn);
+        // Si otra transición empieza antes (p.ej. un cambio de filtros que re-renderiza),
+        // el navegador salta esta y rechaza sus promesas: es esperado, no un error.
+        t.ready?.catch(() => {});
+        t.finished?.catch(() => {});
+        return t;
     }
     // Fallback: small delay so the click event settles before repainting
     return Promise.resolve(setTimeout(fn, 40));

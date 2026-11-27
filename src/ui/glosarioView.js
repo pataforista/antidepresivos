@@ -22,7 +22,7 @@ export function renderGlosario(view) {
             ${t("Definiciones psicofarmacológicas estándar, criterios diagnósticos y marco metodológico del catálogo.", "Standard psychopharmacological definitions, diagnostic criteria, and dataset methodology.")}
           </p>
         </div>
-        <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
+        <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("back_to_list")}</a>
       </div>
 
       <!-- Navigation Tabs -->

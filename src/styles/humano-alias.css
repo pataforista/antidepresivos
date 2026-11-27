@@ -32,10 +32,13 @@
   --color-text-muted: var(--text-muted);
   --color-text-dim: var(--text-muted);
 
-  /* Semántica de estado */
+  /* Semántica de estado.
+     --h-mint (3.1:1) y --h-amber (2.6:1) son colores de relleno y no alcanzan
+     4.5:1 como texto; aquí se usan tonos más profundos del mismo matiz. */
   --color-danger: var(--h-raspberry);
-  --color-success: var(--h-mint);
-  --color-warning: var(--h-amber);
+  --color-success: #1C7054;
+  --color-warning: #9A5A12;
+  --color-danger-text-on-tint: #A82C44;
 
   /* Sombras y formas */
   --shadow-sm: var(--shadow-neo-sm);
@@ -67,7 +70,11 @@
   --color-primary-h: 231;
   --color-primary-s: 67%;
   --color-primary-l: 80%;
-  --color-danger: var(--ritual-red);
+  /* Texto de estado legible sobre superficies oscuras (≥6:1) */
+  --color-danger: #FF9AAE;
+  --color-success: #6FD3B0;
+  --color-warning: #F4B66A;
+  --color-danger-text-on-tint: #FF9AAE;
   --color-on-primary-container: var(--accent);
   --shadow-dock: 0 -8px 24px rgba(0, 0, 0, 0.25), var(--shadow-neo-md);
 }

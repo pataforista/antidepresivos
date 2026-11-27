@@ -34,12 +34,11 @@ export function renderAjuste(view) {
                         ${i18n.t("adjustment_subtitle")}
                     </p>
                 </div>
-                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
+                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("back_to_list")}</a>
             </div>
 
             <!-- Nota clínica geriátrica -->
             <div class="alert alert--info" style="margin-bottom:var(--space-6);">
-                <div style="font-size:1.3rem;">👴</div>
                 <div class="text-xs" style="line-height:1.7;">
                     <strong>${i18n.t("geriatric_note_title")}</strong> ${i18n.t("geriatric_note_text")}
                 </div>
