@@ -23,3 +23,21 @@
     color: var(--color-text-muted);
     font-weight: 500;
 }
+
+/* Móvil: es una herramienta de consulta; el buscador y el listado deben
+   aparecer en la primera pantalla, no debajo de un cartel de bienvenida. */
+@media (max-width: 600px) {
+    .home-hero {
+        padding: var(--space-4);
+        border-radius: 20px;
+        margin-bottom: var(--space-4);
+    }
+    .home-hero__title {
+        font-size: 1.3rem !important;
+        margin-bottom: var(--space-1);
+    }
+    .home-hero__subtitle {
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+}

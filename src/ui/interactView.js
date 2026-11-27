@@ -1,6 +1,8 @@
 // src/ui/interactView.js
 import { store } from "../core/store.js";
 import { escapeHtml } from "../core/utils.js";
+import { i18n } from "../core/i18n.js";
+import { parsePotency, potencyScore } from "../core/cypPotency.js";
 
 /* ── Columnas CYP a mostrar ──────────────────────────────────────── */
 const CYP_COLS = [
@@ -11,35 +13,13 @@ const CYP_COLS = [
     { key: "c9",  name: "CYP2C9",  pattern: /CYP2C9(?!9)/i }, // evita coincidir con CYP2C19
 ];
 
-/* ── Parser de potencia desde texto libre ────────────────────────── */
-function parsePotency(rawStr, col) {
-    if (!rawStr || rawStr === "No" || rawStr === "N/D") return "-";
-
-    const idx = rawStr.search(col.pattern);
-    if (idx === -1) return "-";
-
-    // Buscar potencia en paréntesis justo después del nombre de la enzima
-    const after = rawStr.slice(idx);
-    const m = after.match(/\(([^)]+)\)/);
-    if (!m) return "+"; // Mencionada sin indicar potencia → asumimos débil
-
-    const p = m[1].toLowerCase();
-    if (p.includes("potente") || p.includes("fuerte")) return "+++";
-    if (p.includes("moderado"))                          return "++";
-    return "+"; // débil, leve, u otro
-}
-
-function potencyScore(val) {
-    return val === "+++" ? 3 : val === "++" ? 2 : val === "+" ? 1 : 0;
-}
-
 function drugTotalScore(row) {
     return CYP_COLS.reduce((sum, col) => sum + potencyScore(row[col.key]), 0);
 }
 
 /* ── Helpers visuales ────────────────────────────────────────────── */
-const BADGE_CLASS = { "+++": "badge--red", "++": "badge--yellow", "+": "badge--gray" };
-const BADGE_LABEL = { "+++": "POTENTE", "++": "MODERADO", "+": "DÉBIL" };
+const BADGE_CLASS = { "+++": "badge--red", "++": "badge--yellow", "+": "badge--gray", "?": "badge--outline-unknown" };
+const BADGE_LABEL = { "+++": "POTENTE", "++": "MODERADO", "+": "DÉBIL", "?": "SIN GRADUAR" };
 
 function renderBadge(val) {
     if (val === "-") return `<span style="color:var(--color-text-dim); font-weight:600; font-size:0.9rem">—</span>`;
@@ -75,7 +55,7 @@ export function renderInteract(view) {
                         Inhibición enzimática por antidepresivos · <strong>${cypData.length}</strong> fármacos con inhibición relevante
                     </p>
                 </div>
-                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← VOLVER AL LISTADO</a>
+                <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("back_to_list")}</a>
             </div>
 
             <!-- Leyenda -->
@@ -84,12 +64,13 @@ export function renderInteract(view) {
                 <span class="badge badge--red"    style="font-size:0.65rem;">POTENTE — inhibe significativamente el metabolismo</span>
                 <span class="badge badge--yellow" style="font-size:0.65rem;">MODERADO — monitorizar</span>
                 <span class="badge badge--gray"   style="font-size:0.65rem;">DÉBIL — riesgo bajo en monoterapia</span>
+                <span class="badge badge--outline-unknown" style="font-size:0.65rem;">SIN GRADUAR — inhibe; la fuente no indica potencia</span>
                 <span style="color:var(--color-text-dim); font-size:0.85rem; font-weight:600">— = sin inhibición relevante</span>
             </div>
 
             <!-- Tabla CYP -->
             <div class="card glass-effect" style="padding:0; overflow:hidden;">
-                <div class="compare-container" style="overflow-x:auto;">
+                <div class="compare-container" style="overflow-x:auto;" tabindex="0" role="region" aria-label="Tabla de inhibición CYP450">
                     <table class="compare-table" style="width:100%; border-collapse:collapse; min-width:600px;">
                         <thead>
                             <tr style="text-align:left;">

@@ -5,6 +5,13 @@ import { i18n } from "../core/i18n.js";
 import { riskVariant, sedationLabel, sedationVariant } from "../core/drugNormalization.js";
 import { ensurePdfFooter } from "./pdfFooter.js";
 
+// El dataset guarda black_box_warning como booleano; versiones antiguas, como "Sí"/"No".
+function hasBlackBoxWarning(item) {
+   const v = item?.black_box_warning;
+   if (v === true) return true;
+   return typeof v === "string" && /^(s[ií]|yes|true)$/i.test(v.trim());
+}
+
 export function renderDetail(view, id) {
    const state = store.getState();
    const item = selectItemById(state, id);
@@ -20,13 +27,13 @@ export function renderDetail(view, id) {
       return;
    }
 
-   const hasBBW = (item.black_box_warning || "").toLowerCase() === "sí" || item.black_box_warning === true;
+   const hasBBW = hasBlackBoxWarning(item);
    const clinicalSummary = buildClinicalSummary(item);
 
    const contentHTML = `
     <div class="monograph animate-fade-in">
       <!-- Nav Back -->
-      <a href="/" class="btn btn--ghost text-sm" style="margin-bottom:var(--space-4); font-weight:700; display:inline-flex; align-items:center; gap:6px;">← ${i18n.t("btn_list")}</a>
+      <a href="/" class="btn btn--ghost text-sm" style="margin-bottom:var(--space-4); font-weight:700; display:inline-flex; align-items:center; gap:6px;">← ${i18n.t("back_to_list")}</a>
 
       <!-- Header Principal — M3 style -->
       <header class="monograph__header glass-effect" style="border-radius:var(--radius-xl); padding:var(--space-6);">
@@ -37,14 +44,14 @@ export function renderDetail(view, id) {
             <div style="font-size:1rem; font-weight:600; font-family:var(--font-headers); color:var(--color-text-muted); margin-top:var(--space-2);">${escapeHtml(item.clase_terapeutica)}</div>
             <div style="display:flex; gap:var(--space-2); margin-top:var(--space-3); flex-wrap:wrap; align-items:center;">
               <span class="chip chip--active" style="font-size:0.75rem; font-weight:700;">${escapeHtml(item.codigo_atc)}</span>
-              ${item.mecanismo_principal ? `<span class="text-xs text-muted" style="font-weight:500; font-style:italic; max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${escapeHtml(item.mecanismo_principal)}">${escapeHtml(item.mecanismo_principal)}</span>` : ""}
+              ${item.mecanismo_principal ? `<span class="text-sm text-muted" style="font-weight:500;">${escapeHtml(item.mecanismo_principal)}</span>` : ""}
             </div>
           </div>
           <div style="display:flex; gap:var(--space-2); align-self:flex-start; flex-shrink:0;">
-            <button id="btnMonoPDF" class="btn btn--outline btn--circle" title="${i18n.t("aria_download_pdf")}" aria-label="${i18n.t("aria_download_pdf")}" style="width: 44px; height: 44px;">
-              ↓
+            <button id="btnMonoPDF" type="button" class="btn btn--outline" title="${i18n.t("aria_download_pdf")}" aria-label="${i18n.t("aria_download_pdf")}" style="min-height: 44px; padding: 0 16px; font-weight:700;">
+              <span aria-hidden="true">↓</span> ${i18n.t("btn_pdf")}
             </button>
-            <button id="btnMonoCompare" class="m3-fab">
+            <button id="btnMonoCompare" type="button" class="m3-fab">
               ⚖ ${i18n.t("btn_compare")}
             </button>
           </div>
@@ -173,13 +180,19 @@ function renderTabResumen(item) {
    return `
     <div class="animate-fade-in" style="display:grid; gap:var(--space-4);">
 
-      ${item.utilidad_sintomatica_clave ? `
+      ${typeof item.perlas_clinicas === "string" && item.perlas_clinicas.trim() ? `
       <div class="alert alert--info">
-         <div style="font-size:1.4rem">☀</div>
          <div>
            <strong style="display:block; margin-bottom:var(--space-1)">${i18n.t("clinical_pearl")}</strong>
-           <span class="text-body">${escapeHtml(item.utilidad_sintomatica_clave)}</span>
+           <span class="text-body">${escapeHtml(item.perlas_clinicas)}</span>
          </div>
+      </div>
+      ` : ""}
+
+      ${item.utilidad_sintomatica_clave ? `
+      <div class="field-box">
+         <div class="field-box__label">${i18n.t("key_symptom_targets")}</div>
+         <div class="text-body" style="font-weight:600; margin-top:4px;">${escapeHtml(item.utilidad_sintomatica_clave)}</div>
       </div>
       ` : ""}
 
@@ -324,7 +337,7 @@ function renderTabDosis(item) {
 }
 
 function renderTabSeguridad(item) {
-   const hasBBW = (item.black_box_warning || "").toLowerCase() === "sí" || item.black_box_warning === true;
+   const hasBBW = hasBlackBoxWarning(item);
    const eas = item.rel_efectos_adversos || [];
    const interacciones = item.rel_interacciones || [];
 

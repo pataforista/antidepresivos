@@ -375,7 +375,7 @@ function renderStart(view, allDrugs) {
         <button class="quiz-btn quiz-btn--primary" id="btnStartQuiz">
           ${i18n.t("quiz_start_btn")}
         </button>
-        <a href="/" class="quiz-link-back">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
+        <a href="/" class="quiz-link-back">← ${i18n.t("back_to_list")}</a>
       </div>
     </div>
   `;
@@ -672,7 +672,7 @@ function renderResults(view) {
             ${i18n.t("quiz_play_again")}
           </button>
           <a href="/" class="quiz-btn quiz-btn--ghost">
-            ← ${i18n.t("btn_back")} ${i18n.t("btn_list")}
+            ← ${i18n.t("back_to_list")}
           </a>
         </div>
       </div>

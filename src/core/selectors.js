@@ -131,7 +131,11 @@ export function rehydrateFarmaco(farmaco, dataset) {
 export function selectItemById(state, id) {
     const dataset = state.data?.dataset;
     const items = dataset?.farmacos ?? [];
-    const item = items.find(i => String(i.id_farmaco) === String(id));
+    // Acepta el ID interno (ADP_SSRI_01) o el nombre genérico (/farmaco/sertralina),
+    // para que las URLs escritas o compartidas a mano también funcionen.
+    const key = normalizeText(id);
+    const item = items.find(i => String(i.id_farmaco) === String(id))
+        ?? items.find(i => normalizeText(i.id_farmaco) === key || normalizeText(i.nombre_generico) === key);
     return item ? rehydrateFarmaco(item, dataset) : null;
 }
 

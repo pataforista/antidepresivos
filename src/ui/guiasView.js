@@ -38,7 +38,7 @@ export function renderGuias(view) {
     return `
       <details class="detail-section" style="margin-bottom:var(--space-4);">
         <summary class="detail-section__summary">
-          <span style="display:flex; align-items:center; gap:10px;"><span style="font-size:1.3rem;">${c.icon || "≡"}</span>${escapeHtml(label)}</span>
+          <span>${escapeHtml(label)}</span>
           <span class="detail-section__chevron">▼</span>
         </summary>
         <div class="detail-section__body">${blocks}</div>
@@ -52,7 +52,7 @@ export function renderGuias(view) {
           <h2 class="h2" style="margin:0">${t("Guías Clínicas", "Clinical Guidelines")}</h2>
           <p class="text-sm text-muted" style="margin-top:var(--space-2);">${t("Orientaciones de primera línea por trastorno (NICE · APA · CANMAT · ACOG).", "First-line orientations by disorder (NICE · APA · CANMAT · ACOG).")}</p>
         </div>
-        <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("btn_back")} ${i18n.t("btn_list")}</a>
+        <a href="/" class="btn btn--outline text-xs" style="font-weight:700">← ${i18n.t("back_to_list")}</a>
       </div>
 
       <div>${cards}</div>

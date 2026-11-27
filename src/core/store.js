@@ -327,7 +327,9 @@ export const store = createStore(
       locales: null
     },
     ui: {
-      theme: "light",
+      // Sin preferencia guardada, theme-bootstrap.js sigue al sistema operativo;
+      // el estado inicial debe coincidir con lo que ya se pintó.
+      theme: (typeof document !== "undefined" && document.documentElement?.getAttribute("data-theme") === "dark") ? "dark" : "light",
       locale: "es",
       disclaimerAccepted: false,
       toasts: [],
